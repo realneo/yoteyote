@@ -1,7 +1,6 @@
 <html>
     <head>
         <title>I will Form</title>
-        <script type='text/javascript' src='js/main.js'></script>
     </head>
     <body>
         <form id="new_post_form" name="new_post_form" method="post" action="post_process.php">
