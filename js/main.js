@@ -157,9 +157,14 @@ $(document).ready(function(){
                     $('#overlay').fadeIn(500);
                     $('#popup_window').delay(500).fadeIn(500);
                     $('#popup_window_title').fadeIn().html('I will');
-                    $('#popup_window_content').fadeIn().load('includes/new_will.php');
+                    $('#popup_window_content').fadeIn().load('includes/new_will.php', function(responseTxt,statusTxt,xhr){
+                        if(statusTxt=="success")
+                            alert("External content loaded successfully!");
+                            $('#will_post').val(will_post);
+                        if(statusTxt=="error")
+                            alert("Error: "+xhr.status+": "+xhr.statusText);
+                    });
                     $('#popup_window').css({'width':'400px'}); 
-                    $('#will_post').val(will_post);
                 }else{
                     $('#overlay').fadeIn(500);
                     $('#popup_window').delay(500).fadeIn(500);
