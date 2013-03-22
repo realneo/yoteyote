@@ -27,15 +27,15 @@
                 <form name='will_form' action='' method='post'>
                     <tr>
                         <th align='right'><span class='will_color'>I will</span></th>
-                        <td><input type='text' name='will' value='desing your website for 100,000' size='40'/></td>
-                        <td><button type='submit'>create ></button></td>
+                        <td><input type='text' name='will' value='desing your website for 100,000' size='40' id='will_input'/></td>
+                        <td><button type='submit' id='will_btn'>create ></button></td>
                     </tr>
                 </form>
                 <form name='want_form' action='' method='post'>
                     <tr>
                         <th align='right'><span class='want_color'>I want</span></th>
-                        <td><input type='text' name='want' value='a cleaner for my house for 30,000' size='40'/></td>
-                        <td><button type='submit'>create ></button></td>
+                        <td><input type='text' name='want' value='a cleaner for my house for 30,000' size='40' id='want_input'/></td>
+                        <td><button type='submit' id='want_btn'>create ></button></td>
                     </tr>
                 </form>
                 </table>
@@ -443,26 +443,18 @@
             
         </div><!-- main_content -->
         <div id='bottom_content'>
+            <div id='user'>
             <?php
                 if($user_id == false){
                     echo "<div id='logging_in'>             
                 <a href='#' id='login_pop'>Login</a> |
-                <a href='#'>Register</a>
+                <a href='#' id='register_pop'>Register</a>
             </div><!-- logging_in -->";
                 }else{
-                    echo "<div id='user'>
-                <div id='user_pic'><img src='images/sample_user2.png' alt=''></div><!-- user_pic -->
-                <div id='user_name'>John Doe</div><!-- user_name -->
-                <div id='user_links'>
-                    <a href='#'>My Settings</a>
-                    <a href='#'>My Listings</a>
-                    <div id='logout_btn'>Logout</div><!-- logout -->
-                </div><!-- user_links -->
-                
-            </div><!-- user -->";
+                    include('includes/logged_user.php');
                 }
             ?>
-            
+            </div><!-- user -->
             <div id='footer'>
                 <a href='#'>How does it Work?</a> 
                 <a href='#'>Help</a>
@@ -479,7 +471,8 @@
         <div id="overlay"></div><!-- overlay -->
         <div id="popup_window">
                 <div id="popup_window_title"></div><!-- title -->
-                <div id="popup_window_content"></div><!-- popup_window_content -->
+                <div id="popup_window_content">
+                </div><!-- popup_window_content -->
         </div><!-- popup_window -->
     </body>
 </html>
