@@ -69,7 +69,7 @@ $(document).ready(function(){
         $('#popup_window_content').fadeIn().load('includes/new_user_form.php');
         $('#popup_window').css({'width':'400px'}); 
     });
-    //Login Process
+    //Registration Process
     $('#reg_btn').click(function(){
         $('.preloader').fadeIn();
         // Email Check up
@@ -158,11 +158,11 @@ $(document).ready(function(){
                     $('#popup_window').delay(500).fadeIn(500);
                     $('#popup_window_title').fadeIn().html('I will');
                     $('#popup_window_content').fadeIn().load('includes/new_will.php', function(responseTxt,statusTxt,xhr){
-                        if(statusTxt=="success")
-                            alert("External content loaded successfully!");
+                        if(statusTxt=="success"){
                             $('#will_post').val(will_post);
-                        if(statusTxt=="error")
-                            alert("Error: "+xhr.status+": "+xhr.statusText);
+                        }else{
+                            console.log('Failed to load the new_will.php')
+                        }
                     });
                     $('#popup_window').css({'width':'400px'}); 
                 }else{
@@ -176,4 +176,121 @@ $(document).ready(function(){
         });
         return false;
     });
+    
+    // I will post process
+    $('#will_create_btn').click(function(){
+        //Getting data from the Form
+        var will_post = $('#will_post').val();
+        var description = $('#description').val();
+        var currency = $('input[name=currency]:checked', '#new_will_form').val();
+        var amount = $('#amount').val();
+        var type = $('#type').val();
+        
+        // Preloader Icon
+        $('.preloader').fadeIn();
+        
+        // Checking the will_post input
+        if($('#will_post').val() == '' ){
+            $('.feedback').fadeIn().html("<p class='error'>Please fill in the 'WILL' Statement</p>");
+            $('.preloader').fadeOut();
+            return false;
+        }
+        // Checking the description text field
+        if($('#description').val() == '' ){
+            $('.feedback').fadeIn().html("<p class='error'>Please give a detailed description of your 'WILL'</p>");
+            $('.preloader').fadeOut();
+            return false;
+        }
+        // Checking the amount input
+        if($('#amount').val() == '' ){
+            $('.feedback').fadeIn().html("<p class='error'>Please state your amount </p>");
+            $('.preloader').fadeOut();
+            return false;
+        }
+        var form_action = $('#new_will_form').attr('action');
+        var form_data = {
+                post : will_post,
+                description : description,
+                currency : currency,
+                amount : amount,
+                type : type
+                };
+            $.ajax({
+                type:'post',
+                url: form_action,
+                data: form_data,
+                success: function(response){
+                    if(response == "success"){
+                        $('.feedback').fadeIn().html("<p class='success'>Successfully Created</p>");
+                        $('.preloader').fadeOut();
+                        $('.feedback').delay(500).fadeOut(400);
+                        $('#popup_window').delay(900).fadeOut(400);
+                        $('#overlay').delay(1200).fadeOut(400);
+                        
+                    }else{
+                        $('.feedback').fadeIn().html("<p class='error'>There was an error!</p>");
+                        $('.preloader').fadeOut();
+                    }
+                }
+            });
+        return false;
+    });
+   // I want post process
+    $('#want_create_btn').click(function(){
+        //Getting data from the Form
+        var want_post = $('#want_post').val();
+        var description = $('#description').val();
+        var currency = $('input[name=currency]:checked', '#new_want_form').val();
+        var amount = $('#amount').val();
+        var type = $('#type').val();
+        
+        // Preloader Icon
+        $('.preloader').fadeIn();
+        
+        // Checking the will_post input
+        if($('#want_post').val() == '' ){
+            $('.feedback').fadeIn().html("<p class='error'>Please fill in the 'WANT' Statement</p>");
+            $('.preloader').fadeOut();
+            return false;
+        }
+        // Checking the description text field
+        if($('#description').val() == '' ){
+            $('.feedback').fadeIn().html("<p class='error'>Please give a detailed description of your 'WANT'</p>");
+            $('.preloader').fadeOut();
+            return false;
+        }
+        // Checking the amount input
+        if($('#amount').val() == '' ){
+            $('.feedback').fadeIn().html("<p class='error'>Please state your amount </p>");
+            $('.preloader').fadeOut();
+            return false;
+        }
+        var form_action = $('#new_want_form').attr('action');
+        var form_data = {
+                post : want_post,
+                description : description,
+                currency : currency,
+                amount : amount,
+                type : type
+                };
+            $.ajax({
+                type:'post',
+                url: form_action,
+                data: form_data,
+                success: function(response){
+                    if(response == "success"){
+                        $('.feedback').fadeIn().html("<p class='success'>Successfully Created</p>");
+                        $('.preloader').fadeOut();
+                        $('.feedback').delay(500).fadeOut(400);
+                        $('#popup_window').delay(900).fadeOut(400);
+                        $('#overlay').delay(1200).fadeOut(400);
+                        
+                    }else{
+                        $('.feedback').fadeIn().html("<p class='error'>There was an error!</p>");
+                        $('.preloader').fadeOut();
+                    }
+                }
+            });
+        return false;
+    });    
 });
