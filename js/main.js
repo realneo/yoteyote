@@ -235,6 +235,39 @@ $(document).ready(function(){
             });
         return false;
     });
+    
+    
+     // I want post
+    $('#want_btn').click(function(){
+        // Getting the data from a form
+        want_post = $('#want_input').val();
+        // check if the user is logged in or not
+        $.ajax({
+            url:'includes/session_check.php',
+            success:function(response){
+                if(response == 'success'){
+                    $('#overlay').fadeIn(500);
+                    $('#popup_window').delay(500).fadeIn(500);
+                    $('#popup_window_title').fadeIn().html('I want');
+                    $('#popup_window_content').fadeIn().load('includes/new_want.php', function(responseTxt,statusTxt,xhr){
+                        if(statusTxt=="success"){
+                            $('#want_post').val(want_post);
+                        }else{
+                            console.log('Failed to load the new_want.php')
+                        }
+                    });
+                    $('#popup_window').css({'width':'400px'}); 
+                }else{
+                    $('#overlay').fadeIn(500);
+                    $('#popup_window').delay(500).fadeIn(500);
+                    $('#popup_window_title').fadeIn().html('Login First');
+                    $('#popup_window_content').fadeIn().load('includes/login.php');
+                    $('#popup_window').css({'width':'220px'});
+                }
+            }
+        });
+        return false;
+    });    
    // I want post process
     $('#want_create_btn').click(function(){
         //Getting data from the Form
