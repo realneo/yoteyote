@@ -101,6 +101,11 @@ button{
     top:50px;
     left:460px;
 }
+#discover_btn:hover{
+    background-color:#fff;
+    border:1px solid #9E1300;
+    color:#9E1300;
+}
 #top_bg{
     position: absolute;
     width:100%;
@@ -129,6 +134,11 @@ button{
     background-color:#9E1300;
     cursor: pointer;
 }
+#will_want_form button:hover{
+    border:1px solid #9E1300;
+    color:#9E1300;
+    background-color:#fff;
+}
 #will_want_form .want_color{
     font-size:18px;
     font-weight: lighter;
@@ -154,6 +164,10 @@ button{
     border-radius: 5px;
     padding: 5px;
 }
+#will_want_toggle a:hover{
+    background-color:#9E1300;
+    color:#fff;
+}
 #search{
     position:absolute;
     right:0px;
@@ -172,6 +186,11 @@ button{
     color:#9e1300;
     background-color:#fff;
     cursor: pointer;
+}
+#search button:hover{
+   background-color:#9E1300;
+   border:1px solid #fff;
+   color:#fff;
 }
 #posts{
     padding-top:80px;
@@ -227,6 +246,10 @@ button{
     background-color:#931300;
     cursor:pointer;
 }
+.get_contact button:hover{
+    background-color:#fff;
+    color:#9E1300;
+}
 #footer{
     color:#999;
     position:absolute;
@@ -270,6 +293,10 @@ button{
     left:150px;
     top:0px;
     display:inline;
+}
+#logout_btn:hover{
+    background-color:#9E1300;
+    color:#fff;
 }
 #logging_in {
     position:absolute;
