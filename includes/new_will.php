@@ -1,12 +1,13 @@
 <html>
     <head>
         <title>I will Form</title>
+        <script type='text/javascript' src='js/main.js'></script>
     </head>
     <body>
-        <form id="new_post_form" name="new_post_form" method="post" action="post_process.php">
+        <form id="new_will_form" name="new_will_form" method="post" action="includes/post_process.php">
           <table width="200">
             <tr>
-              <td align="right">I will <input type='hidden' name='type' value='want' /></td>
+              <td align="right">I will <input type='hidden' name='type' value='will'  id="type"/></td>
               <td><input type="text" name="will_post" id="will_post" size='40' value='' /></td>
             </tr>
             <tr>
@@ -16,8 +17,8 @@
             <tr>
               <td align="right">Currency</td>
               <td>
-                <input type="radio" name="currency" id="currency" value="tzs" />Tshs 
-                <input type="radio" name="currency" id="currency" value="usd" />USD</td>
+                <input type="radio" name="currency" value="Tshs" checked="checked"/>Tshs 
+                <input type="radio" name="currency" value="USD" />USD</td>
             </tr>
             <tr>
               <td align="right">Amount</td>
@@ -29,4 +30,6 @@
             </tr>
           </table>
         </form>
+        <div class='preloader'><img src='images/loader.gif' height='12px'/></div><!-- preloader -->
+        <div class='feedback'></div><!-- feedback -->
     </body>

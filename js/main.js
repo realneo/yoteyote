@@ -226,6 +226,7 @@ $(document).ready(function(){
                         $('.feedback').delay(500).fadeOut(400);
                         $('#popup_window').delay(900).fadeOut(400);
                         $('#overlay').delay(1200).fadeOut(400);
+                        $('#posts').fadeOut(400).fadeIn(400).load('includes/posts.php');
                         
                     }else{
                         $('.feedback').fadeIn().html("<p class='error'>There was an error!</p>");
@@ -317,7 +318,7 @@ $(document).ready(function(){
                         $('.feedback').delay(500).fadeOut(400);
                         $('#popup_window').delay(900).fadeOut(400);
                         $('#overlay').delay(1200).fadeOut(400);
-                        
+                        $('#posts').fadeOut(400).fadeIn(400).load('includes/posts.php');
                     }else{
                         $('.feedback').fadeIn().html("<p class='error'>There was an error!</p>");
                         $('.preloader').fadeOut();
@@ -325,5 +326,17 @@ $(document).ready(function(){
                 }
             });
         return false;
-    });    
+    });  
+    
+    // Loading Posts
+    $('#posts').load('includes/posts.php'); 
+    
+    // Get Contact
+     $(document).on('click', '.get_contact', function () {
+        $('#overlay').fadeIn(500);
+        $('#popup_window').delay(500).fadeIn(500);
+        $('#popup_window_title').fadeIn().html('Login First');
+        $('#popup_window_content').fadeIn().load('includes/get_contact.php', $(this).attr('id'));
+        $('#popup_window').css({'width':'320px'});
+    });
 });

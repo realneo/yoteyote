@@ -8,6 +8,7 @@
        $amount = $row['amount'];
        $post = $row['post'];
        $user_id = $row['user_id'];
+       $post_id = $row['id'];
        $qq = mysql_query("SELECT * FROM `users` WHERE `id` = '$user_id'");
        while($rows = mysql_fetch_array($qq)){
            $first_name = $rows['first_name'];
@@ -28,7 +29,7 @@
                     </tr>
                     <tr>
                       <td height='16' valign='top'><div class='trusted_by'>Trusted by 5 people</div><!-- trusted_by -->
-                      <div class='get_contact'><button name='get_contact'>Get Contact</button></div><!-- get_contact -->
+                      <div class='get_contact'><button name='get_contact' class='get_contact' id='{$post_id}'>Get Contact</button></div><!-- get_contact -->
                       </td>
                     </tr>
                 </table>   
