@@ -6,6 +6,7 @@
     while($row = mysql_fetch_array($q)){
        $currency = ucfirst($row['currency']);
        $amount = $row['amount'];
+       $f_amount = number_format($amount);
        $post = $row['post'];
        $user_id = $row['user_id'];
        $post_id = $row['id'];
@@ -18,7 +19,7 @@
                   <table width='310'>
                     <tr>
                         <td height='77' colspan='2' valign='top'>
-                            <div class='amount'><span class='currency'>{$currency}</span> {$amount}</div><!-- amount -->
+                            <div class='amount'><span class='currency'>{$currency}</span> {$f_amount}</div><!-- amount -->
                             <div class='will_want'> - {$post}</div>
                             <!-- class post -->
                        </td>
