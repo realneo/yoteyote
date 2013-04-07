@@ -7,6 +7,7 @@
     $q = mysql_query("SELECT * FROM `users` WHERE `id` = '$user_id'");
     while($row = mysql_fetch_array($q)){
         $user_pic = $row['pic'];
+        $bank = $row['bank'];
     }
     if($user_pic == ''){
         $user_pic = 'default.png';
@@ -22,6 +23,7 @@
                 <a href='#'>My Settings</a>
                 <a href='#'>My Listings</a>
                 <a href='includes/logout_process.php' id='logout_btn'>Logout</a>
+                <a href='#'>Yoteyote Bank : {$bank} </a>    
             </div><!-- user_links -->
             ";
     }
