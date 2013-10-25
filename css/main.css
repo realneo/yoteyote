@@ -218,33 +218,24 @@ color:#9E1300;
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
 
-.apply
-{
+.apply{
 	
-	    float:right;
-			margin-right:7px;
-	
+    float:right;
+    margin-right:7px;
 }
 
-.apply button:hover
-{
-	
-	background-color:#FFF;
+.apply button:hover{	
+    background-color:#FFF;
     color:#9E1300;
 }
 
-.currency
-{
-	
-	font-weight:bold;
-	font-size:12px;
-	color:#9E1300;
-	
+.currency{
+    font-weight:bold;
+    font-size:12px;
+    color:#9E1300;	
 }
 
-#error_a
-{
-	color:red;	
-	
-	
+#error_a{
+    color:red;		
 }
+

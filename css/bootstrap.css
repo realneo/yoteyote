@@ -6169,7 +6169,7 @@ a.badge:focus {
 /* =================== CUSTOM CHANGES ==================== */
 
 .red_color{
-    color:red;
+    color:#D2232A;
 }
 #will_input{
     padding-left:17px;
@@ -6242,7 +6242,11 @@ ul.thumbnails li.span3:nth-child(4n + 5) {
 ul.thumbnails li.span12 + li {
   margin-left : 15px;
 }
-
+.number{
+    font-weight:bold;
+    font-size:16px;
+    color:#D2232A
+}
 
 /************** SIDE BAR ******************/
 #will_want_toggle{
