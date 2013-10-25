@@ -1,0 +1,87 @@
+[23-Feb-2013 05:17:19] PHP Warning:  include_once(lib/Main.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/header.php on line 3
+[23-Feb-2013 05:17:19] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'lib/Main.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/header.php on line 3
+[23-Feb-2013 05:17:19] PHP Fatal error:  Class 'Main' not found in /home/desiarti/public_html/master/header.php on line 4
+[23-Feb-2013 05:19:45] PHP Warning:  include_once(lib/Main.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/header.php on line 3
+[23-Feb-2013 05:19:45] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'lib/Main.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/header.php on line 3
+[23-Feb-2013 05:19:45] PHP Fatal error:  Class 'Main' not found in /home/desiarti/public_html/master/header.php on line 4
+[23-Feb-2013 05:21:35] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 28
+[23-Feb-2013 05:22:51] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 28
+[23-Feb-2013 05:25:16] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 28
+[23-Feb-2013 05:26:27] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 28
+[23-Feb-2013 05:27:15] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 28
+[23-Feb-2013 05:32:31] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 28
+[23-Feb-2013 05:34:12] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 31
+[23-Feb-2013 05:34:57] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 31
+[23-Feb-2013 05:35:18] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 31
+[23-Feb-2013 05:35:25] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 31
+[23-Feb-2013 05:36:03] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 31
+[23-Feb-2013 05:38:10] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 29
+[23-Feb-2013 05:38:47] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 29
+[23-Feb-2013 05:40:21] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:40:28] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:40:28] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:42:06] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:42:24] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:43:11] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:44:12] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:44:47] PHP Fatal error:  Call to a member function getTotal() on a non-object in /home/desiarti/public_html/master/index.php on line 26
+[23-Feb-2013 05:45:28] PHP Fatal error:  Uncaught exception 'Exception' with message 'No database selected' in /home/desiarti/public_html/master/lib/Db.php:74
+Stack trace:
+#0 /home/desiarti/public_html/master/lib/Db.php(88): Db->query('SELECT count(*)...')
+#1 /home/desiarti/public_html/master/lib/admin.php(18): Db->get_row('SELECT count(*)...')
+#2 /home/desiarti/public_html/master/index.php(26): Admin->getTotal('tbl_artist')
+#3 {main}
+  thrown in /home/desiarti/public_html/master/lib/Db.php on line 74
+[23-Feb-2013 05:47:04] PHP Fatal error:  Uncaught exception 'Exception' with message 'No database selected' in /home/desiarti/public_html/master/lib/Db.php:74
+Stack trace:
+#0 /home/desiarti/public_html/master/lib/Db.php(88): Db->query('SELECT count(*)...')
+#1 /home/desiarti/public_html/master/lib/admin.php(18): Db->get_row('SELECT count(*)...')
+#2 /home/desiarti/public_html/master/index.php(26): Admin->getTotal('tbl_artist')
+#3 {main}
+  thrown in /home/desiarti/public_html/master/lib/Db.php on line 74
+[23-Feb-2013 05:51:22] PHP Fatal error:  Call to a member function getArtistData() on a non-object in /home/desiarti/public_html/master/view_artist.php on line 37
+[23-Feb-2013 05:53:44] PHP Fatal error:  Call to a member function getArtistData() on a non-object in /home/desiarti/public_html/master/view_artist.php on line 41
+[23-Feb-2013 05:56:45] PHP Fatal error:  Call to undefined function  pagination() in /home/desiarti/public_html/master/view_lst.php on line 99
+[23-Feb-2013 05:57:53] PHP Warning:  include_once(pagination/db.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/artist_spec.php on line 4
+[23-Feb-2013 05:57:53] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'pagination/db.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/artist_spec.php on line 4
+[23-Feb-2013 05:57:53] PHP Fatal error:  Call to a member function getSpecData() on a non-object in /home/desiarti/public_html/master/artist_spec.php on line 42
+[23-Feb-2013 05:58:32] PHP Warning:  include_once(pagination/db.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/artist_gen.php on line 4
+[23-Feb-2013 05:58:32] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'pagination/db.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/artist_gen.php on line 4
+[23-Feb-2013 05:58:32] PHP Fatal error:  Call to a member function getSpecData() on a non-object in /home/desiarti/public_html/master/artist_gen.php on line 41
+[23-Feb-2013 05:59:00] PHP Warning:  include_once(pagination/db.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/artist_country.php on line 4
+[23-Feb-2013 05:59:00] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'pagination/db.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/artist_country.php on line 4
+[23-Feb-2013 05:59:00] PHP Fatal error:  Call to a member function getSpecData() on a non-object in /home/desiarti/public_html/master/artist_country.php on line 44
+[23-Feb-2013 05:59:24] PHP Fatal error:  Call to a member function getSpecData() on a non-object in /home/desiarti/public_html/master/artist_country.php on line 42
+[23-Feb-2013 05:59:57] PHP Warning:  include_once(pagination/db.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/artist_cities.php on line 4
+[23-Feb-2013 05:59:57] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'pagination/db.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/artist_cities.php on line 4
+[23-Feb-2013 05:59:57] PHP Fatal error:  Call to a member function getSpecData() on a non-object in /home/desiarti/public_html/master/artist_cities.php on line 45
+[23-Feb-2013 06:00:16] PHP Fatal error:  Call to a member function getcountry() on a non-object in /home/desiarti/public_html/master/artist_cities.php on line 56
+[23-Feb-2013 06:00:46] PHP Fatal error:  Call to a member function getcountry() on a non-object in /home/desiarti/public_html/master/artist_cities.php on line 56
+[23-Feb-2013 06:19:38] PHP Warning:  include_once(../lib/Main.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/login.php on line 2
+[23-Feb-2013 06:19:38] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening '../lib/Main.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/login.php on line 2
+[23-Feb-2013 06:19:38] PHP Fatal error:  Class 'Main' not found in /home/desiarti/public_html/master/login.php on line 4
+[23-Feb-2013 06:24:10] PHP Warning:  include(../lib/Main.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/logout.php on line 2
+[23-Feb-2013 06:24:10] PHP Warning:  include(../lib/Main.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/desiarti/public_html/master/logout.php on line 2
+[23-Feb-2013 06:24:10] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '../lib/Main.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/desiarti/public_html/master/logout.php on line 2
+[23-Feb-2013 06:24:10] PHP Fatal error:  Class 'Main' not found in /home/desiarti/public_html/master/logout.php on line 3
+[23-Feb-2013 06:25:56] PHP Fatal error:  Call to undefined method Admin::changePass() in /home/desiarti/public_html/master/change_pass.php on line 44
+[23-Feb-2013 06:54:05] PHP Notice:  Undefined variable: config in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:54:05] PHP Fatal error:  Using $this when not in object context in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:54:24] PHP Notice:  Undefined variable: config in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:54:24] PHP Fatal error:  Cannot access empty property in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:54:56] PHP Notice:  Undefined variable: config in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:54:56] PHP Fatal error:  Cannot access empty property in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:55:07] PHP Notice:  Undefined variable: config in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:55:07] PHP Fatal error:  Cannot access empty property in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:55:46] PHP Notice:  Undefined variable: config in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 06:55:46] PHP Fatal error:  Cannot access empty property in /home/desiarti/public_html/master/artist_country.php on line 93
+[23-Feb-2013 07:15:22] PHP Fatal error:  Call to a member function getSpecInfo() on a non-object in /home/desiarti/public_html/master/edit_spec.php on line 16
+[25-Feb-2013 00:13:27] PHP Fatal error:  Call to a member function getCityInfo() on a non-object in /home/desiarti/public_html/master/edit_cities.php on line 16
+[25-Feb-2013 00:14:20] PHP Fatal error:  Call to a member function getcountry() on a non-object in /home/desiarti/public_html/master/edit_cities.php on line 50
+[25-Feb-2013 00:15:05] PHP Fatal error:  Call to a member function getcountry() on a non-object in /home/desiarti/public_html/master/edit_cities.php on line 50
+[25-Feb-2013 00:15:41] PHP Fatal error:  Call to a member function getcountry() on a non-object in /home/desiarti/public_html/master/edit_cities.php on line 50
+[25-Feb-2013 00:17:07] PHP Fatal error:  Call to a member function getCountryInfo() on a non-object in /home/desiarti/public_html/master/edit_country.php on line 16
+[25-Feb-2013 00:19:45] PHP Fatal error:  Call to a member function getArtistInfo() on a non-object in /home/desiarti/public_html/master/edit_artist.php on line 16
+[25-Feb-2013 00:20:31] PHP Fatal error:  Call to a member function getAllData() on a non-object in /home/desiarti/public_html/master/edit_artist.php on line 115
+[25-Feb-2013 00:20:44] PHP Fatal error:  Call to a member function getAllData() on a non-object in /home/desiarti/public_html/master/edit_artist.php on line 115
+[25-Feb-2013 00:21:00] PHP Fatal error:  Call to a member function getAllData() on a non-object in /home/desiarti/public_html/master/edit_artist.php on line 115

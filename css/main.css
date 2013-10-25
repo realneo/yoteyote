@@ -1,3 +1,4 @@
+@charset "utf-8";
 /* Author: Neo */
 /* Email: neo@yoteyote.com */
 
@@ -17,12 +18,6 @@ a{
     color:#9E1300;
 }
 
-input {
-	padding:7px;
-	border:1px solid #931300;
-	color:#666;
-        border-radius:5px;
-}
 button{
     border:1px solid #9E1300;
     border-radius: 5px;
@@ -47,14 +42,7 @@ button{
     left:0px;
     background-color: #fff;
 }
-#menu_bar{
-    position:absolute;
-    height:30px;
-    width:100%;
-    top:120px;
-    background-color:#9E1300;
-    left:0px;
-}
+
 #main_content{
     position:relative;
     margin: 0px auto;
@@ -62,77 +50,12 @@ button{
     height:500px;
     margin-top:25px;
 }
-#menu{
-    position:absolute;
-    margin: 0px auto;
-    width:1000px;
-    heigh:auto; 
-    top:10px;
-}
-#menu a{
-    padding-right: 20px;
-    color:#fff;
-}
-#menu a:hover{
-    text-decoration:underline;
-}
-#logo_text{
-    position:absolute;
-    left:100px;
-    top:35px;   
-    font-size: 14px;    
-}
-#logo_message{
-    position:absolute;
-    left:100px;
-    top:50px;
-    font-size:20px;
-    color:#9E1300;  
-}
-#discover_btn{
-    font-size:14px;
-    padding: 6px;
-    border-radius: 5px;
-    background-color:#9E1300;   
-    position: absolute;
-    width:auto;
-    color:#fff;
-    cursor: pointer;
-    top:50px;
-    left:460px;
-}
-#discover_btn:hover{
-    background-color:#fff;
-    border:1px solid #9E1300;
-    color:#9E1300;
-}
-#top_bg{
-    position: absolute;
-    width:100%;
-    height:150px;
-    left:0px;
-    top:16px;
-    overflow: hidden;
-}
+
+
 #will_want_form{
     position: absolute;
     right:0px;
     top:35px;
-}
-#will_want_form input{
-    border:1px solid #9E1300;
-    padding:5px;
-    border-radius: 5px;
-    color:#999999;
-    font-style: italic;
-}
-#will_want_form button{
-    border:1px solid #9E1300;
-    border-radius: 5px;
-    padding:5px;
-    color:#fff;
-    background-color:#9E1300;
-    cursor: pointer;
 }
 #will_want_form button:hover{
     border:1px solid #9E1300;
@@ -147,37 +70,11 @@ button{
     font-size:18px;
     font-weight: lighter;
 }
-#will_want_toggle{
-    position:absolute;
-    right:0px;
-    top:35px;
-    padding:10px 10px;
-    color:#999999;
-    font-style: italic;
-    font-size:12px;
-    font-weight: lighter;
-}
-#will_want_toggle a{
-    color:#931300;
-    font-size:12px;
-    border:1px solid #9e1300;
-    border-radius: 5px;
-    padding: 5px;
-}
-#will_want_toggle a:hover{
-    background-color:#9E1300;
-    color:#fff;
-}
+
 #search{
     position:absolute;
     right:0px;
     top:1px;
-}
-#search input{
-    border: 1px solid #9e1300;
-    border-radius:5px;
-    padding:5px;
-    color:#999;
 }
 #search button{
     border:1px solid #9E1300;
@@ -192,28 +89,7 @@ button{
    border:1px solid #fff;
    color:#fff;
 }
-#posts{
-    padding-top:80px;
-    padding-bottom:55px;
-}
-.post{
-    width:315px;
-    height:auto;
-    border:5px solid #EFEFEF;
-    border-radius: 5px;
-    display: inline-block;
-    padding:3px;
-}
-.amount{
-    font-size:18px;
-    color:red;
-    display:inline;
-    font-weight: bold;
-}
-.currency{
-    font-size:12px;
-    color:#999999;
-}
+
 .will_want{
     font-size:20px;
     font-weight: lighter;
@@ -221,12 +97,7 @@ button{
     display:inline;
 }
 
-.user_pic {
-    display:inline;
-}
-.user_name{
-    display:inline;
-}
+
 .get_contact{
     float:right;
 }
@@ -263,10 +134,6 @@ button{
 #logged_user{
     font-style: italic;
 }
-#user_pic{
-    position:absolute;
-    left:0px;
-}
 #user_name{
     position:absolute;
     left:60px;
@@ -290,7 +157,7 @@ button{
     background-color:#fff;
     cursor: pointer;
     position:absolute;
-    left:300px;
+    left:460px;
     top:0px;
     display:inline;
 }
@@ -313,61 +180,71 @@ button{
     font-size:14px;
     font-weight:lighter;    
 }
-#popup_window{
-   display: none;
-   position: fixed;
-   top: 50%;
-   left: 50%;
-   margin-left: -190px;
-   margin-top: -100px;
-   background-color: #ffffff;
-   padding: 0px;
-   z-index: 2;
-}
-#popup_window_title{
-    position:absolute;
-    left:0px;
-    top:0px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    background-color:#931300;
-    width:100%;
-    padding:10px 5px;
-    color:#fff;
-}
-#popup_window_content{
-    position:absolute;
-    left:0px;
-    top:28px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color:#fff;
-    width:100%;
-    padding:5px;
-    color:#000;
-    
-}
-#overlay{
-   position: fixed;
-   top: 0;
-   right: 0;
-   bottom: 0;
-   left: 0;
-   height: 100%;
-   width: 100%;
-   margin: 0;
-   padding: 0;
-   background: #000000;
-   opacity: 0.5;
-   filter: alpha(opacity=50);
-   -moz-opacity: .50;
-   z-index: 1;
-   display: none;
-}
+
 .preloader{
     display:none;
 }
 .feedback{
     font-size:11px;
     color:#666;
+}
+.type{
+	
+	font-style:italic;
+	font-size:20px;
+color:#9E1300;
+	
+}
+/* Preloader */
+#loader {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color:#fff; /* change if the mask should have another color then white */
+	z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+	width:200px;
+	height:200px;
+	position:absolute;
+	left:50%; /* centers the loading animation horizontally one the screen */
+	top:50%; /* centers the loading animation vertically one the screen */
+	background-image:url(../images/status.gif); /* path to your loading animation */
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+
+.apply
+{
+	
+	    float:right;
+			margin-right:7px;
+	
+}
+
+.apply button:hover
+{
+	
+	background-color:#FFF;
+    color:#9E1300;
+}
+
+.currency
+{
+	
+	font-weight:bold;
+	font-size:12px;
+	color:#9E1300;
+	
+}
+
+#error_a
+{
+	color:red;	
+	
+	
 }

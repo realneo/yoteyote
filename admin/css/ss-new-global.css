@@ -1,0 +1,232 @@
+.clearfix_vr:before, .clearfix_vr:after {
+	content: "\0020";
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+.clearfix_vr:after {
+	clear: both;
+}
+.clearfix_vr {
+	zoom: 1;
+}
+.clearfix_vr:after {
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+/* __buttons 
+---------------------------------------------------------------------------- */
+button.cta, button.cta.orange, .cta, .cta.orange, #footer input[type="submit"] {
+	font-family: 'avantGardeMedium', arial, sans-serif;
+	height: 30px;
+	font-size:16px;
+	line-height:30px;
+	border: none;
+	padding: 0 10px;
+	color: #fff;
+	display: inline-block;
+	text-decoration: none;
+}
+button.cta, .cta, #footer input[type="submit"] {
+	background: #10a0d5;
+}
+button.cta.orange, .cta.orange {
+background-color: #F3F3F3;
+    border: 1px solid #FFD700;
+    color: #2B2C2B;
+    text-shadow: 0 1px 0 rgba(254, 254, 254, 0.5);;
+}
+.cta.red {
+	background: #EF3D42;
+	line-height: 23px;
+	padding: 0 14px !important;
+}
+.cta.red:hover {
+	color: #fff;
+}
+p.cta {
+	float: left;
+}
+/* Modal Popup styles
+-------------------------------------------------------------------------------*/
+.modalOverlay {
+	min-width: 600px;
+	position: relative;
+	display: none;
+	z-index: 9999;
+	background: #FFF;
+	-moz-box-shadow: 0 0 8px rgba(0,0,0,0.56);
+	-webkit-box-shadow: 0 0 8px rgba(0,0,0,0.56);
+	box-shadow: 0 0 8px rgba(0,0,0,0.56)
+}
+.modalOverlay a.close, .emailSubscribeOverlay a.close {
+	background: url(../img/ss_global/btn_close_modal.png) no-repeat;
+	width: 30px;
+	height: 29px;
+	position: absolute;
+	right: -15px;
+	top: -15px;
+	cursor: pointer;
+	padding: 0;
+}
+.modalOverlay .overlayHeading {
+	padding: 20px;
+	background: #000;
+}
+.modalOverlay .overlayHeading h2 {
+	color: #cbcbcb;
+}
+.modalOverlay .overlayHeading p {
+	color: #999;
+}
+.modalOverlay .overlayContent {
+	padding: 20px;
+	max-height: 600px;
+	scroll: auto;
+}
+.modalOverlay.iframe {
+	width: auto;
+	max-width: 800px;
+	height: 60%;
+}
+.modalOverlay.iframe .overlayContent {
+	padding: 0px;
+}
+.ie7 .modalOverlay, .ie8 .modalOverlay {
+	border: 2px solid #ccc;
+	background: #FFF;
+}
+#videoOverlay .overlayContent {
+	width: 640px;
+	height: 360px;
+}
+/* Chunky headers on category/series page, etc. */
+h2.enhance {
+	font-family: 'avantGardeMedium', arial, sans-serif;
+	font-size: 24px;
+	font-weight: normal;
+	clear: both;
+	padding: 24px 30px 23px 28px;
+	background: #f1f1f1;
+	line-height: 1;
+}
+h2.enhance .color {
+	width: 85px;
+	height: 4px;
+	display: block;
+	text-indent: -1000em;
+	margin-bottom: 13px;
+}
+h2.enhance .score {
+	display: block;
+	width: 100%;
+	margin-top: -4px;
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #fff;
+	text-indent: -1000em;
+	padding: 0;
+	height: 0;
+}
+h2.enhance .label {
+	display: inline-block;
+	padding-right: 10px;
+	background: #f1f1f1;
+}
+.ie7 h2.enhance .label {
+	display: block;
+}
+.seoImage {
+	display: block;
+	overflow: hidden;
+	text-indent: -9000em;
+}
+div[class='articlePage'] {
+	background: none !important;
+	display: block;
+}
+div[id='sonyStyleWebsite'] {
+	background: none !important;
+	position: inherit !important;
+}
+div[id='sonyStyleHeader'] {
+	position: relative !important;
+}
+/* -------------------------------------- */
+.articlePage, .fullPage {
+	font: 12px/125% Arial, Helvetica Neue, Helvetica;
+	color: #333;
+}
+.articlePage p, .fullPage p {
+	line-height: 125%;
+	margin-bottom: 10px;
+}
+/*  Price Container - this is where all of our product card pricing styles are located, all items within the
+ *  .currency* styles should be floated left (via boxCard left) and we're simply adjusting colors and line-heights
+ *  for the most part.
+
+.priceContainer                         {height: 20px; color: #44b3e1; margin: 0; padding: 0;}
+.priceContainer.price                   {color: #333;}
+    .currencyType                       {line-height: 14px;}
+    .currencySubUnits                   {line-height: 14px; }
+    .currencyMainUnits                  {font-size: 20px;}
+ */
+.priceContainer.startingAt {
+	color: #44b3e1;
+}
+.priceContainer.strikethrough {
+	color: #666;
+	text-decoration: line-through;
+}
+.strikethrough .currencyMainUnits, .strikethrough .currencySymbol {
+	font-size: 16px;
+}
+.strikethrough .currencySubUnits {
+	margin-right: 15px;
+}
+/* DYNAMIC PRICE STYLES - as they are contained in class .priceContainer via .boxCard left
+	.dynamicPrice {}
+		.dynamicPrice span {float: left; clear: none;}
+			.dynamicPrice .currencySymbol {font-size: 20px; line-height: 14px;}
+			.dynamicPrice .currencyMainUnits {font-size: 20px;}
+			.dynamicPrice .currencySubUnits {font-size: 12px; line-height: 9px;} */
+			
+	/* DYNAMIC PRICE STYLES - as they are contained in tooltips */
+.dynamicPriceToolTip {
+	font-size: 11px;
+	color: #44b3e1;
+	font-family: arial;
+	margin-top: 5px;
+	display: block;
+}
+.startingAtToolTip {
+	float: left;
+	margin-right: 2px;
+}
+.priceBoxToolTip {
+	height: 20px;
+	color: #44b3e1;
+	margin: 0px;
+	padding: 0px;
+}
+.dynamicPriceToolTip .dynamicPrice span {
+	font-size: 11px;
+}
+.dynamicPriceToolTip .dynamicPrice .currencySymbol {
+}
+.dynamicPriceToolTip .dynamicPrice .currencyMainUnits {
+}
+.dynamicPriceToolTip .dynamicPrice .currencySubUnits {
+}
+.show {
+	display: block;
+}
+.hide {
+	display: none;
+}
+/* this style exists in ss_core.css as well */
+#sonyStyleFooter {
+	float: left;
+}

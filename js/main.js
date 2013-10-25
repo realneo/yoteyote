@@ -1,42 +1,72 @@
+function is_int(value){ 
+
+  if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
+
+      return true;
+
+  } else { 
+
+      return false;
+
+  } 
+
+}
+
+
+
+
+function preload_start()
+{
+		$("#status").show();                      // will first fade out the loading animation
+		$("#loader").show();
+}
+
+
+function preload_stop()
+{
+
+		$("#status").fadeOut();                      // will first fade out the loading animation
+		$("#loader").delay(350).fadeOut("slow"); //  will fade out the white DIV that covers the website.
+
+}
+
+
+
+function load_page(param,page)
+{
+	preload_start();
+
+	$('#'+param).load(page).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
+  	preload_stop();
+    });; 
+	
+}
+
+
+
 $(document).ready(function(){
-    // Input General Animation
-	$('input').focus(function(){
-		input_value = $(this).val();
-		$(this).val("");
-	});
-	$('input').focusout(function(){
-		if(!$(this).val()){
-			$(this).val(input_value);		
-		}
-	});
+
+
+	$("a").unbind('click');
+	$("button").unbind('click');
         
     //Overflow 
     $('#overlay').click(function(){
-        $('#popup_window').fadeOut(500);
-        $(this).delay(500).fadeOut(500);
-    });
-    
-    // Login popup window
-    $('#login_pop').click(function(){
-        $('#overlay').fadeIn(500);
-        $('#popup_window').delay(500).fadeIn(500);
-        $('#popup_window_title').fadeIn().html('Login');
-        $('#popup_window_content').fadeIn().load('includes/login.php');
-        $('#popup_window').css({'width':'220px'}); 
+        $('#popup_window').fadeOut();
+        $(this).delay(500).fadeOut();
     });
     
     //Login Process
-    $('#login_btn').click(function(){
+    $('#sign-in').click(function(){
         $('.preloader').fadeIn();
-        if($('#user_email').val() == "" || $('#user_password').val() == ""){
-            $('.feedback').fadeIn(400).html("Please Enter BOTH Email & Password Before Proceeding");
-            $('.feedback').delay(2000).fadeOut(400);
+        if($('#email').val() == "" || $('#password').val() == ""){
+            $('.alert').fadeIn(400).html("Enter BOTH Email & Password");
             $('.preloader').fadeOut(400);
         }else{
-            var form_action = $('#login_form').attr('action');
+            var form_action = $('#sign_in_form').attr('action');
             var form_data = {
-                email : $('#user_email').val(),
-                password : $('#user_password').val()
+                email : $('#email').val(),
+                password : $('#password').val()
                 };
             $.ajax({
                 type:'post',
@@ -44,15 +74,13 @@ $(document).ready(function(){
                 data: form_data,
                 success: function(response){
                     if(response == "success"){
-                        $('.feedback').fadeIn().html("<p class='success'>Login Successful</p>");
                         $('.preloader').fadeOut();
-                        $('.feedback').delay(500).fadeOut(400);
-                        $('#popup_window').delay(900).fadeOut(400);
-                        $('#overlay').delay(1200).fadeOut(400);
-                        $('#user').load('includes/logged_user.php');
+                        $('.dropdown-menu').slideUp();
+                        $('#sign_in_dropdown').fadeOut();
+                        $('#user').load('includes/logged_user.php?mode=al');
                         
                     }else{
-                        $('.feedback').fadeIn().html("<p class='error'>Either your Username or Password is incorrect</p>");
+                        $('.alert').fadeIn().html("<p class='error'>Either your Username or Password is incorrect</p>");
                         $('.preloader').fadeOut();
                     }
                 }
@@ -62,12 +90,12 @@ $(document).ready(function(){
     });
     
     // Registration window
-    $('#register_pop').click(function(){
-        $('#overlay').fadeIn(500);
-        $('#popup_window').delay(500).fadeIn(500);
-        $('#popup_window_title').fadeIn().html('Register Now');
-        $('#popup_window_content').fadeIn().load('includes/new_user_form.php');
-        $('#popup_window').css({'width':'400px'}); 
+    $('#signup_btn').click(function(){
+        $('content').hide();
+        $('.preloader').fadeIn();
+        $('#posts').hide(400);
+        $('#content').load('includes/new_user_form.php');
+        $('.preloader').fadeOut();
     });
     //Registration Process
     $('#reg_btn').click(function(){
@@ -177,17 +205,25 @@ $(document).ready(function(){
         return false;
     });
     
-    // I will post process
+    /*************************************************************************/
+    /***********************  I WILL - CREATE PROCESS ************************/
+    /*************************************************************************/
     $('#will_create_btn').click(function(){
-        //Getting data from the Form
-        var will_post = $('#will_post').val();
-        var description = $('#description').val();
-        var currency = $('input[name=currency]:checked', '#new_will_form').val();
-        var amount = $('#amount').val();
-        var type = $('#type').val();
+                
+        // Loading Icon Fade In
+        $('.loader').fadeIn();
         
+        // Assigning Variables to the form and its elements
+        var form_name = "form[name='new_will_form']";
+        var terms = $(form_name + " input[name = 'terms']").is(":checked");
+        var will_post = $(form_name + " input[name = 'will_post']").val();
+        var description = $(form_name + " textarea[name = 'description']").val();
+        var currency = $(form_name + " input[name = 'currency']").val();
+        
+        console.log(form_name);
+        /*
+        alert(currency);
         // Preloader Icon
-        $('.preloader').fadeIn();
         
         // Checking the will_post input
         if($('#will_post').val() == '' ){
@@ -233,7 +269,7 @@ $(document).ready(function(){
                         $('.preloader').fadeOut();
                     }
                 }
-            });
+            });*/
         return false;
     });
     
@@ -328,15 +364,468 @@ $(document).ready(function(){
         return false;
     });  
     
-    // Loading Posts
-    $('#posts').load('includes/posts.php'); 
-    
-    // Get Contact
-     $(document).on('click', '.get_contact', function () {
-        $('#overlay').fadeIn(500);
-        $('#popup_window').delay(500).fadeIn(500);
-        $('#popup_window_title').fadeIn().html('Login First');
-        $('#popup_window_content').fadeIn().load('includes/get_contact.php', $(this).attr('id'));
-        $('#popup_window').css({'width':'320px'});
+
+	$('#posts').load('includes/posts.php');
+	preload_stop();
+	
+	
+	
+	
+	
+	
+	
+	
+	// Get Contact
+     $(document).on('click', '.get_contact_btn', function () {
+		 
+		
+		var button = $(this);
+		
+		
+		
+		
+		 $.ajax({
+            url:'includes/session_check.php',
+            success:function(response){
+                if(response == 'success'){
+					
+					 
+					$('#overlay').fadeIn(500);
+					$('#popup_window').delay(500).fadeIn(500);					
+					$('#popup_window_title').fadeIn().html('Profile');
+
+					$('#popup_window_content').fadeIn().load('includes/get_contact.php?id='+button.attr('id'));					
+					$('#popup_window').css({'width':'320px'});
+              
+                }else{
+                    $('#overlay').fadeIn(500);
+                    $('#popup_window').delay(500).fadeIn(500);
+                    $('#popup_window_title').fadeIn().html('Login First');
+                    $('#popup_window_content').fadeIn().load('includes/login.php');
+                    $('#popup_window').css({'width':'220px'});
+                }
+            }
+        });
+	
+		
     });
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//4-22-2013
+
+
+	
+	
+	
+	
+	
+	// Get lists
+     $(document).on('click', '#list_btn', function () {
+		 $("a").unbind('click');
+	$("button").unbind('click');
+			
+			load_page('posts','includes/lists.php');
+		
+		
+    });
+	
+	
+	// Get ongoings
+	     $(document).on('click', '#ongoing_btn', function () {
+				 $("a").unbind('click');
+				$("button").unbind('click');
+			
+			load_page('posts','includes/ongoings.php');
+		
+		
+    });
+
+	
+	
+	
+	
+	
+	     $(document).on('click', '.view_bid_btn', function () {
+		 
+		
+			var button = 	$(this);
+		
+			load_page('posts','includes/bids.php?id='+button.attr('id'));
+			
+		
+		
+    });
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	$('#will_sort').click(function(e) {
+		
+			load_page('posts','includes/posts.php?sort=wills');
+		
+        
+    });
+
+	$('#want_sort').click(function(e) {
+		
+			load_page('posts','includes/posts.php?sort=wants');
+		
+        
+    });
+    $('#all_sort').click(function(e) {
+		
+			load_page('posts','includes/posts.php');
+		
+        
+    });
+
+	
+	//Search
+	
+	$('#search_btn').click(function(e){
+			e.preventDefault();
+  			var txt = $('#search_txt').val();
+			load_page('posts','includes/posts.php?mode=search&txt='+txt);
+	
+		
+	});
+
+
+
+
+
+
+$(document).on('click','.accept_bid_btn',function(e) {
+	
+	
+ 		 e.preventDefault();
+		 var button = $(this);
+		 var list_id = button.attr('id');
+		 
+		  $.ajax({
+                type:'post',
+                url: 'includes/bid_process.php?list_id='+list_id,
+                success: function(response){
+				
+				
+					if(response == "empty"){
+                
+                     
+                    	
+						toastr.error('Please deposit money in your account');
+	
+					
+                        
+                      	
+                        
+                    }					
+                    else if(response == "success"){
+                        
+                     toastr.options.onFadeOut = function() { location.reload();  }      
+					  toastr.success('Post Approved', 'Bid Accepted');
+				    
+                      	                          
+
+	   
+				   
+
+                        
+                    }else 
+								
+					{
+						 	toastr.error('Some error ocurred please try again');
+                        
+						
+                      
+                    }
+                }
+            });
+	
+	
+	
 });
+
+
+
+
+
+
+
+$(document).on('click','.pay_btn',function(e) {
+	
+	
+ 		 e.preventDefault();
+		 var button = $(this);
+		 var ongoing_id = button.attr('id');
+		 
+		  $.ajax({
+                type:'post',
+                url: 'includes/on_process.php?on_id='+ongoing_id,
+                success: function(response){
+				
+				
+					if(response == "funds"){
+                
+                     
+                    	
+						toastr.error('Insufficient funds in your account.Please Deposit money ');
+	
+					
+                        
+                      	
+                        
+                    }					
+                    else if(response == "success"){
+                        
+				     
+					  
+
+					
+					 toastr.options.onFadeOut = function() { location.reload();  }                                               
+			         toastr.success('Payment Completed', 'Post closed with success');
+
+                      
+
+	   
+				   
+
+                        
+                    }else 
+								
+					{
+						 	toastr.error('Some error ocurred please try again');
+                        
+						
+                      
+                    }
+                }
+            });
+	
+	
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(document).on('click', '.add_apply_btn', function (e) {
+	
+		 e.preventDefault();
+		 
+		 
+	$("a").unbind('click');
+	$("button").unbind('click');
+		 
+		 var button = $(this);
+
+		var post_id  = $('.post_id').val();
+        var post_to_id = $('.post_to_id').val();
+		var bid  = $('#bid_amount').val();
+		
+		
+		if(is_int(bid) )
+		{
+		
+		
+      
+		
+		
+		
+		     $.ajax({
+                type:'post',
+                url: 'includes/apply_process.php',
+                data: {'post_id':post_id,'post_to_id':post_to_id ,'bid':bid },
+                success: function(response){
+				
+				
+					if(response == "empty"){
+                
+                     
+                        $('#error_a').fadeIn(400).text('Please deposit money in your account to continue');
+						 $('.preloader').fadeOut();
+                        
+                      	
+                        
+                    }					
+                    else if(response == "success"){
+                        
+                       
+				        $('.feedback').fadeIn().html("<p class='success'>Process completed with success</p>");
+                        $('.preloader').fadeOut();
+                        $('.feedback').delay(500).fadeOut(400);
+                        $('#popup_window').delay(900).fadeOut(400);
+                        $('#overlay').delay(1200).fadeOut(400 , function() {
+                      	load_page('posts','includes/posts.php');                            
+                        });;
+	   
+				   
+
+                        
+                    }else 
+								
+					{
+						  $('.preloader').fadeIn();	
+					      $('#error_a').fadeIn(400).text('Some error occured please try again after some time');
+						 $('.preloader').fadeOut();
+                        
+						
+                      
+                    }
+                }
+            });
+		
+		}
+		else 
+		{
+			  $('.preloader').fadeIn();	
+			  $('#error_a').fadeIn(400).text('Please enter valid amount');
+			 $('.preloader').fadeOut();
+			
+			
+		}
+		
+		
+		
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  $(document).on('click', '.add_trust_btn', function (e) {
+	$("a").unbind('click');
+	$("button").unbind('click');
+		e.preventDefault();
+		 var button = $(this);
+		var trust_by  = button.attr('id');
+		var post_id  = $('.trusted_to').val();
+       
+		
+		
+		
+		
+		
+		     $.ajax({
+                type:'post',
+                url: 'includes/trust_process.php',
+                data: {'by':trust_by,'post_id':post_id},
+                success: function(response){
+                    if(response == "success"){
+                        
+                         $('.feedback').delay(500).fadeOut(400);
+                        $('#popup_window').delay(900).fadeOut(400);
+                        $('#overlay').delay(1200).fadeOut(400);
+                      	load_page('posts','includes/posts.php');
+                        
+                    }else 
+								
+					{
+					
+					button.text('trusted');
+                      
+                    }
+                }
+            });
+		
+        
+    });
+
+	
+
+
+
+
+
+//Hire / Apply
+
+
+	// Get Contact
+     $(document).on('click', '.apply_btn', function () {
+		 $("a").unbind('click');
+	$("button").unbind('click');
+		
+		var button = $(this);
+   
+		
+		
+		
+		 $.ajax({
+            url:'includes/session_check.php',
+            success:function(response){
+                if(response == 'success'){
+					
+					 
+					$('#overlay').fadeIn(500);
+					$('#popup_window').delay(500).fadeIn(500);					
+					$('#popup_window_title').fadeIn().html('Description');
+					$('#popup_window_content').fadeIn().load('includes/get_apply.php?id='+button.attr('id'));					
+					$('#popup_window').css({'width':'320px'});
+              
+                }else
+				{
+                    $('#overlay').fadeIn(500);
+                    $('#popup_window').delay(500).fadeIn(500);
+                    $('#popup_window_title').fadeIn().html('Login First');
+                    $('#popup_window_content').fadeIn().load('includes/login.php');
+                    $('#popup_window').css({'width':'220px'});
+                }
+            }
+        });
+	
+		
+    });
+	
+	
+	
+	
+	
+
+					
+	
+	
+});//ready ends

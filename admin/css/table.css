@@ -1,0 +1,67 @@
+/*CSS Document*/
+/*b2btechnosolutions CSS files - by http://www.b2btechnosolutions.com India*/
+/*Comment all css which you are NOT useing in Layout*/
+/*Body Link css*/
+
+
+
+/*Body css*/
+html,{
+	margin:0px; background:#ffffff;}
+
+
+/*Link css */
+.link_1 a:link {Font-Family: Arial, Helvetica, sans-serif;color:#f9e03e;text-decoration: underline;}
+.link_1 a:visited {Font-Family: Arial, Helvetica, sans-serif;color:#f9e03e;text-decoration: underline;}
+.link_1 a:active {Font-Family: Arial, Helvetica, sans-serif;color:#f9e03e;text-decoration: underline;}
+.link_1 a:hover {Font-Family: Arial, Helvetica, sans-serif;color:#f9e03e;text-decoration: none;}
+
+
+/*Font css */
+.Light11{ font-family: Arial, Helvetica, sans-serif; font-size:11px;}
+.Light12{ font-family: Arial, Helvetica, sans-serif; font-size:12px;}
+.Light13{ font-family: Arial, Helvetica, sans-serif; font-size:13px;}
+.Light20{ font-family: "Arno Pro"; font-size:20px;}
+.Light15{ font-family: Georgia, "Times New Roman", Times, serif; font-size:15px;}
+.Light12G{ font-family: Georgia, "Times New Roman", Times, serif; font-size:12px;}
+.Light26{ font-family: "Felix Titling"; font-size:26px;}
+.Light15M{ font-family: "Myriad Pro"; font-size:15px;}
+.Light18{ font-family: "Felix Titling"; font-size:18px;}
+.Light14F{ font-family: "Felix Titling"; font-size:14px;}
+.Light22{ font-family: "Myriad Pro"; font-size:22px;}
+
+
+/*Text color css*/
+.White{color:#fff;}
+.White1{color:#eeeeee;}
+.Black{color:#000;}
+.Black1{color:#202021;}
+.Silver{color:#d3d3cc;}
+.Brown{color:#876e2b;}
+.Gray{color:#626262;}
+.Gray1{color:#434342;}
+.Yellow{color:#f5e59e;}
+
+
+.LineHaight19{ line-height:19px;}
+.Bold{ font-weight:bold;}
+
+
+
+.TxtBx1{ font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#4b4b4b; border:none; background:none; padding:5px; outline:none;}
+
+
+
+/*---02-01-2013---*/
+
+.Gray2{ color:#626160;}
+.Glden_1{ color:#b4a660;}
+.Glden_2{ color:#614608;}
+.Light14{ font-family: "Myriad Pro"; font-size:14px;}
+.My_12{ font-family: "Myriad Pro"; font-size:12px;}
+
+.link_2 a:link {Font-Family: "Myriad Pro";color:#614608;text-decoration: none;}
+.link_2 a:visited {Font-Family: "Myriad Pro";color:#614608;text-decoration: none;}
+.link_2 a:active {Font-Family: "Myriad Pro";color:#614608;text-decoration: none;}
+.link_2 a:hover {Font-Family:"Myriad Pro";color:#fff;text-decoration: none;}
+

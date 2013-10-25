@@ -1,46 +1,17 @@
-<html>
-    <head>
-        <title>Registration Form</title>
-        <script type='text/javascript' src='js/main.js'></script>
-    </head>
-    <body>
-        <form action="includes/registration_process.php" method="post" name="new_user_form" id='reg_form'>
-            <table>
-            <tr>
-                <td width="120" align="right">First Name</td>
-                <td width="170"><input name="first_name" type="text" id="first_name" size="35" /></td>
-            </tr>
-            <tr>
-                <td align="right">Last Name</td>
-                <td><input name="last_name" type="text" id="last_name" size="35" /></td>
-            </tr>
-            <tr>
-                <td align="right">Email</td>
-                <td><input name="email" type="text" id="email" size="35" /></td>
-            </tr>
-            <tr>
-                <td align="right">Re-Enter Email</td>
-                <td><input name="email2" type="text" id="email2" size="35" /></td>
-            </tr>
-            <tr>
-                <td align="right">Mobile</td>
-                <td><input name="mobile" type="text" id="mobile" size="15" /></td>
-            </tr>
-            <tr>
-                <td align="right">Password</td>
-                <td><input name="password" type="password" id="password" size="35" /></td>
-            </tr>
-            <tr>
-                <td align="right">Re-Enter Password</td>
-                <td><input name="password2" type="password" id="password2" size="35" /></td>
-            </tr>
-            <tr>
-                <td align="right">&nbsp;</td>
-                <td align="right"><button type='submit' id='reg_btn'>Register </button></td>
-            </tr>
-          </table>
-        </form>
-        <div class='preloader'><img src='images/loader.gif' height='12px'/></div><!-- preloader -->
-        <div class='feedback'></div><!-- preloader -->
-    </body>
-</html>
+<div class="alert alert-error">
+    <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Username or Password!
+</div>
+<div class="span3">
+    <h2>Sign Up</h2>
+    <form action="registration_process.php" method="post" name="new_user_form" id='reg_form'>
+        <label>First Name</label><input type="text" name="first_name" id="first_name" placeholder="Kombo">
+        <label>Last Name</label><input type="text" name="last_name" id="last_name" placeholder="Hamisi">
+        <label>Email Address</label><input type="email" name="email" id="email" placeholder="kombo@email.com">
+        <label>Re-Email Address</label><input type="email" name="email" id="email2" placeholder="kombo@email.com">
+        <label>Mobile</label><input type="text" name="mobile" id="mobile" placeholder ="+255712345678">
+        <label>Password</label><input type="password" name="password" placeholder="***********">
+        <label><input type="checkbox" name="terms"> I agree with the <a href="#">Terms and Conditions</a>.</label>
+        <input type="submit" value="Sign up" class="btn btn-danger" id="reg_btn">
+        <div class="clearfix"></div>
+    </form>
+</div>

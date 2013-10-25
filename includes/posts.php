@@ -1,41 +1,72 @@
+
 <?php
-    session_start();
-    include('db_conn.php');
-    
-    $q = mysql_query("SELECT * FROM `posts` ORDER BY `date` DESC");
-    while($row = mysql_fetch_array($q)){
-       $currency = ucfirst($row['currency']);
-       $amount = $row['amount'];
-       $f_amount = number_format($amount);
-       $post = $row['post'];
-       $user_id = $row['user_id'];
-       $post_id = $row['id'];
-       $qq = mysql_query("SELECT * FROM `users` WHERE `id` = '$user_id'");
-       while($rows = mysql_fetch_array($qq)){
-           $first_name = $rows['first_name'];
-           $last_name = $rows['last_name'];
-           echo"
-               <div class='post'>
-                  <table width='310'>
-                    <tr>
-                        <td height='77' colspan='2' valign='top'>
-                            <div class='amount'><span class='currency'>{$currency}</span> {$f_amount}</div><!-- amount -->
-                            <div class='will_want'> - {$post}</div>
-                            <!-- class post -->
-                       </td>
-                    </tr>
-                    <tr>
-                      <td width='66' rowspan='2'><div class='user_pic'><img src='images/sample_user.png' alt='' /></div><!-- user_pic --></td>
-                      <td width='232' height='20' valign='top'><div class='user_name'>{$first_name} {$last_name}</div><!-- user_name --></td>
-                    </tr>
-                    <tr>
-                      <td height='16' valign='top'><div class='trusted_by'>Trusted by 5 people</div><!-- trusted_by -->
-                      <div class='get_contact'><button name='get_contact' class='get_contact' id='{$post_id}'>Get Contact</button></div><!-- get_contact -->
-                      </td>
-                    </tr>
-                </table>   
-                </div><!-- post -->
-            ";
-       }
-    }
+   include ("../lib/Main.php");
+	$main= new Main;
+	$post_obj=$main->load_model('Post');
+	$active_filter = " AND posts.active='y'";
+	
+	
+	if(isset($_GET['mode']) && $_GET['mode']=='search'){
+            $posts =  $post_obj->searchPost($_GET['txt']);				
+	}
+	else if(isset($_GET['sort']) && $_GET['sort']=='wants'){
+            $posts =  $post_obj->getAllPosts('*',$orderby ='posts.type',$option=" AND posts.type='want' $active_filter");				
+	}
+	
+	else if(isset($_GET['sort']) && $_GET['sort']=='wills'){
+            $posts =  $post_obj->getAllPosts('*',$orderby ='posts.type',$option=" AND posts.type='will' $active_filter");				
+	}
+	else{
+            $posts = $post_obj->getAllPosts();
+	}
+        
+	$html.="";
+
+	if (!empty($posts) ){
+            foreach($posts as $post){
+                
+                // Get total trusts for each user
+                $trusts = $post_obj->getTotalTrusts($post['user_id']);
+                
+                // Assigning different values for post type. 
+                // If its a "WILL" or "WANT"
+                
+                if($post['type']=='will'){
+                    $type_text = "Hire"; //If post type is WILL then change the button text to "Hire"
+                     $btn_toggle = 'btn-success'; // If the post type is WILL then change the button to the assigned class 'btn-success'
+                     $color_toggle = 'success'; // If the post type is WILL then change the color_toggle to the assigned class 'success'
+                }else{
+                    $type_text = "Bid"; //If post type is WANT then change the button text to "Bid"
+                    $btn_toggle = 'btn-danger';// If the post type is WANT then change the button to the assigned class 'btn-danger'
+                    $color_toggle = 'red_color';// If the post type is WANT then change the color_toggle to the assigned class 'red_color'
+                }
+                
+                
+
+                // english notation (default)
+                $conv_amount = number_format($post['amount']);
+                // 1,235
+                // 
+                //Post
+
+                $html.="
+                    <li class='span4 '>
+                        <div class='thumbnail plan no_margin'>
+                            <span class='label label-inverse'>$post[currency]</span>
+                            <span class='amount'>$conv_amount</span> - 
+                            <span class='post_type $color_toggle'>I $post[type]</span>
+                            <span class='post_title'>design a website in one day</span>
+                            <br />
+                            <div class='span3'><img src='images/sample_user.png' alt='' /></div>
+                            <a href='#' class='font15'>$post[first_name] $post[last_name]</a>
+                            <p class='muted'>Trusted by <span class='badge badge-warning'>$trusts</span> people.</p>
+                            <button class='btn $btn_toggle' id='$post[id]'>$type_text</button>
+                        </div>
+                    </li>
+                
+                        ";
+            }
+	   
+	   echo $html;
+	 }
 ?>
