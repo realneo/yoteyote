@@ -1,65 +1,26 @@
 <?php 
 
-
-class Post extends Main
-{
-	public $db;
-  
-	
-	
-		public function  __construct()
-		{
-			$this->db = $this->load_model("Db");
-			$this->table='posts';
+    class Post extends Main{
+	public $db;	
+        public function  __construct(){
+            $this->db = $this->load_model("Db");
+            $this->table='posts';
+        }
+        
+        public function getPost($where='',$s=true){     
+            $q = "SELECT * FROM `posts` $where";
+                if($s){
+                    $post = $this->db->get_row($q);
+		}else{
+                    $post = $this->db->get_rows($q);
+                }
+                    return $post;	
 		}
-		
-		
-		
-		
-		
-		
-		
-		public function getPost($where='',$s=true)
-		{
-			
-			$q = "SELECT *from posts $where";
-			
-			if($s)
-			{
-			$post = $this->db->get_row($q);
-			}
-			else 
-			{
-			$post = $this->db->get_rows($q);
-			}
-			return $post;
-			
-		}
-		
-		
-		
-	
-		
-		
 		
 		public function getAllPosts($get='*',$orderby ='posts.date', $option="AND posts.active='y'"){
-			
-			 $q = "SELECT 
-						  $get 
-						FROM
-						  posts,
-						  users 
-						WHERE posts.`user_id` = users.`user_id` $option 
-						ORDER BY $orderby DESC ";
-						
-
-					$posts=	$this->db->get_rows($q);
-				
-	     return $posts;
-					
-				
-			
-			
+                    $q = "SELECT $get FROM posts, users WHERE posts.`user_id` = users.`user_id` $option ORDER BY $orderby DESC ";
+                    $posts = $this->db->get_rows($q);		
+                    return $posts;		
 		}
 		
 		

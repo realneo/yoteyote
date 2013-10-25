@@ -57,9 +57,9 @@
                             <span class='post_type $color_toggle'>I $post[type]</span>
                             <span class='post_title'>design a website in one day</span>
                             <br />
-                            <div class='span3'><img src='images/sample_user.png' alt=''/></div>
+                            <div class='span3'><img src='images/sample_user.png' alt='' width='50px'/></div>
                             <a href='#' class='font15'>$post[first_name] $post[last_name]</a>
-                            <p class='number'>0787487333</p>
+                            <p class='number'>$post[mobile]</p>
                         </div>
                     </li>
                 
