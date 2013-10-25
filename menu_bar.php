@@ -18,7 +18,7 @@
                     <li class="divider-vertical"></li>
                     <li><a href="#"><i class="icon-signal"></i> Stats</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="#"><i class="icon-lock"></i> Yoteyote Bank</a></li>
+                    <li><a href="#"><i class="icon-lock"></i> Pocket Money</a></li>
                     <li class="divider-vertical"></li>
                 </ul>
                 <ul class="nav pull-right" id='sign_in_dropdown'>
