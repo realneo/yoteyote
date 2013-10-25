@@ -6247,7 +6247,9 @@ ul.thumbnails li.span12 + li {
     font-size:16px;
     color:#D2232A
 }
-
+.greytxt{
+    color:#57585D;
+}
 /************** SIDE BAR ******************/
 #will_want_toggle{
     padding:10px 10px;
