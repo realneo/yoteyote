@@ -43,8 +43,7 @@
                     <h4>Buy & Sell small jobs from one another <button class='btn btn-danger'>Discover how</button> </h4>
                 </div>
             </div>
-                <div class='span4 offset2 padding-top10' id="posts_create">
-                    
+            <div class='span4 offset2 padding-top10' id="posts_create">   
                 <form name='will_form' action='' method='post'>
                     <p>Create New Post</p>
                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#will_modal">I Will</button>

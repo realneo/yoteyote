@@ -1,62 +1,44 @@
 function is_int(value){ 
-
-  if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
-
-      return true;
-
-  } else { 
-
-      return false;
-
-  } 
-
+    if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
+        return true;
+    }else { 
+        return false;
+    } 
 }
 
-
-
-
-function preload_start()
-{
-		$("#status").show();                      // will first fade out the loading animation
-		$("#loader").show();
+function preload_start(){
+    $("#status").show();  // will first fade out the loading animation
+    $("#loader").show();
 }
 
-
-function preload_stop()
-{
-
-		$("#status").fadeOut();                      // will first fade out the loading animation
-		$("#loader").delay(350).fadeOut("slow"); //  will fade out the white DIV that covers the website.
-
+function preload_stop(){
+    $("#status").fadeOut(); // will first fade out the loading animation
+    $("#loader").delay(350).fadeOut("slow"); //  will fade out the white DIV that covers the website.
 }
 
-
-
-function load_page(param,page)
-{
+function load_page(param,page){
 	preload_start();
-
 	$('#'+param).load(page).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
-  	preload_stop();
-    });; 
-	
+            preload_stop();
+        });; 	
 }
-
-
 
 $(document).ready(function(){
-
-
-	$("a").unbind('click');
-	$("button").unbind('click');
-        
+    
+    $("a").unbind('click');
+    $("button").unbind('click');
+    
+    // Hiding Objects
+    $('#posts_create').hide();
+    
     //Overflow 
     $('#overlay').click(function(){
         $('#popup_window').fadeOut();
         $(this).delay(500).fadeOut();
     });
     
-    //Login Process
+    /******************* SIGN IN PROCESS *****************************/
+    
     $('#sign-in').click(function(){
         $('.preloader').fadeIn();
         if($('#email').val() == "" || $('#password').val() == ""){
@@ -78,6 +60,7 @@ $(document).ready(function(){
                         $('.dropdown-menu').slideUp();
                         $('#sign_in_dropdown').fadeOut();
                         $('#user').load('includes/logged_user.php?mode=al');
+                        $('#posts_create').slideDown();
                         
                     }else{
                         $('.alert').fadeIn().html("<p class='error'>Either your Username or Password is incorrect</p>");
@@ -88,8 +71,8 @@ $(document).ready(function(){
         }
         return false;
     });
-    
-    // Registration window
+    /****************************************************************/
+    /******************* SIGNUP FORM *****************************/
     $('#signup_btn').click(function(){
         $('content').hide();
         $('.preloader').fadeIn();
@@ -97,7 +80,8 @@ $(document).ready(function(){
         $('#content').load('includes/new_user_form.php');
         $('.preloader').fadeOut();
     });
-    //Registration Process
+    /****************************************************************/
+    /******************* SIGNUP PROCESS *****************************/
     $('#reg_btn').click(function(){
         $('.preloader').fadeIn();
         // Email Check up
@@ -173,38 +157,6 @@ $(document).ready(function(){
             });
         return false;
     });
-     // I will post
-    $('#will_btn').click(function(){
-        // Getting the data from a form
-        will_post = $('#will_input').val();
-        // check if the user is logged in or not
-        $.ajax({
-            url:'includes/session_check.php',
-            success:function(response){
-                if(response == 'success'){
-                    $('#overlay').fadeIn(500);
-                    $('#popup_window').delay(500).fadeIn(500);
-                    $('#popup_window_title').fadeIn().html('I will');
-                    $('#popup_window_content').fadeIn().load('includes/new_will.php', function(responseTxt,statusTxt,xhr){
-                        if(statusTxt=="success"){
-                            $('#will_post').val(will_post);
-                        }else{
-                            console.log('Failed to load the new_will.php')
-                        }
-                    });
-                    $('#popup_window').css({'width':'400px'}); 
-                }else{
-                    $('#overlay').fadeIn(500);
-                    $('#popup_window').delay(500).fadeIn(500);
-                    $('#popup_window_title').fadeIn().html('Login First');
-                    $('#popup_window_content').fadeIn().load('includes/login.php');
-                    $('#popup_window').css({'width':'220px'});
-                }
-            }
-        });
-        return false;
-    });
-    
     /*************************************************************************/
     /***********************  I WILL - CREATE PROCESS ************************/
     /*************************************************************************/
@@ -364,19 +316,11 @@ $(document).ready(function(){
         return false;
     });  
     
-
-	$('#posts').load('includes/posts.php');
-	preload_stop();
+    $('#posts').load('includes/posts.php');
+    preload_stop();
 	
-	
-	
-	
-	
-	
-	
-	
-	// Get Contact
-     $(document).on('click', '.get_contact_btn', function () {
+    // Get Contact
+    $(document).on('click', '.get_contact_btn', function () {
 		 
 		
 		var button = $(this);
@@ -387,15 +331,13 @@ $(document).ready(function(){
 		 $.ajax({
             url:'includes/session_check.php',
             success:function(response){
-                if(response == 'success'){
-					
-					 
-					$('#overlay').fadeIn(500);
-					$('#popup_window').delay(500).fadeIn(500);					
-					$('#popup_window_title').fadeIn().html('Profile');
+                if(response == 'success'){	 
+                    $('#overlay').fadeIn(500);
+                    $('#popup_window').delay(500).fadeIn(500);					
+                    $('#popup_window_title').fadeIn().html('Profile');
 
-					$('#popup_window_content').fadeIn().load('includes/get_contact.php?id='+button.attr('id'));					
-					$('#popup_window').css({'width':'320px'});
+                    $('#popup_window_content').fadeIn().load('includes/get_contact.php?id='+button.attr('id'));					
+                    $('#popup_window').css({'width':'320px'});
               
                 }else{
                     $('#overlay').fadeIn(500);
@@ -411,76 +353,30 @@ $(document).ready(function(){
     });
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //4-22-2013
 
-
-	
-	
-	
-	
-	
-	// Get lists
-     $(document).on('click', '#list_btn', function () {
-		 $("a").unbind('click');
+    // Get lists
+    $(document).on('click', '#list_btn', function () {
+        $("a").unbind('click');
 	$("button").unbind('click');
 			
-			load_page('posts','includes/lists.php');
-		
+        load_page('posts','includes/lists.php');	
 		
     });
 	
-	
-	// Get ongoings
-	     $(document).on('click', '#ongoing_btn', function () {
-				 $("a").unbind('click');
-				$("button").unbind('click');
+    // Get ongoings
+    $(document).on('click', '#ongoing_btn', function () {
+        $("a").unbind('click');
+        $("button").unbind('click');
 			
-			load_page('posts','includes/ongoings.php');
-		
-		
+        load_page('posts','includes/ongoings.php');	
     });
 
-	
-	
-	
-	
-	
-	     $(document).on('click', '.view_bid_btn', function () {
-		 
-		
-			var button = 	$(this);
-		
-			load_page('posts','includes/bids.php?id='+button.attr('id'));
-			
-		
-		
+    $(document).on('click', '.view_bid_btn', function () {	 
+        var button = $(this);		
+        load_page('posts','includes/bids.php?id='+button.attr('id'));
     });
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	$('#will_sort').click(function(e) {
 		
@@ -720,112 +616,5 @@ $(document).on('click','.pay_btn',function(e) {
 		
 		
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  $(document).on('click', '.add_trust_btn', function (e) {
-	$("a").unbind('click');
-	$("button").unbind('click');
-		e.preventDefault();
-		 var button = $(this);
-		var trust_by  = button.attr('id');
-		var post_id  = $('.trusted_to').val();
-       
-		
-		
-		
-		
-		
-		     $.ajax({
-                type:'post',
-                url: 'includes/trust_process.php',
-                data: {'by':trust_by,'post_id':post_id},
-                success: function(response){
-                    if(response == "success"){
-                        
-                         $('.feedback').delay(500).fadeOut(400);
-                        $('#popup_window').delay(900).fadeOut(400);
-                        $('#overlay').delay(1200).fadeOut(400);
-                      	load_page('posts','includes/posts.php');
-                        
-                    }else 
-								
-					{
-					
-					button.text('trusted');
-                      
-                    }
-                }
-            });
-		
-        
-    });
-
-	
-
-
-
-
-
-//Hire / Apply
-
-
-	// Get Contact
-     $(document).on('click', '.apply_btn', function () {
-		 $("a").unbind('click');
-	$("button").unbind('click');
-		
-		var button = $(this);
-   
-		
-		
-		
-		 $.ajax({
-            url:'includes/session_check.php',
-            success:function(response){
-                if(response == 'success'){
-					
-					 
-					$('#overlay').fadeIn(500);
-					$('#popup_window').delay(500).fadeIn(500);					
-					$('#popup_window_title').fadeIn().html('Description');
-					$('#popup_window_content').fadeIn().load('includes/get_apply.php?id='+button.attr('id'));					
-					$('#popup_window').css({'width':'320px'});
-              
-                }else
-				{
-                    $('#overlay').fadeIn(500);
-                    $('#popup_window').delay(500).fadeIn(500);
-                    $('#popup_window_title').fadeIn().html('Login First');
-                    $('#popup_window_content').fadeIn().load('includes/login.php');
-                    $('#popup_window').css({'width':'220px'});
-                }
-            }
-        });
-	
-		
-    });
-	
-	
-	
-	
-	
-
-					
-	
 	
 });//ready ends
