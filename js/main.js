@@ -31,12 +31,25 @@ $(document).ready(function(){
     // Hiding Objects
     $('#posts_create').hide();
     
+    /****************** IF USER IS LOGGED IN *******************/
+    $.ajax({
+        url:'includes/session_check.php',
+        success:function(response){
+            if(response == 'success'){
+                $('#posts_create').slideDown();
+            }else{
+                $('#posts_create').slideUp();
+            }
+        }
+    });
+    /*****************************************************************/
+    
     //Overflow 
     $('#overlay').click(function(){
         $('#popup_window').fadeOut();
         $(this).delay(500).fadeOut();
     });
-    
+    /*****************************************************************/
     /******************* SIGN IN PROCESS *****************************/
     
     $('#sign-in').click(function(){
