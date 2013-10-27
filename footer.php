@@ -1,6 +1,6 @@
      
             <!-- footer -->
-            <div id='footer'>
+            <div id='footer' class='pull-right padding-top10'>
                 <a href='#'>How does it Work?</a> 
                 <a href='#'>Help</a>
                 <a href='#'>About Us</a>

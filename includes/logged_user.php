@@ -28,15 +28,33 @@
         $total_on = $user->getTotalOn($user_id);
 		
         echo"
-            <div id='user_pic'><img src='images/users/{$user_pic}' alt='{$first_name} {$last_name}' /></div><!-- user_pic -->
-            <div id='user_name'>{$first_name} {$last_name} </div><!-- user_name -->
-            <div id='user_links'>
-                <a href='#'>My Settings</a>
-                <a  id='ongoing_btn' href='#'>My Ongoings (<span id='my_list'>$total_on</span> ) </a>
-                <a href='includes/logout_process.php' id='logout_btn'>Logout</a>
-                <a href='#'>Pocket Money : <strong>{$bank}</strong> <span style='font-size:11px;font-weight:bold;color:#FF0000'>Tshs</span></a>    
-            </div><!-- user_links -->
+            <div class='row-fluid'>
+                <div class='span12'>
+                        <div class='span1'><img src='images/users/{$user_pic}' alt='{$first_name} {$last_name}' /></div>
+                        <div class='span6 pull-left'>
+                            {$first_name} {$last_name}
+                            <br />
+                            <a href='#'>My Settings</a>  &nbsp; &nbsp;| &nbsp; &nbsp;
+                            <a  id='ongoing_btn' href='#'>My Ongoings (<span id='my_list'>$total_on</span> )</a> 
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                            <a href='includes/logout_process.php' class='btn btn-danger btn-small' id='logout_btn'>Logout</a>
+                        </div>
+                        ";
+                            include('footer.php'); 
+               "
+                </div>
+            </div>
             ";
     }
 ?>
 </div><!-- logged_user -->
+<!--<div id='user_pic'></div><!-- user_pic -->
+                <!--<div id='user_name'>{$first_name} {$last_name} </div><!-- user_name -->
+                <!--<div id='user_links'>
+                    
+                    
+                    
+                    <a href='#'>Pocket Money : <strong>{$bank}</strong> <span style='font-size:11px;font-weight:bold;color:#FF0000'>Tshs</span></a>    
+                </div><!-- user_links -->

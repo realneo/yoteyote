@@ -13,5 +13,3 @@
     }
 ?>
 </div><!-- user -->
-
-<?php include('footer.php'); ?> 

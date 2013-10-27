@@ -123,12 +123,6 @@ button{
     background-color:#fff;
     color:#9E1300;
 }
-#footer{
-    color:#999;
-    position:absolute;
-    right:0px;
-    top:20px;
-}
 #footer a{
     padding-left:10px;
     color:#666;
@@ -151,22 +145,7 @@ button{
 #user_links a{
     padding:5px;
 }
-#logout_btn{
-    border:1px solid #9E1300;
-    border-radius: 5px;
-    padding:5px;
-    color:#9e1300;
-    background-color:#fff;
-    cursor: pointer;
-    position:absolute;
-    left:460px;
-    top:0px;
-    display:inline;
-}
-#logout_btn:hover{
-    background-color:#9E1300;
-    color:#fff;
-}
+
 #logging_in {
     position:absolute;
     top:15px;
