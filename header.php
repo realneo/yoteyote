@@ -31,7 +31,7 @@
     <body >
     <?php 
         include('includes/new_will.php'); 
-       // include('includes/new_want.php');
+        include('includes/new_want.php');
     ?>
     <!-- Preloader --><div id="loader"><div id="status">&nbsp;</div></div>
     <div class="container-fluid">
@@ -47,7 +47,7 @@
                 <form name='will_form' action='' method='post'>
                     <p>Create New Post</p>
                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#will_modal">I Will</button>
-                    <button class="btn btn-danger" type="button">I Want</button>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#want_modal" >I Want</button>
                 </form>
             </div>
         </div>

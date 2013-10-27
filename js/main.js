@@ -30,6 +30,8 @@ $(document).ready(function(){
     
     // Hiding Objects
     $('#posts_create').hide();
+    $('.feedback').hide();
+    $('#new_user_form').hide();
     
     /****************** IF USER IS LOGGED IN *******************/
     $.ajax({
@@ -37,13 +39,25 @@ $(document).ready(function(){
         success:function(response){
             if(response == 'success'){
                 $('#posts_create').slideDown();
+                $('#sign_in_dropdown').hide();
             }else{
-                $('#posts_create').slideUp();
+                $('#posts_create').hide();
+                $('#sign_in_dropdown').slideDown();
             }
         }
     });
     /*****************************************************************/
-    
+    /******************** HOME BUTTON *********************************/
+    $('#home_btn').click(function(){
+        $('.loader').fadeIn();
+        $('#content').fadeOut(400);
+        $('#new_user_form').slideUp();
+        $('#posts').hide(400);
+        $('#sort_tab').delay(500).slideDown();
+        $('#content').load('includes/posts.php').fadeIn(400);
+        $('.loader').fadeOut();        
+    });
+    /*****************************************************************/
     //Overflow 
     $('#overlay').click(function(){
         $('#popup_window').fadeOut();
@@ -53,10 +67,10 @@ $(document).ready(function(){
     /******************* SIGN IN PROCESS *****************************/
     
     $('#sign-in').click(function(){
-        $('.preloader').fadeIn();
+        $('.loader').fadeIn();
         if($('#email').val() == "" || $('#password').val() == ""){
-            $('.alert').fadeIn(400).html("Enter BOTH Email & Password");
-            $('.preloader').fadeOut(400);
+            $('.alert').fadeIn(400).html("Enter BOTH Email & Password").delay(200).fadeOut();
+            $('.loader').fadeOut(400);
         }else{
             var form_action = $('#sign_in_form').attr('action');
             var form_data = {
@@ -87,89 +101,109 @@ $(document).ready(function(){
     /****************************************************************/
     /******************* SIGNUP FORM *****************************/
     $('#signup_btn').click(function(){
-        $('content').hide();
-        $('.preloader').fadeIn();
+        $('.loader').fadeIn();
         $('#posts').hide(400);
-        $('#content').load('includes/new_user_form.php');
-        $('.preloader').fadeOut();
+        $('#sort_tab').slideUp();
+        $('#content').fadeOut();
+        $('#new_user_form').slideDown();
+        $('.loader').fadeOut();
     });
     /****************************************************************/
     /******************* SIGNUP PROCESS *****************************/
-    $('#reg_btn').click(function(){
-        $('.preloader').fadeIn();
-        // Email Check up
-        if($('#email').val() == '' || $('#email2').val() == ''){
-            $('.feedback').fadeIn().html("<p class='error'>Please fill in your email address</p>");
-            $('.preloader').fadeOut();
+    $('#signup_process').click(function(){
+        $('.loader').fadeIn();
+        var form_name = "form[name='new_user_form']";
+        var first_name = $(form_name + " input[name = 'first_name']").val();
+        var form_action = "includes/registration_process.php";
+        var last_name = $(form_name + " input[name = 'last_name']").val();
+        var terms = $(form_name + " input[name = 'terms']").is(":checked");
+        var email = $(form_name + " input[name = 'email']").val();
+        var email2 = $(form_name + " input[name = 'email2']").val();
+        var password = $(form_name + " input[name = 'password']").val();
+        var password2 = $(form_name + " input[name = 'password2']").val();
+        var mobile = $(form_name + " input[name = 'mobile']").val();
+        
+        // Check if All Fields are set
+        if(first_name == '' || last_name == '' || email == '' || email2 == '' || password =='' || password2 == '' || mobile == ''){
+            $('.alert_content').addClass('alert-block');
+            $('.alert_content').fadeIn().html("Fill in <strong>All</strong> the Fields.").delay(10000).fadeOut();
+            $('.loader').fadeOut();
+            console.log(form_action);
             return false;
-        }else if($('#email').val() == $('#email2').val()){
-            var email = $('#email').val();
-            $('.preloader').fadeOut();
-        }else{
-            $('.feedback').fadeIn().html("<p class='error'>Emails do not match</p>");
-            $('.preloader').fadeOut();
-            return false;
-        }
-        // Password Checkup
-        if($('#password').val() == '' || $('#password1').val() == ''){
-            $('.feedback').fadeIn().html("<p class='error'>Please fill in your password</p>");
-            $('.preloader').fadeOut();
-            return false;
-        }else if($('#password').val() == $('#password2').val()){
-            var password = $('#password').val();
-            $('.preloader').fadeOut();
-        }else{
-            $('.feedback').fadeIn().html("<p class='error'>Passwords do not match</p>");
-            $('.preloader').fadeOut();
+        }else if(terms == false){
+            $('.alert_content').addClass('alert-block');
+            $('.alert_content').fadeIn().html("You have to accept our <strong>Terms & Conditions</strong> .").delay(10000).fadeOut();
+            $('.loader').fadeOut();
             return false;
         }
-        // First / Last Name  Checkup
-        if($('#first_name').val()== ''){
-            $('.feedback').fadeIn().html("<p class='error'>Enter your First Name</p>");
-            $('.preloader').fadeOut();
+       
+       // Check if Email Match
+       if(email != email2){
+           $('.alert_content').addClass('alert-block');
+            $('.alert_content').fadeIn().html("Email Addresses do not <strong>Match</strong> .").delay(10000).fadeOut();
+            $('.loader').fadeOut();
             return false;
-        }else{
-            var first_name = $('#first_name').val();
-            var last_name = $('#last_name').val();
-        }
-        // Mobile
-        if($('#mobile').val()== '' ){
-            $('.feedback').fadeIn().html("<p class='error'>Please enter your Mobile phone</p>");
-            $('.preloader').fadeOut();
+       }
+       // Check if Passwords Match
+       if(password != password2){
+           $('.alert_content').addClass('alert-block');
+            $('.alert_content').fadeIn().html("Passwords do not <strong>Match</strong> .").delay(10000).fadeOut();
+            $('.loader').fadeOut();
             return false;
-        }else{
-            var mobile = $('#mobile').val();
-            $('.preloader').fadeOut();
-        }
-        var form_action = $('#reg_form').attr('action');
-        var form_data = {
-                email : email,
-                password : password,
-                first_name : first_name,
-                last_name : last_name,
-                mobile : mobile
-                };
-            $.ajax({
-                type:'post',
-                url: form_action,
-                data: form_data,
-                success: function(response){
-                    if(response == "success"){
-                        $('.feedback').fadeIn().html("<p class='success'>Registered Successful</p>");
-                        $('.preloader').fadeOut();
-                        $('.feedback').delay(500).fadeOut(400);
-                        $('#popup_window_title').fadeIn().html('Login');
-                        $('#popup_window_content').fadeIn().load('includes/login.php');
-                        $('#popup_window').css({'width':'220px'});
-                        
-                    }else{
-                        $('.feedback').fadeIn().html("<p class='error'>There was an error!</p>");
-                        $('.preloader').fadeOut();
+       }
+       
+       // Check if Email exists in Database
+       var form_data = {email : email, mobile : mobile};
+        $.ajax({
+            type:'post',
+            url: 'includes/check_user_exists_process.php',
+            data: form_data,
+            success: function(response){
+                if(response == "success"){
+                    $('.alert_content').addClass('alert-error');
+                    $('.alert_content').fadeIn().html("Email Or Mobile Number is Currently associated with <strong>Another Account</strong> .").delay(400).fadeOut();
+                    $('.loader').fadeOut();
+                    return false;
+                }else{
+                    var form_data = {
+                    email : email,
+                    password : password,
+                    first_name : first_name,
+                    last_name : last_name,
+                    mobile : mobile
+                    };
+                $.ajax({
+                    type:'post',
+                    url: form_action,
+                    data: form_data,
+                    success: function(response){
+                        if(response == "success"){
+                            $(form_name)[0].reset();
+                            $('.alert_conten').removeClass('alert-error');
+                            $('.alert_content').addClass('alert-success');
+                            $('.alert_content').fadeIn().html("Successfully Registered. Please <strong>SignIn</strong> .").delay(5000).fadeOut();
+                            $('.loader').fadeOut();
+                            $('#new_user_form').fadeOut();
+                            $('#sort_tab').delay(500).slideDown();
+                            $('#content').load('includes/posts.php').fadeIn(400);
+
+                        }else{
+                            $('.alert_content').addClass('alert-error');
+                            $('.alert_content').fadeIn().html("Something Went Wrong>!!!!</strong> .").delay(10000).fadeOut();
+                            $('.loader').fadeOut();
+                        }
                     }
-                }
-            });
+
+                });
+               }
+            }
+                
+        });
+                
         return false;
     });
+        
+
     /*************************************************************************/
     /***********************  I WILL - CREATE PROCESS ************************/
     /*************************************************************************/
@@ -184,60 +218,153 @@ $(document).ready(function(){
         var will_post = $(form_name + " input[name = 'will_post']").val();
         var description = $(form_name + " textarea[name = 'description']").val();
         var currency = $(form_name + " input[name = 'currency']").val();
-        
-        console.log(form_name);
-        /*
-        alert(currency);
-        // Preloader Icon
+        var amount = $(form_name + " input[name = 'amount']").val();
+        var type = 'will';
         
         // Checking the will_post input
-        if($('#will_post').val() == '' ){
-            $('.feedback').fadeIn().html("<p class='error'>Please fill in the 'WILL' Statement</p>");
-            $('.preloader').fadeOut();
+        if(will_post == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please Fill In the <strong>'I Will'</strong> field before proceeding.");
+            $('.loader').fadeOut();
             return false;
         }
-        // Checking the description text field
-        if($('#description').val() == '' ){
-            $('.feedback').fadeIn().html("<p class='error'>Please give a detailed description of your 'WILL'</p>");
-            $('.preloader').fadeOut();
+        if(description == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please Fill In the <strong>'Description'</strong> field before proceeding.");
+            $('.loader').fadeOut();
             return false;
         }
-        // Checking the amount input
-        if($('#amount').val() == '' ){
-            $('.feedback').fadeIn().html("<p class='error'>Please state your amount </p>");
-            $('.preloader').fadeOut();
+        if(currency == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please choose <strong>'Currency'</strong> before proceeding.");
+            $('.loader').fadeOut();
             return false;
         }
-        var form_action = $('#new_will_form').attr('action');
+        if(amount == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please Fill in the  <strong>'Amount'</strong> before proceeding.");
+            $('.loader').fadeOut();
+            return false;
+        }
+        if(terms == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("You need to accept our <strong>'Terms & Conditions'</strong> before proceeding.");
+            $('.loader').fadeOut();
+            return false;
+        }
+        
+        var form_action = $("form[name='new_will_form']").attr('action');
         var form_data = {
-                post : will_post,
-                description : description,
-                currency : currency,
-                amount : amount,
-                type : type
-                };
-            $.ajax({
+            post: will_post,
+            description: description,
+            currency: currency,
+            type: type,
+            amount : amount
+        };
+        $.ajax({
                 type:'post',
                 url: form_action,
                 data: form_data,
                 success: function(response){
                     if(response == "success"){
-                        $('.feedback').fadeIn().html("<p class='success'>Successfully Created</p>");
-                        $('.preloader').fadeOut();
-                        $('.feedback').delay(500).fadeOut(400);
-                        $('#popup_window').delay(900).fadeOut(400);
-                        $('#overlay').delay(1200).fadeOut(400);
-                        $('#posts').fadeOut(400).fadeIn(400).load('includes/posts.php');
+                        $(form_name)[0].reset();
+                        $("#will_modal").modal("hide");
+                        $('#overlay').fadeOut();
+                        $('.alert_content').addClass('alert-success');
+                        $('.alert_content').slideDown().html("Successfully Added a <strong>New Post</strong>");
+                        $('.loader').fadeOut();
+                        $('.alert').delay(2000).slideUp();
+                        $('#posts').fadeOut().fadeIn(400).load('includes/posts.php');
                         
                     }else{
-                        $('.feedback').fadeIn().html("<p class='error'>There was an error!</p>");
-                        $('.preloader').fadeOut();
+                        $('.alert').fadeIn().html("<p class='error'>There was an error!</p>");
+                        $('.loader').fadeOut();
                     }
                 }
-            });*/
+            });
         return false;
     });
-    
+    /****************************************************************************************/
+        /***********************  I WANT - CREATE PROCESS ************************/
+    /*************************************************************************/
+    $('#want_create_btn').click(function(){
+                
+        // Loading Icon Fade In
+        $('.loader').fadeIn();
+        
+        // Assigning Variables to the form and its elements
+        var form_name = "form[name='new_want_form']";
+        var terms = $(form_name + " input[name = 'terms']").is(":checked");
+        var post = $(form_name + " input[name = 'post']").val();
+        var description = $(form_name + " textarea[name = 'description']").val();
+        var currency = $(form_name + " input[name = 'currency']").val();
+        var amount = $(form_name + " input[name = 'amount']").val();
+        var type = 'want';
+        
+        // Checking the will_post input
+        if(post == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please Fill In the <strong>'I Want'</strong> field before proceeding.");
+            $('.loader').fadeOut();
+            return false;
+        }
+        if(description == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please Fill In the <strong>'Description'</strong> field before proceeding.");
+            $('.loader').fadeOut();
+            return false;
+        }
+        if(currency == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please choose <strong>'Currency'</strong> before proceeding.");
+            $('.loader').fadeOut();
+            return false;
+        }
+        if(amount == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("Please Fill in the  <strong>'Amount'</strong> before proceeding.");
+            $('.loader').fadeOut();
+            return false;
+        }
+        if(terms == '' ){
+            $('.alert').addClass('alert-block');
+            $('.alert').fadeIn().html("You need to accept our <strong>'Terms & Conditions'</strong> before proceeding.");
+            $('.loader').fadeOut();
+            return false;
+        }
+        
+        var form_action = $("form[name='new_want_form']").attr('action');
+        var form_data = {
+            post: post,
+            description: description,
+            currency: currency,
+            type: type,
+            amount : amount
+        };
+        $.ajax({
+                type:'post',
+                url: form_action,
+                data: form_data,
+                success: function(response){
+                    if(response == "success"){
+                        $(form_name)[0].reset();
+                        $("#want_modal").modal("hide");
+                        $('#overlay').fadeOut();
+                        $('.alert_content').addClass('alert-success');
+                        $('.alert_content').slideDown().html("Successfully Added a <strong>New Post</strong>");
+                        $('.loader').fadeOut();
+                        $('.alert').delay(2000).slideUp();
+                        $('#posts').fadeOut().fadeIn(400).load('includes/posts.php');
+                        
+                    }else{
+                        $('.alert').fadeIn().html("<p class='error'>There was an error!</p>");
+                        $('.loader').fadeOut();
+                    }
+                }
+            });
+        return false;
+    });
+    /****************************************************************************************/
     
      // I want post
     $('#want_btn').click(function(){

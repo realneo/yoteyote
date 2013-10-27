@@ -10,7 +10,7 @@
             <a class="brand" href="#" name="top">Yoteyote</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="#"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="#" id='home_btn'><i class="icon-home"></i> Home</a></li>
                     <li class="divider-vertical"></li>
                     <li class="active"><a href="#"><i class="icon-file"></i> Posts</a></li>
                     <li class="divider-vertical"></li>

@@ -41,6 +41,8 @@ button{
     border-top: 3px solid #ececec;
     left:0px;
     background-color: #fff;
+    opacity:0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
 }
 
 #main_content{
@@ -181,7 +183,7 @@ button{
     font-weight:lighter;    
 }
 
-.preloader{
+.loader{
     display:none;
 }
 .feedback{
@@ -238,4 +240,3 @@ color:#9E1300;
 #error_a{
     color:red;		
 }
-

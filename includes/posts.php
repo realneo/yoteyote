@@ -1,4 +1,4 @@
-
+<div class='row'>
 <?php
    include ("../lib/Main.php");
 	$main= new Main;
@@ -25,19 +25,9 @@
 	if (!empty($posts) ){
             foreach($posts as $post){
                 
-                // Get total trusts for each user
-                $trusts = $post_obj->getTotalTrusts($post['user_id']);
-                
-                // Assigning different values for post type. 
-                // If its a "WILL" or "WANT"
-                
                 if($post['type']=='will'){
-                    $type_text = "Hire"; //If post type is WILL then change the button text to "Hire"
-                     $btn_toggle = 'btn-success'; // If the post type is WILL then change the button to the assigned class 'btn-success'
                      $color_toggle = 'success'; // If the post type is WILL then change the color_toggle to the assigned class 'success'
                 }else{
-                    $type_text = "Bid"; //If post type is WANT then change the button text to "Bid"
-                    $btn_toggle = 'btn-danger';// If the post type is WANT then change the button to the assigned class 'btn-danger'
                     $color_toggle = 'red_color';// If the post type is WANT then change the color_toggle to the assigned class 'red_color'
                 }
                 
@@ -50,22 +40,51 @@
                 //Post
 
                 $html.="
-                    <li class='span4 '>
-                        <div class='thumbnail plan no_margin'>
-                            <span class='label label-inverse'>$post[currency]</span>
-                            <span class='amount'>$conv_amount</span> - 
-                            <span class='post_type $color_toggle'>I $post[type]</span>
-                            <span class='post_title'>design a website in one day</span>
-                            <br />
-                            <div class='span3'><img src='images/sample_user.png' alt='' width='50px'/></div>
-                            <a href='#' class='font15 greytxt'>$post[first_name] $post[last_name]</a>
-                            <p class='number'>$post[mobile]</p>
+                    
+                        <div class='span4 thumbnail plan'>
+                            <div class='row'>
+                                <div class='span6 offset1'>
+                                    <span class='post_type $color_toggle'>I $post[type]</span>
+                                    <span class='post_title'>$post[post]</span>
+                                </div>
+                                <div class='span5 text-right'>
+                                    <span class='label label-inverse'>$post[currency]</span>
+                                    <span class='amount $color_toggle'>$conv_amount</span>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='span11 offset1 post_description'>
+                                    <p>$post[description]</p>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='span2 offset1'><img src='images/sample_user.png' alt=''/></div>
+                                <div class='span9 greytxt'>$post[first_name] $post[last_name]</div>
+                                <div class='span9 $color_toggle'>$post[mobile]</div>
+                            </div>
                         </div>
-                    </li>
                 
-                        ";
+                       ";
             }
 	   
 	   echo $html;
 	 }
 ?>
+<!--
+<li class='span4 '>
+                        <div class='thumbnail plan no_margin'>
+                            <span class='label label-inverse'>$post[currency]</span>
+                            <span class='amount $color_toggle'>$conv_amount</span> - 
+                            <span class='post_type $color_toggle'>I $post[type]</span>
+                            <span class='post_title'>$post[post]</span>
+                            <hr />
+                            <span class='post_description'>$post[description]</span>
+                            <hr />
+                            <div class='span3'><img src='images/sample_user.png' alt='' width='50px'/></div>
+                            <a href='#' class='font15 greytxt'>$post[first_name] $post[last_name]</a>
+                            <p class='number $color_toggle '>$post[mobile]</p>
+                        </div>
+                    </li>-->
+</div>
+
+<div class='tex'

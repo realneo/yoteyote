@@ -6203,6 +6203,13 @@ a.badge:focus {
     -webkit-box-shadow: 0 0 6px 2px #b0b2ab;
     box-shadow: 0 0 6px 2px #b0b2ab;
     margin-bottom: 20px;
+    
+    padding: 10px;
+    color: #ff;
+    background-color: #eee;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 
 }
 .plan:hover {
@@ -6212,14 +6219,6 @@ a.badge:focus {
     box-shadow: 0 0 12px 3px #b0b2ab;
     cursor: pointer;
 }
-.plan {
-    padding: 20px;
-    color: #ff;
-    background-color: #eee;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-}
 .amount{
     font-size:18px;
     display:inline;
@@ -6227,6 +6226,7 @@ a.badge:focus {
 }
 .post_type, .post_title{
     font-size:18px;
+    font-weight: lighter;
 }
 .font15{
     font-size: 15px;
@@ -6244,7 +6244,7 @@ ul.thumbnails li.span12 + li {
 }
 .number{
     font-weight:bold;
-    font-size:16px;
+    font-size:13px;
     color:#D2232A
 }
 .greytxt{

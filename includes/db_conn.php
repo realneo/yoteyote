@@ -1,5 +1,5 @@
 <?php
-	$db_conn = mysql_connect("localhost","root","","");
+	$db_conn = mysql_connect("localhost","neo","matrix03","");
 	if(!$db_conn) {
 		die("Failed to Connect to the Database");
 	}

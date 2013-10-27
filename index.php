@@ -7,9 +7,7 @@
 <div id='user'>
 <?php
     if($user_id == false){
-        echo "<div id='logging_in'>             
-                <a href='#' id='login_pop'>Login</a> | <a href='#' id='register_pop'>Register</a>
-            </div><!-- logging_in -->";
+        echo "<p style='padding:15px' class='red_color'>Sign Up or Sign In to GET Full Access of the Yoteyote Features";
     }else{
         include('includes/logged_user.php');
     }

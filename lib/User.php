@@ -1,25 +1,13 @@
 <?php 
 include_once'Sms.php';
 
-class User extends Main{
-	// SMS Config
-	private $host       = '121.241.242.114';
-	private $port       = '8080';
-	private $username   = 'evm-yoteyote';
-	private $password   = '12345';
-	private $sender     = 'Yoteyote';
-	private $message    = '';
-	private $mobile     = '255655487333';
-	private $msgtype    = '0';
-	private $dlr        = '1';
-	
+class User extends Main{	
 	
 	public $db;
 	
 	public function  __construct()	{
 		$this->db = $this->load_model("Db");
 		$this->table='posts';
-		$sms = new Sender();
 		
 	}
 		
@@ -113,8 +101,8 @@ class User extends Main{
 										   VALUES ('NULL', '$date_time', '$hashed_password', '$first_name', '$last_name', '$email', '$mobile')";
 			if($this->db->query($q)){
 				
-				$message ='Welcome New User';
-				$sms->Sender($host, $port, $username, $password, $sender, $message, $mobile, $msgtype, $dlr);
+				//$message ='Welcome New User';
+				//$sms->Sender($host, $port, $username, $password, $sender, $message, $mobile, $msgtype, $dlr);
 				return true;
 			}else{
 				return false;
@@ -123,8 +111,21 @@ class User extends Main{
 			
 		}
 		
-		
-		
+                public function checkUserExists($data){
+                    $email = mysql_real_escape_string($data['email']);
+                    $mobile = mysql_real_escape_string($data['mobile']);
+                    
+                    $q = "SELECT * FROM `users` WHERE email = '$email' OR mobile = '$mobile'";
+                    
+                    if($this->db->get_row($q) >= 1 ){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+
+
+                
 		public function  addList($post_id,$user_id,$bid)
 		{
 			
