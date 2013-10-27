@@ -83,15 +83,15 @@ $(document).ready(function(){
                 data: form_data,
                 success: function(response){
                     if(response == "success"){
-                        $('.preloader').fadeOut();
+                        $('.loader').fadeOut();
                         $('.dropdown-menu').slideUp();
                         $('#sign_in_dropdown').fadeOut();
                         $('#user').load('includes/logged_user.php?mode=al');
                         $('#posts_create').slideDown();
                         
                     }else{
-                        $('.alert').fadeIn().html("<p class='error'>Either your Username or Password is incorrect</p>");
-                        $('.preloader').fadeOut();
+                        $('.alert').fadeIn().html("<p class='error'>Either your Username or Password is incorrect</p>").delay(400).fadeOut();
+                        $('.loader').fadeOut();
                     }
                 }
             });
