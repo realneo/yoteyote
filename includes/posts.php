@@ -1,4 +1,4 @@
-<div class='row'>
+<div class='row-fluid'>
 <?php
    include ("../lib/Main.php");
 	$main= new Main;
@@ -19,8 +19,7 @@
 	else{
             $posts = $post_obj->getAllPosts();
 	}
-        
-	$html.="";
+       
 
 	if (!empty($posts) ){
             foreach($posts as $post){
@@ -31,14 +30,23 @@
                     $color_toggle = 'red_color';// If the post type is WANT then change the color_toggle to the assigned class 'red_color'
                 }
                 
+                $q=  mysql_query("SELECT `pic` FROM `posts` WHERE `id` = '$post[id]'");
+                while($row = mysql_fetch_array($q)){
+                    $pic = $row['pic'];
+                    if ($pic == NULL){
+                        $picture = '';
+                    }else{
+                        $picture = "<div class='span11 offset1'><img src='images/posts/{$pic}' alt='$post[post]' /></div>";
+                    }
+                }
                 
 
                 // english notation (default)
                 $conv_amount = number_format($post['amount']);
+                
                 // 1,235
                 // 
                 //Post
-
                 $html.="
                     
                         <div class='span4 thumbnail plan'>
@@ -51,6 +59,7 @@
                                     <span class='label label-inverse'>$post[currency]</span>
                                     <span class='amount $color_toggle'>$conv_amount</span>
                                 </div>
+                                $picture
                             </div>
                             <div class='row'>
                                 <div class='span11 offset1 post_description'>
@@ -59,8 +68,8 @@
                             </div>
                             <div class='row'>
                                 <div class='span2 offset1'><img src='images/sample_user.png' alt=''/></div>
-                                <div class='span9 greytxt'>$post[first_name] $post[last_name]</div>
-                                <div class='span9 $color_toggle'>$post[mobile]</div>
+                                <div class='span9 greytxt padding_left10'>$post[first_name] $post[last_name]</div>
+                                <div class='span9 $color_toggle padding_left10'>$post[mobile]</div>
                             </div>
                         </div>
                 
@@ -70,21 +79,4 @@
 	   echo $html;
 	 }
 ?>
-<!--
-<li class='span4 '>
-                        <div class='thumbnail plan no_margin'>
-                            <span class='label label-inverse'>$post[currency]</span>
-                            <span class='amount $color_toggle'>$conv_amount</span> - 
-                            <span class='post_type $color_toggle'>I $post[type]</span>
-                            <span class='post_title'>$post[post]</span>
-                            <hr />
-                            <span class='post_description'>$post[description]</span>
-                            <hr />
-                            <div class='span3'><img src='images/sample_user.png' alt='' width='50px'/></div>
-                            <a href='#' class='font15 greytxt'>$post[first_name] $post[last_name]</a>
-                            <p class='number $color_toggle '>$post[mobile]</p>
-                        </div>
-                    </li>-->
 </div>
-
-<div class='tex'

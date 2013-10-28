@@ -333,7 +333,7 @@ $(document).ready(function(){
             return false;
         }
         
-        var form_action = $("form[name='new_want_form']").attr('action');
+        var form_action = "includes/post_process.php";
         var form_data = {
             post: post,
             description: description,
@@ -756,5 +756,6 @@ $(document).on('click','.pay_btn',function(e) {
 		
 		
     });
-	
+	$("#file").pekeUpload({theme:'bootstrap', multi: false});
+        $("#file1").pekeUpload({theme:'bootstrap', multi: false});
 });//ready ends

@@ -28,6 +28,10 @@
                     <span class='add-on success'>Amount</span>
                     <input class='span1' name='amount' type='text' placeholder='200,000' />
                 </div>
+                <div class='input-prepend' style="margin-bottom:0px;">
+                    <span class='add-on success'>Picture</span>
+                    <input id="file1" type="file" name="pic" />
+                </div>
                 <div class='model_terms'>
                     <input type="checkbox" name="terms"> I agree with the <a href="#" class='red_color'>Terms and Conditions</a>
                 </div>

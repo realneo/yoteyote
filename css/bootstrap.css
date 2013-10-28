@@ -6219,6 +6219,10 @@ a.badge:focus {
     box-shadow: 0 0 12px 3px #b0b2ab;
     cursor: pointer;
 }
+.plan img{
+    border:3px solid #fff;
+    width:290px;
+}
 .amount{
     font-size:18px;
     display:inline;

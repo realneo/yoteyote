@@ -6,7 +6,7 @@
             <h3 class='red_color'>I Want</h3>
         </div>
         <div class="modal-body">
-            <form name="new_want_form" method="post" action="includes/post_process.php">
+            <form name="new_want_form" method="post" enctype="multipart/form-data">
                 <div class='input-prepend well well-small'>
                     <span class='add-on red_color'>I Want</span>
                     <input class='span4' name='post' type='text' placeholder='Subaru Forester AirMass' value=''/>
@@ -27,6 +27,10 @@
                 <div class='input-prepend' style="margin-bottom:0px;">
                     <span class='add-on success'>Amount</span>
                     <input class='span1' name='amount' type='text' placeholder='200,000' />
+                </div>
+                <div class='input-prepend' style="margin-bottom:0px;">
+                    <span class='add-on error'>Picture</span>
+                    <input id="file" type="file" name="pic" />
                 </div>
                 <div class='model_terms'>
                     <input type="checkbox" name="terms"> I agree with the <a href="#" class='red_color'>Terms and Conditions</a>
