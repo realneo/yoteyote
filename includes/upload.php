@@ -27,7 +27,7 @@ if (!empty($_FILES)) {
 	if (in_array($fileParts['extension'],$fileTypes)) {
 		move_uploaded_file($tempFile,$targetFile);
 		echo '1';
-                $_SESSION['pic_name'] = time().$_SESSION['user_id'].'.'.$ext;
+                $_SESSION['pic_name'] = $target_file_name;
 	} else {
 		echo 'Invalid file type.';
 	}

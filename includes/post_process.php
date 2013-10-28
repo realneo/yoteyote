@@ -8,7 +8,12 @@
     $currency = mysql_real_escape_string($_POST['currency']);
     $amount = mysql_real_escape_string($_POST['amount']);
     $f_amount = str_replace(",", "", $amount); 
-    $pic = $_SESSION['pic_name'];
+    if($_SESSION['pic_name'] == ''){
+        $pic = NULL;
+    }else{
+        $pic = $_SESSION['pic_name'];
+    }
+    
     
     $date_time = date('Y-m-d H:i:s');
 
