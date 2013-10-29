@@ -1,6 +1,6 @@
 <div class="span3" id='new_user_form'>
     <h2>Sign Up</h2>
-    <form action="includes/registration_process.php" method="post" name="new_user_form">
+    <form method="post" name="new_user_form">
         
         <label>First Name</label>
         <input type="text" name="first_name" placeholder="Kombo">

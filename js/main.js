@@ -156,7 +156,7 @@ $(document).ready(function(){
        var form_data = {email : email, mobile : mobile};
         $.ajax({
             type:'post',
-            url: 'includes/check_user_exists_process.php',
+            url: 'includes/registration_process.php',
             data: form_data,
             success: function(response){
                 if(response == "success"){
