@@ -6204,7 +6204,7 @@ a.badge:focus {
     box-shadow: 0 0 6px 2px #b0b2ab;
     margin-bottom: 20px;
     
-    padding: 10px;
+    padding: 5px;
     color: #ff;
     background-color: #eee;
     -moz-border-radius: 5px;
@@ -6221,7 +6221,6 @@ a.badge:focus {
 }
 .plan img{
     border:3px solid #fff;
-    width:290px;
 }
 .amount{
     font-size:18px;
