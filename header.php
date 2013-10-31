@@ -22,14 +22,18 @@
             $main->iCSS('bootstrap-responsive');
             $main->iCSS('main');
             $main->iCSS('custom');
-
+            
+            
             $main->iJS('jquery-1.8.3.min');
             $main->iJS('jquery-ui-1.9.2.custom');
             $main->iJS('main');
             //$main->iJS('toastr');
             $main->iJS('bootstrap');
+            
             $main->iJS('pekeUpload');
             
+            $main->iJS('jquery.shapeshift.min');
+
         ?>
     </head>
     <body >

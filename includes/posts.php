@@ -68,26 +68,3 @@ $('.container').shapeshift();
              }
     ?>
 </div>
-<div class='span4 thumbnail plan item'>
-                            <div class='row'>
-                                <div class='span6 offset1'>
-                                    <span class='post_type $color_toggle'>I $post[type]</span>
-                                    <span class='post_title'>$post[post]</span>
-                                </div>
-                                <div class='span5 text-right'>
-                                    <span class='label label-inverse'>$post[currency]</span>
-                                    <span class='amount $color_toggle'>$conv_amount</span>
-                                </div>
-                                $picture
-                            </div>
-                            <div class='row'>
-                                <div class='span11 offset1 post_description'>
-                                    <p>$post[description]</p>
-                                </div>
-                            </div>
-                            <div class='row'>
-                                <div class='span2 offset1'><img src='images/sample_user.png' alt=''/></div>
-                                <div class='span9 greytxt padding_left10'>$post[first_name] $post[last_name]</div>
-                                <div class='span9 $color_toggle padding_left10'>$post[mobile]</div>
-                            </div>
-                        </div>
