@@ -220,3 +220,14 @@ color:#9E1300;
     color:red;		
 }
 .padding_left10{padding-left:10px;}
+h3{
+    font-weight: lighter;
+}
+.container {
+  position: relative;
+  width: 100%;
+}
+.container div {
+  position: absolute;
+  width: 300px;
+}
