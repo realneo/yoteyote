@@ -6199,11 +6199,7 @@ a.badge:focus {
 .plan {
     border-radius: 5px;
     background-color: #f3f3f3;
-    -moz-box-shadow: 0 0 6px 2px #b0b2ab;
-    -webkit-box-shadow: 0 0 6px 2px #b0b2ab;
-    box-shadow: 0 0 6px 2px #b0b2ab;
     margin-bottom: 20px;
-    
     padding: 5px;
     color: #ff;
     background-color: #eee;
