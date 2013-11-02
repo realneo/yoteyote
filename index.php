@@ -2,6 +2,7 @@
     include('header.php');
     include('menu_bar.php');
     include('main_content.php');
+    //include('includes/profile.php');
  ?>
 <div id='bottom_content'>
 <div id='user'>

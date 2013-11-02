@@ -28,6 +28,7 @@
             $main->iJS('jquery-ui-1.9.2.custom');
             $main->iJS('functions');
             $main->iJS('main');
+            
             //$main->iJS('toastr');
             $main->iJS('bootstrap');
             
@@ -39,6 +40,7 @@
             //$main->iJS('owl/library');
             $main->iJS('owl/notification');
             $main->iCSS('owl/main');
+            $main->iJS('jquery.sticky');
 
         ?>
     </head>
@@ -47,7 +49,6 @@
         include('includes/new_will.php'); 
         include('includes/new_want.php');
     ?>
-    <!-- loader --><div id="loader"><div id="status">&nbsp;</div></div>
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span6">

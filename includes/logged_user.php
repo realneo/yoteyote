@@ -34,8 +34,6 @@
                         <div class='span6 pull-left'>
                             {$first_name} {$last_name}
                             <br />
-                            <a href='#'>My Settings</a>  &nbsp; &nbsp;| &nbsp; &nbsp;
-                            <a  id='ongoing_btn' href='#'>My Ongoings (<span id='my_list'>$total_on</span> )</a> 
                                 &nbsp;
                                 &nbsp;
                                 &nbsp;

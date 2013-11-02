@@ -1,5 +1,5 @@
 <script>
-$('.container').shapeshift();
+    $('.container').shapeshift();
 </script>
 <div class='container'>
     <?php

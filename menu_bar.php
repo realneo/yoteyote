@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#" name="top">Yoteyote</a>
+            <a class="brand" href="index.php" name="top">Yoteyote</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li><a href="#" id='home_btn'><i class="icon-home"></i> Home</a></li>

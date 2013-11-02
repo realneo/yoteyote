@@ -6,7 +6,7 @@ Copyright (c) 2013 Pedro Molina
 */
 
 // Define a destination
-$targetFolder = '../images/posts/'; // Relative to the root
+$targetFolder = "../images/posts/"; // Relative to the root
 
 
 if (!empty($_FILES)) {
