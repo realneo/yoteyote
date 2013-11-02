@@ -38,12 +38,6 @@
             </div>
             
             <div class="modal-footer">
-                <div class="loader">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class='alert'></div><!-- feedback -->
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                 <button class="btn btn-danger" id='want_create_btn'>Create</button>
             </div>

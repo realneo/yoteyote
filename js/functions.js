@@ -18,14 +18,15 @@ function preload_stop(){
 
 function load_page(type, param, page){
     preload_start();
-    $(type+param).load(page).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
+    $(type+param).fadeOut('slow').load(page).fadeIn('slow').ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
+        $('#sort_tabs').slideDown();
         preload_stop();
-        $('#sort_tabs').fadeIn();
-    });; 	
+     });; 	
 }
 
 function clear_page(type, param){
     preload_start();
+    $('#sort_tabs').slideUp();
     $(type + param).empty();
     preload_stop();	
 }

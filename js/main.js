@@ -48,9 +48,9 @@ $(document).ready(function(){
                         preload_stop();
                         $('.dropdown-menu').slideUp();
                         $('#sign_in_dropdown').fadeOut();
-                        $('#user').load('includes/logged_user.php?mode=al');
+                        load_page('#','user', 'includes/logged_user.php?=al');
                         $('#posts_create').slideDown();
-                        
+                        notify('Welcome Again','We are here for you!', 5000, '6', '');
                     }else{
                         notify('Incorrect', 'Email or Password is incorrect', 5000, 'c', true);
                         preload_stop();
@@ -220,8 +220,8 @@ $(document).ready(function(){
                         load_page('.','posts','includes/posts.php');
                         
                     }else{
-                        $('.alert').fadeIn().html("<p class='error'>There was an error!</p>");
-                        $('.loader').fadeOut();
+                        notify('Error', 'Something Went Wrong', 5000, 'o', true);
+                        preload_stop();
                     }
                 }
             });
@@ -295,6 +295,7 @@ $(document).ready(function(){
                     }else{
                         notify('Error', 'Something Went Wrong', 5000, 'o', true);
                         preload_stop();
+                        return false;
                     }
                 }
             });

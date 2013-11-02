@@ -5,13 +5,15 @@
 	$main->initSession();
     }
 
-    $user_id = $_SESSION['user_id'];
-    $first_name = $_SESSION['first_name'];
-    $last_name = $_SESSION['last_name'];
-	
+    if(isset($_SESSION['user_id'])){
+        $user_id = $_SESSION['user_id'];
+    }
+    
     $user = $main->load_model('User');
     $row  = $user->getUser('*',"user_id ='$user_id'");	
     
+    $first_name = $row['first_name'];
+    $last_name = $row['last_name'];
     $user_pic = $row['pic'];
 		
     $bank = number_format($row['bank'],2);
@@ -48,11 +50,3 @@
     }
 ?>
 </div><!-- logged_user -->
-<!--<div id='user_pic'></div><!-- user_pic -->
-                <!--<div id='user_name'>{$first_name} {$last_name} </div><!-- user_name -->
-                <!--<div id='user_links'>
-                    
-                    
-                    
-                    <a href='#'>Pocket Money : <strong>{$bank}</strong> <span style='font-size:11px;font-weight:bold;color:#FF0000'>Tshs</span></a>    
-                </div><!-- user_links -->

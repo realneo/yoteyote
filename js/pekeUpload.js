@@ -18,7 +18,7 @@
     // default configuration properties
     var defaults = {
       onSubmit:       false,
-      btnText:        "Look for a picture",
+      btnText:        "Look for a pic",
       url:        "includes/upload.php",
       theme:        "custom",
       field:        "file",
