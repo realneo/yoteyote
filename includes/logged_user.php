@@ -1,9 +1,8 @@
 <?php
-    if(isset($_GET['mode']) && $_GET['mode']=='al'){
-        include_once('../lib/Main.php');
-	$main =  new Main;
-	$main->initSession();
-    }
+    include_once('../lib/Main.php');
+    include_once('../lib/User.php');
+    $main =  new Main;
+    $main->initSession();
 
     if(isset($_SESSION['user_id'])){
         $user_id = $_SESSION['user_id'];

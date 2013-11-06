@@ -10,8 +10,8 @@ $(document).ready(function(){
     
     // Init
     preload_start();
-    //clear_page('#','content');
-    //load_page('#','content','includes/posts.php');
+    clear_page('#','content');
+    load_page('#','content','includes/posts.php');
     
     notify_small('Hello and Welcome to Yoteyote', 5000, '6', '');
     /****************** IF USER IS LOGGED IN *******************/
