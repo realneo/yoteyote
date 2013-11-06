@@ -10,8 +10,8 @@ $(document).ready(function(){
     
     // Init
     preload_start();
-    clear_page('#','content');
-    load_page('#','content','includes/posts.php');
+    //clear_page('#','content');
+    //load_page('#','content','includes/posts.php');
     
     notify_small('Hello and Welcome to Yoteyote', 5000, '6', '');
     /****************** IF USER IS LOGGED IN *******************/
@@ -20,7 +20,6 @@ $(document).ready(function(){
     /******************** HOME BUTTON *********************************/
     $('#home_btn').click(function(){
         preload_start();
-        clear_page('#','content');
         load_page('#','content','includes/posts.php');
         $('#sort_tab').delay(500).slideDown();
         sessionCheck();
@@ -51,6 +50,8 @@ $(document).ready(function(){
                         load_page('#','user', 'includes/logged_user.php?=al');
                         $('#posts_create').slideDown();
                         notify('Welcome Again','We are here for you!', 5000, '6', '');
+                        clear_page('#','content');
+                        load_page('#', 'content', 'includes/posts.php');
                     }else{
                         notify('Incorrect', 'Email or Password is incorrect', 5000, 'c', true);
                         preload_stop();
@@ -64,10 +65,11 @@ $(document).ready(function(){
     /******************* SIGNUP FORM *****************************/
     $('#signup_btn').click(function(){
         preload_start();
-        $('#posts').hide(400);
+        $('content').fadeOut();
+        clear_page('#','content');
+        load_page('#', 'content', 'includes/new_user_form.php');
         $('#sort_tab').slideUp();
-        $('#content').fadeOut();
-        $('#new_user_form').slideDown();
+        $('#new_user_form').delay(400).fadeIn();
         notify('Sign Up','It will only take you less than a minute', 15000, '2', '');
         preload_stop();
     });
@@ -330,9 +332,21 @@ $(document).ready(function(){
         var txt = $('#search_txt').val();
         load_page('#','content','includes/posts.php?mode=search&txt='+txt);	
     });
-
+    
+    // Peke Upload
     $("#file").pekeUpload({theme:'bootstrap', multi: false});
     $("#file1").pekeUpload({theme:'bootstrap', multi: false});
     $("#profile_pic").pekeUpload({theme:'bootstrap', multi: false});
 
+    // How it Works
+    $('#discover_btn').click(function(){
+        preload_start();
+        load_page('#', 'content', 'includes/how_it_works.php');
+        preload_stop();
+        notify_small('Quick View of How it works', 5000, 'M', '');
+        return false;
+    });
+    
+    //profile
+    $('#nickname').editable();
 });//ready ends
