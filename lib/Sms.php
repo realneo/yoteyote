@@ -1,28 +1,44 @@
 <?php
-    class Sender{
-        var $host;
-        var $port; //Username that is to be used for submission
-        var $strUserName; //password that is to be used along with username
-        var $strPassword; //Sender Id to be used for submitting the message
-        var $strSender; //Message content that is to be transmitted
-        var $strMessage; //Mobile No is to be transmitted.
-        var $strMobile;
+class Sender
+{
+    var $host;
+    var $port;
     /*
-        * What type of the message that is to be sent
-        * <ul>
-            * <li>0:means plain text</li>
-            * <li>1:means flash</li>
-            * <li>2:means Unicode (Message content should be in Hex)</li>
-            * <li>6:means Unicode Flash (Message content should be in Hex)</li>
-        * </ul>
+     * Username that is to be used for submission
+     */
+    var $strUserName;
+    /*
+     * password that is to be used along with username
+     */
+    var $strPassword;
+    /*
+     * Sender Id to be used for submitting the message
+     */
+    var $strSender;
+    /*
+     * Message content that is to be transmitted
+     */
+    var $strMessage;
+    /*
+     * Mobile No is to be transmitted.
+     */
+    var $strMobile;
+    /*
+     * What type of the message that is to be sent
+     * <ul>
+     * <li>0:means plain text</li>
+     * <li>1:means flash</li>
+     * <li>2:means Unicode (Message content should be in Hex)</li>
+     * <li>6:means Unicode Flash (Message content should be in Hex)</li>
+     * </ul>
      */
     var $strMessageType;
     /*
-        * Require DLR or not
-        * <ul>
-            * <li>0:means DLR is not Required</li>
-            * <li>1:means DLR is Required</li>
-        * </ul>
+     * Require DLR or not
+     * <ul>
+     * <li>0:means DLR is not Required</li>
+     * <li>1:means DLR is Required</li>
+     * </ul>
      */
     var $strDlr;
 
@@ -82,7 +98,8 @@
             try
             {
                 //Smpp http Url to send sms.
-                $live_url   = "http://" . $this->host . ":" . $this->port . "/bulksms/bulksms?username=" . $this ->strUserName . "&password=" . $this->strPassword . "&type=" . $this->strMessageType . "&dlr=" . $this ->strDlr . "&destination=" . $this->strMobile . "&source=" . $this->strSender . "&message=" . $this->strMessage . "";
+                $live_url ="http://api.sendsms.co.tz/api/sendsms/plain?user=".$this->strUserName."&password=".$this->strPassword."&sender=".$this->strSender."&SMSText=".$this->strMessage."&GSM=".$this->strMobile;
+                //$live_url="http://".$this->host.":".$this->port."/bulksms/bulksms?username=".$this->strUserName."&password=".$this->strPassword."&type=".$this->strMessageType."&dlr=".$this->strDlr."&destination=".$this->strMobile."&source=".$this->strSender."&message=".$this->strMessage."";
                 $parse_url  = file($live_url);
                 echo $parse_url[0];
 		    }
@@ -96,12 +113,12 @@
 
         try
         {
-            //Smpp http Url to send sms.
-            $live_url   = "http://" . $this->host . ":" . $this->port . "/bulksms/bulksms?username=" . $this->strUserName . "&password=" . $this ->strPassword . "&type=" . $this->strMessageType . "&dlr=" . $this->strDlr . "&destination=" . $this ->strMobile . "&source=" . $this ->strSender . "&message=" . $this->strMessage . "";
+            //Smpp http Url to send sms.  d
+            //$live_url="http://".$this->host.":".$this->port."/bulksms/bulksms?username=".$this->strUserName."&password=".$this->strPassword."&type=".$this->strMessageType."&dlr=".$this->strDlr."&destination=".$this->strMobile."&source=".$this->strSender."&message=".$this->strMessage."";
+            $live_url ="http://api.sendsms.co.tz/api/sendsms/plain?user=".$this->strUserName."&password=".$this->strPassword."&sender=".$this->strSender."&SMSText=".$this->strMessage."&GSM=".$this->strMobile;
             $parse_url  = file($live_url);
-           // echo $parse_url[0];
-            $_SESSION['msg'] = 'Message Sent';
-            header('Location: ../index.php');
+           echo $parse_url[0];
+           //echo'Message Sent';
         }
         catch (Exception $e)
         {
