@@ -36,11 +36,19 @@
             
             // Layout
             $main->iJS('jquery.shapeshift.min');
+            
             // Notification
-            //$main->iJS('owl/library');
             $main->iJS('owl/notification');
             $main->iCSS('owl/main');
             $main->iJS('jquery.sticky');
+            
+            // Bootstrap Editable
+            $main->iJS('bootstrap-editable/js/bootstrap-editable.min');
+            $main->iCSS('bootstrap-editable/css/bootstrap-editable');
+            
+            // Side Panel
+            $main->iJS('slidePanel/js/jquery.slidepanel');
+            $main->iCSS('slidePanel/css/jquery.slidepanel');
 
         ?>
     </head>
@@ -55,7 +63,7 @@
                 <div class="span2"><img src='images/logo.png' alt='Yoteyote'/></div>
                 <div class="span10">
                     <h1 class="red_color">Yoteyote</h1>
-                    <h4>Buy & Sell small jobs from one another <button class='btn btn-danger' id='test_btn'>Discover how</button> </h4>
+                    <h4>Buy & Sell small jobs from one another <a class='btn btn-danger' id='discover_btn' href="includes/how_it_works.php">Discover how</a> </h4>
                 </div>
             </div>
             <div class='span4 offset2 padding-top10' id="posts_create">   

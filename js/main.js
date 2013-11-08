@@ -10,8 +10,8 @@ $(document).ready(function(){
     
     // Init
     preload_start();
-    clear_page('#','content');
-    load_page('#','content','includes/posts.php');
+    //clear_page('#','content');
+    //load_page('#','content','includes/posts.php');
     
     notify_small('Hello and Welcome to Yoteyote', 5000, '6', '');
     /****************** IF USER IS LOGGED IN *******************/
@@ -44,14 +44,13 @@ $(document).ready(function(){
                 data: form_data,
                 success: function(response){
                     if(response == "success"){
-                        preload_stop();
                         $('.dropdown-menu').slideUp();
                         $('#sign_in_dropdown').fadeOut();
-                        load_page('#','user', 'includes/logged_user.php?=al');
                         $('#posts_create').slideDown();
                         notify('Welcome Again','We are here for you!', 5000, '6', '');
                         clear_page('#','content');
                         load_page('#', 'content', 'includes/posts.php');
+                        preload_stop();
                     }else{
                         notify('Incorrect', 'Email or Password is incorrect', 5000, 'c', true);
                         preload_stop();
@@ -216,7 +215,7 @@ $(document).ready(function(){
                     if(response == "success"){
                         $(form_name)[0].reset();
                         $("#will_modal").modal("hide");
-                        notify('Successfully Posted', 'Your Post is already on the <strong>Wall</strong>', 5000, 'W', '');
+                        notify('Successfully Posted', 'Your Post is already on the <strong>Grid</strong>', 5000, 'W', '');
                         preload_stop();
                         clear_page('.','posts');
                         load_page('.','posts','includes/posts.php');
@@ -289,7 +288,7 @@ $(document).ready(function(){
                     if(response == "success"){
                         $(form_name)[0].reset();
                         $("#want_modal").modal("hide");
-                        notify('Successfully Posted', 'Your Post is already on the <strong>Wall</strong>', 5000, 'W', '');
+                        notify('Successfully Posted', 'Your Post is already on the <strong>Grid</strong>', 5000, 'W', '');
                         preload_stop();
                         clear_page('#','content');
                         load_page('#','content','includes/posts.php');
@@ -339,14 +338,16 @@ $(document).ready(function(){
     $("#profile_pic").pekeUpload({theme:'bootstrap', multi: false});
 
     // How it Works
-    $('#discover_btn').click(function(){
-        preload_start();
-        load_page('#', 'content', 'includes/how_it_works.php');
-        preload_stop();
-        notify_small('Quick View of How it works', 5000, 'M', '');
-        return false;
-    });
     
     //profile
-    $('#nickname').editable();
+    $('#nickname').editable({
+        type:'text',
+        hightlight:'green',
+        mode:'inline',
+        pk: 1,
+        ajaxOptions: {
+            type: 'put',
+            dataType: 'json'
+        }
+    });
 });//ready ends
