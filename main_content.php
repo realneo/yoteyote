@@ -1,5 +1,4 @@
-<?php include'includes/new_user_form.php'; ?>    
-    <div class="container-fluid">
+      <div class="container-fluid">
         <div class="row-fluid">
             
             <div class="span2">
@@ -14,7 +13,6 @@
             <div class="span12">
                 <!--Body content-->
                 <div id="content">
-                    
                 </div>
             </div>
         </div>

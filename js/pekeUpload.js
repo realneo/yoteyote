@@ -29,7 +29,7 @@
       showErrorAlerts:    true,
       allowedExtensions:  "",
       invalidExtError:    "Invalid File Type",
-      maxSize:      0,
+      maxSize:      5,
       sizeError:      "Size of the file is greather than allowed",
       onFileError:        function(file,error){},
       onFileSuccess:      function(file,data){}

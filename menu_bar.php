@@ -12,8 +12,15 @@
                 <ul class="nav">
                     <li><a href="#" id='home_btn'><i class="icon-home"></i> Home</a></li>
                     <li class="divider-vertical"></li>
-                    <li class="active"><a href="#"><i class="icon-file"></i> Posts</a></li>
-                    <li class="divider-vertical"></li>
+                    <li class="active"><a href="#"  id='post_btn'><i class="icon-file"></i> Posts</a></li>
+                    <?php
+                        if(isset($_SESSION['user_id'])){
+                            echo"<li class='divider-vertical'></li>
+                                <li><a href='#' class='profile_btn'><i class='icon-file'></i> Profile</a></li>
+                                ";
+                        }
+                    ?>
+                    
                 </ul>
                 <ul class="nav pull-right" id='sign_in_dropdown'>
                     <li><a href="#" id="signup_btn">Sign Up</a></li>

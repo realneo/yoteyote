@@ -1,6 +1,6 @@
 <?php
-    include_once('../lib/Main.php');
-    include_once('../lib/User.php');
+    include_once('lib/Main.php');
+    include_once('lib/User.php');
     $main =  new Main;
     $main->initSession();
 
@@ -31,7 +31,7 @@
         echo"
             <div class='row-fluid'>
                 <div class='span12'>
-                        <div class='span1'><img src='images/users/{$user_pic}' alt='{$first_name} {$last_name}' /></div>
+                        <div class='span1' class='profile_btn'><img src='images/posts/{$user_pic}' alt='{$first_name} {$last_name}' /></div>
                         <div class='span6 pull-left'>
                             {$first_name} {$last_name}
                             <br />

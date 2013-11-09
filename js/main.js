@@ -10,18 +10,26 @@ $(document).ready(function(){
     
     // Init
     preload_start();
-    //clear_page('#','content');
-    //load_page('#','content','includes/posts.php');
+    clear_page('#','content');
+    load_page('#','content','includes/posts.php');
     
     notify_small('Hello and Welcome to Yoteyote', 5000, '6', '');
     /****************** IF USER IS LOGGED IN *******************/
     sessionCheck();
     /*****************************************************************/
-    /******************** HOME BUTTON *********************************/
-    $('#home_btn').click(function(){
+    /******************** MAIN MENU *********************************/
+    $('#home_btn, #post_btn').click(function(){
         preload_start();
         load_page('#','content','includes/posts.php');
         $('#sort_tab').delay(500).slideDown();
+        sessionCheck();
+        preload_stop();        
+    });
+    
+    $('.profile_btn').click(function(){
+        preload_start();
+        load_page('#','content','includes/profile.php');
+        $('#sort_tab').delay(500).slideUp();
         sessionCheck();
         preload_stop();        
     });
@@ -334,20 +342,17 @@ $(document).ready(function(){
     
     // Peke Upload
     $("#file").pekeUpload({theme:'bootstrap', multi: false});
-    $("#file1").pekeUpload({theme:'bootstrap', multi: false});
-    $("#profile_pic").pekeUpload({theme:'bootstrap', multi: false});
+    
+    
 
     // How it Works
-    
-    //profile
-    $('#nickname').editable({
-        type:'text',
-        hightlight:'green',
-        mode:'inline',
-        pk: 1,
-        ajaxOptions: {
-            type: 'put',
-            dataType: 'json'
-        }
+    $('#discover_btn').click(function(){
+        notify_small('Quick view on How Yoteyote <strong>Works</strong>', 3000, 'M', '');
     });
+    $('#discover_btn').slidepanel({
+        orientation: 'left',
+        mode: 'push'
+    });
+    
+    // Profile Pic
 });//ready ends

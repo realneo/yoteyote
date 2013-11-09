@@ -3,8 +3,9 @@
 </script>
 <div class='container'>
     <?php
-       include ("../lib/Main.php");
-            $main= new Main;
+        include ("../lib/Main.php");
+        
+        $main= new Main;
             $post_obj=$main->load_model('Post');
             $active_filter = " AND posts.active='y'";
 
@@ -43,6 +44,17 @@
                             $picture = "<img src='images/posts/{$pic}' alt='$post[post]' width='280'/>";
                         }
                     }
+                    
+                    $user_id = $post['user_id'];
+                    $q = mysql_query("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
+                    while($row = mysql_fetch_array($q)){
+                        $user_data['pic'] = $row['pic'];
+                        
+                    if($user_data['pic'] == false){
+                        $profile_pic = "<img src='images/users/default.png' width='50' alt='' class='pull-left'/>";
+                    }else{
+                        $profile_pic = "<img src='images/posts/$user_data[pic]' width='50' alt='' class='pull-left'/>";
+                    }
 
 
                     // english notation (default)
@@ -57,11 +69,14 @@
                                 <h4><span class='post_type $color_toggle'>I $post[type]</span> <span class='post_title'>$post[post]</span></h4>
                                 $picture
                                 <p class='post_description'>$post[description]</p>
-                                <img src='images/sample_user.png' width='50'alt='' class='pull-left'/>
+                                $profile_pic
                                 &nbsp;<span class='greytxt'>$post[first_name] $post[last_name]</span><br />
                                  &nbsp;<span class='$color_toggle'>$post[mobile]</span>
                             </div>
                            ";
+                    }
+                    
+                    
                 }
 
                echo $html;

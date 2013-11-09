@@ -29,28 +29,27 @@ class Main {
 		'tpl_dir'           => 'templates/'  
         
 	);
-
 /*
 	//server
 		public $config = array(
 			
-		'script_path'		=> "/hermes/bosoraweb096/b2478/ipg.arusdeveloperscom/demo/yoteyote/",
-		'web_path'			=> 'http://arusdevelopers.com/demo/yoteyote/',
-		'web_path_admin'	=> 'http://arusdevelopers.com/demo/yoteyote/admin/',
-		'log_error'			=> TRUE,
-		'admin_email'		=> 'admin@admin.com',
+		'script_path'		=> "/home/yoteyote/public_html/",
+		'web_path'			=> 'http://www.yoteyote.com/',
+		'web_path_admin'	=> 'http://www.yoteyote.com/admin/',
+		'log_error'			=> FALSE,
+		'admin_email'		=> 'neo@yoteyote.com',
 		'upload_dir'		=> 'uploads',
-		'db_name'			=> 'yote_db',
-		'db_user'			=> 'basit',
-		'db_pass'			=> '12345678',
-		'db_host'			=> 'arusdeveloperscom.ipagemysql.com',
+		'db_name'			=> 'yoteyote_db',
+		'db_user'			=> 'yoteyote_neo',
+		'db_pass'			=> 'jQueryMaster7',
+		'db_host'			=> 'localhost',
 		'title'             => 'Yoteyote | Lets Work Together',
 		'tpl_dir'           => 'templates/'  
         
 	);
-*/
-	
 
+	
+*/
 	
 	public $info;	
 

@@ -49,6 +49,9 @@
             // Side Panel
             $main->iJS('slidePanel/js/jquery.slidepanel');
             $main->iCSS('slidePanel/css/jquery.slidepanel');
+            
+            //Combodate
+            $main->iJS('moment.min');
 
         ?>
     </head>
