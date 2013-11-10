@@ -39,10 +39,12 @@ function sessionCheck(){
                 $('#posts_create').slideDown();
                 $('#sign_in_dropdown').hide();
                 notify_small('Your still Signed In', 2000, '3', '');
+                $('.profile_btn').fadeIn();
             }else{
                 $('#posts_create').hide();
                 $('#sign_in_dropdown').slideDown();
                 notify('Sign In','Sign Up if You Dont have an account', 5000, '3', '');
+                $('.profile_btn').fadeOut();
             }
         }
     });

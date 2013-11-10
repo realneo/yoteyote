@@ -58,6 +58,9 @@ $(document).ready(function(){
                         notify('Welcome Again','We are here for you!', 5000, '6', '');
                         clear_page('#','content');
                         load_page('#', 'content', 'includes/posts.php');
+                        clear_page('#','logged_user');
+                        load_page('#', 'logged_user', 'includes/logged_user.php');
+                        $('.profile_btn').fadeIn();
                         preload_stop();
                     }else{
                         notify('Incorrect', 'Email or Password is incorrect', 5000, 'c', true);
