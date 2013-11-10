@@ -1,5 +1,7 @@
 <script>
-    $('.container').shapeshift();
+    $('.container').shapeshift({
+        animateOnInit:'true'
+    });
 </script>
 <div class='container'>
     <?php

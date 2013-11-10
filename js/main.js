@@ -342,6 +342,7 @@ $(document).ready(function(){
     
     // Peke Upload
     $("#file").pekeUpload({theme:'bootstrap', multi: false});
+    $("#file1").pekeUpload({theme:'bootstrap', multi: false});
     
     
 
