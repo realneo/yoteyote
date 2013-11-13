@@ -12,8 +12,8 @@
 
             <div class="span12">
                 <!--Body content-->
+                <?php include('includes/new_user_form.php'); ?>
                 <div id="content">
-
                 </div>
             </div>
         </div>

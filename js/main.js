@@ -76,9 +76,9 @@ $(document).ready(function(){
     /******************* SIGNUP FORM *****************************/
     $('#signup_btn').click(function(){
         preload_start();
-        //$('#content').fadeOut();
-        //clear_page('#','content');
-        //$('#content').fadeIn();
+        $('#content').fadeOut();
+        clear_page('#','content');
+        $('#content').fadeIn();
         //load_page('#', 'content', 'includes/new_user_form.php');
         $('#sort_tab').slideUp();
         $('#new_user_form').fadeIn();
