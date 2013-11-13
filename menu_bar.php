@@ -10,8 +10,6 @@
             <a class="brand" href="index.php" name="top">Yoteyote</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="#" id='home_btn'><i class="icon-home"></i> Home</a></li>
-                    <li class="divider-vertical"></li>
                     <li class="active"><a href="#"  id='post_btn'><i class="icon-file"></i> Wills & Wants</a></li>
                     <li class='divider-vertical'></li>
                     <li><a href='#' class='profile_btn'><i class='icon-file'></i> Profile</a></li>
