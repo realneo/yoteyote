@@ -7,36 +7,53 @@
         </div>
         <div class="modal-body">
             <form name="new_want_form" method="post" enctype="multipart/form-data">
-                <div class='input-prepend well well-small'>
-                    <span class='add-on red_color'>I Want</span>
-                    <input class='span4' name='post' type='text' placeholder='Subaru Forester AirMass' value=''/>
+                <div class="control-group">
+	                <div class='input-prepend well well-small'>
+    	                <span class='add-on red_color'>I Want</span>
+        	            <input class='span4' name='post' type='text' placeholder='Subaru Forester AirMass' value=''/>
+            	    </div>
+				</div>
+
+                <div class="control-group">
+	                <div>
+    	                <textarea class="span5" name="description" placeholder="Description about this post." rows="5"></textarea>
+        	        </div>
+				</div>
+
+                <div class="control-group">
+	                <div class="btn-group" data-toggle="buttons-radio" >
+    	                <button type="button" class="btn" data-toggle="button">
+							Tshs
+							<input type="radio" name="currency" value="Tshs" />
+	                    </button>
+    	                <button type="button" class="btn" data-toggle="button">
+							USD
+							<input type="radio" name="currency" value="USD" />
+	                    </button>
+    	            </div>
+				</div>
+
+				<div class="control-group">
+	                <div class='input-prepend' style="margin-bottom:0px;">
+    	                <span class='add-on success'>Amount</span>
+        	            <input class='span1' name='amount' type='text' placeholder='200,000' />
+	        	        <input id="file1" type="file" style="visibility:hidden;" name="pic" /><br />
+                	</div>
+				</div>
+
+				<div class="control-group">
+					<div class="input-prepend">
+					    <a class="btn add-on" onclick="$('#file1').click();">Picture</a>
+					    <input type="text" name="subfile" id="subfile prependedInput">
+					</div>
                 </div>
-                <div>
-                    <textarea class="span5" name="description" placeholder="Description about this post." rows="5"></textarea>
-                </div>
-                <div class="btn-group" data-toggle="buttons-radio" >
-                    <button type="button" class="btn" data-toggle="button">
-                      Tshs
-                      <input type="radio" name="currency" value="Tshs" />
-                    </button>
-                    <button type="button" class="btn" data-toggle="button">
-                      USD
-                      <input type="radio" name="currency" value="USD" />
-                    </button>
-                </div>          
-                <div class='input-prepend' style="margin-bottom:0px;">
-                    <span class='add-on success'>Amount</span>
-                    <input class='span1' name='amount' type='text' placeholder='200,000' />
-                </div>
-                <div class='input-prepend' style="margin-bottom:0px;">
-                    <span class='add-on error'>Picture</span>
-                    <input id="file" type="file" name="pic" />
-                </div>
+
+
                 <div class='model_terms'>
                     <input type="checkbox" name="terms"> I agree with the <a href="#" class='red_color'>Terms and Conditions</a>
                 </div>
             </div>
-            
+
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                 <button class="btn btn-danger" id='want_create_btn'>Create</button>

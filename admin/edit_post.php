@@ -1,17 +1,17 @@
-<?php 
+<?php
 $message="";
 include("header.php");
 include("sidebar.php");
 
-		$admin =   $main->load_model("Admin");			
+		$admin =   $main->load_model("Admin");
 		$name="submit";
 
 if(isset($_GET['mod']) && $_GET['mod']=='edit')
 {
 		$name="update";
-		
+
 		$id=$_GET['id'];
-		
+
 		$row=$admin->getPostsInfo($id);
 
 }
@@ -20,17 +20,17 @@ if(isset($_GET['mod']) && $_GET['mod']=='edit')
 
 <section id="main" class="column">
     <?
-		
-    	
+
+
 	    if(isset($_GET['message'])) { $admin->show_bar(1,$_GET['message']);    }
-		
-		
+
+
 		if(isset($_POST['update']))
 		{
-			
-			
+
+
 			$message=$admin->getUpdatePosts($_POST ,$id);
-			
+
 			if($message !='')
 			{
 				$admin->show_bar(0,$message);
@@ -39,39 +39,39 @@ if(isset($_GET['mod']) && $_GET['mod']=='edit')
 
 	?>
 	<h4 class="alert_info">Welcome to the yoteyote Admin Panel</h4>
-    
+
 		<article class="module width_full">
 			<header><h3>yoteyote DASHBOARD</h3></header>
-			
-				
+
+
 						<fieldset>
                         	<form action="#" enctype="multipart/form-data" method="post">
 							<label>User Name</label></br>
-                            <? 
-							
+                            <?
+
 							$getusers=$admin->getUsers();
-							
-							?>							
+
+							?>
                             <select name="username" style="width:81%"">
                             <option value="">Select User</option>
-                            <?							
+                            <?
 							$select = '';
 							foreach($getusers as $ress)
 							{
-								
-                             if ( $ress['user_id'] == $row['user_id'] ) 
+
+                             if ( $ress['user_id'] == $row['user_id'] )
                              {
-								 
+
 								 $select="selected";
-                             
+
                              }
-							 else 
+							 else
 							 {
-								$select = ''; 
-								 
+								$select = '';
+
 							 }
 							?>
-                            
+
                             <option <?=$select?> value="<? echo $ress['user_id']; ?>"><? echo $ress['first_name']." ".$ress['last_name']; ?></option>
                             <? }?>
                             </select>
@@ -83,8 +83,8 @@ if(isset($_GET['mod']) && $_GET['mod']=='edit')
             				</br></br>
                             <label>Type</label></br>
                             <select name="user_type" style="width:81%;">
-							<option value="will" <? if($row['type']=='will'){echo 'selected' ;}?>>Will</option>
-							<option value="want"  <? if($row['type']=='want'){echo 'selected' ;}?>>Want</option>
+							<option value="will" <? if($row['post_type']=='will'){echo 'selected' ;}?>>Will</option>
+							<option value="want"  <? if($row['post_type']=='want'){echo 'selected' ;}?>>Want</option>
 							</select>
 							</br></br>
                             <label>Amount</label></br>
@@ -96,11 +96,11 @@ if(isset($_GET['mod']) && $_GET['mod']=='edit')
                             <input type="submit" value="<?=$name?>" name="<?=$name?>" valign="right" style="margin-left:13px">
 							</form>
 						</fieldset>
-						
+
                         <div class="clear"></div>
-				
+
 		</article>
-		
-<?php 
+
+<?php
  include("footer.php");
  ?>

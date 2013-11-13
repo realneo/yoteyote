@@ -1,18 +1,18 @@
 $(document).ready(function(){
     $("#notifications").sticky({topSpacing:0});
-    
+
     $("a").unbind('click');
     $("button").unbind('click');
-    
+
     // Hiding Objects
     $('#posts_create').hide();
     $('#new_user_form').hide();
-    
+
     // Init
     preload_start();
     clear_page('#','content');
     load_page('#','content','includes/posts.php');
-    
+
     notify_small('Hello and Welcome to Yoteyote', 5000, '6', '');
     /****************** IF USER IS LOGGED IN *******************/
     sessionCheck();
@@ -23,15 +23,15 @@ $(document).ready(function(){
         load_page('#','content','includes/posts.php');
         $('#sort_tab').delay(500).slideDown();
         sessionCheck();
-        preload_stop();        
+        preload_stop();
     });
-    
+
     $('.profile_btn').click(function(){
         preload_start();
         load_page('#','content','includes/profile.php');
         $('#sort_tab').delay(500).slideUp();
         sessionCheck();
-        preload_stop();        
+        preload_stop();
     });
     /*****************************************************************/
     /******************* SIGN IN PROCESS *****************************/
@@ -55,13 +55,14 @@ $(document).ready(function(){
                         $('.dropdown-menu').slideUp();
                         $('#sign_in_dropdown').fadeOut();
                         $('#posts_create').slideDown();
-                        notify('Welcome Again','We are here for you!', 5000, '6', '');
+                        notify('Welcome Again', 'We are here for you!', 5000, '6', '');
                         clear_page('#','content');
                         load_page('#', 'content', 'includes/posts.php');
                         clear_page('#','logged_user');
                         load_page('#', 'logged_user', 'includes/logged_user.php');
                         $('.profile_btn').fadeIn();
                         preload_stop();
+                        location.reload();
                     }else{
                         notify('Incorrect', 'Email or Password is incorrect', 5000, 'c', true);
                         preload_stop();
@@ -107,7 +108,7 @@ $(document).ready(function(){
             preload_stop();
             return false;
         }
-       
+
        // Check if Email Match
        if(email != email2){
             notify('Do Not Match', 'Email Addresses do not Match', 5000, 'X', '');
@@ -162,7 +163,7 @@ $(document).ready(function(){
                 });
                }
             }
-                
+
         });
         return false;
     });
@@ -170,10 +171,10 @@ $(document).ready(function(){
     /***********************  I WILL - CREATE PROCESS ************************/
     /*************************************************************************/
     $('#will_create_btn').click(function(){
-                
+
         // Loading Icon Fade In
         preload_start();
-        
+
         // Assigning Variables to the form and its elements
         var form_name = "form[name='new_will_form']";
         var terms = $(form_name + " input[name = 'terms']").is(":checked");
@@ -182,7 +183,7 @@ $(document).ready(function(){
         var currency = $(form_name + " input[name = 'currency']").val();
         var amount = $(form_name + " input[name = 'amount']").val();
         var type = 'will';
-        
+
         // Checking the will_post input
         if(will_post == '' ){
             notify('Blank Fields', 'Please give a detailed description of your <strong>post</strong>', 5000, 'o', '');
@@ -209,7 +210,7 @@ $(document).ready(function(){
             preload_stop();
             return false;
         }
-        
+
         var form_action = $("form[name='new_will_form']").attr('action');
         var form_data = {
             post: will_post,
@@ -230,7 +231,7 @@ $(document).ready(function(){
                         preload_stop();
                         clear_page('.','posts');
                         load_page('.','posts','includes/posts.php');
-                        
+
                     }else{
                         notify('Error', 'Something Went Wrong', 5000, 'o', true);
                         preload_stop();
@@ -243,10 +244,10 @@ $(document).ready(function(){
     /***********************  I WANT - CREATE PROCESS ************************/
     /*************************************************************************/
     $('#want_create_btn').click(function(){
-                
+
         // Loading Icon Fade In
         preload_start();
-        
+
         // Assigning Variables to the form and its elements
         var form_name = "form[name='new_want_form']";
         var terms = $(form_name + " input[name = 'terms']").is(":checked");
@@ -255,7 +256,7 @@ $(document).ready(function(){
         var currency = $(form_name + " input[name = 'currency']").val();
         var amount = $(form_name + " input[name = 'amount']").val();
         var type = 'want';
-        
+
         // Checking the will_post input
         if(post == '' ){
             notify('Blank Fields', 'Please fill in the <strong>I Want</strong> field', 5000, 'o', '');
@@ -282,7 +283,7 @@ $(document).ready(function(){
             preload_stop();
             return false;
         }
-        
+
         var form_action = "includes/post_process.php";
         var form_data = {
             post: post,
@@ -303,7 +304,7 @@ $(document).ready(function(){
                         preload_stop();
                         clear_page('#','content');
                         load_page('#','content','includes/posts.php');
-                        
+
                     }else{
                         notify('Error', 'Something Went Wrong', 5000, 'o', true);
                         preload_stop();
@@ -315,7 +316,7 @@ $(document).ready(function(){
     });
     /****************************************************************************************/
 
-    $('#will_sort').click(function(e) { 
+    $('#will_sort').click(function(e) {
         preload_start();
         load_page('#','content','includes/posts.php?sort=wills');
         notify_small('You can only view <strong>I Will</strong> Posts', 3000, 'M', '');
@@ -328,26 +329,26 @@ $(document).ready(function(){
         notify_small('You can only view <strong>I Want</strong> Posts', 3000, 'M', '');
         preload_stop();
     });
-    
+
     $('#all_sort').click(function(e) {
         preload_start();
 	load_page('#','content','includes/posts.php');
         notify_small('You can view <strong>All</strong> Posts', 3000, 'M', '');
         preload_stop();
     });
-	
+
     //Search
     $('#search_btn').click(function(e){
         e.preventDefault();
         var txt = $('#search_txt').val();
-        load_page('#','content','includes/posts.php?mode=search&txt='+txt);	
+        load_page('#','content','includes/posts.php?mode=search&txt='+txt);
     });
-    
+
     // Peke Upload
     $("#file").pekeUpload({theme:'bootstrap', multi: false});
     $("#file1").pekeUpload({theme:'bootstrap', multi: false});
-    
-    
+
+
 
     // How it Works
     $('#discover_btn').click(function(){
@@ -357,6 +358,6 @@ $(document).ready(function(){
         orientation: 'left',
         mode: 'push'
     });
-    
+
     // Profile Pic
 });//ready ends

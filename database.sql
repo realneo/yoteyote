@@ -1,15 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 3.5.5
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 11, 2013 at 07:56 PM
--- Server version: 5.5.29
--- PHP Version: 5.4.10
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
+-- --------------------------------------------------------
 --
 -- Database: `yoteyote_db`
 --
@@ -20,13 +9,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id`       int(11)      unsigned NOT NULL  AUTO_INCREMENT,
+  `username` varchar(100)                    DEFAULT NULL,
+  `pword`    varchar(128)                    DEFAULT NULL,                -- FIXED password is a MySQL reserved word
+  `email`    varchar(255)                    DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -34,11 +24,12 @@ CREATE TABLE `admin` (
 -- Table structure for table `admin_bank`
 --
 
-CREATE TABLE `admin_bank` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `bank` int(100) DEFAULT NULL,
+DROP TABLE IF EXISTS `admin_bank`;
+CREATE TABLE IF NOT EXISTS `admin_bank` (
+  `id`   int(11)  unsigned NOT NULL  AUTO_INCREMENT,
+  `bank` int(100)                    DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -46,12 +37,13 @@ CREATE TABLE `admin_bank` (
 -- Table structure for table `currency_setting`
 --
 
-CREATE TABLE `currency_setting` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) DEFAULT NULL,
-  `rate` decimal(10,0) DEFAULT '0',
+DROP TABLE IF EXISTS `currency_setting`;
+CREATE TABLE IF NOT EXISTS `currency_setting` (
+  `id`    int(11)       unsigned NOT NULL  AUTO_INCREMENT,
+  `title` varchar(100)                     DEFAULT NULL,
+  `rate`  decimal(10,0)                    DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -59,12 +51,13 @@ CREATE TABLE `currency_setting` (
 -- Table structure for table `deduction`
 --
 
-CREATE TABLE `deduction` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mobile` double DEFAULT '0',
-  `transc` double DEFAULT '0',
+DROP TABLE IF EXISTS `deduction`;
+CREATE TABLE IF NOT EXISTS `deduction` (
+  `id`     int(11) unsigned NOT NULL  AUTO_INCREMENT,
+  `mobile` double                     DEFAULT '0',
+  `transc` double                     DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -72,14 +65,15 @@ CREATE TABLE `deduction` (
 -- Table structure for table `listings`
 --
 
-CREATE TABLE `listings` (
-  `list_id` int(10) NOT NULL AUTO_INCREMENT,
-  `post_id` int(10) DEFAULT NULL,
-  `user_id` int(10) DEFAULT NULL,
-  `list_date` datetime DEFAULT NULL,
+DROP TABLE IF EXISTS `listings`;
+CREATE TABLE IF NOT EXISTS `listings` (
+  `list_id` int(10)    unsigned NOT NULL  AUTO_INCREMENT,
+  `post_id` int(10)    unsigned           DEFAULT NULL,
+  `user_id` int(10)    unsigned           DEFAULT NULL,
+  `list_date` datetime                    DEFAULT '0000-00-00 00:00:00',
   `bid` int(10) DEFAULT NULL,
   PRIMARY KEY (`list_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -87,14 +81,15 @@ CREATE TABLE `listings` (
 -- Table structure for table `log`
 --
 
-CREATE TABLE `log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `trans_date` datetime DEFAULT NULL,
-  `user_bank` double DEFAULT '0',
-  `user_id` int(11) DEFAULT NULL,
-  `admin_bank` double DEFAULT '0',
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE IF NOT EXISTS `log` (
+  `id`         int(11) unsigned NOT NULL  AUTO_INCREMENT,
+  `trans_date` datetime                   DEFAULT '0000-00-00 00:00:00',
+  `user_bank`  double                     DEFAULT '0',
+  `user_id`    int(11) unsigned           DEFAULT NULL,
+  `admin_bank` double                     DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -102,14 +97,15 @@ CREATE TABLE `log` (
 -- Table structure for table `ongoing`
 --
 
-CREATE TABLE `ongoing` (
-  `on_id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_by_user_id` int(11) DEFAULT NULL,
-  `won_by_user_id` int(11) DEFAULT NULL,
-  `on_amount` int(11) DEFAULT NULL,
-  `post_id` int(11) DEFAULT NULL,
+DROP TABLE IF EXISTS `ongoing`;
+CREATE TABLE IF NOT EXISTS `ongoing` (
+  `on_id`           int(11) unsigned NOT NULL  AUTO_INCREMENT,
+  `post_by_user_id` int(11) unsigned           DEFAULT NULL,
+  `won_by_user_id`  int(11) unsigned           DEFAULT NULL,
+  `on_amount`       int(11) unsigned           DEFAULT NULL,
+  `post_id`         int(11) unsigned           DEFAULT NULL,
   PRIMARY KEY (`on_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -117,19 +113,20 @@ CREATE TABLE `ongoing` (
 -- Table structure for table `posts`
 --
 
-CREATE TABLE `posts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post` varchar(255) COLLATE latin2_bin NOT NULL,
-  `description` text COLLATE latin2_bin NOT NULL,
-  `type` varchar(4) COLLATE latin2_bin NOT NULL,
-  `date` datetime NOT NULL,
-  `amount` int(11) NOT NULL,
-  `currency` varchar(20) COLLATE latin2_bin NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `active` enum('y','n') COLLATE latin2_bin DEFAULT 'y',
-  `pic` varchar(255) COLLATE latin2_bin DEFAULT NULL,
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id`          int(11)      unsigned NOT NULL  AUTO_INCREMENT,
+  `post`        varchar(255)          NOT NULL,
+  `description` text                  NOT NULL,
+  `post_type`   varchar(4)            NOT NULL,                                         -- type is a MySQL Reserved Word
+  `post_date`   datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',          -- date is a MySQL Reserved Word
+  `amount`      int(11)      unsigned NOT NULL,
+  `currency`    varchar(20)           NOT NULL,
+  `user_id`     int(11)      unsigned NOT NULL,
+  `post_active` enum('y','n')                   DEFAULT 'y',              -- active is a MySQL Reserved Word
+  `pic`         varchar(255)                    DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin2 COLLATE=latin2_bin AUTO_INCREMENT=154 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -137,12 +134,13 @@ CREATE TABLE `posts` (
 -- Table structure for table `trust`
 --
 
-CREATE TABLE `trust` (
-  `trust_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `trusted_by_id` int(11) DEFAULT '0',
+DROP TABLE IF EXISTS `trust`;
+CREATE TABLE IF NOT EXISTS `trust` (
+  `trust_id`      int(11) unsigned NOT NULL  AUTO_INCREMENT,
+  `user_id`       int(11) unsigned           DEFAULT NULL,
+  `trusted_by_id` int(11) unsigned           DEFAULT '0',
   PRIMARY KEY (`trust_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin2 COLLATE=latin2_bin AUTO_INCREMENT=37 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -150,24 +148,26 @@ CREATE TABLE `trust` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL,
-  `password` varchar(255) COLLATE latin2_bin NOT NULL,
-  `first_name` varchar(45) COLLATE latin2_bin NOT NULL,
-  `last_name` varchar(45) COLLATE latin2_bin NOT NULL,
-  `dob` date DEFAULT NULL,
-  `gender` varchar(6) COLLATE latin2_bin DEFAULT NULL,
-  `bio` text COLLATE latin2_bin,
-  `email` varchar(120) COLLATE latin2_bin NOT NULL,
-  `mobile` varchar(15) COLLATE latin2_bin NOT NULL,
-  `bank` int(11) NOT NULL DEFAULT '0',
-  `pic` varchar(255) COLLATE latin2_bin DEFAULT NULL,
-  `country` varchar(255) COLLATE latin2_bin DEFAULT NULL,
-  `city` varchar(100) COLLATE latin2_bin DEFAULT NULL,
-  `street` varchar(100) COLLATE latin2_bin DEFAULT NULL,
-  `building_name` varchar(255) COLLATE latin2_bin DEFAULT NULL,
-  `building_number` varchar(255) COLLATE latin2_bin DEFAULT NULL,
-  `nickname` varchar(255) COLLATE latin2_bin DEFAULT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id`         int(11)      unsigned NOT NULL  AUTO_INCREMENT,
+  `user_date`       datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- date is a MySQL Reserved Word
+  `pword`           varchar(128)          NOT NULL,                                 -- password is a MySQL Reserved Word
+  `first_name`      varchar(45)           NOT NULL,
+  `last_name`       varchar(45)           NOT NULL,
+  `dob`             date                            DEFAULT '0000-00-00',
+  `gender`          varchar(6)                      DEFAULT NULL,
+  `bio`             text,
+  `email`           varchar(255)          NOT NULL,
+  `mobile`          varchar(15)           NOT NULL,
+  `bank`            int(11)      unsigned NOT NULL  DEFAULT '0',
+  `pic`             varchar(255)                    DEFAULT NULL,
+  `country`         varchar(255)                    DEFAULT NULL,
+  `city`            varchar(100)                    DEFAULT NULL,
+  `street`          varchar(100)                    DEFAULT NULL,
+  `building_name`   varchar(255)                    DEFAULT NULL,
+  `building_number` varchar(255)                    DEFAULT NULL,
+  `nickname`        varchar(255)                    DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin2 COLLATE=latin2_bin AUTO_INCREMENT=68 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+

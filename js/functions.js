@@ -1,9 +1,9 @@
-function is_int(value){ 
+function is_int(value){
     if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
         return true;
-    }else { 
+    }else {
         return false;
-    } 
+    }
 }
 
 function preload_start(){
@@ -21,14 +21,14 @@ function load_page(type, param, page){
     $(type+param).fadeOut('slow').load(page).fadeIn('slow').ajaxComplete(function(event, XMLHttpRequest, ajaxOptions) {
         $('#sort_tabs').slideDown();
         preload_stop();
-     });; 	
+     });;
 }
 
 function clear_page(type, param){
     preload_start();
     $('#sort_tabs').slideUp();
     $(type + param).empty();
-    preload_stop();	
+    preload_stop();
 }
 
 function sessionCheck(){
