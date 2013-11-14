@@ -15,8 +15,8 @@
                     <li class="active"><a href="#"  id='post_btn'><i class="icon-file"></i> Wills & Wants</a></li>
                     <li class='divider-vertical'></li>
                     <li><a href='#' class='profile_btn'><i class='icon-file'></i> Profile</a></li>
-                    
                 </ul>
+
                 <ul class="nav pull-right" id='sign_in_dropdown'>
                     <li><a href="#" id="signup_btn">Sign Up</a></li>
                     <li class="divider-vertical"></li>
@@ -39,6 +39,7 @@
                         </div>
                     </li>
                 </ul>
+
             </div>
         <!--/.nav-collapse -->
         </div>

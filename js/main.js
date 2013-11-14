@@ -14,6 +14,7 @@ $(document).ready(function(){
     load_page('#','content','includes/posts.php');
 
     notify_small('Hello and Welcome to Yoteyote', 5000, '6', '');
+
     /****************** IF USER IS LOGGED IN *******************/
     sessionCheck();
     /*****************************************************************/
@@ -62,6 +63,7 @@ $(document).ready(function(){
                         load_page('#', 'logged_user', 'includes/logged_user.php');
                         $('.profile_btn').fadeIn();
                         preload_stop();
+						// this does a page refresh to update the statusbar.
                         location.reload();
                     }else{
                         notify('Incorrect', 'Email or Password is incorrect', 5000, 'c', true);
@@ -358,6 +360,8 @@ $(document).ready(function(){
         orientation: 'left',
         mode: 'push'
     });
+
+	//location.reload();
 
     // Profile Pic
 });//ready ends

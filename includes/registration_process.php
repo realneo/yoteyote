@@ -8,8 +8,8 @@ $user = $main->load_model('User');
 	{
         if ($user->addUser($_POST))
 		{
-			redirect('/');
-            //echo'success';
+			//redirect('/');
+            echo'success';
         }
 		else
 		{

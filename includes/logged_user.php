@@ -18,7 +18,7 @@
     $last_name  = $row['last_name'];
     $user_pic   = $row['pic'];
 
-    $bank = number_format($row['bank'],2);
+    $bank = number_format($row['bank'], 2);
 
     if ($user_pic == '')
 	{
