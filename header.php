@@ -67,7 +67,7 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span6">
-                <div class="span2"><img src='images/logo.png' alt='Yoteyote'/></div>
+                <div class="span2"><a href='index.php'><img src='images/logo.png' alt='Yoteyote'/></a></div>
                 <div class="span10">
                     <h1 class="red_color">Yoteyote</h1>
                     <h4>Buy & Sell small jobs from one another <a class='btn btn-danger' id='discover_btn' href="includes/how_it_works.php">Discover how</a> </h4>

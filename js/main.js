@@ -78,11 +78,12 @@ $(document).ready(function(){
     /******************* SIGNUP FORM *****************************/
     $('#signup_btn').click(function(){
         preload_start();
-        $('content').fadeOut();
+        $('#content').fadeOut();
         clear_page('#','content');
-        load_page('#', 'content', 'includes/new_user_form.php');
+        $('#content').fadeIn();
+        //load_page('#', 'content', 'includes/new_user_form.php');
         $('#sort_tab').slideUp();
-        $('#new_user_form').delay(400).fadeIn();
+        $('#new_user_form').fadeIn();
         notify('Sign Up','It will only take you less than a minute', 15000, '2', '');
         preload_stop();
     });

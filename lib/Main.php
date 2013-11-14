@@ -12,7 +12,7 @@ class Main
 	  public $where;
       public $backurl;
 
-/*
+      
 	//local server
 	public $config = array(
 
@@ -30,7 +30,7 @@ class Main
 		'tpl_dir'           => 'templates/'
 
 	);
-*/
+/*
 
 	// My local server
 	public $config = array(
@@ -50,7 +50,7 @@ class Main
 
 	);
 
-
+*/
 /*
 	//server
 		public $config = array(
