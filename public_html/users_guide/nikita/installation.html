@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Nikita CMS - Installation</title>
+
+	<link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
+
+	<meta http-equiv='expires' content='-1' />
+	<meta http-equiv= 'pragma' content='no-cache' />
+	<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+	<!-- START NAVIGATION -->
+	<div id="nav">
+		<div id="nav_inner"></div>
+	</div>
+
+	<div id="nav2">
+		<a name="top">&nbsp;</a>
+	</div>
+
+	<div id="masthead">
+		<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+			<tr>
+				<td>
+					<h1>Nikita CMS - Installation</h1>
+				</td>
+
+				<td id="breadcrumb_right">
+					<a href="http://www.procoversfx.com">Pro Covers FX</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- END NAVIGATION -->
+
+	<!-- START BREADCRUMB -->
+	<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+		<tr>
+			<td id="breadcrumb">
+				<a href="http://www.procoversfx.com">Pro Covers FX</a> &nbsp;&#8250;&nbsp;
+				<a href="http://www.procoversfx.com/user_guide/">User Guide Home</a> &nbsp;&#8250;&nbsp;Installation Instructions
+			</td>
+
+			<td id="searchbox">
+				<form method="get" action="http://www.google.com/search">
+					<input type="hidden" name="as_sitesearch" id="as_sitesearch" value="procoversfx.com/user_guide/" />Search Project User Guide&nbsp;
+					<input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;
+					<input type="submit" class="submit" name="sa" value="Go" />
+				</form>
+			</td>
+		</tr>
+	</table>
+	<!-- END BREADCRUMB -->
+
+	<br clear="all" />
+
+	<!-- START CONTENT -->
+	<a name="top"></a>
+
+	<div id="content">
+
+		<h1>Installation</h1>
+
+		<p>
+			Installing The Authentication Library is very simple, with only 3 steps to get going.
+		</p>
+
+		<h2>Step 1</h2>
+
+		<p>
+			<a href="http://github.com/adamgriffiths/the-codeigniter-authentication-library/tree/master">Download the files from Github</a>
+		</p>
+
+		<h2>Step 2</h2>
+
+		<p>
+			If this is your first time using the library, create a new database and run the query in dump.sql (MySQL only). This will set up the user table.
+		</p>
+
+		<p>
+			You will also need to change your base URL, and other general changes when using CodeIgniter. Please consult the CodeIgniter user guide directly.
+		</p>
+
+		<p>
+			Open up config.php and set $config['sess_use_database'] to TRUE.
+		</p>
+
+		<p>
+			Open up routes.php and copy The Authentication Library routes over to your own application's routes.php file.
+		</p>
+
+		<p class="important">
+			<strong>Note:</strong>&nbsp; You need to set an encryption key in the config.php file. Once this is set you must
+			not change it as this will break your application.
+		</p>
+
+		<h2>Step 3</h2>
+
+		<p>
+			Try out The Authentication Library! Navigate to <strong>http://yourdomain.ext/index.php/register</strong> to set up a new user account.
+			You should go into PHPMyAdmin or another equivalent package and edit the group_id to 1, so that the first user is an administrator.
+		</p>
+
+		<p>
+			To make things easier to work with and build upon the last version of The Authentication Library I have added the SQL for the groups
+			table to both the dump.sql and upgrade.sql file. This will help when developing applications that need to show user groups.
+		</p>
+
+		<p class="important">
+			<strong>Note:</strong>&nbsp; The 'id' field is not set to auto-increment. Bare this in mind when developing an application to add groups etc.
+		</p>
+
+		<h2>Step 4</h2>
+
+		<p>
+			In many cases you may want to store your models, views and controllers in a sub folder for The Authentication Library Admin Panel.
+			If this is the case (or you have changed the folder name from the default value) you can change these values inside of <var>config/Auth.php</var>.
+		</p>
+
+	</div>
+	<!-- END CONTENT -->
+
+	<div id="footer">
+		<p>
+			Previous Topic:&nbsp;&nbsp;<a href="overview.html">Overview</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+			<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+			<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+			Next Topic:&nbsp;&nbsp;<a href="usage.html">Usage Instructions</a>
+		</p>
+
+		<p>
+			<a href="http://www.procoversfx.com">Pro Covers FX</a>
+		</p>
+	</div>
+
+</body>
+
+</html>

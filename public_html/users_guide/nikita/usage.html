@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Nikita CMS - Usage</title>
+
+	<link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
+
+	<meta http-equiv='expires' content='-1' />
+	<meta http-equiv= 'pragma' content='no-cache' />
+	<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+	<!-- START NAVIGATION -->
+	<div id="nav">
+		<div id="nav_inner"></div>
+	</div>
+
+	<div id="nav2">
+		<a name="top">&nbsp;</a>
+	</div>
+
+	<div id="masthead">
+		<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+			<tr>
+				<td><h1>Nikita CMS - Usage</h1></td>
+				<td id="breadcrumb_right"><a href="http://www.procoversfx.com">Pro Covers FX</a></td>
+			</tr>
+		</table>
+	</div>
+	<!-- END NAVIGATION -->
+
+	<!-- START BREADCRUMB -->
+	<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+		<tr>
+			<td id="breadcrumb">
+				<a href="http://www.procoversfx.com">Pro Covers FX</a> &nbsp;&#8250;&nbsp;
+				<a href="http://www.procoversfx.com/user_guide/">User Guide Home</a> &nbsp;&#8250;&nbsp;Usage Instructions
+			</td>
+
+			<td id="searchbox">
+				<form method="get" action="http://www.google.com/search">
+					<input type="hidden" name="as_sitesearch" id="as_sitesearch" value="procoversfx.com/user_guide/" />Search Project User Guide&nbsp;
+					<input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;
+					<input type="submit" class="submit" name="sa" value="Go" />
+				</form>
+			</td>
+		</tr>
+	</table>
+	<!-- END BREADCRUMB -->
+
+	<br clear="all" />
+
+	<!-- START CONTENT -->
+	<a name="top"></a>
+
+	<div id="content">
+
+		<h1>Usage Instructions</h1>
+
+		<p>
+			The Authentication Library is the easiest Authentication library to use for CodeIgniter. You do not need to write any code, period.
+		</p>
+
+		<h2>Configurable items</h2>
+
+		<p>
+			The Authentication Library comes with a few configurable items located in config/Auth.php. The first is an array of all
+			the user groups and the group ID's of the groups.
+		</p>
+
+		<pre class="code">
+			$config['auth_groups'] = array(
+				'admin' => '1',
+				'editor' => '2',
+				'user' => '100'
+			);
+		</pre>
+
+		<p>
+			The second is the default place to redirect users to on a successful login. The Authentication Library will fall back on this
+			if there wasn't a value set using it's parameter.
+		</p>
+
+		<pre class="code">
+			$config['auth_login'] = 'admin/';
+		</pre>
+
+		<p>
+			The next configurable item, as of 1.0.2, determines whether or not The Authentication Library should remember users by default.
+			This should be a boolean, TRUE/FALSE.
+		</p>
+
+		<pre class="code">
+			$config['auth_remember'] = TRUE;
+		</pre>
+
+		<p>
+			The next 3 configurable items are the directory for your view files, admin controller files and models. The lines are below.
+		</p>
+
+		<pre class="code">
+			$config['auth_controllers_root'] = 'admin/';
+			$config['auth_models_root'] = '';
+			$config['auth_views_root']  = 'auth/';
+		</pre>
+
+		<p>
+			Finally you can set the name of your user table and groups tables. The lines are below.
+		</p>
+
+		<pre class="code">
+			$config['auth_user_table']  = 'users';
+			$config['auth_group_table'] = 'groups';
+		</pre>
+
+		<h2>The Application Controller</h2>
+
+		<p>
+			Normally when using CodeIgniter, your Controllers will usually look like this.
+		</p>
+
+		<pre class="code">
+			&lt;?php
+
+			class Example extends Controller
+			{
+				function Example()
+				{
+					parent::Controller();
+				}
+			}
+
+			/* End of file: example.php */
+			/* Location: application/controllers/example.php */
+		</pre>
+
+		<p>
+			However, when you need to use The Authentication Library, you should extend the Application controller instead of Controller.
+			The Application controller is in the file MY_Controller.php in libraries/. Your controller will now look like this.
+		</p>
+
+		<pre class="code">
+			&lt;?php
+
+			class Example extends Application
+			{
+				function Example()
+				{
+					parent::Application();
+				}
+			}
+
+			/* End of file: example.php */
+			/* Location: application/controllers/example.php */
+		</pre>
+
+		<p>
+			This has been done to use the Form Validation library available from CodeIgniter 1.7.0 and above, which only runs callbacks in Controllers.
+			To keep within the simplicity of The Authentication Library, I needed to create a new controller.
+		</p>
+
+		<p>
+			The Application Controller also has a number of other functions which are there to save you time and money. This means you do not
+			need to call the login, logout and register functions directly, although if you do wish to in other areas of your application you
+			can call upon these functions as showed below.
+		</p>
+
+		<h2>Login</h2>
+
+		<p>
+			The login function calls upon the login function of The Authentication Library so you don't have to. If you navigate to
+			<strong>http://yourdomain.ext/index.php/admin/login</strong> you will see the login form. If you wish to display the login
+			form somewhere else on your website, you can do so by using the following function.
+		</p>
+
+		<pre class="code">
+			$this->auth->login();
+		</pre>
+
+		<p>
+			The login function accepts one parameter, this is the URI string where you want the user to be redirected to after a successful login.
+			You may want to override the function in the application controller for the login, in which case you can simply add the following to
+			your controller.
+		</p>
+
+		<pre class="code">
+			function login()
+			{
+				$this->auth->login('<var>user/dashboard</var>');
+				// user/dashboard is a made up URI string
+			}
+		</pre>
+
+		<h2>Logout</h2>
+
+		<p>
+			There is a logout function in the Application class. This allows you to logout by destroying all session and cookie data.
+			You can access this by going to <strong>http://yourdomain.ext/index.php/admin/logout</strong>. You will not need to change
+			the behaviour of this, but if you wish to have it in another controller too, you can use the following function.
+		</p>
+
+		<pre class="code">
+			$this->auth->logout();
+		</pre>
+
+		<p>
+			The logout function does not accept any parameters.
+		</p>
+
+		<h2>Register</h2>
+
+		<p>
+			The register function is also self contained, and can be accessed via <strong>http://yourdomain.ext/index.php/admin/register</strong>.
+			If you wish to have this in aother controller, you can do so by adding this.
+		</p>
+
+		<pre class="code">
+			$this->auth->register();
+		</pre>
+
+		<p>
+			The register function does not accept any parameters.
+		</p>
+
+		<h2>Restrict access to controllers</h2>
+
+		<p>
+			Use the function below to restrict access to a function.
+		</p>
+
+		<pre class="code">
+			$this->auth->restrict('<var>user_level</var>', <var>TRUE</var>);
+		</pre>
+
+		<p>
+			This works directly with the config file, so you will need to change the <var>$config['auth_groups']</var> if you have more than the
+			3 default groups. You should pass the name of the user group to the first parameter, not the user id. The function works in heirachy;
+			for example, if you restrict access to 'users' groups above the user group will also have access to that function. If left blank the
+			function will restrict access to only people who are logged in. However, if you pass a boolean value TRUE to the second parameter,
+			you can restrict access to just the user group provided.
+		</p>
+
+		<p>
+			If you look inside the admin controller (controllers/admin.php), you will see a number of dummy functions that restrict access to
+			every user group. These serve as an example to show you how you would go about using the restrict function in a real application.
+		</p>
+
+		<h2>The Authentication Library Helper</h2>
+
+		<p>
+			The Authentication Library comes with a helper which is used to make your life easier when coding with the library.
+		</p>
+
+		<h3>Printing a username</h3>
+
+		<p>
+			To print a users name, you simply use the following line of code.
+		</p>
+
+		<pre class="code">
+			echo username();
+		</pre>
+
+		<h3>Test if a user is logged in</h3>
+
+		<p>
+			Instead of <dfn>$this->auth->logged_in();</dfn> you can simply use the following code block to test if a user is logged in.
+		</p>
+
+		<pre class="code">
+			if(logged_in() === TRUE)
+			{
+				echo("You are logged in.");
+			}
+			else
+			{
+				echo("You must be logged in.");
+			}
+		</pre>
+
+		<h3>Check if a user belongs to a certain group</h3>
+
+		<p>
+			For things like dynamic navigation, it is imperative to find out what group a user is in. This is made possible using the following function.
+		</p>
+
+		<pre class="code">
+			if(user_group('admin') === TRUE)
+			{
+				echo("You are an admin");
+			}
+			else
+			{
+				echo("You are not an admin.");
+			}
+		</pre>
+
+		<p>
+			Simply pass the name of the group to the function and let the function do the rest!
+		</p>
+
+		<h3>Print the user table name</h3>
+
+		<p>
+			When performing operations on the user table, you will need to reference the correct name. But if you ever change this you need to update all of
+			your references to the table name. With a simple function, you can use the table name you have set in your config file.
+		</p>
+
+		<pre class="code">
+			echo user_table();
+		</pre>
+
+		<h3>Print the group table name</h3>
+
+		<p>
+			As above, there is also a function to display the group table name as specified in the config file.
+		</p>
+
+		<pre class="code">
+			echo group_table();
+		</pre>
+
+		<h2>Loading views and models.</h2>
+
+		<p>
+			You are able to easily build the path to any view or model by using the two helper values, <var>$this->views</var> and <var>$this->models</var>.
+			You would use these as shown below.
+		</p>
+
+		<pre class="code">
+			$this->load->view($this->views . "dashboard.php");
+			$this->load->model($this->models."usermodel", 'users');
+		</pre>
+
+	</div>
+	<!-- END CONTENT -->
+
+	<div id="footer">
+		<p>
+			Previous Topic:&nbsp;&nbsp;<a href="installation.html">Installation</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+			<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+			<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+			Next Topic:&nbsp;&nbsp;<a href="admin.html">About the Admin Panel</a>
+		</p>
+
+		<p>
+			<a href="http://www.procoversfx.com">Pro Covers FX</a>
+		</p>
+	</div>
+
+</body>
+
+</html>
