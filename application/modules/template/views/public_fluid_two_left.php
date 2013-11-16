@@ -44,8 +44,6 @@
 
 						<div class="row logo">
 
-								<!--<img src="<?php //echo image_url('logo.png'); ?>" alt="logo">-->
-
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 header-left">
 
 								<div class=""><h1>Yoteyote</h1></div> <br />
@@ -61,6 +59,7 @@
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 
 							</div>
+
 						</div>
 					</div>
 				</div>
