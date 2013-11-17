@@ -10,9 +10,9 @@
  * Class	Mdl_group	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	auth
+ * @category	category	auth
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -48,11 +48,10 @@ class Mdl_group extends MY_Model {
 		$this->set_table('groups');
 	}
 
-
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file mdl_group.php
+ * Filename: mdl_group.php
  * Location: ./application/modules/group/models/mdl_group.php
  * ------------------------------------------------------------------------
  */

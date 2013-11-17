@@ -52,7 +52,7 @@ class Mdl_perfectmodel extends MY_Model
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file mdl_filename.php
+ * Filename: mdl_filename.php
  * Location: ./application/modules/dir_name/models/mdl_filename.php
  * ------------------------------------------------------------------------
  */

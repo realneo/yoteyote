@@ -7,10 +7,10 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Auth
+ * Class	Auth	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Auth
+ * @package		Package		Yoteyote
  * @subpackage	Subpackage	auth
  * @category	category	auth
  * @author		Raymond L King Sr.
@@ -886,7 +886,7 @@ class Auth extends Auth_Controller
 
 /**
  * ------------------------------------------------------------------------
- * End of file filename.php
- * Location: ./application/dir_name/filename.php
+ * Filename: auth.php
+ * Location: ./application/modules/auth/auth.php
  * ------------------------------------------------------------------------
  */

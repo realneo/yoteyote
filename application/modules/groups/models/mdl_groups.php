@@ -10,9 +10,9 @@
  * Class	Mdl_groups	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	auth
+ * @category	category	auth
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com

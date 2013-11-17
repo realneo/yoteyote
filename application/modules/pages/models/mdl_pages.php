@@ -7,12 +7,12 @@
  * Author: Raymond L King Sr. and Stephen Willis.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Mdl_pages
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	pages
+ * @category	category	pages
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -44,8 +44,9 @@ class Mdl_pages extends MY_Model
 
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file filename.php
- * Location: ./application/dir_name/filename.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: mdl_pages.php
+ * Location: ./application/modules/pages/model/mdl_pages.php
  * ------------------------------------------------------------------------
  */

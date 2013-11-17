@@ -10,9 +10,9 @@
  * Class	Groups	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	auth
+ * @category	category	auth
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -23,7 +23,6 @@
 
 class Groups extends Auth_Controller
 {
-
 	/**
 	 * -----------------------------------------------------------------------
 	 * Class variables - public, private, protected and static.
@@ -294,12 +293,10 @@ class Groups extends Auth_Controller
 		$result = $this->groups->_insert($data);
     }
 
-
-
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file groups.php
+ * Filename: groups.php
  * Location: ./application/modules/groups/controllers/groups.php
  * ------------------------------------------------------------------------
  */

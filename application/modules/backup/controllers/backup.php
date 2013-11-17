@@ -10,9 +10,9 @@
  * Class	Backup	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	backup
+ * @category	category	backup
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -100,7 +100,7 @@ class Backup extends Admin_Controller
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file backup.php
+ * Filename: backup.php
  * Location: ./application/modules/backup/controllers/backup.php
  * ------------------------------------------------------------------------
  */

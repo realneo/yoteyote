@@ -8,12 +8,12 @@
  * Author: Raymond L King Sr. and Stephen Willis.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Pages	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	pages
+ * @category	category	pages
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2013, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -300,8 +300,9 @@ class Pages extends Admin_Controller
 
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file pages.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: pages.php
  * Location: ./application/modules/pages/controllers/pages.php
  * ------------------------------------------------------------------------
  */

@@ -7,10 +7,10 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Mdl_Name	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
+ * @package		Package		Yoteyote
  * @subpackage	Subpackage	name
  * @category	category	name
  * @author		Raymond L King Sr.
@@ -51,8 +51,9 @@ class Mdl_perfectmodel extends MY_Model
 
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file mdl_filename.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: mdl_filename.php
  * Location: ./application/modules/dir_name/models/mdl_filename.php
  * ------------------------------------------------------------------------
  */

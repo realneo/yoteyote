@@ -8,12 +8,12 @@
  * Author: Raymond L King Sr. and Stephen Willis.
  * ------------------------------------------------------------------------
  *
- * Class	Custompage
+ * Class	Page	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	page
+ * @category	category	page
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -116,7 +116,7 @@ class Page extends Public_Controller
 
 /**
  * ------------------------------------------------------------------------
- * End of file custompage.php
- * Location: ./application/modules/custompage/controllers/custompage.php
+ * Filename: page.php
+ * Location: ./application/modules/page/controllers/page.php
  * ------------------------------------------------------------------------
  */

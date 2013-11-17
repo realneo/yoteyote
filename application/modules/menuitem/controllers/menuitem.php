@@ -10,8 +10,8 @@
  * Class	Menuitem	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Menu
- * @subpackage	Subpackage	menuitem
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	menu
  * @category	category	menuitem
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
@@ -51,11 +51,10 @@ class Menuitem extends Auth_Controller
 		log_message('debug', "Class Name Controller Initialized");
 	}
 
-
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file menuitem.php
+ * Filename: menuitem.php
  * Location: ./application/modules/menuitem/controllers/menuitem.php
  * ------------------------------------------------------------------------
  */

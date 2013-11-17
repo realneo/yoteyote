@@ -5,15 +5,15 @@
  * Created by phpDesigner 8.1.2
  * Date  : 8/17/2013
  * Time  : 7:30:14 AM
- * Author: Raymond L King Sr. and Stephen Willis.
+ * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Template	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	template
+ * @category	category	template
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -240,11 +240,11 @@ class Template extends Public_Controller
 		echo "It spent " . rutime($ru, $rustart, "stime") . " ms in system calls\n";
 	}
 
-}
+}	// End of Class.
 
 /**
  * ------------------------------------------------------------------------
- * End of file template.php
+ * Filename: template.php
  * Location: ./application/modules/template/controllers/template.php
  * ------------------------------------------------------------------------
  */

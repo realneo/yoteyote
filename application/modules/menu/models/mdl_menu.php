@@ -10,9 +10,9 @@
  * Class	Mdl_menu	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	menu
+ * @category	category	menu
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -48,11 +48,10 @@ class Mdl_menu extends MY_Model
 		$this->set_table('menu');
 	}
 
-
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file mdl_menu.php
+ * Filename: mdl_menu.php
  * Location: ./application/modules/menu/models/mdl_menu.php
  * ------------------------------------------------------------------------
  */

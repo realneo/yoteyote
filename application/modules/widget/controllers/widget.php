@@ -7,12 +7,12 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Widget	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	widget
+ * @category	category	widget
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -51,12 +51,10 @@ class Widget extends Public_Controller
 		log_message('debug', "Class Name Initialized");
 	}
 
-
-
-
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
+/**
+ * ------------------------------------------------------------------------
  * Filename: widget.php
  * Location: ./application/modules/widget/widget.php
  * ------------------------------------------------------------------------

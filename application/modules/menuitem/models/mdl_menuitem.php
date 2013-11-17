@@ -7,11 +7,11 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Mdl_menuitem	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Menu
- * @subpackage	Subpackage	menuitem
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	menu
  * @category	category	menuitem
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
@@ -45,14 +45,13 @@ class Mdl_menuitem extends MY_Model
 	{
 		parent::__construct();
 
-		$this->set_table('');
+		$this->set_table('menu_items');
 	}
-
 
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file mdl_filename.php
- * Location: ./application/modules/dir_name/models/mdl_filename.php
+ * Filename: mdl_menuitem.php
+ * Location: ./application/modules/menuitem/models/mdl_menuitem.php
  * ------------------------------------------------------------------------
  */

@@ -10,9 +10,9 @@
  * Class	Menu	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	menu
+ * @category	category	menu
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -51,11 +51,10 @@ class Menu extends Auth_Controller
 		log_message('debug', "Class Menu Controller Initialized");
 	}
 
-
 }	// End of Class.
 
 /* ------------------------------------------------------------------------
- * End of file menu.php
+ * Filename: menu.php
  * Location: ./application/modules/menu/controllers/menu.php
  * ------------------------------------------------------------------------
  */

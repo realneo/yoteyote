@@ -10,7 +10,7 @@
  * Class	Profile	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Auth
+ * @package		Package		Yoteyote
  * @subpackage	Subpackage	profile
  * @category	category	profile
  * @author		Raymond L King Sr.
@@ -51,11 +51,11 @@ class Profile extends Auth_Controller
 		log_message('debug', "Class Name Controller Initialized");
 	}
 
-
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file profile.php
+/**
+ * *------------------------------------------------------------------------
+ * Filename: profile.php
  * Location: ./application/modules/profile/controllers/profile.php
  * ------------------------------------------------------------------------
  */

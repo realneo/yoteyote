@@ -7,12 +7,12 @@
  * Author: Raymond L King Sr. and Stephen Willis.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Mdl_users	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	auth
+ * @category	category	auth
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -109,8 +109,9 @@ class Mdl_users extends MY_Model
 
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file Mdl_users.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: Mdl_users.php
  * Location: ./application/modules/users/models/mdl_users.php
  * ------------------------------------------------------------------------
  */

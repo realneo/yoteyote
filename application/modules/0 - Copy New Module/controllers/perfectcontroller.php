@@ -7,10 +7,10 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Name
+ * Class	Name	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
+ * @package		Package		Yoteyote
  * @subpackage	Subpackage	name
  * @category	category	name
  * @author		Raymond L King Sr.
@@ -54,8 +54,9 @@ class Perfectcontroller extends Auth_Controller
 
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file filename.php
- * Location: ./application/modules/module_dir_name/controllers/filename.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: filename.php
+ * Location: ./application/modules/module_dir/controllers/filename.php
  * ------------------------------------------------------------------------
  */

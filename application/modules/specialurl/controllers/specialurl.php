@@ -10,9 +10,9 @@
  * Class	Specialurl	Controller
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	specialurl
+ * @category	category	specialurl
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -51,11 +51,11 @@ class Specialurl extends Auth_Controller
 		log_message('debug', "Class Specialurl Controller Initialized");
 	}
 
-
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file specialurl.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: specialurl.php
  * Location: ./application/modules/specialurl/controllers/specialurl.php
  * ------------------------------------------------------------------------
  */

@@ -10,9 +10,9 @@
  * Class	Mdl_specialurl	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Yoteyote
+ * @subpackage	Subpackage	specialurl
+ * @category	category	specialurl
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -48,11 +48,11 @@ class Mdl_perfectmodel extends MY_Model
 		$this->set_table('special_urls');
 	}
 
-
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file mdl_specialurl.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: mdl_specialurl.php
  * Location: ./application/modules/specialurl/models/mdl_specialurl.php
  * ------------------------------------------------------------------------
  */

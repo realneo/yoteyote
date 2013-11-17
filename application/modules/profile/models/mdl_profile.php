@@ -7,10 +7,10 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Profile	Model
+ * Class	Mdl_Profile	Model
  *
  * ------------------------------------------------------------------------
- * @package		Package		Auth
+ * @package		Package		Yoteyote
  * @subpackage	Subpackage	profile
  * @category	category	profile
  * @author		Raymond L King Sr.
@@ -48,11 +48,11 @@ class Mdl_profile extends MY_Model
 		$this->set_table('user_profiles');
 	}
 
-
 }	// End of Class.
 
-/* ------------------------------------------------------------------------
- * End of file mdl_profile.php
+/**
+ * ------------------------------------------------------------------------
+ * Filename: mdl_profile.php
  * Location: ./application/modules/profile/models/mdl_profile.php
  * ------------------------------------------------------------------------
  */
