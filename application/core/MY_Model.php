@@ -112,8 +112,11 @@ class MY_Model extends CI_Model
 	 */
 	public function get($order_by)
 	{
+		$data = array();
+
 		$this->db->order_by($order_by);
 		return $this->db->get($this->table);
+
 	}
 
 	// -----------------------------------------------------------------------
@@ -159,6 +162,29 @@ class MY_Model extends CI_Model
 	public function get_where($where)
 	{
 		$this->db->where($where);
+		return $this->db->get($this->table);
+	}
+
+	// -----------------------------------------------------------------------
+
+	/**
+	 * get_by_category()
+	 *
+	 * Gets the database record with a where clause by category.
+	 *
+	 * $where = array('id' => $id);
+	 * or
+	 * get_where(array('id' => $id));
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function get_by_category($cat_id)
+	{
+		$this->db->where('category_id', $cat_id);
+		$this->db->where('status', 'published');
+
 		return $this->db->get($this->table);
 	}
 

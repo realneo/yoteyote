@@ -10,9 +10,9 @@
  * Class	Auth
  *
  * ------------------------------------------------------------------------
- * @package		Package		Name
- * @subpackage	Subpackage	name
- * @category	category	name
+ * @package		Package		Auth
+ * @subpackage	Subpackage	auth
+ * @category	category	auth
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2013, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -119,7 +119,7 @@ class Auth extends Auth_Controller
 		}
 
 		// See if the user has the correct group level
-		else if ($this->logged_in() == TRUE)
+		elseif ($this->logged_in() == TRUE)
 		{
 			$id	= $this->session->userdata('user_id');
 
@@ -331,6 +331,24 @@ class Auth extends Auth_Controller
 			);
 
 			$insert_id = $this->user->_insert($data);
+
+			/**
+			 * -----------------------------------------------------
+			 * Create the Users Profile Record...
+			 * -----------------------------------------------------
+			 */
+
+			// Load the users model.
+			$this->load->model('profile/mdl_profile', 'profile');
+
+			// Load the profile module.
+		    $this->load->module('profile');
+
+			$data = array(
+				'profile_user_id' => $insert_id,
+			);
+
+			$insert_id = $this->profile->_insert($data);
 
 			$data2['msg'] = "The user has now been created.";
 

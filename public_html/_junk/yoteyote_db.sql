@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 
 --
--- Database: `freshcms`
+-- Database: `yoteyote_db`
 --
 
 -- --------------------------------------------------------
@@ -12,11 +12,11 @@
 
 DROP TABLE IF EXISTS `ci_sessions`;
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
-  `session_id`    varchar(40)           NOT NULL  DEFAULT '0',
-  `ip_address`    varchar(45)           NOT NULL  DEFAULT '0',
-  `user_agent`    varchar(120)          NOT NULL,
-  `last_activity` int(10)      unsigned NOT NULL  DEFAULT 0,
-  `user_data`     text                  NOT NULL,
+  `session_id`    varchar(40)           NOT NULL  DEFAULT '0',            -- The session id
+  `ip_address`    varchar(45)           NOT NULL  DEFAULT '0',            -- The connection IP - IP4 or IP6
+  `user_agent`    varchar(120)          NOT NULL,                         -- The browser user agent
+  `last_activity` int(10)      unsigned NOT NULL  DEFAULT 0,              -- The session last activity
+  `user_data`     text                  NOT NULL,                         -- The session user data serialized array
   PRIMARY KEY (`session_id`),
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -29,20 +29,20 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id`               bigint(20)   unsigned NOT NULL  AUTO_INCREMENT,
-  `user_name`        varchar(32)           NOT NULL,
-  `user_email`       varchar(255)          NOT NULL,
-  `user_password`    varchar(128)          NOT NULL,
-  `user_group_id`    int(11)      unsigned NOT NULL  DEFAULT '100',
-  `user_token`       varchar(128)          NOT NULL,
-  `user_identifier`  varchar(128)          NOT NULL,
-  `user_recover`     varchar(128)          NOT NULL,
-  `user_remember_me` tinyint(1)   unsigned NOT NULL  DEFAULT 0,
-  `user_confirmed`   tinyint(1)   unsigned NOT NULL  DEFAULT 0,
-  `user_created_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `user_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `user_status`      enum('active','inactive','banned','deleted') NOT NULL DEFAULT 'active',
-  PRIMARY KEY  (`id`)
+  `id`               bigint(20)   unsigned NOT NULL  AUTO_INCREMENT,      -- The user record id
+  `user_name`        varchar(32)           NOT NULL,                      -- The user name
+  `user_email`       varchar(255)          NOT NULL,                      -- The user email address
+  `user_password`    varchar(128)          NOT NULL,                      -- The user password
+  `user_token`       varchar(128)          NOT NULL,                      -- The user token for hashing
+  `user_identifier`  varchar(128)          NOT NULL,                      -- The user identifier for hashing
+  `user_recover`     varchar(128)          NOT NULL,                      -- The user password recover hash
+  `user_remember_me` tinyint(1)   unsigned NOT NULL  DEFAULT 0,           -- The user remember me
+  `user_confirmed`   tinyint(1)   unsigned NOT NULL  DEFAULT 0,           -- The user email confirmed
+  `user_created_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The user created at date time
+  `user_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The user updated at date time
+  `user_status`      enum('active','inactive','banned','deleted') NOT NULL DEFAULT 'active',  -- The user status
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -53,24 +53,26 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 DROP TABLE IF EXISTS `user_profiles`;
 CREATE TABLE IF NOT EXISTS `user_profiles` (
-  `id`                      int(11)      unsigned NOT NULL  AUTO_INCREMENT,
-  `profile_user_id`         int(11)      unsigned NOT NULL,
-  `profile_date`            datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `profile_first_name`      varchar(45)           NOT NULL,
-  `profile_last_name`       varchar(45)           NOT NULL,
-  `profile_dob`             date                            DEFAULT '0000-00-00',
-  `profile_gender`          varchar(6)                      DEFAULT NULL,
-  `profile_bio`             text,
-  `profile_mobile`          varchar(15)           NOT NULL,
-  `profile_bank`            int(11)      unsigned NOT NULL  DEFAULT '0',
-  `profile_pic`             varchar(255)                    DEFAULT NULL,
-  `profile_country`         varchar(255)                    DEFAULT NULL,
-  `profile_city`            varchar(100)                    DEFAULT NULL,
-  `profile_street`          varchar(100)                    DEFAULT NULL,
-  `profile_building_name`   varchar(255)                    DEFAULT NULL,
-  `profile_building_number` varchar(255)                    DEFAULT NULL,
-  `profile_nickname`        varchar(255)                    DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id`                      int(11)      unsigned NOT NULL  AUTO_INCREMENT,  -- The profile record id
+  `profile_user_id`         int(11)      unsigned NOT NULL,                  -- The profile users id
+  `profile_first_name`      varchar(45)                     DEFAULT NULL,    -- The profile users first name
+  `profile_last_name`       varchar(45)                     DEFAULT NULL,    -- The profile users last name
+  `profile_dob`             date                            DEFAULT '0000-00-00',  -- The profile users date of birth
+  `profile_gender`          varchar(6)                      DEFAULT NULL,    -- The profile users gender
+  `profile_bio`             text,                                            -- The profile users bio
+  `profile_mobile`          varchar(15)                     DEFAULT NULL,    -- The profile users mobile phone number
+  `profile_bank`            int(11)      unsigned NOT NULL  DEFAULT '0',     -- The profile users bank
+  `profile_pic`             varchar(255)                    DEFAULT NULL,    -- The profile users pic
+  `profile_country`         varchar(255)                    DEFAULT NULL,    -- The profile users country
+  `profile_city`            varchar(100)                    DEFAULT NULL,    -- The profile users city
+  `profile_street`          varchar(100)                    DEFAULT NULL,    -- The profile users street address
+  `profile_building_name`   varchar(255)                    DEFAULT NULL,    -- The profile users building name
+  `profile_building_number` varchar(255)                    DEFAULT NULL,    -- The profile users building number
+  `profile_nickname`        varchar(255)                    DEFAULT NULL,    -- The profile users nick name
+  `profile_created_at`      datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The profile created at date time
+  `profile_updated_at`      datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The profile updated at date time
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `profile_nickname` (`profile_nickname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -85,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `user_profiles` (
 
 DROP TABLE IF EXISTS `user_groups`;
 CREATE TABLE IF NOT EXISTS `user_groups` (
-  `id`                int(11)      unsigned NOT NULL,
-  `group_title`       varchar(32)           NOT NULL  DEFAULT '',
-  `group_description` varchar(100)          NOT NULL  DEFAULT '',
+  `id`                int(11)      unsigned NOT NULL,                     -- The user groups record id
+  `group_title`       varchar(32)           NOT NULL  DEFAULT '',         -- The user groups title
+  `group_description` varchar(100)          NOT NULL  DEFAULT '',         -- The user groups description
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -113,18 +115,18 @@ INSERT INTO `user_groups` (`id`, `group_title`, `group_description`) VALUES
 
 DROP TABLE IF EXISTS `pages`;
 CREATE TABLE IF NOT EXISTS `pages` (
-  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,
-  `page_title`       varchar(128)          NOT NULL,
-  `page_slug`        varchar(128)          NOT NULL,
-  `page_keywords`    text,
-  `page_description` text,
-  `page_content`     longtext,
-  `page_author`      bigint(20)   unsigned NOT NULL  DEFAULT '1',
-  `page_location`    tinyint(1)   unsigned NOT NULL  DEFAULT '1',
-  `page_type`        tinyint(1)   unsigned NOT NULL  DEFAULT '1',
-  `page_created_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `page_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `page_status`      enum('published','draft') NOT NULL  DEFAULT 'published',
+  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,      -- The page record id
+  `page_title`       varchar(128)          NOT NULL,                      -- The page title      - 'Home'
+  `page_slug`        varchar(128)          NOT NULL,                      -- The page page slug  - 'home'
+  `page_keywords`    text,                                                -- The page meta keywords
+  `page_description` text,                                                -- The page meta description
+  `page_content`     longtext,                                            -- The page content text
+  `page_author`      bigint(20)   unsigned NOT NULL  DEFAULT '1',         -- The page content author
+  `page_location`    tinyint(1)   unsigned NOT NULL  DEFAULT '1',         -- The page location
+  `page_type`        tinyint(1)   unsigned NOT NULL  DEFAULT '1',         -- The page type
+  `page_created_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The page created at date time
+  `page_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The page updated at date time
+  `page_status`      enum('published','draft') NOT NULL  DEFAULT 'published',        -- The page status
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -147,14 +149,14 @@ INSERT INTO `pages` (`id`, `page_title`, `page_slug`, `page_keywords`, `page_des
 
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
-  `id`                 bigint(20)   unsigned NOT NULL  AUTO_INCREMENT,
-  `comment_name`       varchar(255)          NOT NULL,
-  `comment_email`      varchar(255)          NOT NULL,
-  `comment_content`    varchar(255)          NOT NULL,
-  `comment_post_id`    int(11)      unsigned NOT NULL,
-  `comment_created_at` datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `comment_updated_at` datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `comment_status`     enum('active','inactive') NOT NULL DEFAULT 'active',
+  `id`                 int(11)      unsigned NOT NULL  AUTO_INCREMENT,    -- The comment record id
+  `comment_user_name`  varchar(255)          NOT NULL,                    -- The comment users name
+  `comment_email`      varchar(255)          NOT NULL,                    -- The comment users email address
+  `comment_content`    varchar(255)          NOT NULL,                    -- The comment content text
+  `comment_post_id`    int(11)      unsigned NOT NULL,                    -- The comment post id
+  `comment_created_at` datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- the comment created at date time
+  `comment_updated_at` datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The comment updated at date time
+  `comment_status`     enum('active','inactive') NOT NULL DEFAULT 'active',            -- The comment status
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
@@ -170,15 +172,15 @@ CREATE TABLE `comments` (
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
-  `id`                  int(11)          unsigned NOT NULL  AUTO_INCREMENT,
-  `category_name`       varchar(255)              NOT NULL  DEFAULT '',
-  `category_short_desc` varchar(255)              NOT NULL  DEFAULT '',
-  `category_long_desc`  text,
-  `category_sort_order` int(3)                    NOT NULL  DEFAULT '0',
-  `category_parent_id`  int(11)          unsigned NOT NULL  DEFAULT '0',
-  `category_created_at` datetime                  NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `category_updated_at` datetime                  NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `category_status`     enum('active','inactive') NOT NULL  DEFAULT 'active',
+  `id`                  int(11)          unsigned NOT NULL  AUTO_INCREMENT,  -- The category record id
+  `category_name`       varchar(255)              NOT NULL  DEFAULT '',      -- The category name
+  `category_short_desc` varchar(255)              NOT NULL  DEFAULT '',      -- The category short description
+  `category_long_desc`  text,                                                -- The category long description
+  `category_sort_order` int(3)                    NOT NULL  DEFAULT '0',     -- The category sort order
+  `category_parent_id`  int(11)          unsigned NOT NULL  DEFAULT '0',     -- The category parent id
+  `category_created_at` datetime                  NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The category created at date time
+  `category_updated_at` datetime                  NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- the category updated at date time
+  `category_status`     enum('active','inactive') NOT NULL  DEFAULT 'active',               -- The category status
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
@@ -194,38 +196,13 @@ CREATE TABLE `categories` (
 
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE IF NOT EXISTS `settings` (
-  `id`             int(11)      unsigned NOT NULL  AUTO_INCREMENT,
-  `setting_name`   varchar(255)          NOT NULL  DEFAULT '0',
-  `setting_value`  varchar(255)          NOT NULL  DEFAULT '0',
-  `setting_type`   enum('string','int','float','double','bool') NOT NULL  DEFAULT 'string',
-  `setting_status` enum('active','inactive','deleted') NOT NULL  DEFAULT 'active',
+  `id`             int(11)      unsigned NOT NULL  AUTO_INCREMENT,        -- The setting record id
+  `setting_name`   varchar(255)          NOT NULL  DEFAULT '0',           -- The setting name
+  `setting_value`  varchar(255)          NOT NULL  DEFAULT '0',           -- The setting value
+  `setting_type`   enum('string','int','float','double','bool') NOT NULL DEFAULT 'string',  -- The setting type
+  `setting_status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',           -- The setting status
   PRIMARY KEY (`id`, `setting_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `menu_groups`
---
-
-DROP TABLE IF EXISTS `menu_groups`;
-CREATE TABLE IF NOT EXISTS `menu_groups` (
-  `id`               int(11)     unsigned NOT NULL  AUTO_INCREMENT,
-  `menu_group_title` varchar(50)          NOT NULL,
-  `menu_abbrev`      varchar(20)          NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Navigation groupings. Eg, header, sidebar, footer, etc' ;
-
---
--- Dumping data for table `menu_groups`
---
-
-INSERT INTO `menu_groups` (`id`, `menu_group_title`, `menu_abbrev`) VALUES
-(1, 'Topmenu', 'topmenu'),
-(2, 'Header', 'header'),
-(3, 'Sidebar', 'sidebar'),
-(4, 'Sidebar2', 'sidebar2'),
-(5, 'Footer', 'footer');
 
 -- --------------------------------------------------------
 
@@ -235,29 +212,57 @@ INSERT INTO `menu_groups` (`id`, `menu_group_title`, `menu_abbrev`) VALUES
 
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
-  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,
-  `menu_title`       varchar(100)          NOT NULL  DEFAULT '',
-  `menu_link_type`   varchar(20)           NOT NULL  DEFAULT 'uri',
-  `menu_page_id`     int(11)      unsigned NOT NULL  DEFAULT '0',
-  `menu_module_name` varchar(50)           NOT NULL  DEFAULT '',
-  `menu_url`         varchar(255)          NOT NULL  DEFAULT '',
-  `menu_uri`         varchar(255)          NOT NULL  DEFAULT '',
-  `menu_group_id`    int(11)      unsigned NOT NULL  DEFAULT '0',
-  `menu_position`    int(5)       unsigned NOT NULL  DEFAULT '0',
-  `menu_target`      varchar(10)                     DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `menu_group_id - normal` (`menu_group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Links for site menu' ;
+  `id`          int(11)     unsigned NOT NULL  AUTO_INCREMENT,       -- The menu record id
+  `menu_title`  varchar(50)          NOT NULL,                       -- The menu title - 'Topmenu'
+  `menu_slug`   varchar(20)          NOT NULL,                       -- The menu slug  - 'topmenu'
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Navigation main menus. Eg, header, sidebar, footer, etc' ;
 
 --
 -- Dumping data for table `menu`
 --
 
-INSERT INTO `menu` (`id`, `menu_title`, `menu_link_type`, `menu_page_id`, `menu_module_name`, `menu_url`, `menu_uri`, `menu_group_id`, `menu_position`, `menu_target`) VALUES
-(1, 'Home', 'page', 1, '', '', '', 1, 1, NULL),
-(2, 'Home', 'page', 1, '', '', '', 2, 1, '_self'),
-(4, 'About us', 'page', 3, '', '', '', 1, 2, '_self'),
-(5, 'Forums', 'module', 0, 'forums', '', '', 1, 3, '_self');
+INSERT INTO `menu` (`id`, `menu_title`, `menu_slug`) VALUES
+(1, 'Topmenu', 'topmenu'),        -- Top main navigation menu
+(2, 'Header', 'header'),          -- Any menu in a header
+(3, 'Sidebar', 'sidebar'),        -- Sidebar menu left
+(4, 'Sidebar2', 'sidebar2'),      -- Sidebar menu Right
+(5, 'Slideout', 'slideout'),      -- Slideout menu Left
+(6, 'Slideout2', 'slideout2'),    -- Slideout menu Right
+(7, 'Footer', 'footer');          -- Bottom footer menu
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_items`
+--
+
+DROP TABLE IF EXISTS `menu_items`;
+CREATE TABLE IF NOT EXISTS `menu_items` (
+  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,      -- The menuitem record id
+  `menu_title`       varchar(100)          NOT NULL  DEFAULT '',          -- The menuitem title
+  `menu_link_type`   varchar(20)           NOT NULL  DEFAULT 'uri',       -- The menuitem link type ( 'url' or 'uri' )
+  `menu_page_id`     int(11)      unsigned NOT NULL  DEFAULT '0',         -- The menuitem page id
+  `menu_module_name` varchar(50)           NOT NULL  DEFAULT '',          -- The menuitem module name
+  `menu_url`         varchar(255)          NOT NULL  DEFAULT '',          -- The menuitem url - 'http://www.your.com/controller/method'
+  `menu_uri`         varchar(255)          NOT NULL  DEFAULT '',          -- The menuitem uri - 'controller/method'
+  `menu_id`          int(11)      unsigned NOT NULL  DEFAULT '0',         -- The menuitem main menu id
+  `menu_position`    int(5)       unsigned NOT NULL  DEFAULT '0',         -- The menuitem postion
+  `menu_target`      varchar(10)                     DEFAULT NULL,        -- The menuitem target ('_self / _blank' etc;)
+  `menu_show`        int(1)       unsigned NOT NULL  DEFAULT '1',         -- The menuitem menu show
+  PRIMARY KEY (`id`),
+  KEY `menu_id` (`menu_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Links for site menu' ;
+
+--
+-- Dumping data for table `menu_items`
+--
+
+INSERT INTO `menu_items` (`id`, `menu_title`, `menu_link_type`, `menu_page_id`, `menu_module_name`, `menu_url`, `menu_uri`, `menu_id`, `menu_position`, `menu_target`, `menu_show`) VALUES
+(1, 'Home', 'page', 1, '', '', '', 1, 1, NULL, 1),
+(2, 'Home', 'page', 1, '', '', '', 2, 1, '_self', 1),
+(4, 'About us', 'page', 3, '', '', '', 1, 2, '_self', 1),
+(5, 'Forums', 'module', 0, 'forums', '', '', 1, 3, '_self', 1);
 
 
 -- --------------------------------------------------------
@@ -272,8 +277,8 @@ INSERT INTO `menu` (`id`, `menu_title`, `menu_link_type`, `menu_page_id`, `menu_
 
 DROP TABLE IF EXISTS `admin_bank`;
 CREATE TABLE IF NOT EXISTS `admin_bank` (
-  `id`         int(11)  unsigned NOT NULL  AUTO_INCREMENT,
-  `admin_bank` int(100)                    DEFAULT NULL,
+  `id`         int(11)  unsigned NOT NULL  AUTO_INCREMENT,                -- The admin bank record id
+  `admin_bank` int(100)                    DEFAULT NULL,                  -- The admin bank
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -289,9 +294,9 @@ CREATE TABLE IF NOT EXISTS `admin_bank` (
 
 DROP TABLE IF EXISTS `currency_setting`;
 CREATE TABLE IF NOT EXISTS `currency_setting` (
-  `id`             int(11)      unsigned NOT NULL  AUTO_INCREMENT,
-  `currency_title` varchar(100)                    DEFAULT NULL,
-  `currency_rate`  decimal(10,0)                   DEFAULT '0',
+  `id`             int(11)      unsigned NOT NULL  AUTO_INCREMENT,        -- The currency record id
+  `currency_title` varchar(100)                    DEFAULT NULL,          -- The currency title
+  `currency_rate`  decimal(10,0)                   DEFAULT '0',           -- The currency rate value
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -307,9 +312,9 @@ CREATE TABLE IF NOT EXISTS `currency_setting` (
 
 DROP TABLE IF EXISTS `deduction`;
 CREATE TABLE IF NOT EXISTS `deduction` (
-  `id`               int(11) unsigned NOT NULL  AUTO_INCREMENT,
-  `deduction_mobile` double                     DEFAULT '0',
-  `deduction_transc` double                     DEFAULT '0',
+  `id`               int(11) unsigned NOT NULL  AUTO_INCREMENT,           -- The deduction record id
+  `deduction_mobile` double                     DEFAULT '0',              -- The deduction mobile
+  `deduction_transc` double                     DEFAULT '0',              -- The deduction transaction
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -325,11 +330,12 @@ CREATE TABLE IF NOT EXISTS `deduction` (
 
 DROP TABLE IF EXISTS `listings`;
 CREATE TABLE IF NOT EXISTS `listings` (
-  `id`              int(11)  unsigned NOT NULL  AUTO_INCREMENT,
-  `listing_post_id` int(11)  unsigned           DEFAULT NULL,
-  `listing_user_id` int(11)  unsigned           DEFAULT NULL,
-  `listing__date`   datetime                    DEFAULT '0000-00-00 00:00:00',
-  `listing_bid`     int(11)                     DEFAULT NULL,
+  `id`                 int(11)  unsigned NOT NULL  AUTO_INCREMENT,        -- The listing record id
+  `listing_post_id`    int(11)  unsigned           DEFAULT NULL,          -- The listing post id
+  `listing_user_id`    int(11)  unsigned           DEFAULT NULL,          -- The listing user id
+  `listing_bid`        int(11)                     DEFAULT NULL,          -- The listing bid
+  `listing_created_at` datetime                    DEFAULT '0000-00-00 00:00:00',  -- The listing created at date time
+  `listing_updated_at` datetime                    DEFAULT '0000-00-00 00:00:00',  -- The listing updated at date time
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -345,11 +351,11 @@ CREATE TABLE IF NOT EXISTS `listings` (
 
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE IF NOT EXISTS `log` (
-  `id`             int(11)  unsigned NOT NULL  AUTO_INCREMENT,
-  `log_trans_date` datetime                    DEFAULT '0000-00-00 00:00:00',
-  `log_user_bank`  double                      DEFAULT '0',
-  `log_user_id`    int(11) unsigned            DEFAULT NULL,
-  `log_admin_bank` double                      DEFAULT '0',
+  `id`             int(11)  unsigned NOT NULL  AUTO_INCREMENT,            -- The log record id
+  `log_user_bank`  double                      DEFAULT '0',               -- The log user bank
+  `log_user_id`    int(11) unsigned            DEFAULT NULL,              -- The log user id
+  `log_admin_bank` double                      DEFAULT '0',               -- The log admin bank
+  `log_trans_date` datetime                    DEFAULT '0000-00-00 00:00:00',  -- The log traansaction date
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -360,19 +366,22 @@ CREATE TABLE IF NOT EXISTS `log` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ongoing`
+-- Table structure for table `on_going`
 --
 
-DROP TABLE IF EXISTS `ongoing`;
-CREATE TABLE IF NOT EXISTS `ongoing` (
-  `id`              int(11) unsigned NOT NULL  AUTO_INCREMENT,
-  `post_by_user_id` int(11) unsigned           DEFAULT NULL,
-  `won_by_user_id`  int(11) unsigned           DEFAULT NULL,
-  `on_amount`       int(11) unsigned           DEFAULT NULL,
-  `post_id`         int(11) unsigned           DEFAULT NULL,
+DROP TABLE IF EXISTS `on_going`;
+CREATE TABLE IF NOT EXISTS `on_going` (
+  `id`              int(11) unsigned NOT NULL  AUTO_INCREMENT,            -- The on going record id
+  `post_by_user_id` int(11) unsigned           DEFAULT NULL,              -- The on going post by user id
+  `won_by_user_id`  int(11) unsigned           DEFAULT NULL,              -- The on going won by user id
+  `won_amount`      int(11) unsigned           DEFAULT NULL,              -- The on going won amount
+  `post_id`         int(11) unsigned           DEFAULT NULL,              -- The on going post id
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `on_going`
+--
 
 -- --------------------------------------------------------
 
@@ -382,16 +391,18 @@ CREATE TABLE IF NOT EXISTS `ongoing` (
 
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
-  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,
-  `post_title`       varchar(255)          NOT NULL,
-  `post_description` text                  NOT NULL,
-  `post_type`        varchar(4)            NOT NULL,
-  `post_date`        datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
-  `post_amount`      int(11)      unsigned NOT NULL,
-  `post_currency`    varchar(20)           NOT NULL,
-  `post_user_id`     int(11)      unsigned NOT NULL,
-  `post_pic`         varchar(255)                    DEFAULT NULL,
-  `post_active`      enum('y','n')                   DEFAULT 'y',
+  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,      -- The post record id
+  `post_user_id`     int(11)      unsigned NOT NULL,                      -- The post user id
+  `post_title`       varchar(255)          NOT NULL,                      -- The post title - 'Home'
+  `post_slug`        varchar(255)          NOT NULL,                      -- The post slug  - 'home'
+  `post_description` text                  NOT NULL,                      -- The post description
+  `post_type`        varchar(4)            NOT NULL,                      -- The post type
+  `post_amount`      int(11)      unsigned NOT NULL,                      -- The post amount
+  `post_currency`    varchar(20)           NOT NULL,                      -- The post currency
+  `post_pic`         varchar(255)                    DEFAULT NULL,        -- The post picture
+  `post_created_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The post created at date time
+  `post_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The post updated at date time
+  `post_active`      enum('y','n')                   DEFAULT 'y',                    -- The post active status
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -407,9 +418,9 @@ CREATE TABLE IF NOT EXISTS `posts` (
 
 DROP TABLE IF EXISTS `trust`;
 CREATE TABLE IF NOT EXISTS `trust` (
-  `id`            int(11) unsigned NOT NULL  AUTO_INCREMENT,
-  `trust_user_id` int(11) unsigned           DEFAULT NULL,
-  `trust_by_id`   int(11) unsigned           DEFAULT '0',
+  `id`            int(11) unsigned NOT NULL  AUTO_INCREMENT,              -- The trust record id
+  `trust_user_id` int(11) unsigned           DEFAULT NULL,                -- The trust user id
+  `trust_by_id`   int(11) unsigned           DEFAULT '0',                 -- The trust by id
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
