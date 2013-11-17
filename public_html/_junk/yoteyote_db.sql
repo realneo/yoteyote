@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DROP TABLE IF EXISTS `user_profiles`;
 CREATE TABLE IF NOT EXISTS `user_profiles` (
   `id`                      int(11)      unsigned NOT NULL  AUTO_INCREMENT,
+  `profile_user_id`         int(11)      unsigned NOT NULL,
   `profile_date`            datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',
   `profile_first_name`      varchar(45)           NOT NULL,
   `profile_last_name`       varchar(45)           NOT NULL,
