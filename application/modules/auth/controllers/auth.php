@@ -73,6 +73,9 @@ class Auth extends Auth_Controller
 		// Load the users model.
 		$this->load->model('users/mdl_users', 'user');
 
+		// Load the users profile model.
+		$this->load->model('profiles/mdl_profiles', 'profile');
+
 		// Set the expire times.
 		$this->login_expire    = (int) $this->config->item('login_expire');
 		$this->remember_expire = (int) $this->config->item('remember_expire');
@@ -176,7 +179,7 @@ class Auth extends Auth_Controller
 			else
 			{
 				$this->load->module('template');
-				$this->template->admin_dashboard($data);
+				$this->template->admin_fluid_dashboard($data);
 			}
 		}
 
@@ -204,10 +207,21 @@ class Auth extends Auth_Controller
 			$query = $this->user->get_where(array($login_type => $user_name));
 			$row   = $query->row();
 
+			// assign the profile id with the users id
+			$profile_user_id = $row->id;
+
+			// Get the users profile information.
+			$query   = $this->profile->get_where(array('profile_user_id' => $profile_user_id));
+			$pro_row = $query->row();
+
+			// The users session data array.
 			$data = array(
 				$login_type   => $user_name,
 				'user_id'     => $row->id,
 				'user_name'   => $row->user_name,
+				'first_name'  => $pro_row->profile_first_name,
+				'last_name'   => $pro_row->profile_last_name,
+				'pic'         => $pro_row->profile_pic,
 				'user_groups' => $this->check_user_groups($row->id),
 				'logged_in'   => TRUE,
 			);
@@ -310,7 +324,7 @@ class Auth extends Auth_Controller
 		{
 			// Show the normal registration form
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
 		// Register and login the new user to the system.
@@ -338,17 +352,11 @@ class Auth extends Auth_Controller
 			 * -----------------------------------------------------
 			 */
 
-			// Load the users model.
-			$this->load->model('profile/mdl_profile', 'profile');
-
-			// Load the profile module.
-		    $this->load->module('profile');
-
 			$data = array(
 				'profile_user_id' => $insert_id,
 			);
 
-			$insert_id = $this->profile->_insert($data);
+			$result = $this->profile->_insert($data);
 
 			$data2['msg'] = "The user has now been created.";
 
@@ -368,7 +376,7 @@ class Auth extends Auth_Controller
 			}
 
 			// Web site owner group
-			else if ($user_name == 'owner')
+			elseif ($user_name == 'owner')
 			{
 				$data = array(
 					'user_id'  => $insert_id,
@@ -397,14 +405,25 @@ class Auth extends Auth_Controller
 				$query = $this->user->get_where(array('user_name' => $user_name));
 				$row   = $query->row();
 
-				// Set the users session data variables
+				// assign the profile id with the users id
+				$profile_user_id = $row->id;
+
+				// Get the users profile information.
+				$query   = $this->profile->get_where(array('profile_user_id' => $profile_user_id));
+				$pro_row = $query->row();
+
+				// The users session data array.
 				$data = array(
-					'user_name'   => $user_name,
 					'user_id'     => $row->id,
+					'user_name'   => $row->user_name,
+					'first_name'  => $pro_row->profile_first_name,
+					'last_name'   => $pro_row->profile_last_name,
+					'pic'         => $pro_row->profile_pic,
 					'user_groups' => $this->check_user_groups($row->id),
-					'logged_in'   => TRUE
+					'logged_in'   => TRUE,
 				);
 
+				// Set the users session data array.
 				$this->session->set_userdata($data);
 
 				// If remember me is TRUE then generate the users cookie.
@@ -420,7 +439,7 @@ class Auth extends Auth_Controller
 			$data['msg']       = $data2['msg'];
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
     }
 

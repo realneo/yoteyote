@@ -21,6 +21,17 @@ body {
   padding: 0 0 60px;
 }
 
+/* Wrapper for page content to push down footer */
+#fluid-wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
 /* Set the fixed height of the footer here */
 #footer {
   height: 60px;
@@ -35,12 +46,9 @@ body {
  * ----------------------------------------------
  */
 
-#wrap > .container {
-  padding: 80px 15px 0;
-}
-
 .fluid-container {
-  padding: 0 15px;
+  padding: 80px 15px 0;
+  /*padding: 0 15px;*/
 }
 
 .fluid-container:before,
@@ -53,6 +61,15 @@ body {
   clear: both;
 }
 
+#wrap > .container {
+  padding: 80px 15px 0;
+}
+
+#fluid-wrap > .fluid-container {
+  padding: 80px 15px 0;
+  /*padding: 0 15px 0;*/
+}
+
 /* Not required for template or sticky footer method. */
 
 .container .credit {
@@ -60,9 +77,52 @@ body {
   color: #999999;
 }
 
+.fluid-container .text-muted {
+  color: #999999;
+}
+
+.fluid-container .credit {
+  margin: 20px 0;
+  color: #999999;
+}
+
 #footer > .container {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#fluid-footer > .fluid-container {
+  margin:  -2px 0 0;
+  padding: 0 15px 0;
+}
+
+.header {
+  background: #ffffff url('../images/background-header.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /*height: 116px;
+  width:  auto;*/
+}
+
+.fluid-container .logo {
+  background-image: url('../images/logo.png');
+  background-repeat: no-repeat;
+  margin: 10px 0 10px 15px;
+  /*padding: 20px 20px;*/
+}
+
+.header h1 {
+  font-weight: bold;
+  color: red;
+  margin: 10px 0 0;
+}
+
+.header-left {
+  padding-left: 120px;
+}
+
+.header-right {
+
 }
 
 code {

@@ -85,6 +85,9 @@
   font-family: 'Glyphicons Filetypes Regular';
 }
 
+.glyphicon-black:before {
+  color: #000;
+}
 .glyphicon-white:before {
   color: #fff;
 }

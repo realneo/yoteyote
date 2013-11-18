@@ -170,6 +170,20 @@ class Template extends Public_Controller
 	// -----------------------------------------------------------------------
 
 	/**
+	 * admin_dashboard()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function admin_fluid_dashboard($data)
+	{
+	    $this->load->view('admin_fluid_dashboard', $data);
+	}
+
+	// -----------------------------------------------------------------------
+
+	/**
 	 * test()
 	 *
 	 * @access	public

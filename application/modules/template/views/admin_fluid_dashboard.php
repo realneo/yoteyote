@@ -17,12 +17,12 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="<?php echo css_url('bootstrap.min.css'); ?>" rel="stylesheet">
-	<link href="<?php echo css_url('bootstrap-theme.css'); ?>" rel="stylesheet">
+	<!--<link href="<?php //echo css_url('bootstrap-theme.css'); ?>" rel="stylesheet">-->
 
-	<link rel="stylesheet" href="<?php echo css_url('glyphicons.css'); ?>">
+	<!--<link rel="stylesheet" href="<?php //echo css_url('glyphicons.css'); ?>">-->
 
 	<!-- Custom styles for this template -->
-	<link href="<?php echo css_url('dashboard.css'); ?>" rel="stylesheet">
+	<link href="<?php echo css_url('app-dashboard.css'); ?>" rel="stylesheet">
 
 	<link href="<?php echo css_url('summernote.css'); ?>" rel="stylesheet">
 	<link href="<?php echo css_url('summernote-bs3.css'); ?>" rel="stylesheet">
@@ -38,11 +38,11 @@
 <body>
 
 	<!-- Wrap all page content here -->
-    <div id="wrap">
+    <div id="fluid-wrap">
 
 		<!-- Fixed Top navbar -->
 		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
+			<div class="fluid-container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 						<span class="icon-bar"></span>
@@ -50,7 +50,7 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand" href="<?php echo base_url(); ?>">Yoteyote</a>
+					<a class="navbar-brand" href="<?php echo base_url(); ?>"> Yoteyote</a>
 
 				</div>
 
@@ -116,32 +116,9 @@
 			</div> <!-- container -->
 		</div> <!-- navbar -->
 
-	    <div class="container">
+	    <div class="fluid-container">
 
 		  	<div class="row">
-
-				<!-- The Left Sidebar Section -->
-<!--				<div class="col-lg-3">
-					<div class="panel panel-default">
-						<div class="panel-heading">	Panel heading without title</div>
-						<div class="panel-body">
-							<div id="sidebar-left" role="navigation">
-								<div class="sidebar-nav">
-									<ul class="nav">
-										<li>Sidebar</li>
-										<li class="active"><a href="#">Link</a></li>
-										<li><a href="#">Link</a></li>
-										<li><a href="#">Link</a></li>
-										<li>Sidebar</li>
-										<li><a href="#">Link</a></li>
-										<li><a href="#">Link</a></li>
-										<li><a href="#">Link</a></li>
-									</ul>
-								</div> <!-- sidebar nav -->
-<!--							</div> <!-- sidebar -->
-<!--						</div> <!-- panel body -->
-<!--					</div> <!-- panel -->
-<!--				</div> <!-- col-lg-3 -->
 
 				<!-- The Main Content Section -->
 				<div class="col-lg-12">
@@ -185,8 +162,8 @@
 	</div> <!-- wrap -->
 
 	<!-- The Footer Section -->
-	<div id="footer">
-		<div class="container">
+	<div id="fluid-footer">
+		<div class="fluid-container">
 			<div class="row">
 				<div class="col-lg-12">
 					<p class="text-muted credit">

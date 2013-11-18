@@ -91,7 +91,7 @@ class Admin extends Admin_Controller
 			$data['view_file']  = "dashboard";
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
 		// Display the Auth Login Form

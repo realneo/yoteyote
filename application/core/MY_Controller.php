@@ -45,6 +45,7 @@ class Base_Controller extends MX_Controller {
 		$this->output->enable_profiler(PROFILER);
 
 		$this->load->module('users');
+		$this->load->module('profiles');
 	}
 
 	// --------------------------------------------------------------------

@@ -2,23 +2,12 @@
 <div class="col-lg-6">
 	<div class="panel panel-default">
 
-	  	<div class="panel-heading">
-			<?php if (empty($user_name)) { ?>
-				<?php if ($add == TRUE)	{ ?>
-					<h3 class="panel-title">Add User</h3>
-				<?php } else { ?>
-					<h3 class="panel-title">Register</h3>
-				<?php } ?>
-			<?php } else { ?>
-				<h3 class="panel-title">Update</h3>
-			<?php } ?>
-		</div>
+	  	<div class="panel-heading"> <h3 class="panel-title">Register</h3> </div>
 
 		<form method="post" class="form-horizontal" role="form">
 			<div class="panel-body">
 				<fieldset>
 					<div class="form-group">
-						<?php if (empty($user_name)) { ?>
 						<label for="user_name" class="col-lg-4 control-label">User name:</label>
 						<div class="col-lg-8">
 						  <!--<div class="input-group">
@@ -43,13 +32,9 @@
 					</div>
 
 					<div class="form-group">
-						<?php } ?>
 						<label for="user_email" class="col-lg-4 control-label">Email:</label>
 						<div class="col-lg-8">
-						<?php if (empty($user_name)){ ?>
-							<input type="text" class="form-control" id="user_email" name="user_email" placeholder="Email" value="<?php echo set_value('user_email'); ?>"><?php echo form_error('user_email'); ?>
-						<?php }else{ ?>
-							<input type="text" class="form-control" id="user_email" name="user_email" placeholder="Email" value="<?php echo set_value('user_email', $user_email); ?>"><?php echo form_error('user_email'); ?>
+								<input type="text" class="form-control" id="user_email" name="user_email" placeholder="Email" value="<?php echo set_value('user_email'); ?>"><?php echo form_error('user_email'); ?>
 						</div>
 					</div>
 
@@ -57,21 +42,9 @@
 
 					<div class="form-group">
 						<div class="col-lg-offset-2 col-lg-10">
-							<?php } if (empty($user_name)) { ?><br>
-								<?php if ($add == TRUE)	{ ?>
-									<button type="submit" class="btn btn-primary" name="register" value="Add">
-										<span class="glyphicon glyphicon-plus"></span> Add User
-							  		</button>
-								<?php } else { ?>
-									<button type="submit" class="btn btn-primary" name="register" value="Register">
-										<span class="glyphicon glyphicon-list"></span> Register
-							  		</button>
-								<?php } ?>
-							<?php } else { ?><br>
-								<button type="submit" class="btn btn-primary" name="register" value="Update">
-									<span class="glyphicon glyphicon-pencil"></span> Update User
-						  		</button>
-							<?php } ?>
+							<button type="submit" class="btn btn-primary" name="register" value="Register">
+								<span class="glyphicon glyphicon-list"></span> Register
+					  		</button>
 						</div>
 					</div>
 				</fieldset>

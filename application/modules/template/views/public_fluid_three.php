@@ -17,9 +17,9 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="<?php echo css_url('bootstrap.min.css'); ?>" rel="stylesheet">
-	<!--<link href="<?php //echo css_url('bootstrap-theme.css'); ?>" rel="stylesheet">-->
+	<link href="<?php echo css_url('bootstrap-theme.css'); ?>" rel="stylesheet">
 
-	<!--<link rel="stylesheet" href="<?php //echo css_url('glyphicons.css'); ?>">-->
+	<link rel="stylesheet" href="<?php echo css_url('glyphicons.css'); ?>">
 
 	<!-- Custom Application styles for this template -->
 	<link href="<?php echo css_url('application.css'); ?>" rel="stylesheet">
@@ -46,7 +46,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo base_url(); ?>">Nikita CMS</a>
+					<a class="navbar-brand" href="<?php echo base_url(); ?>"> Yoteyote</a>
 				</div>
 
 				<!-- Left top navbar -->

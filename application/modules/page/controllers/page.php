@@ -58,17 +58,17 @@ class Page extends Public_Controller
 		$data = array();
 
 		// Grab the URI segment.
-		$page_url = $this->uri->segment(2);
+		$page_slug = $this->uri->segment(2);
 
-		if ($page_url === FALSE)
+		if ($page_slug === FALSE)
 		{
-			$page_url = 'home';
+			$page_slug = 'home';
 		}
 
         // Load the page model.
         $this->load->model('pages/mdl_pages', 'pages');
 
-        $page_data = $this->pages->get_where(array('page_url' => $page_url));
+        $page_data = $this->pages->get_where(array('page_slug' => $page_slug));
 
 		if ($page_data === FALSE)
 		{
@@ -81,8 +81,8 @@ class Page extends Public_Controller
 		{
             // page_title - page_headline - page_url - page_keywords - page_description - page_content
            	$data['page_title']       = $row->page_title;
+           	$data['page_slug']        = $row->page_slug;
        	    $data['page_headline']    = $row->page_headline;
-       	    $data['page_url']         = $row->page_url;
             $data['page_keywords']    = $row->page_keywords;
    	        $data['page_description'] = $row->page_description;
            	$data['page_content']     = $row->page_content;

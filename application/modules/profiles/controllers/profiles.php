@@ -7,7 +7,7 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Profile	Controller
+ * Class	Profiles	Controller
  *
  * ------------------------------------------------------------------------
  * @package		Package		Yoteyote
@@ -21,7 +21,7 @@
  * ------------------------------------------------------------------------
  */
 
-class Profile extends Auth_Controller
+class Profiles extends Admin_Controller
 {
 	/**
 	 * -----------------------------------------------------------------------
@@ -46,10 +46,24 @@ class Profile extends Auth_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('mdl_profile', 'profile');
+		$this->load->model('mdl_profiles', 'profiles');
 
 		log_message('debug', "Class Name Controller Initialized");
 	}
+
+	// -----------------------------------------------------------------------
+
+	/**
+	 * index()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function index()
+    {
+
+    }
 
 }	// End of Class.
 

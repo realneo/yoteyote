@@ -29,17 +29,19 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id`               bigint(20)   unsigned NOT NULL  AUTO_INCREMENT,      -- The user record id
-  `user_name`        varchar(32)           NOT NULL,                      -- The user name
-  `user_email`       varchar(255)          NOT NULL,                      -- The user email address
-  `user_password`    varchar(128)          NOT NULL,                      -- The user password
-  `user_token`       varchar(128)          NOT NULL,                      -- The user token for hashing
-  `user_identifier`  varchar(128)          NOT NULL,                      -- The user identifier for hashing
-  `user_recover`     varchar(128)          NOT NULL,                      -- The user password recover hash
-  `user_remember_me` tinyint(1)   unsigned NOT NULL  DEFAULT 0,           -- The user remember me
-  `user_confirmed`   tinyint(1)   unsigned NOT NULL  DEFAULT 0,           -- The user email confirmed
-  `user_created_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The user created at date time
-  `user_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The user updated at date time
+  `id`               int(11)       unsigned NOT NULL  AUTO_INCREMENT,      -- The user record id
+  `user_name`        varchar(32)            NOT NULL,                      -- The user name
+  `user_email`       varchar(255)           NOT NULL,                      -- The user email address
+  `user_password`    varchar(128)           NOT NULL,                      -- The user password
+  `user_ip_address`  varbinary(16)          NOT NULL,                      -- The user IP address
+  `user_token`       varchar(128)           NOT NULL,                      -- The user token for hashing
+  `user_identifier`  varchar(128)           NOT NULL,                      -- The user identifier for hashing
+  `user_recover`     varchar(128)           NOT NULL,                      -- The user password recover hash
+  `user_remember_me` tinyint(1)    unsigned NOT NULL  DEFAULT 0,           -- The user remember me
+  `user_confirmed`   tinyint(1)    unsigned NOT NULL  DEFAULT 0,           -- The user email confirmed
+  `user_last_login`  datetime               NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The user last logged in date time
+  `user_created_at`  datetime               NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The user created at date time
+  `user_updated_at`  datetime               NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The user updated at date time
   `user_status`      enum('active','inactive','banned','deleted') NOT NULL DEFAULT 'active',  -- The user status
   PRIMARY KEY  (`id`),
   UNIQUE KEY `user_name` (`user_name`)
@@ -82,30 +84,60 @@ CREATE TABLE IF NOT EXISTS `user_profiles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_groups`
+-- Table structure for table `groups`
 --
 
-DROP TABLE IF EXISTS `user_groups`;
-CREATE TABLE IF NOT EXISTS `user_groups` (
-  `id`                int(11)      unsigned NOT NULL,                     -- The user groups record id
-  `group_title`       varchar(32)           NOT NULL  DEFAULT '',         -- The user groups title
-  `group_description` varchar(100)          NOT NULL  DEFAULT '',         -- The user groups description
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id`                int(11)      unsigned NOT NULL  AUTO_INCREMENT,
+  `group_name`        varchar(20)           NOT NULL,
+  `group_description` varchar(100)          NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `group_name`, `group_description`) VALUES
+(1, 'admin', 'Administrator'),
+(2, 'owner', 'Site Owner'),
+(3, 'moderator', 'Site Moderator'),
+(4, 'editor', 'Site Editor'),
+(5, 'members', 'Site Member'),
+(6, 'user', 'General User');
 
 -- --------------------------------------------------------
 
 --
--- Dumping data for Table `user_groups`
+-- Table structure for table `users_groups`
 --
 
-INSERT INTO `user_groups` (`id`, `group_title`, `group_description`) VALUES
-('1', 'owner', 'Site Owner'),
-('2', 'admin', 'Main Admin'),
-('25', 'moderator', 'Site Moderator'),
-('50', 'editor', 'Site Editors'),
-('100', 'user', 'General User'),
-('900', 'guest', 'Stie Guest');
+DROP TABLE IF EXISTS `users_groups`;
+CREATE TABLE IF NOT EXISTS `users_groups` (
+  `id`       int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id`  int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- RELATIONS FOR TABLE `users_groups`:
+--   `group_id`
+--       `groups` -> `id`
+--   `user_id`
+--       `users` -> `id`
+--
+
+--
+-- Dumping data for table `users_groups`
+--
+
+INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 6),
+(4, 3, 6);
 
 -- --------------------------------------------------------
 
@@ -118,12 +150,13 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,      -- The page record id
   `page_title`       varchar(128)          NOT NULL,                      -- The page title      - 'Home'
   `page_slug`        varchar(128)          NOT NULL,                      -- The page page slug  - 'home'
+  `page_headline`    varchar(255)          NOT NULL,                      -- The page headline
   `page_keywords`    text,                                                -- The page meta keywords
   `page_description` text,                                                -- The page meta description
   `page_content`     longtext,                                            -- The page content text
-  `page_author`      bigint(20)   unsigned NOT NULL  DEFAULT '1',         -- The page content author
-  `page_location`    tinyint(1)   unsigned NOT NULL  DEFAULT '1',         -- The page location
-  `page_type`        tinyint(1)   unsigned NOT NULL  DEFAULT '1',         -- The page type
+  `page_author`      int(11)      unsigned NOT NULL  DEFAULT 1,         -- The page content author
+  `page_location`    tinyint(1)   unsigned NOT NULL  DEFAULT 1,         -- The page location
+  `page_type`        tinyint(1)   unsigned NOT NULL  DEFAULT 1,         -- The page type
   `page_created_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The page created at date time
   `page_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The page updated at date time
   `page_status`      enum('published','draft') NOT NULL  DEFAULT 'published',        -- The page status
@@ -136,10 +169,10 @@ CREATE TABLE IF NOT EXISTS `pages` (
 -- Dumping data for Table `pages`
 --
 
-INSERT INTO `pages` (`id`, `page_title`, `page_slug`, `page_keywords`, `page_description`, `page_created_at`, `page_updated_at`, `page_status`, `page_content`) VALUES
-('1', 'Home', 'home', 'meta keywords', 'meta description', '', '', 'published', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed libero consectetur arcu suscipit convallis. Sed accumsan dictum risus, sollicitudin eleifend velit mollis eget. Curabitur varius orci sagittis sapien elementum porta. Pellentesque interdum nulla quis purus luctus nec auctor sem venenatis. Vivamus ultrices odio sit amet metus faucibus suscipit. Morbi sed enim a sapien facilisis scelerisque. Duis facilisis leo quis sapien laoreet eget mollis ipsum condimentum. Etiam placerat accumsan leo, vel faucibus nunc ultrices vel. Aenean tristique mi vitae orci consequat id fermentum tortor accumsan. Donec adipiscing turpis sem. Mauris rhoncus tellus ac elit consequat consectetur. Maecenas elementum volutpat ligula at malesuada.'),
-('2', 'About', 'about', 'meta keywords', 'meta description', '', '', 'published', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed libero consectetur arcu suscipit convallis. Sed accumsan dictum risus, sollicitudin eleifend velit mollis eget. Curabitur varius orci sagittis sapien elementum porta. Pellentesque interdum nulla quis purus luctus nec auctor sem venenatis. Vivamus ultrices odio sit amet metus faucibus suscipit. Morbi sed enim a sapien facilisis scelerisque. Duis facilisis leo quis sapien laoreet eget mollis ipsum condimentum. Etiam placerat accumsan leo, vel faucibus nunc ultrices vel. Aenean tristique mi vitae orci consequat id fermentum tortor accumsan. Donec adipiscing turpis sem. Mauris rhoncus tellus ac elit consequat consectetur. Maecenas elementum volutpat ligula at malesuada.'),
-('3', 'Contact', 'contact', 'meta keywords', 'meta description', '', '', 'published', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed libero consectetur arcu suscipit convallis. Sed accumsan dictum risus, sollicitudin eleifend velit mollis eget. Curabitur varius orci sagittis sapien elementum porta. Pellentesque interdum nulla quis purus luctus nec auctor sem venenatis. Vivamus ultrices odio sit amet metus faucibus suscipit. Morbi sed enim a sapien facilisis scelerisque. Duis facilisis leo quis sapien laoreet eget mollis ipsum condimentum. Etiam placerat accumsan leo, vel faucibus nunc ultrices vel. Aenean tristique mi vitae orci consequat id fermentum tortor accumsan. Donec adipiscing turpis sem. Mauris rhoncus tellus ac elit consequat consectetur. Maecenas elementum volutpat ligula at malesuada.');
+INSERT INTO `pages` (`id`, `page_title`, `page_slug`, `page_headline`, `page_keywords`, `page_description`, `page_content`, `page_author`, `page_location`, `page_type`, `page_created_at`, `page_updated_at`, `page_status`) VALUES
+('1', 'Home', 'home', '', 'meta keywords', 'meta description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed libero consectetur arcu suscipit convallis. Sed accumsan dictum risus, sollicitudin eleifend velit mollis eget. Curabitur varius orci sagittis sapien elementum porta. Pellentesque interdum nulla quis purus luctus nec auctor sem venenatis. Vivamus ultrices odio sit amet metus faucibus suscipit. Morbi sed enim a sapien facilisis scelerisque. Duis facilisis leo quis sapien laoreet eget mollis ipsum condimentum. Etiam placerat accumsan leo, vel faucibus nunc ultrices vel. Aenean tristique mi vitae orci consequat id fermentum tortor accumsan. Donec adipiscing turpis sem. Mauris rhoncus tellus ac elit consequat consectetur. Maecenas elementum volutpat ligula at malesuada.', 2, 1, 1, NOW(), NOW(), 'published'),
+('2', 'About', 'about', '', 'meta keywords', 'meta description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed libero consectetur arcu suscipit convallis. Sed accumsan dictum risus, sollicitudin eleifend velit mollis eget. Curabitur varius orci sagittis sapien elementum porta. Pellentesque interdum nulla quis purus luctus nec auctor sem venenatis. Vivamus ultrices odio sit amet metus faucibus suscipit. Morbi sed enim a sapien facilisis scelerisque. Duis facilisis leo quis sapien laoreet eget mollis ipsum condimentum. Etiam placerat accumsan leo, vel faucibus nunc ultrices vel. Aenean tristique mi vitae orci consequat id fermentum tortor accumsan. Donec adipiscing turpis sem. Mauris rhoncus tellus ac elit consequat consectetur. Maecenas elementum volutpat ligula at malesuada.', 2, 1, 1, NOW(), NOW(), 'published'),
+('3', 'Contact', 'contact', '', 'meta keywords', 'meta description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed libero consectetur arcu suscipit convallis. Sed accumsan dictum risus, sollicitudin eleifend velit mollis eget. Curabitur varius orci sagittis sapien elementum porta. Pellentesque interdum nulla quis purus luctus nec auctor sem venenatis. Vivamus ultrices odio sit amet metus faucibus suscipit. Morbi sed enim a sapien facilisis scelerisque. Duis facilisis leo quis sapien laoreet eget mollis ipsum condimentum. Etiam placerat accumsan leo, vel faucibus nunc ultrices vel. Aenean tristique mi vitae orci consequat id fermentum tortor accumsan. Donec adipiscing turpis sem. Mauris rhoncus tellus ac elit consequat consectetur. Maecenas elementum volutpat ligula at malesuada.', 2, 1, 1, NOW(), NOW(), 'published');
 
 -- --------------------------------------------------------
 
@@ -427,4 +460,3 @@ CREATE TABLE IF NOT EXISTS `trust` (
 --
 -- Dumping data for table `trust`
 --
-
