@@ -65,27 +65,15 @@ class Admin extends Admin_Controller
 	 */
 	public function index()
 	{
-			//echo 'admin index';
-			//echo logged_in();
-			//exit;
-
-
 		/**
-		 * Logged_in here is a duo-method.
+		 * Logged_in.
 		 *
 		 * If the site owner or admin is logged in then it
 		 * will display the Admin Dashboard which uses the
 		 * restrict_user method.
-		 *
-		 * Otherwise it displays the User Dashboard for users.
 		 */
 		if (logged_in())
 		{
-			//echo 'admin index';
-			//exit;
-
-			//$this->auth->view('dashboard');
-
 			$data['page_title'] = '';
 			$data['module']     = 'admin';
 			$data['view_file']  = "dashboard";

@@ -9,6 +9,8 @@ $lang['max_login_attempts_error']    = "You have exceeded your maximum number of
                                        "please consult the lost password form. You will be able to login again in 15 minutes.";
 $lang['logout_perms_error']          = "You have been logged out due to a permission error, please login again.";
 
+$lang['nick_name_callback_error']    = "Sorry, that Nick name has already been used.";
+
 /**
  * ------------------------------------------------------------------------
  * End of file auth_lang.php

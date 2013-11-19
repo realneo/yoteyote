@@ -170,7 +170,7 @@ class Template extends Public_Controller
 	// -----------------------------------------------------------------------
 
 	/**
-	 * admin_dashboard()
+	 * admin_fluid_dashboard()
 	 *
 	 * @access	public
 	 * @param	string
@@ -179,6 +179,34 @@ class Template extends Public_Controller
 	public function admin_fluid_dashboard($data)
 	{
 	    $this->load->view('admin_fluid_dashboard', $data);
+	}
+
+	// -----------------------------------------------------------------------
+
+	/**
+	 * user_dashboard()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function user_dashboard($data)
+	{
+	    $this->load->view('user_dashboard', $data);
+	}
+
+	// -----------------------------------------------------------------------
+
+	/**
+	 * user_fluid_dashboard()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function user_fluid_dashboard($data)
+	{
+	    $this->load->view('user_fluid_dashboard', $data);
 	}
 
 	// -----------------------------------------------------------------------

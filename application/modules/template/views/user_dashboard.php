@@ -7,13 +7,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<meta name="description" content="<?php echo $page_description; ?>">
-	<meta name="keywords" content="<?php echo $page_keywords; ?>">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
 	<meta name="author" content="">
 
 	<link rel="shortcut icon" href="<?php echo ico_url('favicon.png'); ?>">
 
-	<title><?php echo $page_title; ?></title>
+	<title>Admin Dashboard</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="<?php echo css_url('bootstrap.min.css'); ?>" rel="stylesheet">
@@ -21,8 +21,11 @@
 
 	<link rel="stylesheet" href="<?php echo css_url('glyphicons.css'); ?>">
 
-	<!-- Custom Application styles for this template -->
-	<link href="<?php echo css_url('application.css'); ?>" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="<?php echo css_url('dashboard.css'); ?>" rel="stylesheet">
+
+	<link href="<?php echo css_url('summernote.css'); ?>" rel="stylesheet">
+	<link href="<?php echo css_url('summernote-bs3.css'); ?>" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -32,98 +35,96 @@
 
 </head>
 
-  <body>
+<body>
 
-		<!-- Wrap all page content here -->
-    <div id="fluid-wrap">
-
-		<div class="header">
-			<div class="fluid-container">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-						<div class="row logo">
-
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 header-left">
-
-								<div class=""> <h1>Yoteyote</h1> </div> <br />
-
-								<div>
-
-									Buy & Sell small jobs from one another.&nbsp;&nbsp;
-									<a href="#" class="btn btn-danger btn-sm" role="button"> Discover how</a>
-								</div>
-
-							</div>
-
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<!-- Wrap all page content here -->
+    <div id="wrap">
 
 		<!-- Fixed Top navbar -->
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="fluid-container">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo base_url(); ?>"> Yoteyote</a>
+
+					<a class="navbar-brand" href="<?php echo base_url(); ?>">Yoteyote</a>
+
 				</div>
 
-				<!-- Left top navbar -->
 				<div class="navbar-collapse collapse">
+
+					<!-- Top left navbar -->
 					<ul class="nav navbar-nav">
 						<li <?php echo set_active(1, '', 'home'); ?>>
 							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon glyphicon-home"></span> Home</a>
 						</li>
-						<li <?php echo set_active(2, 'about'); ?>>
-							<?php echo anchor('page/about', 'About'); ?>
-						</li>
-						<li <?php echo set_active(2, 'contact'); ?>>
-							<?php echo anchor('page/contact', 'Contact'); ?>
-						</li>
+						<?php if (logged_in()) { ?>
+							<li <?php echo set_active(1, 'profile'); ?>>
+								<?php echo anchor('profile', 'Profile'); ?>
+							</li>
+							<?php if (user_group('owner') OR user_group('admin')) { ?>
+								<li <?php echo set_active(1, 'users'); ?>>
+									<?php echo anchor('users/manage', 'Users'); ?>
+								</li>
+							<?php } ?>
+							<?php if (user_group('editor') OR user_group('owner') OR user_group('admin')) { ?>
+								<li <?php echo set_active(1, 'pages'); ?>>
+									<?php echo anchor('pages/manage', 'Pages'); ?>
+								</li>
+							<?php } ?>
+
+							<!-- Left top navbar dropdown menu -->
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Groups <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<?php if (user_group('editor') OR user_group('owner') OR user_group('admin')) { ?>
+										<li <?php echo set_active(1, 'group'); ?>>
+											<?php echo anchor('group/manage', 'Group'); ?>
+										</li>
+									<?php } ?>
+
+									<?php if (user_group('editor') OR user_group('owner') OR user_group('admin')) { ?>
+										<li <?php echo set_active(1, 'groups'); ?>>
+											<?php echo anchor('groups/manage', 'User Groups'); ?>
+										</li>
+									<?php } ?>
+								</ul>
+							</li>
+						<?php } ?>
 					</ul>
 
-					<!-- Right top navbar NOTE: These should never be changed! -->
+					<!-- Top right navbar Action dropdown menu NOTE: These should never be changed! -->
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<?php if (logged_in()) { ?>
-									<li> <?php echo anchor('dashboard', 'Dashboard'); ?> </li>
-									<li> <?php echo anchor('logout', 'Logout'); ?> </li>
-								<?php } else { ?>
-									<li> <?php echo anchor('login', 'Log in'); ?> </li>
+									<li><?php echo anchor('dashboard', 'Dashboard'); ?></li>
 									<li class="divider"></li>
-									<li> <?php echo anchor('register', 'Register'); ?> </li>
+									<li><?php echo anchor('logout', 'Logout'); ?></li>
+								<?php } else { ?>
+									<li><?php echo anchor('login', 'Login'); ?></li>
+									<li class="divider"></li>
+									<li><?php echo anchor('register', 'Register'); ?></li>
 								<?php } ?>
 							</ul>
 						</li>
 					</ul>
 				</div> <!-- nav-collapse -->
-
 			</div> <!-- container -->
-		</nav> <!-- navbar -->
+		</div> <!-- navbar -->
 
-
-	    <div class="fluid-container">
+	    <div class="container">
 
 		  	<div class="row">
 
 				<!-- The Left Sidebar Section -->
-				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+<!--				<div class="col-lg-3">
 					<div class="panel panel-default">
-
-						<div class="panel-heading"> Panel heading without title </div>
-
+						<div class="panel-heading">	Panel heading without title</div>
 						<div class="panel-body">
 							<div id="sidebar-left" role="navigation">
 								<div class="sidebar-nav">
@@ -138,17 +139,16 @@
 										<li><a href="#">Link</a></li>
 									</ul>
 								</div> <!-- sidebar nav -->
-							</div> <!-- sidebar -->
-						</div> <!-- panel body -->
-
-					</div> <!-- panel -->
-				</div> <!-- col-lg-3 -->
+<!--							</div> <!-- sidebar -->
+<!--						</div> <!-- panel body -->
+<!--					</div> <!-- panel -->
+<!--				</div> <!-- col-lg-3 -->
 
 				<!-- The Main Content Section -->
-				<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-					<div id="panel-1" class="panel panel-default">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
 
-						<div class="panel-heading"> <?php echo $page_title; ?> </div>
+						<div class="panel-heading"> Admin Dashboard. </div>
 
 						<div class="panel-body">
 
@@ -170,45 +170,53 @@
 						        }
 								else
 								{
-						            echo nl2br($page_content);
-						        }
+					    	        echo nl2br($page_content);
+					        	}
 					        ?>
 
 						</div> <!-- panel body -->
 
-						<div class="panel-footer"> &nbsp; </div> <!-- Panel footer -->
+						<div class="panel-footer"> &nbsp; </div> <!-- panel footer -->
 
 					</div> <!-- panel -->
-
 				</div> <!-- col-lg-9 -->
-			</div> <!-- row -->
 
+			</div> <!-- row -->
 		</div> <!-- container -->
 	</div> <!-- wrap -->
 
 	<!-- The Footer Section -->
-	<div id="fluid-footer">
-		<div class="fluid-container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p class="text-muted credit">
-					&copy;2009 - <?php echo date('Y'); ?>&nbsp;
-					<a href="http://www.yoursite.com">Your Site.</a>&nbsp;<strong>All rights reserved Worldwide.</strong>
-				</p>
-			</div> <!-- col-lg-12 -->
-		</div> <!-- container -->
-	</div> <!-- footer -->
+	<div id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p class="text-muted credit">
+						&copy;2009 - <?php echo date('Y'); ?>&nbsp;
+						<a href="http://www.yoursite.com">Your Site.</a>&nbsp;<strong>All rights reserved Worldwide.</strong>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Bootstrap core JavaScript ----------------------------------->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<?php echo js_url('jquery-1.10.2.min.js'); ?>"></script>
 	<script src="<?php echo js_url('bootstrap.min.js'); ?>"></script>
 
-	<!-- base_url and site_url for Ajax calls. ----------------------->
-	<script type="text/javascript" charset="utf-8">
-		//<![CDATA[
-			var base_url = "<?php echo base_url(); ?>";
-			var site_url = "<?php echo site_url(); ?>";
-		// ]]>
+	<!-- SummerNote Text Editor -->
+	<script src="<?php echo js_url('summernote-bs3.js'); ?>"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#summernote').summernote({
+				height: "200px"
+			});
+		});
+
+		var postForm = function() {
+			var page_content = $('textarea[name="page_content"]').val($('#summernote').code());
+		}
 	</script>
 
 	<!-- BUG FIX: For IE 10 -->
@@ -224,6 +232,5 @@
 		}
 	</script>
 
-</body>
-
+  </body>
 </html>

@@ -57,6 +57,43 @@ class Users extends Admin_Controller
 	// --------------------------------------------------------------------
 
 	/**
+	 * index()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function index()
+	{
+		/**
+		 * Logged_in.
+		 *
+		 * If the site owner or admin is logged in then it
+		 * will display the Admin Dashboard which uses the
+		 * restrict_user method.
+		 */
+		if (logged_in())
+		{
+			$data['page_title'] = '';
+			$data['module']     = 'users';
+			$data['view_file']  = "user_dashboard";
+
+			$this->load->module('template');
+			$this->template->user_fluid_dashboard($data);
+		}
+
+		// Display the Auth Login Form
+		else
+		{
+			Modules::run('auth/login');
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * manage()
 	 *
 	 * Manages the users.

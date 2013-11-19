@@ -41,24 +41,17 @@ $route['default_controller'] = 'page';
 
 $route['page/(:any)'] = 'page/index/$1';
 
-
-
-
 /**
  * ------------------------------------------------------------------------
  * BEGIN AUTHENTICATION LIBRARY ROUTES.
  * ------------------------------------------------------------------------
  */
 
-//$route['login']           = "admin/admin/login";
-//$route['logout']          = "admin/admin/logout";
-//$route['register']        = "admin/admin/register";
-//$route['admin/dashboard'] = "admin/admin/index";
-
-$route['login']           = 'auth/login';
-$route['logout']          = 'auth/logout';
-$route['register']        = 'auth/register';
-$route['dashboard']       = 'admin/index';
+$route['login']     = 'auth/login';
+$route['logout']    = 'auth/logout';
+$route['register']  = 'auth/register';
+$route['dashboard'] = 'admin/index';
+$route['profile']   = 'users/index';
 
 // END AUTHENTICATION LIBRARY ROUTES --------------------------------------
 

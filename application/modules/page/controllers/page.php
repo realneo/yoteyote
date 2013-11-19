@@ -95,7 +95,7 @@ class Page extends Public_Controller
 		 * Page Template View
 		 * ----------------------------------------------------------------------
 		 *
-		 * These have to match the page methods in the template controller.
+		 * These have to match the page methods in the Template Controller.
 		 *
 		 * public_fluid_one       -
 		 * public_fluid_three     -
