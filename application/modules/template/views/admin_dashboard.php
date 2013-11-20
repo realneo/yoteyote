@@ -50,7 +50,7 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand" href="<?php echo base_url(); ?>">Yoteyote</a>
+					<a class="navbar-brand" href="<?php echo base_url(); ?>"> Yoteyote</a>
 
 				</div>
 
@@ -59,7 +59,7 @@
 					<!-- Top left navbar -->
 					<ul class="nav navbar-nav">
 						<li <?php echo set_active(1, '', 'home'); ?>>
-							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon glyphicon-home"></span> Home</a>
+							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon-home"></span> Home</a>
 						</li>
 						<?php if (logged_in()) { ?>
 							<li <?php echo set_active(1, 'dashboard'); ?>>

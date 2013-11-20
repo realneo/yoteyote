@@ -55,7 +55,7 @@
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li <?php echo set_active(1, '', 'home'); ?>>
-							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon glyphicon-home"></span> Home</a>
+							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon-home"></span> Home</a>
 						</li>
 						<li <?php echo set_active(2, 'about'); ?>>
 							<a href="<?php echo base_url('page/about'); ?>"> About Us</a>

@@ -46,14 +46,14 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo base_url(); ?>">Nikita CMS</a>
+					<a class="navbar-brand" href="<?php echo base_url(); ?>"> Yoteyote</a>
 				</div>
 
 				<!-- Left top navbar -->
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li <?php echo set_active(1, '', 'home'); ?>>
-							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon glyphicon-home"></span> Home</a>
+							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon-home"></span> Home</a>
 						</li>
 						<li <?php echo set_active(2, 'about'); ?>>
 							<?php echo anchor('page/about', 'About'); ?>

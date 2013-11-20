@@ -39,6 +39,8 @@
 */
 $route['default_controller'] = 'page';
 
+$route['404_override'] = 'page';
+
 $route['page/(:any)'] = 'page/index/$1';
 
 /**
@@ -55,8 +57,12 @@ $route['profile']   = 'users/index';
 
 // END AUTHENTICATION LIBRARY ROUTES --------------------------------------
 
-
-$route['404_override'] = 'page';
+/*
+$route['posts']       = 'posts/';
+$route['messages']    = 'messages/';
+$route['stats']       = 'stats/';
+$route['pocketmoney'] = 'pocketmoney/';
+*/
 
 //$route['(:any)'] = "page/$1";
 

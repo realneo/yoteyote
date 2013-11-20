@@ -51,6 +51,33 @@ class Posts extends Auth_Controller
 		log_message('debug', "Class Name Controller Initialized");
 	}
 
+	// -----------------------------------------------------------------------
+
+	/**
+	 * posts_sort()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function posts_sort($type = NULL)
+    {
+		switch ($type)
+		{
+			case 'will':
+
+			break;
+
+			case 'want':
+
+			break;
+
+			default:
+
+			break;
+		}
+
+    }
 
 }	// End of Class.
 

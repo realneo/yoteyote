@@ -17,9 +17,9 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="<?php echo css_url('bootstrap.min.css'); ?>" rel="stylesheet">
-	<!--<link href="<?php //echo css_url('bootstrap-theme.css'); ?>" rel="stylesheet">-->
+	<link href="<?php echo css_url('bootstrap-theme.css'); ?>" rel="stylesheet">
 
-	<!--<link rel="stylesheet" href="<?php //echo css_url('glyphicons.css'); ?>">-->
+	<link rel="stylesheet" href="<?php echo css_url('glyphicons.css'); ?>">
 
 	<!-- Custom styles for this template -->
 	<link href="<?php echo css_url('app-dashboard.css'); ?>" rel="stylesheet">

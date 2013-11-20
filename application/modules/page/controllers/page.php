@@ -70,7 +70,8 @@ class Page extends Public_Controller
 
         $page_data = $this->pages->get_where(array('page_slug' => $page_slug));
 
-		if ($page_data === FALSE)
+
+		if ($page_data === FALSE OR $page_data === NULL)
 		{
 			// Show a 404 if no page exists.
 			show_404();
