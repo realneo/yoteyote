@@ -184,9 +184,9 @@ class Profiles extends Admin_Controller
 		// Run the Form Validation
 		if ($this->form_validation->run($this) === FALSE)
 		{
-			// Show the normal registration form
+			// Show the users profile form
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->user_fluid_dashboard($data);
 		}
 
 		// Update the users Profile record.

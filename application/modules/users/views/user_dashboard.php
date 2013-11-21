@@ -6,7 +6,7 @@
 	<p>
 		Add anything you would like to say here!<br />
 
-		Edit this file: .application/modules/users/views/dashboard.php
+		Edit this file: .application/modules/users/views/user_dashboard.php
 	</p>
 
 </div>

@@ -135,6 +135,8 @@ class Auth extends Auth_Controller
 
 			return TRUE;
 		}
+
+		// Redirect to the admin dashboard
 		else
 		{
 			redirect('admin/dashboard/', 'refresh');
@@ -340,6 +342,7 @@ class Auth extends Auth_Controller
 				'user_email'      => $user_email,
 				'user_password'   => $user_password,
 				'user_ip_address' => $this->input->ip_address(),
+				'user_last_login' => set_now(),
 				'user_created_at' => set_now(),
 				'user_updated_at' => set_now(),
 			);

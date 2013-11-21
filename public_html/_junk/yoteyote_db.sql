@@ -47,6 +47,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `user_name`, `user_email`, `user_password`, `user_ip_address`, `user_token`, `user_identifier`, `user_recover`, `user_remember_me`, `user_confirmed`, `user_last_login`, `user_created_at`, `user_updated_at`, `user_status`) VALUES
+(1, 'admin', 'youremail@your.com', 'd48a868eee1cf70395ecc59031779a9daf641a355ba19e33d0b1c4b80dbd2c270b909b2a487ecb9196ca107d3d83fea2021743251eef78fe4519966dbfbb3c5a', '127.0.0.1', 'C2)tPLwRgJzENiWOmY2N!Hd4kOBydjm9BGGuYnjiMHJf8uIZ2njfHSVJgXngY8N!ml9UKBnn8Xj(oSbgkVpMNL213fK)5m!x!S9Dw4Qf4K1xHvEq88CRh21Ir0n3y63w', '484d40dfbc5e513afa26368b2c71efdde1fe7083741700a58de85e742319dc5a8cf31335cebb0c902fb13fe418075593933a171bccec0806fb6b921f7e7b4d24', '', 0, 1, '2013-11-21 09:16:30', '2013-11-21 09:16:30', '2013-11-21 09:16:30', 'active');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +88,9 @@ CREATE TABLE IF NOT EXISTS `user_profiles` (
 -- Dumping data for table `user_profiles`
 --
 
+INSERT INTO `user_profiles` (`id`, `profile_user_id`, `profile_first_name`, `profile_last_name`, `profile_dob`, `profile_gender`, `profile_bio`, `profile_mobile`, `profile_bank`, `profile_pic`, `profile_country`, `profile_city`, `profile_street`, `profile_building_name`, `profile_building_number`, `profile_nickname`, `profile_created_at`, `profile_updated_at`) VALUES
+(1, 1, NULL, NULL, '0000-00-00', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -94,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `group_description` varchar(100)          NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
 
 --
 -- Dumping data for table `groups`
@@ -134,10 +145,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 --
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 2, 6),
-(4, 3, 6);
+(1, 1, 1);
 
 -- --------------------------------------------------------
 

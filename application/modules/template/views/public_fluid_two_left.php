@@ -41,13 +41,9 @@
 			<div class="fluid-container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
 						<div class="row logo">
-
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 header-left">
-
 								<div class=""> <h1>Yoteyote</h1> </div> <br />
-
 								<div>
 									Buy & Sell small jobs from one another.&nbsp;&nbsp;
 									<a id="discover_btn" href="#" class="btn btn-danger btn-sm" role="button"> Discover how</a>
@@ -64,9 +60,7 @@
 									<button type="button" class="btn btn-default active"> I Want</button>
 									<a href="#" class="btn btn-danger" role="button"> Create</a>
 								</div>
-
 							</div>
-
 						</div>
 					</div>
 				</div>
