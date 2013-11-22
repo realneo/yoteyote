@@ -108,7 +108,7 @@ class Groups extends Auth_Controller
 		$this->fx_pagination->initialize($config);
 
 		// Get the database records with limit and offset.
-		$order_by  = 'id asc';
+		$order_by  = 'user_id asc';
 		$query = $this->groups->get_with_limit($limit, $offset, $order_by);
 
 		// Setup the data array and display the view.
@@ -119,7 +119,7 @@ class Groups extends Auth_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_dashboard($data);
+		$this->template->admin_fluid_dashboard($data);
 	}
 
 	// --------------------------------------------------------------------
@@ -146,7 +146,7 @@ class Groups extends Auth_Controller
 			$data['view_file'] = "add";
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
 		// Add a new page.
@@ -184,7 +184,7 @@ class Groups extends Auth_Controller
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			$query = $this->groups->get_where(array('id' => $id));
+			$query = $this->groups->get_where(array('user_id' => $id));
 			$row   = $query->row_array();
 
 			// Set the page_status selected value.
@@ -195,7 +195,7 @@ class Groups extends Auth_Controller
 			);
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
 		// Update the page.
@@ -216,7 +216,7 @@ class Groups extends Auth_Controller
 			);
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 	}
 
@@ -233,22 +233,20 @@ class Groups extends Auth_Controller
 	 */
 	public function delete($id)
 	{
-		$this->groups->_delete(array('id' => $id));
+		$this->groups->_delete(array('user_id' => $id));
 
 		$data = array(
 			'view_file' => 'delete_success',
 		);
 
 		$this->load->module('template');
-		$this->template->admin_dashboard($data);
+		$this->template->admin_fluid_dashboard($data);
 	}
 
 	// -----------------------------------------------------------------------
 
 	/**
 	 * get_user_groups()
-	 *
-	 *
 	 *
 	 * @access	public
 	 * @param	string
@@ -257,7 +255,7 @@ class Groups extends Auth_Controller
     public function get_user_groups($id)
     {
     	$data     = array();
-		$order_by = 'id asc';
+		$order_by = 'user_id asc';
 
 		$query = $this->groups->get($order_by);
 

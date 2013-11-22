@@ -8,7 +8,6 @@
 
 				<thead class="active-header">
 					<tr>
-						<th class="th-align">#id</th>
 						<th class="th-align">User id</th>
 						<th class="th-align">Group id</th>
 						<th class="text-center">Actions</th>
@@ -19,16 +18,15 @@
 					<!-- Generate the Twitter Bootstrap Table DataGrid -->
 					<?php foreach($data_grid as $item): ?>
 						<tr>
-							<td><?php echo $item->id; ?></td>
 							<td><?php echo $item->user_id; ?></td>
 							<td><?php echo $item->group_id; ?></td>
 
 							<!-- Build actions links -->
 							<td class="text-center col-lg-2">
-								<a href="<?php echo base_url('groups/edit/'.$item->id.'/'); ?>" class="btn btn-primary btn-info btn-xs">
+								<a href="<?php echo base_url('groups/edit/'.$item->user_id.'/'); ?>" class="btn btn-primary btn-info btn-xs">
 									<span class="glyphicon glyphicon-edit"></span> Edit
 								</a>
-								<a href="<?php echo base_url('groups/delete/'.$item->id.'/'); ?>" class="btn btn-primary btn-danger btn-xs">
+								<a href="<?php echo base_url('groups/delete/'.$item->user_id.'/'); ?>" class="btn btn-primary btn-danger btn-xs">
 									<span class="glyphicon glyphicon-remove-circle"></span> Delete
 								</a>
 							</td>

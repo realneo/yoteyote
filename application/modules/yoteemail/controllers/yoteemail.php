@@ -7,12 +7,12 @@
  * Author: Raymond L King Sr.
  * ------------------------------------------------------------------------
  *
- * Class	Posts	Controller
+ * Class	Yoteemail	Controller
  *
  * ------------------------------------------------------------------------
  * @package		Package		Yoteyote
- * @subpackage	Subpackage	posts
- * @category	category	posts
+ * @subpackage	Subpackage	name
+ * @category	category	name
  * @author		Raymond L King Sr.
  * @copyright	Copyright (c) 2009 - 2012, Custom Software Designers, LLC.
  * @link		http://www.example.com
@@ -21,7 +21,7 @@
  * ------------------------------------------------------------------------
  */
 
-class Posts extends Auth_Controller
+class Yoteemail extends Auth_Controller
 {
 	/**
 	 * -----------------------------------------------------------------------
@@ -46,46 +46,17 @@ class Posts extends Auth_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('mdl_post', 'post');
+		$this->load->model('mdl_yoteemail', 'yoteemail');
 
 		log_message('debug', "Class Name Controller Initialized");
 	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * posts_sort()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-    public function posts_sort($type = NULL)
-    {
-		switch ($type)
-		{
-			case 'will':
-
-			break;
-
-			case 'want':
-
-			break;
-
-			default:
-
-			break;
-		}
-
-    }
-
 
 
 }	// End of Class.
 
 /**
  * ------------------------------------------------------------------------
- * Filename: posts.php
- * Location: ./application/modules/posts/controllers/posts.php
+ * Filename: yoteemail.php
+ * Location: ./application/modules/module_dir/controllers/yoteemail.php
  * ------------------------------------------------------------------------
  */

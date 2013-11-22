@@ -1,6 +1,6 @@
 <div class="panel panel-default manage">
 
-	<div class="panel-heading"> Manage groupss</div>
+	<div class="panel-heading"> Manage groups</div>
 
 	<div class="panel-body manage">
 		<div class="table-responsive">
@@ -20,8 +20,8 @@
 					<?php foreach($data_grid as $item): ?>
 						<tr>
 							<td><?php echo $item->id; ?></td>
-							<td><?php echo $item->name; ?></td>
-							<td><?php echo $item->description; ?></td>
+							<td><?php echo $item->group_name; ?></td>
+							<td><?php echo $item->group_description; ?></td>
 
 							<!-- Build actions links -->
 							<td class="text-center col-lg-2">

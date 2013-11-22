@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="<?php echo css_url('glyphicons.css'); ?>">
 
 	<!-- Custom styles for this template -->
-	<link href="<?php echo css_url('app-dashboard.css'); ?>" rel="stylesheet">
+	<link href="<?php echo css_url('dashboard.css'); ?>" rel="stylesheet">
 
 	<link href="<?php echo css_url('summernote.css'); ?>" rel="stylesheet">
 	<link href="<?php echo css_url('summernote-bs3.css'); ?>" rel="stylesheet">
@@ -50,7 +50,7 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand" href="<?php echo base_url(); ?>"> Yoteyote</a>
+					<a class="navbar-brand" href="<?php echo base_url(); ?>"> Yoteyote Dashboard</a>
 
 				</div>
 
@@ -58,37 +58,24 @@
 
 					<!-- Top left navbar -->
 					<ul class="nav navbar-nav">
-						<li <?php echo set_active(1, '', 'home'); ?>>
-							<a href="<?php echo base_url('/'); ?>"><span class="glyphicon glyphicon-home"></span> Home</a>
-						</li>
+						<li <?php echo set_active(1, '', 'home'); ?>> <a href="<?php echo base_url('/'); ?>"><span class="glyphicon-home"></span> Home</a></li>
 						<?php if (logged_in()) { ?>
-							<li <?php echo set_active(1, 'dashboard'); ?>>
-								<?php echo anchor('dashboard', 'Dashboard'); ?>
-							</li>
-							<?php if (user_group('owner') OR user_group('admin')) { ?>
-								<li <?php echo set_active(1, 'users'); ?>>
-									<?php echo anchor('users/manage', 'Users'); ?>
-								</li>
+							<li <?php echo set_active(1, 'dashboard'); ?>> <?php echo anchor('dashboard', 'Dashboard'); ?></li>
+							<?php if (user_group('admin') OR user_group('owner')) { ?>
+								<li <?php echo set_active(1, 'users'); ?>> <?php echo anchor('users/manage', 'Users'); ?></li>
 							<?php } ?>
-							<?php if (user_group('editor') OR user_group('owner') OR user_group('admin')) { ?>
-								<li <?php echo set_active(1, 'pages'); ?>>
-									<?php echo anchor('pages/manage', 'Pages'); ?>
-								</li>
+							<?php if (user_group('admin') == TRUE OR user_group('owner') == TRUE OR user_group('editor') == TRUE) { ?>
+								<li <?php echo set_active(1, 'pages'); ?>> <?php echo anchor('pages/manage', 'Pages'); ?></li>
 							<?php } ?>
 
 							<!-- Left top navbar dropdown menu -->
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Groups <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<?php if (user_group('editor') OR user_group('owner') OR user_group('admin')) { ?>
-										<li <?php echo set_active(1, 'group'); ?>>
-											<?php echo anchor('group/manage', 'Group'); ?>
-										</li>
-									<?php } ?>
-									<?php if (user_group('editor') OR user_group('owner') OR user_group('admin')) { ?>
-										<li <?php echo set_active(1, 'groups'); ?>>
-											<?php echo anchor('groups/manage', 'User Groups'); ?>
-										</li>
+									<?php if (user_group('admin') == TRUE OR user_group('owner') == TRUE OR user_group('editor') == TRUE) { ?>
+										<li <?php echo set_active(1, 'group'); ?>> <?php echo anchor('group/manage', 'Group'); ?></li>
+										<li class="divider"></li>
+										<li <?php echo set_active(1, 'groups'); ?>> <?php echo anchor('groups/manage', 'User Groups'); ?></li>
 									<?php } ?>
 								</ul>
 							</li>

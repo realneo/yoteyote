@@ -22,7 +22,7 @@
 
 		<div class="form-group">
 			<label for="page_keywords" class="col-lg-1 control-label">Keywords:</label>
-			<div class="col-lg-9">
+			<div class="col-lg-8">
 				<?php echo form_error('page_keywords'); ?>
 				<input type="text" name="page_keywords" class="form-control" id="page_keywords" placeholder="Meta Keywords" value="<?php echo set_value('page_keywords'); ?>">
 			</div>
@@ -31,7 +31,7 @@
 
 		<div class="form-group">
 			<label for="page_description" class="col-lg-1 control-label">Description:</label>
-			<div class="col-lg-9">
+			<div class="col-lg-8">
 				<?php echo form_error('page_description'); ?>
 				<input type="text" name="page_description" class="form-control" id="page_description" placeholder="Meta Description" value="<?php echo set_value('page_description'); ?>">
 			</div>

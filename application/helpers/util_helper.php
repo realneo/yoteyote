@@ -89,6 +89,7 @@ if ( ! function_exists('object_to_array'))
  *
  * Outputs the given variable(s) with formatting and location
  *
+ * @author	Raymond L King Sr.
  * @access	public
  * @param	mixed	- variables to be output
  */
@@ -96,14 +97,14 @@ if ( ! function_exists('var_debug'))
 {
 	function var_debug()
 	{
-		list($callee) = debug_backtrace();
+		list($params) = debug_backtrace();
 
 		$arguments = func_get_args();
 
 		$total_arguments = func_num_args();
 
 		echo '<div><fieldset style="background: #fefefe !important; border:1px red solid; padding:15px">';
-		echo '<legend style="background:lightgrey; padding:5px;">'.$callee['file'].' @line: '.$callee['line'].'</legend><pre><code>';
+		echo '<legend style="background:lightgrey; padding:5px;">'.$params['file'].' @line: '.$params['line'].'</legend><pre><code>';
 
 		$i = 0;
 		foreach ($arguments as $argument)

@@ -120,7 +120,7 @@ class Group extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_dashboard($data);
+		$this->template->admin_fluid_dashboard($data);
 	}
 
 	// --------------------------------------------------------------------
@@ -147,7 +147,7 @@ class Group extends Admin_Controller
 			$data['view_file'] = "add";
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
 		// Add a new page.
@@ -156,7 +156,7 @@ class Group extends Admin_Controller
 			$now = date("Y-m-d H:i:s");
 
 			$data = array(
-				'name'              => set_value('group_name'),
+				'group_name'        => set_value('group_name'),
 				'group_description' => set_value('group_description'),
 			);
 
@@ -192,13 +192,13 @@ class Group extends Admin_Controller
 
 			// Set the page_status selected value.
 			$data = array(
-				'group_name'        => $row['name'],
-				'group_description' => $row['description'],
+				'group_name'        => $row['group_name'],
+				'group_description' => $row['group_description'],
 				'view_file'         => "edit",
 			);
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
 		// Update the page.
@@ -207,8 +207,8 @@ class Group extends Admin_Controller
 			$now = date("Y-m-d H:i:s");
 
 			$data_record = array(
-				'name'        => set_value('group_name'),
-				'description' => set_value('group_description'),
+				'group_name'        => set_value('group_name'),
+				'group_description' => set_value('group_description'),
 			);
 
 			$this->group->_update(array('id' => $id), $data_record);
@@ -219,7 +219,7 @@ class Group extends Admin_Controller
 			);
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 	}
 
@@ -243,7 +243,7 @@ class Group extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_dashboard($data);
+		$this->template->admin_fluid_dashboard($data);
 	}
 
 	// -----------------------------------------------------------------------
@@ -266,7 +266,7 @@ class Group extends Admin_Controller
 		foreach ($query->result() as $row)
 		{
 			$id   = $row->id;
-			$name = $row->name;
+			$name = $row->group_name;
 
 			$data[$id] = $name;
 		}

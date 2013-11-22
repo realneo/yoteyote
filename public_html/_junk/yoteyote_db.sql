@@ -126,10 +126,8 @@ INSERT INTO `groups` (`id`, `group_name`, `group_description`) VALUES
 
 DROP TABLE IF EXISTS `users_groups`;
 CREATE TABLE IF NOT EXISTS `users_groups` (
-  `id`       int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id`  int(11) unsigned NOT NULL,
-  `group_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  `group_id` int(11) unsigned NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -144,8 +142,8 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 -- Dumping data for table `users_groups`
 --
 
-INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 1, 1);
+INSERT INTO `users_groups` (`user_id`, `group_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 

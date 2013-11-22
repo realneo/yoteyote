@@ -106,6 +106,7 @@
 							<ul class="dropdown-menu">
 								<?php if (logged_in()) { ?>
 									<li> <?php echo anchor('dashboard', 'Dashboard'); ?> </li>
+									<li class="divider"></li>
 									<li> <?php echo anchor('logout', 'Logout'); ?> </li>
 								<?php } else { ?>
 									<li> <?php echo anchor('login', 'Log in'); ?> </li>

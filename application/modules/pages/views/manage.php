@@ -10,7 +10,7 @@
 					<tr>
 						<th class="th-align">#id</th>
 						<th class="th-align">Page Title</th>
-						<th class="th-align">Page URL</th>
+						<th class="th-align">Page Slug</th>
 						<th class="text-center">Actions</th>
 					</tr>
 				</thead>
@@ -21,7 +21,7 @@
 						<tr>
 							<td><?php echo $item->id; ?></td>
 							<td><?php echo $item->page_title; ?></td>
-							<td><?php echo $item->page_url; ?></td>
+							<td><?php echo $item->page_slug; ?></td>
 
 							<!-- Build actions links -->
 							<td class="text-center col-lg-2">

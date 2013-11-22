@@ -77,13 +77,13 @@ class Users extends Admin_Controller
 		{
 			$data['page_title'] = '';
 			$data['module']     = 'users';
-			$data['view_file']  = "user_dashboard";
+			$data['view_file']  = "admin_fluid_dashboard";
 
 			$this->load->module('template');
-			$this->template->user_fluid_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
-		// Display the Auth Login Form
+		// Not logged in so display the Auth Login Form
 		else
 		{
 			Modules::run('auth/login');
@@ -144,7 +144,7 @@ class Users extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_dashboard($data);
+		$this->template->admin_fluid_dashboard($data);
 	}
 
 	// --------------------------------------------------------------------

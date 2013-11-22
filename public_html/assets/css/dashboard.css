@@ -47,7 +47,7 @@ body {
  */
 
 .fluid-container {
-  padding: 80px 15px 0;
+  padding: 0px 15px 0;
   /*padding: 0 15px;*/
 }
 
@@ -67,7 +67,6 @@ body {
 
 #fluid-wrap > .fluid-container {
   padding: 80px 15px 0;
-  /*padding: 0 15px 0;*/
 }
 
 /* Not required for template or sticky footer method. */
@@ -96,19 +95,17 @@ body {
   padding: 0 15px 0;
 }
 
+/*
 .header {
   background: #ffffff url('../images/background-header.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  /*height: 116px;
-  width:  auto;*/
 }
 
 .fluid-container .logo {
   background-image: url('../images/logo.png');
   background-repeat: no-repeat;
   margin: 10px 0 10px 15px;
-  /*padding: 20px 20px;*/
 }
 
 .header h1 {
@@ -124,6 +121,7 @@ body {
 .header-right {
 
 }
+*/
 
 code {
   font-size: 80%;

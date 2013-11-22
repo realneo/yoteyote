@@ -1,5 +1,5 @@
 <div class="page-header dashboard">
-	<h4>Add New Group <small>Add a new group to the groups</small></h4>
+	<h4>Add New Group <small>Add a new Group</small></h4>
 </div>
 
 	<form method="post" class="form-horizontal" role="form">
@@ -20,6 +20,6 @@
 		  </div>
 		</div>
 
-	    <button type="submit" value="Submit" name="submit" class="btn btn-primary">Add</button>
+	    <button type="submit" value="Submit" name="submit" class="btn btn-primary">Add Group</button>
       </fieldset>
 	</form>

@@ -228,13 +228,16 @@ class Auth extends Auth_Controller
 				'logged_in'   => TRUE,
 			);
 
+			//var_debug($data);
+			//exit;
+
 			// Set the users session data.
 			$this->session->set_userdata($data);
 
 			// get current date and time
 			$now = date('Y-m-d H:i:s');
 
-			// Update the users Remember Me and IP Address.
+			// Update the users RememberMe, IP Address and Last time logged in.
 			$data1 = array(
 				'user_remember_me' => $this->input->post('user_remember_me', TRUE),
 				'user_ip_address'  => $this->input->ip_address(),
@@ -475,7 +478,7 @@ class Auth extends Auth_Controller
 		if ($this->form_validation->run($this) === FALSE)
 		{
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
 
 		// Create the new users database record
@@ -542,7 +545,7 @@ class Auth extends Auth_Controller
 			$data['msg']       = $data2['msg'];
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->admin_fluid_dashboard($data);
 		}
     }
 
@@ -790,6 +793,8 @@ class Auth extends Auth_Controller
 	 */
     public function check_user_groups($id, $group = '')
     {
+    	$data = array();
+
 		/** ADMIN - The default groups.
 		 * array groups
 		 *   1 => string 'admin'     (length=5)
@@ -810,12 +815,19 @@ class Auth extends Auth_Controller
 		// Get a list of all the groups a user belongs to.
 		$this->user_groups = modules::run('groups/get_user_groups', $id);
 
+		//var_debug($this->groups, $this->user_groups);
+		//exit;
+
 		if ($group == '')
 		{
-			foreach($this->user_groups as $key => $value)
+			foreach ($this->user_groups as $key => $value)
 			{
 				$group = $this->groups[$value];
-				break;
+
+				if ($group == $this->groups[$value])
+				{
+					break;
+				}
 			}
 		}
 
