@@ -119,7 +119,7 @@ class Profiles extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->user_dashboard($data);
+		$this->template->render('admin_fluid_dashboard', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -141,36 +141,16 @@ class Profiles extends Admin_Controller
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 
-/*
-  `id`                      int(11)      unsigned NOT NULL  AUTO_INCREMENT,  -- The profile record id
-  `profile_user_id`         int(11)      unsigned NOT NULL,                  -- The profile users id
-  `profile_first_name`      varchar(45)                     DEFAULT NULL,    -- The profile users first name
-  `profile_last_name`       varchar(45)                     DEFAULT NULL,    -- The profile users last name
-  `profile_dob`             date                            DEFAULT '0000-00-00',  -- The profile users date of birth
-  `profile_gender`          varchar(6)                      DEFAULT NULL,    -- The profile users gender
-  `profile_bio`             text,                                            -- The profile users bio
-  `profile_mobile`          varchar(15)                     DEFAULT NULL,    -- The profile users mobile phone number
-  `profile_bank`            int(11)      unsigned NOT NULL  DEFAULT '0',     -- The profile users bank
-  `profile_pic`             varchar(255)                    DEFAULT NULL,    -- The profile users pic
-  `profile_country`         varchar(255)                    DEFAULT NULL,    -- The profile users country
-  `profile_city`            varchar(100)                    DEFAULT NULL,    -- The profile users city
-  `profile_street`          varchar(100)                    DEFAULT NULL,    -- The profile users street address
-  `profile_building_name`   varchar(255)                    DEFAULT NULL,    -- The profile users building name
-  `profile_building_number` varchar(255)                    DEFAULT NULL,    -- The profile users building number
-  `profile_nickname`        varchar(255)                    DEFAULT NULL,    -- The profile users nick name
-  `profile_created_at`      datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The profile created at date time
-  `profile_updated_at`      datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The profile updated at date time
-*/
 		// Setup the Form Validation Rules.
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[5]|max_length[40]');
-		$this->form_validation->set_rules('last_name', 'User Password', 'trim|required|min_length[5]|max_length[40]');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[5]|max_length[40]');
 		$this->form_validation->set_rules('dob', 'DOB', 'trim|required|min_length[5]|max_length[12]');
 		$this->form_validation->set_rules('gender', 'Gender', 'trim|required');
 		$this->form_validation->set_rules('bio', 'BIO', 'trim|required|min_length[5]|max_length[40]');
 		$this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|min_length[5]|max_length[12]');
 		$this->form_validation->set_rules('bank', 'Bank', 'trim|required|min_length[5]|max_length[12]');
 		$this->form_validation->set_rules('pic', 'Pic', 'trim|required');
-		$this->form_validation->set_rules('country', 'Contry', 'trim|required|min_length[5]|max_length[40]');
+		$this->form_validation->set_rules('country', 'Country', 'trim|required|min_length[5]|max_length[40]');
 		$this->form_validation->set_rules('city', 'City', 'trim|required|min_length[5]|max_length[12]');
 		$this->form_validation->set_rules('street', 'Street', 'trim|required|min_length[5]|max_length[12]');
 		$this->form_validation->set_rules('building_name', 'Building Name', 'trim|required');
@@ -186,17 +166,34 @@ class Profiles extends Admin_Controller
 		{
 			// Show the users profile form
 			$this->load->module('template');
-			$this->template->user_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Update the users Profile record.
 		else
 		{
 
+			$data = array(
+				'first_name' => '',
+				'last_name' => '',
+				'dob' => '',
+				'gender' => '',
+				'bio' => '',
+				'mobile' => '',
+				'bank' => '',
+				'pic' => '',
+				'country' => '',
+				'city' => '',
+				'street' => '',
+				'building_name' => '',
+				'building_number' => '',
+				'nickname' => '',
+			);
 
 		}
 
 	}
+
 
 	// --------------------------------------------------------------------
 

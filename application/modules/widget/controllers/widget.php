@@ -51,6 +51,22 @@ class Widget extends Public_Controller
 		log_message('debug', "Class Name Initialized");
 	}
 
+	// -----------------------------------------------------------------------
+
+	/**
+	 * render()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function render($template, $data)
+    {
+		$layout = $template;
+
+		return $this->load->view($layout, $data, TRUE);
+    }
+
 }	// End of Class.
 
 /**

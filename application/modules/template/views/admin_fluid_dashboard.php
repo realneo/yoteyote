@@ -60,12 +60,18 @@
 					<ul class="nav navbar-nav">
 						<li <?php echo set_active(1, '', 'home'); ?>> <a href="<?php echo base_url('/'); ?>"><span class="glyphicon-home"></span> Home</a></li>
 						<?php if (logged_in()) { ?>
+
 							<li <?php echo set_active(1, 'dashboard'); ?>> <?php echo anchor('dashboard', 'Dashboard'); ?></li>
 							<?php if (user_group('admin') OR user_group('owner')) { ?>
 								<li <?php echo set_active(1, 'users'); ?>> <?php echo anchor('users/manage', 'Users'); ?></li>
 							<?php } ?>
+
 							<?php if (user_group('admin') == TRUE OR user_group('owner') == TRUE OR user_group('editor') == TRUE) { ?>
 								<li <?php echo set_active(1, 'pages'); ?>> <?php echo anchor('pages/manage', 'Pages'); ?></li>
+							<?php } ?>
+
+							<?php if (user_group('admin') == TRUE OR user_group('owner') == TRUE OR user_group('editor') == TRUE) { ?>
+								<li <?php echo set_active(1, 'profiles'); ?>> <?php echo anchor('profiles/manage', 'Profiles'); ?></li>
 							<?php } ?>
 
 							<!-- Left top navbar dropdown menu -->
@@ -79,6 +85,7 @@
 									<?php } ?>
 								</ul>
 							</li>
+
 						<?php } ?>
 					</ul>
 
@@ -88,10 +95,13 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<?php if (logged_in()) { ?>
+
 									<li><?php echo anchor('dashboard', 'Dashboard'); ?></li>
 									<li class="divider"></li>
 									<li><?php echo anchor('logout', 'Logout'); ?></li>
+
 								<?php } else { ?>
+
 									<li><?php echo anchor('login', 'Login'); ?></li>
 									<li class="divider"></li>
 									<li><?php echo anchor('register', 'Register'); ?></li>

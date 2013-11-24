@@ -80,7 +80,7 @@ class Users extends Admin_Controller
 			$data['view_file']  = "admin_fluid_dashboard";
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Not logged in so display the Auth Login Form
@@ -144,7 +144,7 @@ class Users extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_fluid_dashboard($data);
+		$this->template->render('admin_fluid_dashboard', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -202,7 +202,7 @@ class Users extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_dashboard($data);
+		$this->template->render('admin_fluid_dashboard', $data);
 	}
 
 	// -----------------------------------------------------------------------

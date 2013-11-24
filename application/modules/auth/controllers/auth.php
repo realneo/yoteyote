@@ -70,10 +70,8 @@ class Auth extends Auth_Controller
 	{
 		parent::__construct();
 
-		// Load the users model.
+		// Load the users and profile models.
 		$this->load->model('users/mdl_users', 'user');
-
-		// Load the users profile model.
 		$this->load->model('profiles/mdl_profiles', 'profile');
 
 		// Set the expire times.
@@ -181,7 +179,7 @@ class Auth extends Auth_Controller
 			else
 			{
 				$this->load->module('template');
-				$this->template->admin_fluid_dashboard($data);
+				$this->template->render('admin_fluid_dashboard', $data);
 			}
 		}
 
@@ -329,7 +327,7 @@ class Auth extends Auth_Controller
 		{
 			// Show the normal registration form
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Register and login the new user to the system.
@@ -445,7 +443,7 @@ class Auth extends Auth_Controller
 			$data['msg']       = $data2['msg'];
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
     }
 
@@ -478,7 +476,7 @@ class Auth extends Auth_Controller
 		if ($this->form_validation->run($this) === FALSE)
 		{
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Create the new users database record
@@ -545,7 +543,7 @@ class Auth extends Auth_Controller
 			$data['msg']       = $data2['msg'];
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
     }
 
@@ -585,7 +583,7 @@ class Auth extends Auth_Controller
 		if ($this->form_validation->run($this) === FALSE)
 		{
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Update the users edited details.
@@ -612,7 +610,7 @@ class Auth extends Auth_Controller
 			$data['msg']       = $data2['msg'];
 
 			$this->load->module('template');
-			$this->template->admin_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
     }
 
@@ -715,6 +713,8 @@ class Auth extends Auth_Controller
 		{
 			setcookie("logged_in", $identifier, time() + (int) $this->remember_expire, '/');
 		}
+
+		// The user doe's not want to be Remembered.
 		else
 		{
 			setcookie("logged_in", $identifier, time() + (int) $this->login_expire, '/');

@@ -24,7 +24,7 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/pagination.html
  */
-class Fx_pagination {
+class FX_Pagination {
 
 	public $base_url			  = '';						// The page we are linking to
 	public $prefix				  = '';						// A custom prefix added to the path.
@@ -214,13 +214,17 @@ class Fx_pagination {
 			$this->cur_page = floor(($this->cur_page / $this->per_page) + 1);
 		}
 
-		// Calculate the start and end numbers. These determine
-		// which number to start and end the digit links with
+		/**
+		 * Calculate the start and end numbers. These determine
+		 * which number to start and end the digit links with
+		 */
 		$start = (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
 		$end   = (($this->cur_page + $this->num_links) < $num_pages) ? $this->cur_page + $this->num_links : $num_pages;
 
-		// Is pagination being used over GET or POST?  If get, add a per_page query
-		// string. If post, add a trailing slash to the base URL if needed
+		/**
+		 * Is pagination being used over GET or POST?  If get, add a per_page query
+		 * string. If post, add a trailing slash to the base URL if needed
+		 */
 		if ($_ci->config->item('enable_query_strings') === TRUE OR $this->page_query_string === TRUE)
 		{
 			$this->base_url = rtrim($this->base_url).'&amp;'.$this->query_string_segment.'=';
@@ -357,8 +361,10 @@ class Fx_pagination {
 			$output .= $this->last_tag_open.$this->get_ajax_link($i, $this->last_link).$this->last_tag_close;
 		}
 
-		// Kill double slashes.  Note: Sometimes we can end up with a double slash
-		// in the penultimate link so we'll kill all double slashes.
+		/**
+		 * Kill double slashes.  Note: Sometimes we can end up with a double slash
+		 * in the penultimate link so we'll kill all double slashes.
+		 */
 		$output = preg_replace("#([^:])//+#", "\\1/", $output);
 
 		// Add the wrapper HTML if exists
@@ -394,12 +400,11 @@ class Fx_pagination {
 			$('".$this->div."').html(data);".$this->js_rebind."; }); return false;\">".$text.'</a>';
 	}
 
-}	// END Fx_Pagination Class
-
+}	// END of FX_Pagination Class
 
 /**
  * ------------------------------------------------------------------------
- * End of file Fx_pagination.php
- * Location: ./application/libraries/Fx_pagination.php
+ * End of file FX_Pagination.php
+ * Location: ./application/libraries/FX_Pagination.php
  * ------------------------------------------------------------------------
  */

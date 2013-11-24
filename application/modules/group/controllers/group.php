@@ -120,7 +120,7 @@ class Group extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_fluid_dashboard($data);
+		$this->template->render('admin_fluid_dashboard', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -147,7 +147,7 @@ class Group extends Admin_Controller
 			$data['view_file'] = "add";
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Add a new page.
@@ -198,7 +198,7 @@ class Group extends Admin_Controller
 			);
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Update the page.
@@ -219,7 +219,7 @@ class Group extends Admin_Controller
 			);
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 	}
 
@@ -243,7 +243,7 @@ class Group extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_fluid_dashboard($data);
+		$this->template->render('admin_fluid_dashboard', $data);
 	}
 
 	// -----------------------------------------------------------------------

@@ -99,7 +99,7 @@ class Pages extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_fluid_dashboard($data);
+		$this->template->render('admin_fluid_dashboard', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -126,24 +126,24 @@ class Pages extends Admin_Controller
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			$data['view_file'] = "add";
+			$data = array(
+				'view_file' => 'add',
+			);
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Add a new page.
 		else
 		{
-			$now = date("Y-m-d H:i:s");
-
 			$data = array(
 				'page_title'       => set_value('page_title'),
 				'page_slug'        => url_title(set_value('page_title'), 'underscore', TRUE),
 				'page_keywords'    => set_value('page_keywords'),
 				'page_description' => set_value('page_description'),
-				'page_created_at'  => $now,
-				'page_updated_at'  => $now,
+				'page_created_at'  => set_now(),
+				'page_updated_at'  => set_now(),
 				'page_status'      => set_value('page_status'),
 				'page_content'     => set_value('page_content'),
 			);
@@ -195,20 +195,18 @@ class Pages extends Admin_Controller
 			);
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Update the page.
 		else
 		{
-			$now = date("Y-m-d H:i:s");
-
 			$data_record = array(
 				'page_title'       => set_value('page_title'),
 				'page_slug'        => url_title(set_value('page_title'), 'underscore', TRUE),
 				'page_keywords'    => set_value('page_keywords'),
 				'page_description' => set_value('page_description'),
-				'page_updated_at'  => $now,
+				'page_updated_at'  => set_now(),
 				'page_status'      => set_value('page_status'),
 				'page_content'     => set_value('page_content'),
 			);
@@ -221,7 +219,7 @@ class Pages extends Admin_Controller
 			);
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 	}
 
@@ -245,7 +243,7 @@ class Pages extends Admin_Controller
 		);
 
 		$this->load->module('template');
-		$this->template->admin_fluid_dashboard($data);
+		$this->template->render('admin_fluid_dashboard', $data);
 	}
 
 	// --------------------------------------------------------------------

@@ -49,7 +49,7 @@ class Admin extends Admin_Controller
 
 		modules::run('auth/restrict_user', 'admin');
 
-		//log_message('debug', "Class Name Initialized");
+		//log_message('debug', "Class Admin Controller Initialized");
 	}
 
 	// --------------------------------------------------------------------
@@ -79,7 +79,7 @@ class Admin extends Admin_Controller
 			$data['view_file']  = "dashboard";
 
 			$this->load->module('template');
-			$this->template->admin_fluid_dashboard($data);
+			$this->template->render('admin_fluid_dashboard', $data);
 		}
 
 		// Display the Auth Login Form

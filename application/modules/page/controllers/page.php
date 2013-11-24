@@ -110,7 +110,7 @@ class Page extends Public_Controller
 		 *
 		 */
 	    $this->load->module('template');
-    	$this->template->public_fluid_two_left($data);
+    	$this->template->render('public_fluid_two_left', $data);
 	}
 
 }	// End of Class.

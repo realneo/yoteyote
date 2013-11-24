@@ -44,170 +44,25 @@ class Template extends Public_Controller
 	// -----------------------------------------------------------------------
 
 	/**
-	 * public_one()
+	 * render()
 	 *
 	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
-	public function public_one($data)
-	{
-	    $this->load->view('public_one', $data);
-	}
+    public function render($template, $data, $type = FALSE)
+    {
+		$layout = $template;
 
-	// -----------------------------------------------------------------------
-
-	/**
-	 * public_two_left()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function public_two_left($data)
-	{
-	    $this->load->view('public_two_left', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * public_two_right()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function public_two_right($data)
-	{
-	    $this->load->view('public_two_right', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * public_three()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function public_three($data)
-	{
-	    $this->load->view('public_three', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * public_fulid_one()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function public_fluid_one($data)
-	{
-	    $this->load->view('public_fluid_one', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * public_fulid_two_left()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function public_fluid_two_left($data)
-	{
-	    $this->load->view('public_fluid_two_left', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * public_fulid_two_right()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function public_fluid_two_right($data)
-	{
-	    $this->load->view('public_fluid_two_right', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * public_fulid_three()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function public_fluid_three($data)
-	{
-	    $this->load->view('public_fluid_three', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * admin_dashboard()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function admin_dashboard($data)
-	{
-	    $this->load->view('admin_dashboard', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * admin_fluid_dashboard()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function admin_fluid_dashboard($data)
-	{
-	    $this->load->view('admin_fluid_dashboard', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * user_dashboard()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function user_dashboard($data)
-	{
-	    $this->load->view('user_dashboard', $data);
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * user_fluid_dashboard()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function user_fluid_dashboard($data)
-	{
-	    $this->load->view('user_fluid_dashboard', $data);
-	}
+		if ($type == FALSE)
+		{
+			$this->load->view($layout, $data);
+		}
+		else
+		{
+			return $this->load->view($layout, $data, TRUE);
+		}
+    }
 
 	// -----------------------------------------------------------------------
 
