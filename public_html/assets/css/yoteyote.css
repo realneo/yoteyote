@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/**
+ * ----------------------------------------------
+ * Yoteyote.css - Custom page defines.
+ * ----------------------------------------------
+ */
+
+.header-background {
+  background: #ffffff url('../images/background-header.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: red;
+}
+
+.header-logo {
+  background-image: url('../images/logo.png');
+  background-repeat: no-repeat;
+  /*margin: 5px 0 5px 20px;*/
+}
+
+.header-pad {
+  padding: 20px 20px;
+}
+
+.header2-pad {
+  padding-top: 35px;
+}
+
+.discover-pad {
+  padding-left: 95px;
+}
