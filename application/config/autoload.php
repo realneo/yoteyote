@@ -70,6 +70,7 @@ $autoload['helper'] = array(
 	'html',
 	'assets',
 	'auth',
+	'ui',
 	'util'
 );
 

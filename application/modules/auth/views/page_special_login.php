@@ -66,6 +66,7 @@
 
         <!-- Login Container -->
         <div id="login-container">
+
             <!-- Page Content -->
             <div id="page-content" class="block remove-margin animation-bigEntrance">
                 <!-- Login Title -->
@@ -93,18 +94,17 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input type="text" id="login-email" name="login-email" class="form-control input-lg" placeholder="Email">
+                            <input type="text" id="user_name" name="user_name" class="form-control input-lg" placeholder="Email / Username" value="<?php echo set_value('user_name'); ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input type="password" id="login-password" name="login-password" class="form-control input-lg" placeholder="Password">
-
+                            <input type="password" id="user_password" name="user_password" class="form-control input-lg" placeholder="Password" value="<?php echo set_value('user_password'); ?>">
                             <!--
                             Hidden checkbox. Its checked property will be toggled every time the remember me (#btn-remember) button is clicked (js code at the bottom)
                             You can add the checked property by default (the button will be enabled automatically)
                             -->
-                            <input type="checkbox" id="login-remember" name="login-remember" hidden>
+                            <input type="checkbox" id="user_remember_me" name="user_remember_me" <?php echo set_checkbox('user_remember_me', '1', FALSE); ?> hidden>
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,7 +115,7 @@
                             </div>
                         </div>
                         <div class="col-xs-4 text-right">
-                            <button type="submit" class="btn btn-sm btn-primary" name="login" value="Login"><i class="fa fa-angle-right"></i> Login</button>
+                            <button type="submit" class="btn btn-sm btn-primary" name="login" value="login"><i class="fa fa-angle-right"></i> Login</button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -127,12 +127,12 @@
                 <!-- END Login Form -->
 
                 <!-- Register Form -->
-                <form method="post" id="form-register" class="form-horizontal display-none" onsubmit="return false;">
+                <form method="post" id="form-register" class="form-horizontal display-none">
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                <input type="text" id="register-username" name="register-username" class="form-control input-lg" placeholder="Username">
+                                <input type="text" id="user_name" name="user_name" class="form-control input-lg" placeholder="User name" value="<?php echo set_value('user_name'); ?>">
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                                <input type="text" id="register-email" name="register-email" class="form-control input-lg" placeholder="Email">
+                                <input type="text" id="user_email" name="user_email" class="form-control input-lg" placeholder="Email" value="<?php echo set_value('user_email'); ?>">
                             </div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-asterisk fa-fw"></i></span>
-                                <input type="password" id="register-password" name="register-password" class="form-control input-lg" placeholder="Password">
+                                <input type="password" id="user_password" name="user_password" class="form-control input-lg" placeholder="Password" value="<?php echo set_value('user_password'); ?>">
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-asterisk fa-fw"></i></span>
-                                <input type="password" id="register-password-verify" name="register-password-verify" class="form-control input-lg" placeholder="Verify Password">
+                                <input type="password" id="conf_password" name="conf_password" class="form-control input-lg" placeholder="Verify Password" value="<?php echo set_value('conf_password'); ?>">
                             </div>
 
                             <!--
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                         <div class="col-xs-4 text-right">
-                            <button type="submit" class="btn btn-sm btn-success" name="register" value="Register"><i class="fa fa-angle-right"></i> Register</button>
+                            <button type="submit" class="btn btn-sm btn-success" name="register" value="register"><i class="fa fa-angle-right"></i> Register</button>
                         </div>
                     </div>
                     <div class="form-group">

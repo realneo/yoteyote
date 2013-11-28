@@ -49,9 +49,8 @@ $route['page/(:any)'] = 'page/index/$1';
  * ------------------------------------------------------------------------
  */
 
-$route['login']     = 'auth/login';
+$route['login']     = 'auth/login';		// Handles both login and registration!
 $route['logout']    = 'auth/logout';
-$route['register']  = 'auth/register';
 $route['dashboard'] = 'admin/index';
 $route['profile']   = 'users/index';
 

@@ -60,6 +60,7 @@
         <link rel="stylesheet" href="<?php echo css_url('themes.css'); ?>">
         <!-- END Stylesheets -->
 
+		<!-- These are Global variables for jQuery. -->
 		<script type="text/javascript" charset="utf-8">
 			//<![CDATA[
 				var base_url  = "<?php echo base_url(); ?>";

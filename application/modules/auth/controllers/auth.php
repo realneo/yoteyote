@@ -71,8 +71,8 @@ class Auth extends Auth_Controller
 		parent::__construct();
 
 		// Load the users and profile models.
-		$this->load->model('users/mdl_users', 'user');
-		$this->load->model('profiles/mdl_profiles', 'profile');
+		$this->load->model('auth/mdl_users', 'user');
+		$this->load->model('auth/mdl_profiles', 'profile');
 
 		// Set the expire times.
 		$this->login_expire    = (int) $this->config->item('login_expire');
@@ -152,17 +152,10 @@ class Auth extends Auth_Controller
 	 */
 	public function login($redirect = NULL)
 	{
-		if ($redirect === NULL)
-		{
-			$redirect = 'dashboard';
-		}
-
-		$data['module']    = 'auth';
-		$data['view_file'] = "login_form";
-
 		// Load the Form Validation library and form helper.
 		$this->load->library('form_validation');
 		$this->load->helper('form');
+
 
 		// Setup the Form Validation Rules.
 		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]|callback_username_check');
@@ -178,81 +171,216 @@ class Auth extends Auth_Controller
 			}
 			else
 			{
-				$this->load->module('template');
-				$this->template->render('admin_fluid_dashboard', $data);
+				$data = set_page_data('page_special_login');
+
+				$data['module']    = 'auth';
+				$data['view_file'] = "page_special_login";
+
+				$this->load->view('page_special_login', $data);
 			}
 		}
 
 		// Form Validation passed so log the user in.
 		else
 		{
-			$user_name        = set_value('user_name');
-			$login_type       = $this->_login_type($user_name);
-			$user_password    = $this->_secure_hash(set_value('user_password'));
-			$user_email       = set_value('user_email');
+			// See if the forms have been submitted!
+			$submit = $this->input->post(NULL, TRUE);
 
-			// Get the Remember Me setting.
-			$query = $this->user->get_where(array($login_type => $user_name));
-			$row   = $query->row();
-
-			$user_remember_me = set_checkbox('user_remember_me', $row->user_remember_me);
-
-			// Verify the users details.
-			if ( ! $this->_verify_user_details($login_type, $user_name, $user_password))
+			// Has the login form been submitted?
+			if (isset($submit['login']))
 			{
-				show_error($this->lang->line('login_details_error'));
+				//var_debug($submit['login']);
+				//exit;
+
+				$user_name        = set_value('user_name');
+				$login_type       = $this->_login_type($user_name);
+				$user_password    = $this->_secure_hash(set_value('user_password'));
+				$user_email       = set_value('user_email');
+
+				// Get the Remember Me setting.
+				$query = $this->user->get_where(array($login_type => $user_name));
+				$row   = $query->row();
+
+				$user_remember_me = set_checkbox('user_remember_me', $row->user_remember_me);
+
+				// Verify the users details.
+				if ( ! $this->_verify_user_details($login_type, $user_name, $user_password))
+				{
+					show_error($this->lang->line('login_details_error'));
+				}
+
+				// Get the users details from the database.
+				$query = $this->user->get_where(array($login_type => $user_name));
+				$row   = $query->row();
+
+				// assign the profile id with the users id
+				$profile_user_id = $row->id;
+
+				// Get the users profile information.
+				$query   = $this->profile->get_where(array('profile_user_id' => $profile_user_id));
+				$pro_row = $query->row();
+
+				// The users session data array.
+				$data = array(
+					$login_type   => $user_name,
+					'user_id'     => $row->id,
+					'user_name'   => $row->user_name,
+					'first_name'  => $pro_row->profile_first_name,
+					'last_name'   => $pro_row->profile_last_name,
+					'pic'         => $pro_row->profile_pic,
+					'user_groups' => $this->check_user_groups($row->id),
+					'logged_in'   => TRUE,
+				);
+
+				// Set the users session data.
+				$this->session->set_userdata($data);
+
+				// Update the users RememberMe, IP Address and Last time logged in.
+				$data1 = array(
+					'user_remember_me' => $user_remember_me,
+					'user_ip_address'  => $this->input->ip_address(),
+					'user_last_login'  => set_now(),
+				);
+
+				// Update the users database record.
+				$this->user->_update(array('user_name' => $user_name), $data1);
+
+				// Check to see if the user want's to be remembered.
+				if ( ! empty($data1['user_remember_me']))
+				{
+					$this->_create_user_cookie();
+				}
+				else
+				{
+					setcookie("logged_in", '', 1, '/');
+				}
+
 			}
 
-			// Get the users details from the database.
-			$query = $this->user->get_where(array($login_type => $user_name));
-			$row   = $query->row();
-
-			// assign the profile id with the users id
-			$profile_user_id = $row->id;
-
-			// Get the users profile information.
-			$query   = $this->profile->get_where(array('profile_user_id' => $profile_user_id));
-			$pro_row = $query->row();
-
-			// The users session data array.
-			$data = array(
-				$login_type   => $user_name,
-				'user_id'     => $row->id,
-				'user_name'   => $row->user_name,
-				'first_name'  => $pro_row->profile_first_name,
-				'last_name'   => $pro_row->profile_last_name,
-				'pic'         => $pro_row->profile_pic,
-				'user_groups' => $this->check_user_groups($row->id),
-				'logged_in'   => TRUE,
-			);
-
-			//var_debug($data);
-			//exit;
-
-			// Set the users session data.
-			$this->session->set_userdata($data);
-
-			// get current date and time
-			$now = date('Y-m-d H:i:s');
-
-			// Update the users RememberMe, IP Address and Last time logged in.
-			$data1 = array(
-				'user_remember_me' => $this->input->post('user_remember_me', TRUE),
-				'user_ip_address'  => $this->input->ip_address(),
-				'user_last_login'  => set_now(),
-			);
-
-			// Update the users database record.
-			$this->user->_update(array('user_name' => $user_name), $data1);
-
-			// Check to see if the user want's to be remembered.
-			if ($data1['user_remember_me'])
+			// Has the registration form been submitted?
+			elseif (isset($submit['register']))
 			{
-				$this->_create_user_cookie();
+				//var_debug($submit['register']);
+				//exit;
+
+				$login = TRUE;
+
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = set_value('user_email');
+
+				// Create the new users database record
+				$data = array(
+					'user_name'       => $this->input->post('user_name', true),
+					'user_email'      => $this->input->post('user_email', true),
+					'user_password'   => $user_password,
+					'user_ip_address' => $this->input->ip_address(),
+					'user_last_login' => set_now(),
+					'user_created_at' => set_now(),
+					'user_updated_at' => set_now(),
+				);
+
+				$insert_id = $this->user->_insert($data);
+
+				/**
+				 * -----------------------------------------------------
+				 * Create the Users Profile Record...
+				 * -----------------------------------------------------
+				 */
+
+				$data = array(
+					'profile_user_id' => $insert_id,
+				);
+
+				$result = $this->profile->_insert($data);
+
+				$data2['msg'] = "The user has now been created.";
+
+				/**
+				 * ---------------------------------------------------------------------
+				 * Add the new created user groups.
+				 * ---------------------------------------------------------------------
+				 */
+
+				// Web site admin group
+				if ($user_name == 'admin')
+				{
+					$data = array(
+						'user_id'  => $insert_id,
+						'group_id' => '1',
+					);
+				}
+
+				// Web site owner group
+				elseif ($user_name == 'owner')
+				{
+					$data = array(
+						'user_id'  => $insert_id,
+						'group_id' => '2',
+					);
+				}
+
+				// Web site user group default
+				else
+				{
+					$data = array(
+						'user_id'  => $insert_id,
+						'group_id' => '6',
+					);
+				}
+
+				// Insert the new users group
+				$result = modules::run('admin/groups/insert_user_group', $data);
+
+				// Everything passed so log the new user into the system
+				if ($login === TRUE)
+				{
+					$data2['msg'] = "The user has been created, you have now been logged in.";
+
+					// Get the users information from the database.
+					$query = $this->user->get_where(array('user_name' => $user_name));
+					$row   = $query->row();
+
+					// assign the profile id with the users id
+					$profile_user_id = $row->id;
+
+					// Get the users profile information.
+					$query   = $this->profile->get_where(array('profile_user_id' => $profile_user_id));
+					$pro_row = $query->row();
+
+					// The users session data array.
+					$data = array(
+						'user_id'     => $row->id,
+						'user_name'   => $row->user_name,
+						'first_name'  => $pro_row->profile_first_name,
+						'last_name'   => $pro_row->profile_last_name,
+						'pic'         => $pro_row->profile_pic,
+						'user_groups' => $this->check_user_groups($row->id),
+						'logged_in'   => TRUE,
+					);
+
+					// Set the users session data array.
+					$this->session->set_userdata($data);
+
+					// Create the users cookie.
+					$this->_create_user_cookie();
+				}
 			}
-			else
+
+			/**
+			 * ---------------------------------------------------------------------
+			 * TODO:
+			 * ---------------------------------------------------------------------
+			 *
+			 * Add a check here to see if the login is a User or Admin
+			 * for dispalying the admin_dashboard or the user_dashboard.
+			 *
+			 * ---------------------------------------------------------------------
+			 */
+
+			if ($redirect === NULL)
 			{
-				setcookie("logged_in", '', 1, '/');
+				$redirect = 'admin_dashboard';
 			}
 
 			redirect($redirect, 'refresh');
@@ -296,156 +424,6 @@ class Auth extends Auth_Controller
 	{
 		return ($this->session->userdata('logged_in') === TRUE) ? TRUE : FALSE;
 	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * register()
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-    public function register($login = TRUE, $edit = FALSE, $id = NULL, $add = FALSE)
-    {
-    	// Load the Form Validation library and form helper.
-		$this->load->library('form_validation');
-		$this->load->helper('form');
-
-		// Setup the Form Validation Rules.
-		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]|callback_reg_username_check');
-		$this->form_validation->set_rules('user_password', 'User Password', 'trim|required|min_length[5]|max_length[12]|matches[conf_password]');
-		$this->form_validation->set_rules('conf_password', 'Password confirmation', 'trim|required|min_length[5]|max_length[12]|matches[user_password]');
-		$this->form_validation->set_rules('user_email', 'User Email', 'trim|required|valid_email|callback_reg_email_check');
-
-		// Setup for the module views.
-		$data['module']     = 'auth';
-		$data['view_file']  = "register_form";
-
-		// Run the Form Validation
-		if ($this->form_validation->run($this) === FALSE)
-		{
-			// Show the normal registration form
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
-		}
-
-		// Register and login the new user to the system.
-		else
-		{
-			$user_name     = set_value('user_name');
-			$user_password = $this->_secure_hash(set_value('user_password'));
-			$user_email    = set_value('user_email');
-
-			// Create the new users database record
-			$data = array(
-				'user_name'       => $user_name,
-				'user_email'      => $user_email,
-				'user_password'   => $user_password,
-				'user_ip_address' => $this->input->ip_address(),
-				'user_last_login' => set_now(),
-				'user_created_at' => set_now(),
-				'user_updated_at' => set_now(),
-			);
-
-			$insert_id = $this->user->_insert($data);
-
-			/**
-			 * -----------------------------------------------------
-			 * Create the Users Profile Record...
-			 * -----------------------------------------------------
-			 */
-
-			$data = array(
-				'profile_user_id' => $insert_id,
-			);
-
-			$result = $this->profile->_insert($data);
-
-			$data2['msg'] = "The user has now been created.";
-
-			/**
-			 * ---------------------------------------------------------------------
-			 * Add the new created user groups.
-			 * ---------------------------------------------------------------------
-			 */
-
-			// Web site admin group
-			if ($user_name == 'admin')
-			{
-				$data = array(
-					'user_id'  => $insert_id,
-					'group_id' => '1',
-				);
-			}
-
-			// Web site owner group
-			elseif ($user_name == 'owner')
-			{
-				$data = array(
-					'user_id'  => $insert_id,
-					'group_id' => '2',
-				);
-			}
-
-			// Web site user group default
-			else
-			{
-				$data = array(
-					'user_id'  => $insert_id,
-					'group_id' => '6',
-				);
-			}
-
-			// Insert the new users group
-			$result = modules::run('groups/insert_user_group', $data);
-
-			// Everything passed so log the new user into the system
-			if ($login === TRUE)
-			{
-				$data2['msg'] = "The user has been created, you have now been logged in.";
-
-				// Get the users information from the database.
-				$query = $this->user->get_where(array('user_name' => $user_name));
-				$row   = $query->row();
-
-				// assign the profile id with the users id
-				$profile_user_id = $row->id;
-
-				// Get the users profile information.
-				$query   = $this->profile->get_where(array('profile_user_id' => $profile_user_id));
-				$pro_row = $query->row();
-
-				// The users session data array.
-				$data = array(
-					'user_id'     => $row->id,
-					'user_name'   => $row->user_name,
-					'first_name'  => $pro_row->profile_first_name,
-					'last_name'   => $pro_row->profile_last_name,
-					'pic'         => $pro_row->profile_pic,
-					'user_groups' => $this->check_user_groups($row->id),
-					'logged_in'   => TRUE,
-				);
-
-				// Set the users session data array.
-				$this->session->set_userdata($data);
-
-				// If remember me is TRUE then generate the users cookie.
-				if ($row->user_remember_me === TRUE)
-				{
-					$this->_create_user_cookie();
-				}
-			}
-
-			// Show the View
-			$data['view_file'] = "reg_success";
-			$data['module']    = 'auth';
-			$data['msg']       = $data2['msg'];
-
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
-		}
-    }
 
 	// -----------------------------------------------------------------------
 
@@ -650,7 +628,7 @@ class Auth extends Auth_Controller
 	 */
 	private function _verify_user_details($auth_type, $user_name, $user_password)
 	{
-		$row = $this->user->verify_user_details($auth_type, $user_name, $user_password);
+		$row = $this->user->verify_user_details($auth_type, $user_name);
 
 		if ($row === FALSE)
 		{
@@ -709,7 +687,7 @@ class Auth extends Auth_Controller
 		// seconds * minutes * hours * days + current time -  86400 = 1 day
 		// expiration time is set to a month (60 sec * 60 min * 24 hours * 30 days).
 		// 86400 * 30 = 30 days.
-		if ($row->user_remember_me)
+		if ( ! empty($row->user_remember_me))
 		{
 			setcookie("logged_in", $identifier, time() + (int) $this->remember_expire, '/');
 		}

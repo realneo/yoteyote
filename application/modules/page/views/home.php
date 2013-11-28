@@ -38,6 +38,7 @@
         <li><i class="fa fa-file-o"></i></li>
         <!--<li>Pages</li>-->
         <li><a href=""><?php echo $page_title; ?></a></li>
+		<li class="pull-right"><strong>Welcome: <?php echo $user_name; ?>.</strong></li>
     </ul>
     <!-- END Blank Header -->
 

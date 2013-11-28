@@ -45,6 +45,21 @@ class Mdl_users extends MY_Model
 	// -----------------------------------------------------------------------
 
 	/**
+	 * verify_user_details()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function verify_user_details($auth_type, $user_name)
+    {
+		$this->db->where($auth_type, $user_name);
+		return $query = $this->db->get($this->table);
+    }
+
+	// -----------------------------------------------------------------------
+
+	/**
 	 * password_check()
 	 *
 	 * @access	public

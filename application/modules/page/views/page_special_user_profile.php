@@ -110,7 +110,7 @@
                                 </a>
                                 <div class="media-body">
                                     <h6><span class="label label-default"><i class="fa fa-clock-o"></i> 1 hour ago</span></h6>
-                                    <p class="remove-margin">Check them out: <br><a href="img/placeholders/image_720x450_dark.png" data-toggle="lightbox-image"><img src="img/placeholders/image_160x120_dark.png" alt="demo"></a><a href="<?php echo img_url('placeholders/image_720x450_dark.png'); ?>" data-toggle="lightbox-image"><img src="img/placeholders/image_160x120_dark.png" alt="demo"></a></p>
+                                    <p class="remove-margin">Check them out: <br><a href="<?php echo img_url('placeholders/image_720x450_dark.png'); ?>" data-toggle="lightbox-image"><img src="<?php echo img_url('placeholders/image_160x120_dark.png'); ?>" alt="demo"></a><a href="<?php echo img_url('placeholders/image_720x450_dark.png'); ?>" data-toggle="lightbox-image"><img src="<?php echo img_url('placeholders/image_160x120_dark.png'); ?>" alt="demo"></a></p>
                                     <p>
                                         <a href="javascript:void(0)" class="btn btn-xs btn-success" data-toggle="tooltip" title="Like"><i class="fa fa-thumbs-up"></i> 1</a>
                                         <a href="javascript:void(0)" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Dislike"><i class="fa fa-thumbs-down"></i></a>
