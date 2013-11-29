@@ -120,24 +120,29 @@ class Auth extends Auth_Controller
 		}
 
 		// See if the user has the correct group level
-		elseif ($this->logged_in() == TRUE)
+		if ($this->logged_in() == TRUE)
 		{
-			$id	= $this->session->userdata('user_id');
+			//$id	= $this->session->userdata('user_id');
 
-			$data = json_decode($this->check_user_groups($id, $group), TRUE);
+			//$data = json_decode($this->check_user_groups($id, $group), TRUE);
 
-			if ($data === FALSE)
+			//if ($data === FALSE)
+			//{
+			//	show_error($this->lang->line('insufficient_privs'));
+			//}
+
+			//return TRUE;
+
+			if (user_group($group != 'admin'))
 			{
-				show_error($this->lang->line('insufficient_privs'));
+				redirect('/', 'refresh');
 			}
 
-			return TRUE;
-		}
-
-		// Redirect to the admin dashboard
-		else
-		{
-			redirect('admin/dashboard/', 'refresh');
+			// Redirect to the admin dashboard
+			else
+			{
+				redirect('admin/dashboard/', 'refresh');
+			}
 		}
     }
 
@@ -254,7 +259,6 @@ class Auth extends Auth_Controller
 				{
 					setcookie("logged_in", '', 1, '/');
 				}
-
 			}
 
 			// Has the registration form been submitted?
@@ -373,14 +377,21 @@ class Auth extends Auth_Controller
 			 * ---------------------------------------------------------------------
 			 *
 			 * Add a check here to see if the login is a User or Admin
-			 * for dispalying the admin_dashboard or the user_dashboard.
+			 * for dispalying the admin dashboard or the user dashboard.
 			 *
 			 * ---------------------------------------------------------------------
 			 */
 
 			if ($redirect === NULL)
 			{
-				$redirect = 'admin_dashboard';
+				if (user_group('admin'))
+				{
+					$redirect = 'dashboard';
+				}
+				else
+				{
+					$redirect = '/';
+				}
 			}
 
 			redirect($redirect, 'refresh');
@@ -788,10 +799,10 @@ class Auth extends Auth_Controller
 		 */
 
 		// Get a list of user groups.
-		$this->groups = modules::run('group/get_groups');
+		$this->groups = modules::run('admin/group/get_groups');
 
 		// Get a list of all the groups a user belongs to.
-		$this->user_groups = modules::run('groups/get_user_groups', $id);
+		$this->user_groups = modules::run('admin/groups/get_user_groups', $id);
 
 		//var_debug($this->groups, $this->user_groups);
 		//exit;

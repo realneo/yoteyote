@@ -52,7 +52,7 @@ $route['page/(:any)'] = 'page/index/$1';
 $route['login']     = 'auth/login';		// Handles both login and registration!
 $route['logout']    = 'auth/logout';
 $route['dashboard'] = 'admin/index';
-$route['profile']   = 'users/index';
+$route['profile']   = 'user/index';
 
 // END AUTHENTICATION LIBRARY ROUTES --------------------------------------
 

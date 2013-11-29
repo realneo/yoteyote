@@ -280,7 +280,7 @@
                             <a href="javascript:void(0)"><i class="fa fa-cog"></i> Settings</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('home/page_special_login'); ?>"><i class="fa fa-power-off"></i> Logout</a>
+                            <a href="<?php echo base_url('/'); ?>"><i class="fa fa-power-off"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- END User Menu -->

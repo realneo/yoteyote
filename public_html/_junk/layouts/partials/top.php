@@ -15,11 +15,10 @@
     <head>
         <meta charset="utf-8">
 
-        <title><?php echo $template['title']; ?></title>
+        <title><?php echo $template['title'] ?></title>
 
-        <meta name="description" content="<?php echo $template['description']; ?>">
-        <meta name="keywords" content="<?php echo $template['keywords']; ?>">
-        <meta name="author" content="<?php echo $template['author']; ?>">
+        <meta name="description" content="<?php echo $template['description'] ?>">
+        <meta name="author" content="<?php echo $template['author'] ?>">
         <meta name="robots" content="noindex, nofollow">
 
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
@@ -280,7 +279,7 @@
                             <a href="javascript:void(0)"><i class="fa fa-cog"></i> Settings</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('/'); ?>"><i class="fa fa-power-off"></i> Logout</a>
+                            <a href="<?php echo base_url('home/page_special_login'); ?>"><i class="fa fa-power-off"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- END User Menu -->

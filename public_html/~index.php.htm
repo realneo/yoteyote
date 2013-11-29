@@ -1,0 +1,668 @@
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Notice</p>
+<p>Message:  Undefined index: REMOTE_ADDR</p>
+<p>Filename: core/Input.php</p>
+<p>Line Number: 351</p>
+
+</div><div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Warning</p>
+<p>Message:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\yoteyote\system\core\Exceptions.php:185)</p>
+<p>Filename: libraries/Session.php</p>
+<p>Line Number: 675</p>
+
+</div><!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <title>YoteyoteUI - Premium Web App and Admin Template</title>
+
+        <meta name="description" content="YoteyoteUI is a Premium Web App and Admin Template">
+        <meta name="author" content="Yoteyote">
+        <meta name="robots" content="noindex, nofollow">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="http://localhost/assets/img/favicon.ico">
+        <link rel="apple-touch-icon" href="http://localhost/assets/img/icon57.png" sizes="57x57">
+        <link rel="apple-touch-icon" href="http://localhost/assets/img/icon72.png" sizes="72x72">
+        <link rel="apple-touch-icon" href="http://localhost/assets/img/icon76.png" sizes="76x76">
+        <link rel="apple-touch-icon" href="http://localhost/assets/img/icon114.png" sizes="114x114">
+        <link rel="apple-touch-icon" href="http://localhost/assets/img/icon120.png" sizes="120x120">
+        <link rel="apple-touch-icon" href="http://localhost/assets/img/icon144.png" sizes="144x144">
+        <link rel="apple-touch-icon" href="http://localhost/assets/img/icon152.png" sizes="152x152">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- The Open Sans font is included from Google Web Fonts -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,700,700italic">
+
+        <!-- Bootstrap is included in its original form, unaltered -->
+        <link rel="stylesheet" href="http://localhost/assets/css/bootstrap.css">
+
+        <!-- Related styles of various icon packs and javascript plugins -->
+        <link rel="stylesheet" href="http://localhost/assets/css/plugins.css">
+
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <link rel="stylesheet" href="http://localhost/assets/css/main.css">
+
+        <!-- The main Yoteyote custom stylesheet defined in here -->
+        <link rel="stylesheet" href="http://localhost/assets/css/yoteyote.css">
+
+        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+        	        <link id="theme-link" rel="stylesheet" href="http://localhost/assets/css/themes/dragon.css">
+        
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" href="http://localhost/assets/css/themes.css">
+        <!-- END Stylesheets -->
+
+		<!-- These are Global variables for jQuery. -->
+		<script type="text/javascript" charset="utf-8">
+			//<![CDATA[
+				var base_url  = "http://localhost/";
+				var site_url  = "http://localhost/";
+				var theme_url = "http://localhost/assets/css/themes";
+			// ]]>
+		</script>
+
+        <!-- Modernizr (Browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+        <script src="http://localhost/assets/js/vendor/modernizr-2.6.2-respond-1.3.0.min.js"></script>
+    </head>
+
+    <!-- Body -->
+    <!-- In the PHP version you can set the following options from the config file -->
+    <!--
+        Add one of the following classes to the body element for the desirable feature:
+        'sidebar-left-pinned'                         for a left pinned sidebar (always visible > 1200px)
+        'sidebar-right-pinned'                        for a right pinned sidebar (always visible > 1200px)
+        'sidebar-left-pinned sidebar-right-pinned'    for both sidebars pinned (always visible > 1200px)
+    -->
+        <body class="header-fixed-top">
+        <!-- Left Sidebar -->
+        <!-- In the PHP version you can set the following options from the config file -->
+        <!-- If you add the class .enable-hover, then a small portion of left sidebar will be visible and it can be opened with a mouse hover (> 1200px) (may affect website performance) -->
+        <div id="sidebar-left" class="enable-hover">
+
+            <!-- Sidebar Content -->
+            <div class="sidebar-content">
+
+                <!-- Search Form -->
+                <form action="http://localhost/home/page_ready_search_results" method="post" class="sidebar-search">
+                    <input type="text" id="sidebar-search-term" name="sidebar-search-term" placeholder="Search..">
+                </form>
+                <!-- END Search Form -->
+
+                <!-- Wrapper for scrolling functionality -->
+                <div class="sidebar-left-scroll">
+                    
+                    <!-- Sidebar Navigation -->
+                    <ul class="sidebar-nav">
+                                                                                <li>
+                                <h2 class="sidebar-header">Welcome</h2>
+                            </li>
+                                                                                                            <li>
+                                <a href="http://localhost/" class=" active"><i class="fa fa-coffee"></i>Dashboard</a>
+                                                            </li>
+                                                                                                            <li>
+                                <h2 class="sidebar-header">User Interface</h2>
+                            </li>
+                                                                                                            <li>
+                                <a href="#" class="menu-link"><i class="fa fa-rocket"></i>Elements</a>
+                                                                    <ul>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_elements_typography">Typography</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_elements_blocks_grid">Blocks - Grid</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_elements_navigation_extras">Navigation - Extras</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_elements_buttons_dropdowns">Buttons - Dropdowns</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_elements_progress_loading">Progress - Loading</a>
+                                                                                    </li>
+                                                                            </ul>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="#" class="menu-link"><i class="fa fa-th"></i>Tables</a>
+                                                                    <ul>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_tables_styles">Styles</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_tables_datatables">Datatables</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_tables_editable">Editable</a>
+                                                                                    </li>
+                                                                            </ul>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="#" class="menu-link"><i class="fa fa-pencil-square-o"></i>Forms</a>
+                                                                    <ul>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_forms_general">General</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_forms_components">Components</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_forms_validation">Validation</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_forms_wizard">Wizard</a>
+                                                                                    </li>
+                                                                            </ul>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="#" class="menu-link"><i class="fa fa-gift"></i>Icon Packs</a>
+                                                                    <ul>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_icons_fontawesome">Font Awesome</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_icons_glyphicons_pro">Glyphicons Pro</a>
+                                                                                    </li>
+                                                                            </ul>
+                                                            </li>
+                                                                                                            <li>
+                                <h2 class="sidebar-header">Extras</h2>
+                            </li>
+                                                                                                            <li>
+                                <a href="#" class="menu-link"><i class="fa fa-gear"></i>Components</a>
+                                                                    <ul>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_comp_animations">Animations</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_comp_carousel">Carousel</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_comp_gallery">Gallery</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_comp_calendar">Calendar</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_comp_charts">Charts</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_comp_syntax_highlighting">Syntax Highlighting</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_comp_maps">Maps</a>
+                                                                                    </li>
+                                                                            </ul>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="#" class="menu-link"><i class="fa fa-file"></i>Pages</a>
+                                                                    <ul>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_blank">Blank</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_404">404 Error</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_search_results">Search Results</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_pricing_tables">Pricing Tables</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_faq">FAQ</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_invoice">Invoice</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_article">Article</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="http://localhost/home/page_ready_forum">Forum</a>
+                                                                                    </li>
+                                                                            </ul>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="#" class="menu-link"><i class="glyphicon-tint"></i>3 Level Menu</a>
+                                                                    <ul>
+                                                                                <li>
+                                            <a href="#">Link 1</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="#" class="submenu-link">Submenu 1</a>
+                                                                                            <ul>
+                                                                                                        <li>
+                                                        <a href="#">Link</a>
+                                                    </li>
+                                                                                                        <li>
+                                                        <a href="#">Link</a>
+                                                    </li>
+                                                                                                        <li>
+                                                        <a href="#">Link</a>
+                                                    </li>
+                                                                                                    </ul>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="#">Link 2</a>
+                                                                                    </li>
+                                                                                <li>
+                                            <a href="#" class="submenu-link">Submenu 2</a>
+                                                                                            <ul>
+                                                                                                        <li>
+                                                        <a href="#">Link</a>
+                                                    </li>
+                                                                                                        <li>
+                                                        <a href="#">Link</a>
+                                                    </li>
+                                                                                                    </ul>
+                                                                                    </li>
+                                                                            </ul>
+                                                            </li>
+                                                                                                            <li>
+                                <h2 class="sidebar-header">Special</h2>
+                            </li>
+                                                                                                            <li>
+                                <a href="http://localhost/home/page_special_timeline"><i class="fa fa-clock-o"></i>Timeline</a>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="http://localhost/home/page_special_user_profile"><i class="fa fa-pencil-square"></i>User Profile</a>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="http://localhost/home/page_special_message_center"><i class="fa fa-envelope-o"></i>Message Center</a>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="http://localhost/home/page_ready_yoteyote_blank"><i class="fa fa-envelope-o"></i>Yoteyote Page</a>
+                                                            </li>
+                                                                                                            <li>
+                                <a href="http://localhost/login"><i class="fa fa-power-off"></i>Login &amp; Register</a>
+                                                            </li>
+                                                                        </ul>
+                    <!-- END Sidebar Navigation -->
+                                    </div>
+                <!-- END Wrapper for scrolling functionality -->
+            </div>
+            <!-- END Sidebar Content -->
+        </div>
+        <!-- END Left Sidebar -->
+
+        <!-- Right Sidebar -->
+        <!-- In the PHP version you can set the following options from the config file -->
+        <!-- If you add the class .enable-hover, then a small portion of right sidebar will be visible and it can be opened with a mouse hover (> 1200px) (may affect website				performance) -->
+        <div id="sidebar-right">
+            <!-- Sidebar Content -->
+            <div class="sidebar-content">
+                <!-- User Info -->
+                <div class="user-info">
+                    <div class="user-details"><a href="http://localhost/home/page_special_user_profile">pixelcave</a><br><em>Web Designer</em></div>
+                    <img src="http://localhost/assets/img/template/avatar.png" alt="Avatar">
+                </div>
+                <!-- END User Info -->
+
+                <!-- Wrapper for scrolling functionality -->
+                <div class="sidebar-right-scroll">
+                    <!-- Color Themes -->
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-header">Color Themes</h2>
+
+                        <!-- Change Color Theme functionality can be found in main.js - templateOptions() -->
+                        <ul class="theme-colors clearfix">
+                            <li class="active">
+                                <a href="javascript:void(0)" class="themed-background-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="themed-background-river themed-border-river" data-theme="http://localhost/assets/css/themes/river.css" data-toggle="tooltip" title="River"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="themed-background-amethyst themed-border-amethyst" data-theme="http://localhost/assets/css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="themed-background-dragon themed-border-dragon" data-theme="http://localhost/assets/css/themes/dragon.css" data-toggle="tooltip" title="Dragon"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="themed-background-emerald themed-border-emerald" data-theme="http://localhost/assets/css/themes/emerald.css" data-toggle="tooltip" title="Emerald"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="themed-background-grass themed-border-grass" data-theme="http://localhost/assets/css/themes/grass.css" data-toggle="tooltip" title="Grass"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END Color Themes -->
+
+                    <!-- User Menu -->
+                    <ul class="sidebar-nav">
+                        <li>
+                            <h2 class="sidebar-header">Explore</h2>
+                        </li>
+                        <li>
+                            <a href="http://localhost/home/page_special_timeline"><i class="fa fa-clock-o"></i> Updates</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost/home/page_special_user_profile"><i class="fa fa-pencil-square"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost/home/page_special_message_center"><i class="fa fa-envelope-o"></i> Messages</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fa fa-cog"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost/home/page_special_login"><i class="fa fa-power-off"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- END User Menu -->
+
+                    <!-- Notifications -->
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-header">Notifications</h2>
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>2 hours ago</em></small><br>
+                            PHP version updated successfully on <a href="javascript:void(0)">Server #5</a>
+                        </div>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>3 hours ago</em></small><br>
+                            <a href="javascript:void(0)">Game Server</a> crashed but restored!
+                        </div>
+                        <div class="alert alert-warning alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>5 hours ago</em></small><br>
+                            <a href="javascript:void(0)">FTP Server</a> went down for maintenance!
+                        </div>
+                    </div>
+                    <!-- END Notifications -->
+
+                    <!-- Messages -->
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-header">Messages</h2>
+                        <div class="alert alert-info">
+                            <small><a href="http://localhost/home/page_special_user_profile">Claire</a>, 2 minutes ago</small><br>
+                            Hi John, I just wanted to let you know that.. <a href="page_special_message_center.php">more</a>
+                        </div>
+                        <div class="alert alert-info">
+                            <small><a href="http://localhost/home/page_special_user_profile">Michael</a>, 5 minutes ago</small><br>
+                            The project is moving along just fine and we.. <a href="page_special_message_center.php">more</a>
+                        </div>
+                    </div>
+                    <!-- END Messages -->
+                </div>
+                <!-- END Wrapper for scrolling functionality -->
+            </div>
+            <!-- END Sidebar Content -->
+        </div>
+        <!-- END Right Sidebar -->
+
+        <!-- Page Container -->
+        <!-- In the PHP version you can set the following options from the config file -->
+        <!-- Add the class .full-width for a full width page (100%, 1920px max width) -->
+        <div id="page-container" class="full-width">
+            <!-- Header -->
+            <!-- In the PHP version you can set the following options from the config file -->
+            <!-- Add the class .navbar-default or .navbar-inverse for a light or dark header respectively -->
+            <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
+            <!-- If you add the class .navbar-fixed-top remember to add the class .header-fixed-top to <body> element -->
+            <!-- If you add the class .navbar-fixed-bottom remember to add the class .header-fixed-bottom to <body> element -->
+            <header class="navbar navbar-default navbar-fixed-top">
+                <!-- Right Header Navigation -->
+                <ul class="nav header-nav pull-right">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-cogs"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-custom pull-right">
+                            <li class="dropdown-header text-center">HEADER</li>
+                            <li>
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-default">Default</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-inverse">Inverse</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-top">Top</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-bottom">Bottom</a>
+                                </div>
+                            </li>
+                            <li class="hidden-xs hidden-sm dropdown-header text-center">FULL WIDTH PAGE</li>
+                            <li class="hidden-xs hidden-sm">
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-fw-disable">Disable</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-fw-enable">Enable</a>
+                                </div>
+                            </li>
+                            <li class="visible-lg dropdown-header text-center">PIN SIDEBARS</li>
+                            <li class="visible-lg">
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-pin-left">Pin Left</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-pin-right">Pin Right</a>
+                                </div>
+                            </li>
+                            <li class="visible-lg dropdown-header text-center">SIDEBARS MOUSE HOVER</li>
+                            <li class="visible-lg">
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-hover-left">Left</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-hover-right">Right</a>
+                                </div>
+                            </li>
+                            <li class="visible-lg hidden-lt-ie9 dropdown-header text-center">EFFECT WHEN SIDEBARS OPEN</li>
+                            <li class="visible-lg hidden-lt-ie9 text-center">
+                                <div class="btn-group-vertical btn-group-sm" id="option-effects">
+                                    <button class="btn btn-default" data-fx="fx-none">None</button>
+                                    <button class="btn btn-default" data-fx="fx-opacity">Opacity</button>
+                                    <button class="btn btn-default" data-fx="fx-move">Move</button>
+                                    <button class="btn btn-default" data-fx="fx-push">Push</button>
+                                    <button class="btn btn-default" data-fx="fx-rotate">Rotate</button>
+                                    <button class="btn btn-default" data-fx="fx-push-move">Push and Move</button>
+                                    <button class="btn btn-default" data-fx="fx-push-rotate">Push and Rotate</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" id="sidebar-right-toggle">
+                            <strong>5</strong> <i class="fa fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- END Right Header Navigation -->
+
+                <!-- Left Header Navigation -->
+                <ul class="nav header-nav pull-left">
+                    <li>
+                        <a href="javascript:void(0)" id="sidebar-left-toggle">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- END Left Header Navigation -->
+
+                <!-- Header Brand -->
+                <a href="http://localhost/home" class="navbar-brand">
+                    <img src="http://localhost/assets/img/template/drop.png" alt="YoteyoteUI">
+                    <span>Yoteyote</span>
+                </a>
+                <!-- END Header Brand -->
+            </header>
+            <!-- END Header -->
+
+            <!-- FX Container -->
+            <!-- In the PHP version you can set the following options from the config file -->
+            <!--
+                All effects apply in resolutions larger than 1200px width
+                Add one of the following classes to #fx-container for setting an effect to main content when one of the sidebars are opened
+                'fx-none'           remove all effects (better website performance)
+                'fx-opacity'        opacity effect
+                'fx-move'           move effect
+                'fx-push'           push effect
+                'fx-rotate'         rotate effect
+                'fx-push-move'      push-move effect
+                'fx-push-rotate'    push-rotate effect
+            -->
+            <div id="fx-container" class="fx-opacity">
+<!-- Page content -->
+<div id="page-content" class="block">
+    <!-- Blank Header -->
+    <div class="block-header">
+       	<div class="header-background header-pad">
+		    <div class="row">
+        		<div class="col-xs-6">
+        			<h1>
+        			<div>
+	    	    		<img src="http://localhost/assets/images/logo.png" alt="logo" height="87" width="87">
+						<strong>Yoteyote</strong>
+						<br />
+						<small>
+						<strong class="discover-pad">Buy & Sell small jobs from one another.&nbsp;&nbsp;</strong>
+						<a id="discover_btn" href="#" class="btn btn-danger btn-sm" role="button"> Discover how</a><br />
+						</small>
+						</div>
+					</h1>
+        		</div>
+
+		        <div class="col-xs-6 header2-pad">
+					<div class="btn-group pull-right"> <!-- I Will -->
+						<button type="button" class="btn btn-default active"> I Will&nbsp;&nbsp;</button>
+						<a href="#" class="btn btn-success" role="button"> Create</a>
+					</div><br /><br /><br />
+					<div class="btn-group pull-right"> <!-- I Want -->
+						<button type="button" class="btn btn-default active"> I Want</button>
+						<a href="#" class="btn btn-danger" role="button"> Create</a>
+					</div>
+		        </div>
+		    </div>
+	    </div>
+    </div>
+
+    <ul class="breadcrumb breadcrumb-top">
+        <li><i class="fa fa-file-o"></i></li>
+        <!--<li>Pages</li>-->
+        <li><a href="">Home</a></li>
+		<li class="pull-right"><strong>Welcome: Guest.</strong></li>
+    </ul>
+    <!-- END Blank Header -->
+
+    <!-- Block -->
+    <div class="block">
+
+        <!-- Block Title -->
+        <div class="block-title">
+			<h2>Home</h2>
+		</div>
+        <!-- END Block Title -->
+
+        <!-- Block Content -->
+        <p>
+			This is block's content..
+
+			<!-- For notification messages. -->
+			<div id="notifications">
+
+			</div>
+
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed libero consectetur arcu suscipit convallis. Sed accumsan dictum risus, sollicitudin eleifend velit mollis eget. Curabitur varius orci sagittis sapien elementum porta. Pellentesque interdum nulla quis purus luctus nec auctor sem venenatis. Vivamus ultrices odio sit amet metus faucibus suscipit. Morbi sed enim a sapien facilisis scelerisque. Duis facilisis leo quis sapien laoreet eget mollis ipsum condimentum. Etiam placerat accumsan leo, vel faucibus nunc ultrices vel. Aenean tristique mi vitae orci consequat id fermentum tortor accumsan. Donec adipiscing turpis sem. Mauris rhoncus tellus ac elit consequat consectetur. Maecenas elementum volutpat ligula at malesuada.
+			<!-- Yoteyote content id for yoteyote main.js -->
+			<div id="content">
+
+			    <!-- Blank Content -->
+		    	<p>
+					Create your content..
+				</p>
+
+			</div>
+
+		</p>
+        <!-- END Block Content -->
+
+    </div>
+    <!-- END Block -->
+
+<!--
+				<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+					<div id="panel-1" class="panel panel-default">
+
+						<div class="panel-heading"> Home </div>
+
+						<div class="panel-body">
+
+							<!-- For notification messages. --><!--
+							<div id="notifications">
+
+							</div>
+
+							<!--<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Notice</p>
+<p>Message:  Use of undefined constant php - assumed 'php'</p>
+<p>Filename: views/home.php</p>
+<p>Line Number: 134</p>
+
+</div>-->
+
+							<!-- Yoteyote content id for yoteyote main.js --><!--
+							<div id="content">
+
+
+							</div>
+
+						</div> <!-- panel body --><!--
+
+						<div class="panel-footer"> &nbsp; </div> <!-- Panel footer -->
+<!--
+					</div> <!-- panel -->
+
+<!--				</div> <!-- col-lg-9 -->
+    <!-- END Blank Content -->
+</div>
+<!-- END Page Content -->
+
+        <!-- Footer -->
+        <footer class="clearfix">
+        	<!-- Right Statusbar Text -->
+            <div class="pull-right">
+                <span id="year-copy"></span> &copy; <a href="http://www.yoteyote.com" target="_blank">Yoteyote </a>
+                All rights reserved.
+                <!--Crafted with <i class="fa fa-heart"></i> by <a href="http://www.yoteyote.com" target="_blank">Yoteyote</a>-->
+            </div>
+
+			<!-- Left Statusbar text -->
+            <div class="pull-left">
+                <!--<span id="year-copy"></span> &copy; <a href="javascript:void(0)" target="_blank"></a>-->
+
+            </div>
+        </footer>
+        <!-- END Footer -->
+    </div>
+    <!-- END FX Container -->
+</div>
+<!-- END Page Container -->
+
+<!-- Scroll to top link, check main.js - scrollToTop() -->
+<a href="javascript:void(0)" id="to-top"><i class="fa fa-angle-up"></i></a>
+
+<!-- Get Jquery library from Google but if something goes wrong get Jquery from local file - Remove 'http:' if you have SSL -->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="http://localhost/assets/js/vendor/jquery/1.10.2/jquery.min.js"></script>
+
+<script>!window.jQuery && document.write(unescape('%3Cscript src="http://localhost/assets/js/vendor/jquery-1.10.2.min.js" %3E%3C/script%3E'));</script>
+
+<!-- Bootstrap.js, Jquery plugins and custom Javascript code -->
+<script src="http://localhost/assets/js/vendor/bootstrap.min.js"></script>
+<script src="http://localhost/assets/js/jquery.cookie.js"></script>
+<script src="http://localhost/assets/js/plugins.js"></script>
+<script src="http://localhost/assets/js/main.js"></script>    </body>
+</html>

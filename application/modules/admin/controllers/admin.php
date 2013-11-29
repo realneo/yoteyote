@@ -23,7 +23,6 @@
 
 class Admin extends Admin_Controller
 {
-
 	/**
 	 * -----------------------------------------------------------------------
 	 * Class variables - public, private, protected and static.
@@ -47,7 +46,7 @@ class Admin extends Admin_Controller
 	{
 		parent::__construct();
 
-		modules::run('auth/restrict_user', 'admin');
+		//modules::run('auth/restrict_user', 'admin');
 
 		//log_message('debug', "Class Admin Controller Initialized");
 	}
@@ -74,12 +73,11 @@ class Admin extends Admin_Controller
 		 */
 		if (logged_in())
 		{
-			$data['page_title'] = '';
-			$data['module']     = 'admin';
-			$data['view_file']  = "dashboard";
+			$data = set_admin_data('dashboard');
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+			$data['page_title'] = 'Dashboard';
+
+			$this->load->view('dashboard', $data);
 		}
 
 		// Display the Auth Login Form

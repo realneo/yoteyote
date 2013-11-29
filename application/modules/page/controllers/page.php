@@ -87,12 +87,10 @@ class Page extends Public_Controller
            	$data['page_title']       = $row->page_title;
            	$data['page_slug']        = $row->page_slug;
        	    $data['page_headline']    = $row->page_headline;
-            $data['page_keywords']    = $row->page_keywords;
-   	        $data['page_description'] = $row->page_description;
+            //$data['page_keywords']    = $row->page_keywords;
+   	        //$data['page_description'] = $row->page_description;
    	        $data['user_name']        = 'Guest';
            	$data['page_content']     = $row->page_content;
-           	$data['page_author']      = $row->page_author;
-           	$data['page_created_at']  = $row->page_created_at;
         }
 
 		// Load and display the view.

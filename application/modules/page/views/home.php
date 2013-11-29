@@ -77,20 +77,16 @@
 		            $this->load->view($path);
 		        }
 				else
-				{
-		            echo nl2br($page_content);
-		        }
-	        ?>
+				{ ?>
+					<!-- Yoteyote content id for yoteyote main.js -->
+					<div id="content">
 
-			<!-- Yoteyote content id for yoteyote main.js -->
-			<div id="content">
+			            <p><?php echo nl2br($page_content); ?></p>
 
-			    <!-- Blank Content -->
-		    	<p>
-					Create your content..
-				</p>
+					</div>
 
-			</div>
+				<?php }
+			?>
 
 		</p>
         <!-- END Block Content -->
@@ -98,55 +94,6 @@
     </div>
     <!-- END Block -->
 
-<!--
-				<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-					<div id="panel-1" class="panel panel-default">
-
-						<div class="panel-heading"> <?php echo $page_title; ?> </div>
-
-						<div class="panel-body">
-
-							<!-- For notification messages. --><!--
-							<div id="notifications">
-
-							</div>
-
-							<!--<?php/*
-						        if ( ! isset($view_file))
-								{
-						            $view_file = '';
-						        }
-
-						        if ( ! isset($module))
-								{
-						            $module = $this->uri->segment(1);
-						        }
-
-						        if (($view_file != '') && ($module != ''))
-								{
-						            $path = $module.'/'.$view_file;
-						            $this->load->view($path);
-						        }
-								else
-								{
-						            echo nl2br($page_content);
-						        }
-					        */?>-->
-
-							<!-- Yoteyote content id for yoteyote main.js --><!--
-							<div id="content">
-
-
-							</div>
-
-						</div> <!-- panel body --><!--
-
-						<div class="panel-footer"> &nbsp; </div> <!-- Panel footer -->
-<!--
-					</div> <!-- panel -->
-
-<!--				</div> <!-- col-lg-9 -->
-    <!-- END Blank Content -->
 </div>
 <!-- END Page Content -->
 

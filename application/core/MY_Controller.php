@@ -99,9 +99,6 @@ class Base_Controller extends MX_Controller {
 
 		// use profiler
 		$this->output->enable_profiler(PROFILER);
-
-		$this->load->module('users');
-		$this->load->module('profiles');
 	}
 
 	// --------------------------------------------------------------------

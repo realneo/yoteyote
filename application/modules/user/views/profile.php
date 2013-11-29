@@ -122,7 +122,7 @@
                                 <h4 class="timeline-title"><small class="timeline-meta">3 min ago</small><i class="fa fa-plus"></i> Friend Request</h4>
                                 <div class="timeline-content">
                                     <p class="clearfix">
-                                        <img src="<?php echo img_url('template/avatar.png'); ?>" alt="avatar" class="img-circle pull-right">
+                                        <img src="img/template/avatar.png" alt="avatar" class="img-circle pull-right">
                                         <a href="page_special_user_profile.php">John</a> would like to become friends!
                                     </p>
                                     <a href="javascript:void(0)" class="btn btn-xs btn-success" id="accept-request"><i class="fa fa-check"></i> Accept</a>
@@ -142,8 +142,8 @@
                                     <p>
                                         <a href="page_special_user_profile.php">Michael</a> just uploaded an image in <a href="javascript:void(0)" class="btn btn-xs btn-primary">Secret Project</a>
                                     </p>
-                                    <a href="<?php echo img_url('placeholders/image_720x450_dark.png'); ?>" data-toggle="lightbox-image">
-                                        <img src="<?php echo img_url('placeholders/image_160x120_dark.png'); ?>" alt="image">
+                                    <a href="img/placeholders/image_720x450_dark.png" data-toggle="lightbox-image">
+                                        <img src="img/placeholders/image_160x120_dark.png" alt="image">
                                     </a>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
 
                 <!-- Extra Content -->
                 <div class="content-text clearfix">
-                    <img src="<?php echo img_url('template/avatar2.jpg'); ?>" alt="avatar" class="img-circle img-responsive pull-left">
+                    <img src="img/template/avatar2.jpg" alt="avatar" class="img-circle img-responsive pull-left">
                     <h3 class="push"><a href="page_special_user_profile.php">John Doe</a> <small><em>750 Followers</em></small></h3>
                     <a href="javascript:void(0)" class="btn btn-xs btn-success"><i class="fa fa-share"></i> Follow</a>
                     <a href="javascript:void(0)" class="btn btn-xs btn-primary">Hire</a>

@@ -17,7 +17,6 @@
         <li><a href="">Blank</a></li>
     </ul>
     <!-- END Blank Header -->
-
     <!-- Block -->
     <div class="block">
 
@@ -53,16 +52,20 @@
 		            $this->load->view($path);
 		        }
 				else
-				{ ?>
-					<!-- Yoteyote content id for yoteyote main.js -->
-					<div id="content">
+				{
+		            echo nl2br($page_content);
+		        }
+	        ?>
 
-			            <p><?php echo nl2br($page_content); ?></p>
+			<!-- Yoteyote content id for yoteyote main.js -->
+			<div id="content">
 
-					</div>
+			    <!-- Blank Content -->
+		    	<p>
+					Create your content..
+				</p>
 
-				<?php }
-			?>
+			</div>
 
 		</p>
         <!-- END Block Content -->

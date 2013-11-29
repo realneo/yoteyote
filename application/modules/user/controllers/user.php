@@ -75,15 +75,14 @@ class Users extends Admin_Controller
 		 */
 		if (logged_in())
 		{
-			$data['page_title'] = '';
-			$data['module']     = 'users';
-			$data['view_file']  = "admin_fluid_dashboard";
+			$data = set_user_data('profile');
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+			$data['page_title'] = 'Profile';
+
+			$this->load->view('profile', $data);
 		}
 
-		// Not logged in so display the Auth Login Form
+		// Display the Auth Login Form
 		else
 		{
 			Modules::run('auth/login');
