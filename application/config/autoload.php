@@ -53,7 +53,7 @@ $autoload['packages'] = array(
 */
 $autoload['libraries'] = array(
 	'database',
-	'session'
+	'session',
 );
 
 /*
@@ -70,8 +70,7 @@ $autoload['helper'] = array(
 	'html',
 	'assets',
 	'auth',
-	'ui',
-	'util'
+	'util',
 );
 
 /*
@@ -87,7 +86,7 @@ $autoload['helper'] = array(
 |
 */
 $autoload['config'] = array(
-	'auth'
+	'auth',
 );
 
 /*

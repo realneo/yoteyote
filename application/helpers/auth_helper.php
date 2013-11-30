@@ -75,6 +75,11 @@ if ( ! function_exists('user_group'))
 		$auth_group = json_decode($_ci->session->userdata('user_groups'), TRUE);
 		//$auth_group = $_ci->session->userdata('user_groups');
 
+		if ($auth_group == NULL)
+		{
+			return FALSE;
+		}
+
 		//var_debug($auth_group, $user_group);
 		//exit();
 
