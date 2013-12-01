@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 <!-- If you do not want a link in the header, instead of .header-title-link you can use a div with the class .header-section -->
                 <a href="" class="header-title-link">
-                    <h1><i class="fa fa-coffee animation-expandUp"></i>Dashboard<br><small>Welcome <?php echo ucfirst(user_name()); ?>!</small></h1>
+                    <h1><i class="fa fa-coffee animation-expandUp"></i><?php echo $page_title; ?><br><small>Welcome <?php echo ucfirst(user_name()); ?>!</small></h1>
                 </a>
             </div>
             <!-- END Title -->

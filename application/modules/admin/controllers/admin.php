@@ -46,9 +46,7 @@ class Admin extends Admin_Controller
 	{
 		parent::__construct();
 
-		//modules::run('auth/restrict_user', 'admin');
-
-		//log_message('debug', "Class Admin Controller Initialized");
+		$this->load->model('mdl_pages', 'pages');
 	}
 
 	// --------------------------------------------------------------------
@@ -178,6 +176,120 @@ class Admin extends Admin_Controller
         		'name'  => (user_group('admin')) ? 'Dashboard' : 'Home',
 		        'url'   => (user_group('admin')) ? base_url('dashboard') : base_url('/'),
         		'icon'  => 'fa fa-coffee'
+		    ),
+		    array(
+        		'name'  => 'Manage',
+		        'url'   => 'header',
+		    ),
+		    array(
+        		'name'  => 'Users',
+		        'icon'  => 'fa fa-rocket',
+        		'sub'   => array(
+		            array(
+    		            'name'  => 'Users',
+        		        'url'   => base_url('users/manage'),
+            		),
+		        )
+    		),
+		    array(
+	        	'name'  => 'Pages',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Pages',
+		                'url'   => base_url('pages/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Group',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Group',
+		                'url'   => base_url('group/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Groups',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Groups',
+		                'url'   => base_url('groups/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'I Want',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'I Want',
+		                'url'   => base_url('iwant/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'I Will',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'I Will',
+		                'url'   => base_url('iwill/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Logs',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Logs',
+		                'url'   => base_url('logs/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Menus',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Menus',
+		                'url'   => base_url('menus/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Profiles',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Profiles',
+		                'url'   => base_url('profiles/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Settings',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Settings',
+		                'url'   => base_url('settings/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Widgets',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Widgets',
+		                'url'   => base_url('widgets/manage'),
+        		    ),
+		        )
 		    ),
 		    array(
         		'name'  => 'User Interface',

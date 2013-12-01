@@ -51,6 +51,7 @@ class User extends Public_Controller
 		//$this->auth->restrict_user('admin');
 
 		$this->load->model('mdl_user', 'user');
+
 	}
 
 	// --------------------------------------------------------------------
@@ -78,6 +79,8 @@ class User extends Public_Controller
 			$data = $this->set_user_data('profile');
 
 			$data['page_title'] = 'Profile';
+			//$data['module']      = 'user';
+			//$data['view_file']   = 'users_manage';
 
 			$this->load->view('profile', $data);
 		}
@@ -87,6 +90,28 @@ class User extends Public_Controller
 		{
 			Modules::run('auth/login');
 		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * manage()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function manage()
+	{
+		$data = $this->set_user_data('profile');
+
+		$data['page_title'] = ' Edit Profile';
+		$data['module']      = 'user';
+		$data['view_file']   = 'edit_profile';
+
+		$this->load->view('profile_manage', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -171,7 +196,7 @@ class User extends Public_Controller
 	 * @param	string
 	 * @return	mixed
 	 */
-    public function set_user_data($page)
+	public function set_user_data($page)
     {
     	/**
     	 * -------------------------------------------------------------------
@@ -241,36 +266,30 @@ class User extends Public_Controller
 		 * ----------------------------------------------------------------------
 		 */
 
-		// Check login
-		$result_1 = user_group('admin');
-		$result_2 = user_group('user');
-
-		if ($result_1 == true)
-		{
-			$dash = ($result_1 == true) ? 'Dashboard' : 'Home';
-			$base = ($result_1 == true) ? base_url('dashboard') : base_url('/');
-		}
-		elseif ($result_2 == true)
-		{
-			$dash = ($result_2 == true) ? 'Profile' : 'Home';
-			$base = ($result_2 == true) ? base_url('profile') : base_url('/');
-		}
-		else
-		{
-			$dash = 'Home';
-			$base = base_url('/');
-		}
-
 		$data['primary_nav'] = array(
 		    array(
         		'name'  => 'Welcome',
 		        'url'   => 'header'
 		    ),
 		    array(
-        		'name'  => $dash,
-		        'url'   => $base,
+        		'name'  => (user_group('admin')) ? 'Dashboard' : 'Home',
+		        'url'   => (user_group('admin')) ? base_url('dashboard') : base_url('/'),
         		'icon'  => 'fa fa-coffee'
 		    ),
+		    array(
+        		'name'  => 'Manage',
+		        'url'   => 'header',
+		    ),
+		    array(
+        		'name'  => 'Profile',
+		        'icon'  => 'fa fa-rocket',
+        		'sub'   => array(
+		            array(
+    		            'name'  => 'Edit Profile',
+        		        'url'   => base_url('user/manage'),
+            		),
+		        )
+    		),
 		    array(
         		'name'  => 'User Interface',
 		        'url'   => 'header',
@@ -501,6 +520,7 @@ class User extends Public_Controller
 		    ),
 		    array(
         		'name'  => 'Login &amp; Register',
+		        //'url'   => base_url('home/page_special_login'),
 		        'url'   => base_url('login'),
         		'icon'  => 'fa fa-power-off'
 		    )

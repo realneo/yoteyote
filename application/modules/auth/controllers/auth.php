@@ -336,7 +336,7 @@ class Auth extends Auth_Controller
 				}
 
 				// Insert the new users group
-				$result = modules::run('admin/groups/insert_user_group', $data);
+				$result = modules::run('groups/insert_user_group', $data);
 
 				// Everything passed so log the new user into the system
 				if ($login === TRUE)
@@ -790,10 +790,10 @@ class Auth extends Auth_Controller
 		 */
 
 		// Get a list of user groups.
-		$this->groups = modules::run('admin/group/get_groups');
+		$this->groups = modules::run('group/get_groups');
 
 		// Get a list of all the groups a user belongs to.
-		$this->user_groups = modules::run('admin/groups/get_user_groups', $id);
+		$this->user_groups = modules::run('groups/get_user_groups', $id);
 
 		//var_debug($this->groups, $this->user_groups);
 		//exit;

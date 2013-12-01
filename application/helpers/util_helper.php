@@ -3,6 +3,46 @@
 // --------------------------------------------------------------------
 
 /**
+ * bread_crumbs()
+ *
+ * @access	public
+ * @param	string
+ * @return	mixed
+ */
+if ( ! function_exists('bread_crumbs'))
+{
+	function bread_crumbs()
+	{
+		$html = '';
+		$i = 0;
+
+		$_ci = get_instance();
+
+		$segs = $_ci->uri->segment_array();
+
+		$num_segs = count($segs);
+
+		foreach ($segs as $segment)
+		{
+			if ($num_segs == $i)
+			{
+				$html .= '<li ><a href="">' . $segment . '</a></li><br />';
+			}
+			else
+			{
+				$html .= '<li>' . $segment . '</li><br />';
+			}
+
+			$i++;
+		}
+
+		return $html;
+	}
+}
+
+// --------------------------------------------------------------------
+
+/**
  * set_now()
  *
  * Converts an array to an object.
