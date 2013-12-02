@@ -140,6 +140,7 @@ class Users extends Admin_Controller
 		// Run the form.
 		if ($this->form_validation->run($this) == FALSE)
 		{
+			// Setup the view and display it.
 			$data = $this->set_admin_data('add');
 
 			$data['page_title'] = 'Add User';
@@ -152,18 +153,17 @@ class Users extends Admin_Controller
 		// Form Validation passed so add the user to the database.
 		else
 		{
-			// See if the forms have been submitted!
+			// See if the forms have been submitted ( name="add" )!
 			$submit = $this->input->post(NULL, TRUE);
 
-			// Has the login form been submitted?
+			// Has the form been submitted?
 			if (isset($submit['add']))
 			{
 				$user_name     = set_value('user_name');
 				$user_password = $this->_secure_hash(set_value('user_password'));
-				//$user_email    = set_value('user_email');
 				$user_email    = $this->input->post('user_email', TRUE);
 
-				// Setup the database record data.
+				// Setup the $data array for the database record insert.
 				$data = array(
 					'user_name'       => $user_name,
 					'user_email'      => $user_email,
@@ -173,7 +173,7 @@ class Users extends Admin_Controller
 					'user_updated_at' => set_now(),
 			);
 
-				// Insert the new users record.
+				// Insert the new database record.
 				$insert_id = $this->users->_insert($data);
 
 				$data2['msg'] = "The user has now been created.";
@@ -214,7 +214,7 @@ class Users extends Admin_Controller
 				// Insert the new users group
 				$result = modules::run('groups/insert_user_group', $data);
 
-
+				// Redirect back to the manage view.
 				redirect('users/manage', 'refresh');
 			}
 		}
@@ -258,6 +258,7 @@ class Users extends Admin_Controller
 			$data['user_name']  = $row->user_name;
 			$data['user_email'] = $row->user_email;
 
+			// Setup the view and display it.
 			$data['page_title'] = 'Edit User';
 			$data['module']     = 'users';
 			$data['view_file']  = "user_edit";
@@ -265,19 +266,21 @@ class Users extends Admin_Controller
 			$this->load->view('users', $data);
 		}
 
-		// Form Validation passed so update the users database record.
+		// Form Validation passed so update the database record.
 		else
 		{
-			// See if the forms have been submitted!
+			// See if the form has been submitted!
 			$submit = $this->input->post(NULL, TRUE);
 
-			// Has the login form been submitted?
+			// Has the form been submitted ( name="update" )?
 			if (isset($submit['update']))
 			{
+				// Get the form input post variables.
 				$user_name     = set_value('user_name');
 				$user_password = $this->_secure_hash(set_value('user_password'));
 				$user_email    = set_value('user_email');
 
+				// Setup the $data array for a database update.
 				$data = array(
 					'user_name'       => $user_name,
 					'user_email'      => $user_email,
@@ -285,10 +288,12 @@ class Users extends Admin_Controller
 					'user_updated_at' => set_now(),
 				);
 
+				// Update the database record.
 				$result = $this->users->_update(array('id' => $id), $data);
 
 				$data2['msg'] = "The user has now been edited.";
 
+				// Redirect back to the manage view.
 				redirect('users/manage', 'refresh');
 			}
 		}

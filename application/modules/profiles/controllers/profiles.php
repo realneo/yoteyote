@@ -46,7 +46,7 @@ class Profiles extends Admin_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('mdl_profiles', 'profiles');
+		$this->load->model('mdl_profiles', 'profile');
 
 		log_message('debug', "Class Name Controller Initialized");
 	}
@@ -81,9 +81,9 @@ class Profiles extends Admin_Controller
 		// Load the fx_pagination library.
 		$this->load->library('fx_pagination');
 
-		// Setup the record limit and get a total count of all the table records.
+		// Setup the record limit and get a total count of all table records.
 		$limit = 10;
-		$count = $this->profiles->count_all();
+		$count = $this->profile->count_all();
 
 		/**
 		 * ----------------------------------------------------------------------
@@ -109,17 +109,91 @@ class Profiles extends Admin_Controller
 
 		// Get the database records with limit and offset.
 		$order_by  = 'id asc';
-		$query = $this->profiles->get_with_limit($limit, $offset, $order_by);
+		$query = $this->profile->get_with_limit($limit, $offset, $order_by);
 
 		// Setup the data array and display the view.
-		$data = array(
-			'data_grid'   => $query->result(),
-			'pager_links' => $this->fx_pagination->create_links(),
-			'view_file'   => 'manage',
-		);
+		$data = $this->set_admin_data('dashboard');
 
-		$this->load->module('template');
-		$this->template->render('admin_fluid_dashboard', $data);
+		$data['page_title']  = 'Manage Profiles';
+		$data['data_grid']   = $query->result();
+		$data['pager_links'] = $this->fx_pagination->create_links();
+		$data['module']      = 'profiles';
+		$data['view_file']   = 'profiles_manage';
+
+		$this->load->view('profiles', $data);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * add()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function add()
+	{
+		// Load the Form Validation library and form helper.
+		$this->load->library('form_validation');
+		$this->load->helper('form');
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
+
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
+		{
+			// Setup the view and display it.
+			$data = $this->set_admin_data('add');
+
+			$data['page_title'] = 'Add Profile';
+			$data['module']     = 'profiles';
+			$data['view_file']  = "profile_add";
+
+			$this->load->view('profiles', $data);
+		}
+
+		// Form Validation passed so add the user to the database.
+		else
+		{
+			// See if the forms have been submitted ( name="add" )!
+			$submit = $this->input->post(NULL, TRUE);
+
+			// Has the form been submitted?
+			if (isset($submit['add']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = $this->input->post('user_email', TRUE);
+
+				// Setup the $data array for the database record insert.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_ip_address' => $this->input->ip_address(),
+					'user_created_at' => set_now(),
+					'user_updated_at' => set_now(),
+			);
+
+				// Insert the new database record.
+				$insert_id = $this->profile->_insert($data);
+
+				$data2['msg'] = "The Profile has now been created.";
+
+				// Redirect back to the manage view.
+				redirect('profiles/manage', 'refresh');
+			}
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -135,65 +209,95 @@ class Profiles extends Admin_Controller
 	 */
 	public function edit($id)
 	{
-		// Edit the users profile record.
-
-    	// Load the Form Validation library and form helper.
+		// Load the Form Validation library and form helper.
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 
-		// Setup the Form Validation Rules.
-		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[5]|max_length[40]');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[5]|max_length[40]');
-		$this->form_validation->set_rules('dob', 'DOB', 'trim|required|min_length[5]|max_length[12]');
-		$this->form_validation->set_rules('gender', 'Gender', 'trim|required');
-		$this->form_validation->set_rules('bio', 'BIO', 'trim|required|min_length[5]|max_length[40]');
-		$this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|min_length[5]|max_length[12]');
-		$this->form_validation->set_rules('bank', 'Bank', 'trim|required|min_length[5]|max_length[12]');
-		$this->form_validation->set_rules('pic', 'Pic', 'trim|required');
-		$this->form_validation->set_rules('country', 'Country', 'trim|required|min_length[5]|max_length[40]');
-		$this->form_validation->set_rules('city', 'City', 'trim|required|min_length[5]|max_length[12]');
-		$this->form_validation->set_rules('street', 'Street', 'trim|required|min_length[5]|max_length[12]');
-		$this->form_validation->set_rules('building_name', 'Building Name', 'trim|required');
-		$this->form_validation->set_rules('building_number', 'Building Number', 'trim|required|min_length[5]|max_length[40]');
-		$this->form_validation->set_rules('nickname', 'Nickname', 'trim|required|min_length[5]|max_length[12]|callback_nick_name_check');
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		// Setup for the module views.
-		$data['module']     = 'profiles';
-		$data['view_file']  = "edit_form";
-
-		// Run the Form Validation
-		if ($this->form_validation->run($this) === FALSE)
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
 		{
-			// Show the users profile form
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+			$data = $this->set_admin_data('edit');
+
+			// Get the users information.
+			$query = $this->users->get_where(array('id' => $id));
+			$row   = $query->row();
+
+			$data['user_name']  = $row->user_name;
+			$data['user_email'] = $row->user_email;
+
+			// Setup the view and display it.
+			$data['page_title'] = 'Edit Profile';
+			$data['module']     = 'profiles';
+			$data['view_file']  = "profile_edit";
+
+			$this->load->view('profiles', $data);
 		}
 
-		// Update the users Profile record.
+		// Form Validation passed so update the database record.
 		else
 		{
+			// See if the form has been submitted!
+			$submit = $this->input->post(NULL, TRUE);
 
-			$data = array(
-				'first_name' => '',
-				'last_name' => '',
-				'dob' => '',
-				'gender' => '',
-				'bio' => '',
-				'mobile' => '',
-				'bank' => '',
-				'pic' => '',
-				'country' => '',
-				'city' => '',
-				'street' => '',
-				'building_name' => '',
-				'building_number' => '',
-				'nickname' => '',
-			);
+			// Has the form been submitted ( name="update" )?
+			if (isset($submit['update']))
+			{
+				// Get the form input post variables.
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = set_value('user_email');
 
+				// Setup the $data array for a database update.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_updated_at' => set_now(),
+				);
+
+				// Update the database record.
+				$result = $this->profile->_update(array('id' => $id), $data);
+
+				$data2['msg'] = "The Profile has now been edited.";
+
+				// Redirect back to the manage view.
+				redirect('profiles/manage', 'refresh');
+			}
 		}
-
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * delete()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function delete($id)
+	{
+		$this->profile->_delete(array('id' => $id));
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * You can add Success messages etc; Here if you want.
+		 * ----------------------------------------------------------------------
+		 */
+
+		redirect('profiles/manage', 'refresh');
+	}
 
 	// --------------------------------------------------------------------
 

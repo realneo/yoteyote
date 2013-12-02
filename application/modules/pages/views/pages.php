@@ -35,33 +35,32 @@
 
 			</div>
 
-			<?php
-		        if ( ! isset($view_file))
-				{
-		            $view_file = '';
-		        }
+			<!-- Yoteyote content id for yoteyote main.js -->
+			<div id="content">
 
-		        if ( ! isset($module))
-				{
-		            $module = $this->uri->segment(1);
-		        }
+				<?php
+			        if ( ! isset($view_file))
+					{
+		    	        $view_file = '';
+		        	}
 
-		        if (($view_file != '') && ($module != ''))
-				{
-		            $path = $module.'/'.$view_file;
-		            $this->load->view($path);
-		        }
-				else
-				{ ?>
-					<!-- Yoteyote content id for yoteyote main.js -->
-					<div id="content">
+			        if ( ! isset($module))
+					{
+			            $module = $this->uri->segment(1);
+		    	    }
 
-			            <p><?php echo nl2br($page_content); ?></p>
+			        if (($view_file != '') && ($module != ''))
+					{
+			            $path = $module.'/'.$view_file;
+		    	        $this->load->view($path);
+		        	}
+					else
+					{
+			            echo nl2br($page_content);
+					}
+				?>
 
-					</div>
-
-				<?php }
-			?>
+			</div>
 
 		</p>
         <!-- END Block Content -->
@@ -73,4 +72,86 @@
 <!-- END Page Content -->
 
 <?php $this->load->view('partials/footer'); ?>
+
+<!-----------------------------------------------
+  Javascript code only for this page
+  jQuery Validation for the Forms.
+------------------------------------------------>
+
+<script>
+    $(function(){
+
+        /**
+         * -------------------------------------------------------------------------
+		 * For advanced usage and examples please check out
+         *  Jquery Validation   -> https://github.com/jzaefferer/jquery-validation
+         * -------------------------------------------------------------------------
+         */
+
+        /**
+		 * --------------------------------------------
+		 * Initialize Form Validation
+		 * --------------------------------------------
+		 */
+
+        $('#form-validation').validate({
+            errorClass: 'help-block', // You can add help-inline instead of help-block if you like validation messages to the right of the inputs
+            errorElement: 'div',
+            errorPlacement: function(error, e) {
+                e.parents('.form-group > div').append(error);
+            },
+            highlight: function(e){
+                $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                $(e).closest('.help-block').remove();
+            },
+            success: function(e){
+                // You can remove the .addClass('has-success') part if you don't want the inputs to get green after success!
+                e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                e.closest('.help-block').remove();
+            },
+
+			/**
+			 * -------------------------------------------
+			 * Setup form validation rules.
+			 * -------------------------------------------
+			 */
+
+            rules: {
+                user_name: {
+                    required: true,
+                    minlength: 4
+                },
+                user_email: {
+                    required: true,
+					email: true
+                },
+                user_password: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+
+			/**
+			 * -------------------------------------------
+			 * Setup form validation messages here!
+			 * -------------------------------------------
+			 */
+
+            messages: {
+                user_name: {
+                    required: 'Please enter a User name',
+                    minlength: 'Your User name must consist of at least 5 characters'
+                },
+                user_email: {
+                    required: 'Please enter a valid Email Address!',
+                },
+                user_password: {
+                    required: 'Please enter a Password!',
+                    minlength: 'Your Password must consist of at least 5 characters'
+                },
+            }
+        });
+    });
+</script>
+
 <?php $this->load->view('partials/bottom'); ?>

@@ -8,16 +8,16 @@
 
         <div class="col-sm-4">
 
-            <!-- Example Form Block -->
+            <!-- Form Block -->
             <div class="block">
 
-                <!-- Example Form Title -->
+                <!-- Form Title -->
                 <div class="block-title">
                     <h2>Example Form</h2>
                 </div>
-                <!-- END Example Form Title -->
+                <!-- END Form Title -->
 
-                <!-- Example Form Content -->
+                <!-- Form Content -->
                 <form id="form-validation" method="post">
 
                     <div class="form-group">
@@ -46,17 +46,17 @@
                     </div>
 
                 </form>
-                <!-- END Example Form Content -->
+                <!-- END Form Content -->
 
             </div>
-            <!-- END Example Form Block -->
+            <!-- END Form Block -->
 
         </div>
 
         <div class="col-sm-4"></div>
 
     </div>
-    <!-- END Form Example with Blocks in the Grid -->
+    <!-- END Form with Blocks in the Grid -->
 
 </p>
 <!-- END Block Content -->

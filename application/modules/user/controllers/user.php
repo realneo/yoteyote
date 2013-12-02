@@ -51,7 +51,7 @@ class User extends Public_Controller
 		//$this->auth->restrict_user('admin');
 
 		$this->load->model('mdl_user', 'user');
-
+		$this->load->model('mdl_profiles', 'profile');
 	}
 
 	// --------------------------------------------------------------------
@@ -97,27 +97,63 @@ class User extends Public_Controller
 	/**
 	 * manage()
 	 *
-	 * Description:
+	 * Manages the users.
 	 *
 	 * @access	public
 	 * @param	string
 	 * @return	void
 	 */
-	public function manage()
+	public function manage($offset = '')
 	{
-		$data = $this->set_user_data('profile');
+		// Load the fx_pagination library.
+		$this->load->library('fx_pagination');
 
-		$data['page_title'] = ' Edit Profile';
+		// Setup the record limit and get a total count of all table records.
+		$limit = 10;
+		$count = $this->profile->count_all();
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * FX Pagination Configuration.
+		 * ----------------------------------------------------------------------
+		 * The base_url and segment below must be set to the correct URL and the
+		 * segment must be set to the correct segment number or it WILL NOT WORK!
+		 * ----------------------------------------------------------------------
+		 */
+		$config = array(
+			'base_url'      => base_url('user/manage/'),
+			'uri_segment'   => 3,
+			'full_tag_open' => '<div id"content" class="text-center"><ul class="pagination pagination-sm page-manage">',
+			'display_pages' => TRUE,
+			'per_page'      => $limit,
+			'total_rows'    => $count,
+			'num_links'     => 4,
+			'show_count'    => TRUE,
+		);
+
+		// Initialize the fx_pagination configuration.
+		$this->fx_pagination->initialize($config);
+
+		// Get the database records with limit and offset.
+		$order_by  = 'id asc';
+		$query = $this->profile->get_with_limit($limit, $offset, $order_by);
+
+		// Setup the data array and display the view.
+		$data = $this->set_admin_data('dashboard');
+
+		$data['page_title']  = 'Manage Profile';
+		$data['data_grid']   = $query->result();
+		$data['pager_links'] = $this->fx_pagination->create_links();
 		$data['module']      = 'user';
-		$data['view_file']   = 'edit_profile';
+		$data['view_file']   = 'users_manage';
 
-		$this->load->view('profile_manage', $data);
+		$this->load->view('users', $data);
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * edit_profile()
+	 * add()
 	 *
 	 * Description:
 	 *
@@ -125,17 +161,8 @@ class User extends Public_Controller
 	 * @param	string
 	 * @return	void
 	 */
-	public function edit_profile($id)
+	public function add()
 	{
-		// Get the users id from the users session.
-		$id = $this->session->userdata('user_id');
-
-		/**
-		 * ----------------------------------------------------------------------
-		 * Setup the Form Validation and rules here!
-		 * ----------------------------------------------------------------------
-		 */
-
 		// Load the Form Validation library and form helper.
 		$this->load->library('form_validation');
 		$this->load->helper('form');
@@ -143,34 +170,160 @@ class User extends Public_Controller
 		/**
 		 * ----------------------------------------------------------------------
 		 * Setup the Form Validation Rules.
-		 *
-		 * NOTE:
-		 *
-		 * Even if you use the jQuery Form Validation plugin, you must at
-		 * least include one CI form validation rule or it will not work!!!
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
 		 * ----------------------------------------------------------------------
 		 */
-		$this->form_validation->set_rules('profile_first_name', 'First Name', 'trim|required|min_length[5]|max_length[40]');
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		// Run the Form.
+		// Run the form.
 		if ($this->form_validation->run($this) == FALSE)
 		{
-			// Display the edit profile form.
-			$data = $this->set_user_data('profile');
+			// Setup the view and display it.
+			$data = $this->set_admin_data('add');
 
-			$data['page_title'] = 'Edit Profile';
+			$data['page_title'] = 'Add User';
+			$data['module']     = 'users';
+			$data['view_file']  = "user_add";
 
-			$this->load->view('edit_profile', $data);
+			$this->load->view('users', $data);
 		}
 
-		// The Form Validation passed, update the users profile.
+		// Form Validation passed so add the user to the database.
 		else
 		{
+			// See if the forms have been submitted ( name="add" )!
+			$submit = $this->input->post(NULL, TRUE);
 
+			// Has the form been submitted?
+			if (isset($submit['add']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = $this->input->post('user_email', TRUE);
 
+				// Setup the $data array for the database record insert.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_ip_address' => $this->input->ip_address(),
+					'user_created_at' => set_now(),
+					'user_updated_at' => set_now(),
+			);
+
+				// Insert the new database record.
+				$insert_id = $this->users->_insert($data);
+
+				$data2['msg'] = "The user has now been created.";
+
+				// Redirect back to the manage view.
+				redirect('users/manage', 'refresh');
+			}
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * edit()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function edit($id)
+	{
+		// Load the Form Validation library and form helper.
+		$this->load->library('form_validation');
+		$this->load->helper('form');
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
+
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
+		{
+			$data = $this->set_admin_data('edit');
+
+			// Get the users information.
+			$query = $this->users->get_where(array('id' => $id));
+			$row   = $query->row();
+
+			$data['user_name']  = $row->user_name;
+			$data['user_email'] = $row->user_email;
+
+			// Setup the view and display it.
+			$data['page_title'] = 'Edit User';
+			$data['module']     = 'users';
+			$data['view_file']  = "user_edit";
+
+			$this->load->view('users', $data);
 		}
 
-		redirect('profile', 'refresh');
+		// Form Validation passed so update the database record.
+		else
+		{
+			// See if the form has been submitted!
+			$submit = $this->input->post(NULL, TRUE);
+
+			// Has the form been submitted ( name="update" )?
+			if (isset($submit['update']))
+			{
+				// Get the form input post variables.
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = set_value('user_email');
+
+				// Setup the $data array for a database update.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_updated_at' => set_now(),
+				);
+
+				// Update the database record.
+				$result = $this->users->_update(array('id' => $id), $data);
+
+				$data2['msg'] = "The user has now been edited.";
+
+				// Redirect back to the manage view.
+				redirect('users/manage', 'refresh');
+			}
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * delete()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function delete($id)
+	{
+		$this->users->_delete(array('id' => $id));
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * You can add Success messages etc; Here if you want.
+		 * ----------------------------------------------------------------------
+		 */
+
+		redirect('users/manage', 'refresh');
 	}
 
 	// -----------------------------------------------------------------------

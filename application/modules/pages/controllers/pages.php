@@ -114,42 +114,61 @@ class Pages extends Admin_Controller
 	 */
 	public function add()
 	{
+		// Load the Form Validation library and form helper.
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 
-		$this->form_validation->set_rules('page_title', 'Page Title', 'required');
-		$this->form_validation->set_rules('page_keywords', 'Meta Keywords', 'required');
-		$this->form_validation->set_rules('page_description', 'Meta Description', 'required');
-		$this->form_validation->set_rules('page_status', 'Page Status', 'required');
-		$this->form_validation->set_rules('page_content', 'Page Content', 'required');
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		if ($this->form_validation->run() == FALSE)
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
 		{
-			$data = array(
-				'view_file' => 'add',
-			);
+			$data = $this->set_admin_data('add');
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+			$data['page_title'] = 'Add Page';
+			$data['module']     = 'pages';
+			$data['view_file']  = "pages_add";
+
+			$this->load->view('pages', $data);
 		}
 
-		// Add a new page.
+		// Form Validation passed so add the user to the database.
 		else
 		{
-			$data = array(
-				'page_title'       => set_value('page_title'),
-				'page_slug'        => url_title(set_value('page_title'), 'underscore', TRUE),
-				'page_keywords'    => set_value('page_keywords'),
-				'page_description' => set_value('page_description'),
-				'page_created_at'  => set_now(),
-				'page_updated_at'  => set_now(),
-				'page_status'      => set_value('page_status'),
-				'page_content'     => set_value('page_content'),
-			);
+			// See if the forms have been submitted!
+			$submit = $this->input->post(NULL, TRUE);
 
-			$this->pages->_insert($data);
+			// Has the form been submitted ( name"add" )?
+			if (isset($submit['add']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = $this->input->post('user_email', TRUE);
 
-			redirect('pages/manage');
+				// Setup the database record data.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_ip_address' => $this->input->ip_address(),
+					'user_created_at' => set_now(),
+					'user_updated_at' => set_now(),
+				);
+
+				// Insert the new page database record.
+				$insert_id = $this->pages->_insert($data);
+
+				$data2['msg'] = "The page has now been created.";
+
+				redirect('pages/manage', 'refresh');
+			}
 		}
 	}
 
@@ -166,59 +185,64 @@ class Pages extends Admin_Controller
 	 */
 	public function edit($id)
 	{
+		// Load the Form Validation library and form helper.
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 
-		$this->form_validation->set_rules('page_title', 'Page Title', 'required');
-		$this->form_validation->set_rules('page_keywords', 'Meta Keywords', 'required');
-		$this->form_validation->set_rules('page_description', 'Meta Description', 'required');
-		$this->form_validation->set_rules('page_status', 'Page Status', 'required');
-		$this->form_validation->set_rules('page_content', 'Page Content', 'required');
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		if ($this->form_validation->run() == FALSE)
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
 		{
+			$data = $this->set_admin_data('edit');
+
+			// Get the users information.
 			$query = $this->pages->get_where(array('id' => $id));
-			$row   = $query->row_array();
+			$row   = $query->row();
 
-			// Set the page_status selected value.
-			$data = array(
-				'page_title'       => $row['page_title'],
-				'page_slug'        => $row['page_slug'],
-				'page_keywords'    => $row['page_keywords'],
-				'page_description' => $row['page_description'],
-				'page_status'      => $row['page_status'],
-				'page_content'     => $row['page_content'],
-				'selected_one'     => ($row['page_status'] == 'published') ? TRUE : FALSE,
-				'selected_two'     => ($row['page_status'] == 'draft') ? TRUE : FALSE,
-				'view_file'        => "edit",
-			);
+			$data['user_name']  = $row->user_name;
+			$data['user_email'] = $row->user_email;
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+			$data['page_title'] = 'Edit Page';
+			$data['module']     = 'pages';
+			$data['view_file']  = "pages_edit";
+
+			$this->load->view('pages', $data);
 		}
 
-		// Update the page.
+		// Form Validation passed so update the pages database record.
 		else
 		{
-			$data_record = array(
-				'page_title'       => set_value('page_title'),
-				'page_slug'        => url_title(set_value('page_title'), 'underscore', TRUE),
-				'page_keywords'    => set_value('page_keywords'),
-				'page_description' => set_value('page_description'),
-				'page_updated_at'  => set_now(),
-				'page_status'      => set_value('page_status'),
-				'page_content'     => set_value('page_content'),
-			);
+			// See if the forms have been submitted ( name"update" )!
+			$submit = $this->input->post(NULL, TRUE);
 
-			$this->pages->_update(array('id' => $id), $data_record);
+			// Has the form been submitted?
+			if (isset($submit['update']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = set_value('user_email');
 
-			$data = array(
-				'module'    => 'pages',
-				'view_file' => 'edit_success',
-			);
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_updated_at' => set_now(),
+				);
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+				$result = $this->pages->_update(array('id' => $id), $data);
+
+				$data2['msg'] = "The page has now been edited.";
+
+				redirect('pages/manage', 'refresh');
+			}
 		}
 	}
 
@@ -237,12 +261,13 @@ class Pages extends Admin_Controller
 	{
 		$this->pages->_delete(array('id' => $id));
 
-		$data = array(
-			'view_file' => 'delete_success',
-		);
+		/**
+		 * ----------------------------------------------------------------------
+		 * You can add Success messages etc; Here if you want.
+		 * ----------------------------------------------------------------------
+		 */
 
-		$this->load->module('template');
-		$this->template->render('admin_fluid_dashboard', $data);
+		redirect('pages/manage', 'refresh');
 	}
 
 	// --------------------------------------------------------------------

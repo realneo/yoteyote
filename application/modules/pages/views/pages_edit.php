@@ -1,79 +1,62 @@
-<?php $this->load->view('partials/top'); ?>
+<!-- Block Content -->
+<p>
 
-<!-- Page content -->
-<div id="page-content" class="block">
-    <!-- Blank Header -->
-    <div class="block-header">
-        <!-- If you do not want a link in the header, instead of .header-title-link you can use a div with the class .header-section -->
-        <a href="" class="header-title-link">
-            <h1>
-                <i class="glyphicon-brush animation-expandUp"></i><?php echo $page_title; ?><br><small>A clean page to help you start!</small>
-            </h1>
-        </a>
-    </div>
-    <ul class="breadcrumb breadcrumb-top">
-        <li><i class="fa fa-file-o"></i></li>
-        <li>Pages</li>
-        <li><a href="">Blank</a></li>
-    </ul>
-    <!-- END Blank Header -->
-    <!-- Block -->
-    <div class="block">
+    <!-- Form Edit User with Blocks in the Grid -->
+    <div class="row gutter30">
 
-        <!-- Block Title -->
-        <div class="block-title">
-			<h2><?php echo $page_title; ?></h2>
-		</div>
-        <!-- END Block Title -->
+        <div class="col-sm-4"></div>
 
-        <!-- Block Content -->
-        <p>
+        <div class="col-sm-4">
 
-			<!-- For notification messages. -->
-			<div id="notifications">
+            <!-- Form Block -->
+            <div class="block">
 
-			</div>
+                <!-- Form Title -->
+                <div class="block-title">
+                    <h2>Example Form</h2>
+                </div>
+                <!-- END Form Title -->
 
-			<?php
-		        if ( ! isset($view_file))
-				{
-		            $view_file = '';
-		        }
+                <!-- Form Content -->
+                <form id="form-validation" method="post">
 
-		        if ( ! isset($module))
-				{
-		            $module = $this->uri->segment(1);
-		        }
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" id="user_name" name="user_name" class="form-control" placeholder="Username" value="<?php echo $user_name; ?>">
+                        </div>
+                    </div>
 
-		        if (($view_file != '') && ($module != ''))
-				{
-		            $path = $module.'/'.$view_file;
-		            $this->load->view($path);
-		        }
-				else
-				{
-		            echo nl2br($page_content);
-		        }
-	        ?>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input type="email" id="user_email" name="user_email" class="form-control" placeholder="Email" value="<?php echo $user_email; ?>">
+                        </div>
+                    </div>
 
-			<!-- Yoteyote content id for yoteyote main.js -->
-			<div id="content">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                            <input type="password" id="user_password" name="user_password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
 
-			    <!-- Blank Content -->
-		    	<p>
-					Create your content..
-				</p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" name="update" value="update"><i class="fa fa-power-off"></i> Update User</button>
+                    </div>
 
-			</div>
+                </form>
+                <!-- END Form Content -->
 
-		</p>
-        <!-- END Block Content -->
+            </div>
+            <!-- END Form Block -->
+
+        </div>
+
+        <div class="col-sm-4"></div>
 
     </div>
-    <!-- END Block -->
+    <!-- END Form with Blocks in the Grid -->
 
-</div>
-<!-- END Page Content -->
-
-<?php $this->load->view('partials/footer'); ?>
-<?php $this->load->view('partials/bottom'); ?>
+</p>
+<!-- END Block Content -->

@@ -48,8 +48,6 @@ class Group extends Admin_Controller
 		parent::__construct();
 
 		$this->load->model('mdl_group', 'group');
-
-		log_message('debug', "Class Name Initialized");
 	}
 
 	// -----------------------------------------------------------------------
@@ -71,7 +69,7 @@ class Group extends Admin_Controller
 	/**
 	 * manage()
 	 *
-	 * Manage the user database records.
+	 * Manages the users.
 	 *
 	 * @access	public
 	 * @param	string
@@ -113,14 +111,15 @@ class Group extends Admin_Controller
 		$query = $this->group->get_with_limit($limit, $offset, $order_by);
 
 		// Setup the data array and display the view.
-		$data = array(
-			'data_grid'   => $query->result(),
-			'pager_links' => $this->fx_pagination->create_links(),
-			'view_file'   => 'manage',
-		);
+		$data = $this->set_admin_data('dashboard');
 
-		$this->load->module('template');
-		$this->template->render('admin_fluid_dashboard', $data);
+		$data['page_title']  = 'Manage Group';
+		$data['data_grid']   = $query->result();
+		$data['pager_links'] = $this->fx_pagination->create_links();
+		$data['module']      = 'group';
+		$data['view_file']   = 'group_manage';
+
+		$this->load->view('group', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -128,7 +127,7 @@ class Group extends Admin_Controller
 	/**
 	 * add()
 	 *
-	 * Add a new user to the database table.
+	 * Description:
 	 *
 	 * @access	public
 	 * @param	string
@@ -136,33 +135,63 @@ class Group extends Admin_Controller
 	 */
 	public function add()
 	{
+		// Load the Form Validation library and form helper.
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 
-		$this->form_validation->set_rules('group_name', 'Group Name', 'required');
-		$this->form_validation->set_rules('group_description', 'Group Description', 'required');
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		if ($this->form_validation->run() == FALSE)
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
 		{
-			$data['view_file'] = "add";
+			// Setup the view and display it.
+			$data = $this->set_admin_data('add');
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+			$data['page_title'] = 'Add Group';
+			$data['module']     = 'group';
+			$data['view_file']  = "group_add";
+
+			$this->load->view('group', $data);
 		}
 
-		// Add a new page.
+		// Form Validation passed so add the user to the database.
 		else
 		{
-			$now = date("Y-m-d H:i:s");
+			// See if the forms have been submitted ( name="add" )!
+			$submit = $this->input->post(NULL, TRUE);
 
-			$data = array(
-				'group_name'        => set_value('group_name'),
-				'group_description' => set_value('group_description'),
+			// Has the form been submitted?
+			if (isset($submit['add']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = $this->input->post('user_email', TRUE);
+
+				// Setup the $data array for the database record insert.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_ip_address' => $this->input->ip_address(),
+					'user_created_at' => set_now(),
+					'user_updated_at' => set_now(),
 			);
 
-			$this->group->_insert($data);
+				// Insert the new database record.
+				$insert_id = $this->group->_insert($data);
 
-			redirect('group/manage');
+				$data2['msg'] = "The group has now been created.";
+
+				// Redirect back to the manage view.
+				redirect('group/manage', 'refresh');
+			}
 		}
 	}
 
@@ -179,47 +208,69 @@ class Group extends Admin_Controller
 	 */
 	public function edit($id)
 	{
+		// Load the Form Validation library and form helper.
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 
-		$this->form_validation->set_rules('group_name', 'Group Name', 'required');
-		$this->form_validation->set_rules('group_description', 'Group Description', 'required');
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		if ($this->form_validation->run() == FALSE)
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
 		{
+			$data = $this->set_admin_data('edit');
+
+			// Get the users information.
 			$query = $this->group->get_where(array('id' => $id));
-			$row   = $query->row_array();
+			$row   = $query->row();
 
-			// Set the page_status selected value.
-			$data = array(
-				'group_name'        => $row['group_name'],
-				'group_description' => $row['group_description'],
-				'view_file'         => "edit",
-			);
+			$data['user_name']  = $row->user_name;
+			$data['user_email'] = $row->user_email;
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+			// Setup the view and display it.
+			$data['page_title'] = 'Edit Group';
+			$data['module']     = 'group';
+			$data['view_file']  = "group_edit";
+
+			$this->load->view('group', $data);
 		}
 
-		// Update the page.
+		// Form Validation passed so update the database record.
 		else
 		{
-			$now = date("Y-m-d H:i:s");
+			// See if the form has been submitted!
+			$submit = $this->input->post(NULL, TRUE);
 
-			$data_record = array(
-				'group_name'        => set_value('group_name'),
-				'group_description' => set_value('group_description'),
-			);
+			// Has the form been submitted ( name="update" )?
+			if (isset($submit['update']))
+			{
+				// Get the form input post variables.
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = set_value('user_email');
 
-			$this->group->_update(array('id' => $id), $data_record);
+				// Setup the $data array for a database update.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_updated_at' => set_now(),
+				);
 
-			$data = array(
-				'module'    => 'group',
-				'view_file' => 'edit_success',
-			);
+				// Update the database record.
+				$result = $this->users->_update(array('id' => $id), $data);
 
-			$this->load->module('template');
-			$this->template->render('admin_fluid_dashboard', $data);
+				$data2['msg'] = "The group has now been edited.";
+
+				// Redirect back to the manage view.
+				redirect('group/manage', 'refresh');
+			}
 		}
 	}
 
@@ -238,12 +289,13 @@ class Group extends Admin_Controller
 	{
 		$this->group->_delete(array('id' => $id));
 
-		$data = array(
-			'view_file' => 'delete_success',
-		);
+		/**
+		 * ----------------------------------------------------------------------
+		 * You can add Success messages etc; Here if you want.
+		 * ----------------------------------------------------------------------
+		 */
 
-		$this->load->module('template');
-		$this->template->render('admin_fluid_dashboard', $data);
+		redirect('users/manage', 'refresh');
 	}
 
 	// -----------------------------------------------------------------------

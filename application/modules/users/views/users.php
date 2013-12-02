@@ -77,7 +77,8 @@
 <?php $this->load->view('partials/footer'); ?>
 
 <!-----------------------------------------------
-	Javascript code only for this page
+  Javascript code only for this page
+  jQuery Validation for the Forms.
 ------------------------------------------------>
 
 <script>

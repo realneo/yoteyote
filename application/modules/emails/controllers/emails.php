@@ -47,8 +47,240 @@ class Yoteemail extends Auth_Controller
 		parent::__construct();
 
 		$this->load->model('mdl_yoteemail', 'yoteemail');
+	}
 
-		log_message('debug', "Class Name Controller Initialized");
+	// --------------------------------------------------------------------
+
+	/**
+	 * manage()
+	 *
+	 * Manages the users.
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function manage($offset = '')
+	{
+		// Load the fx_pagination library.
+		$this->load->library('fx_pagination');
+
+		// Setup the record limit and get a total count of all table records.
+		$limit = 10;
+		$count = $this->yoteemail->count_all();
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * FX Pagination Configuration.
+		 * ----------------------------------------------------------------------
+		 * The base_url and segment below must be set to the correct URL and the
+		 * segment must be set to the correct segment number or it WILL NOT WORK!
+		 * ----------------------------------------------------------------------
+		 */
+		$config = array(
+			'base_url'      => base_url('emails/manage/'),
+			'uri_segment'   => 3,
+			'full_tag_open' => '<div id"content" class="text-center"><ul class="pagination pagination-sm page-manage">',
+			'display_pages' => TRUE,
+			'per_page'      => $limit,
+			'total_rows'    => $count,
+			'num_links'     => 4,
+			'show_count'    => TRUE,
+		);
+
+		// Initialize the fx_pagination configuration.
+		$this->fx_pagination->initialize($config);
+
+		// Get the database records with limit and offset.
+		$order_by  = 'id asc';
+		$query = $this->yoteemail->get_with_limit($limit, $offset, $order_by);
+
+		// Setup the data array and display the view.
+		$data = $this->set_admin_data('dashboard');
+
+		$data['page_title']  = 'Manage Emails';
+		$data['data_grid']   = $query->result();
+		$data['pager_links'] = $this->fx_pagination->create_links();
+		$data['module']      = 'emails';
+		$data['view_file']   = 'emails_manage';
+
+		$this->load->view('emails', $data);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * add()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function add()
+	{
+		// Load the Form Validation library and form helper.
+		$this->load->library('form_validation');
+		$this->load->helper('form');
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
+
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
+		{
+			// Setup the view and display it.
+			$data = $this->set_admin_data('add');
+
+			$data['page_title'] = 'Add Email';
+			$data['module']     = 'emails';
+			$data['view_file']  = "email_add";
+
+			$this->load->view('emails', $data);
+		}
+
+		// Form Validation passed so add the email to the database.
+		else
+		{
+			// See if the forms have been submitted ( name="add" )!
+			$submit = $this->input->post(NULL, TRUE);
+
+			// Has the form been submitted?
+			if (isset($submit['add']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = $this->input->post('user_email', TRUE);
+
+				// Setup the $data array for the database record insert.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_ip_address' => $this->input->ip_address(),
+					'user_created_at' => set_now(),
+					'user_updated_at' => set_now(),
+			);
+
+				// Insert the new database record.
+				$insert_id = $this->yoteemail->_insert($data);
+
+				$data2['msg'] = "The email has now been created.";
+
+				// Redirect back to the manage view.
+				redirect('emails/manage', 'refresh');
+			}
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * edit()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function edit($id)
+	{
+		// Load the Form Validation library and form helper.
+		$this->load->library('form_validation');
+		$this->load->helper('form');
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
+
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
+		{
+			$data = $this->set_admin_data('edit');
+
+			// Get the users information.
+			$query = $this->yoteemail->get_where(array('id' => $id));
+			$row   = $query->row();
+
+			$data['user_name']  = $row->user_name;
+			$data['user_email'] = $row->user_email;
+
+			// Setup the view and display it.
+			$data['page_title'] = 'Edit Email';
+			$data['module']     = 'emails';
+			$data['view_file']  = "email_edit";
+
+			$this->load->view('emails', $data);
+		}
+
+		// Form Validation passed so update the database record.
+		else
+		{
+			// See if the form has been submitted!
+			$submit = $this->input->post(NULL, TRUE);
+
+			// Has the form been submitted ( name="update" )?
+			if (isset($submit['update']))
+			{
+				// Get the form input post variables.
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = set_value('user_email');
+
+				// Setup the $data array for a database update.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_updated_at' => set_now(),
+				);
+
+				// Update the database record.
+				$result = $this->yoteemail->_update(array('id' => $id), $data);
+
+				$data2['msg'] = "The email has now been edited.";
+
+				// Redirect back to the manage view.
+				redirect('emails/manage', 'refresh');
+			}
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * delete()
+	 *
+	 * Description:
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+	public function delete($id)
+	{
+		$this->users->_delete(array('id' => $id));
+
+		/**
+		 * ----------------------------------------------------------------------
+		 * You can add Success messages etc; Here if you want.
+		 * ----------------------------------------------------------------------
+		 */
+
+		redirect('emails/manage', 'refresh');
 	}
 
 	// ------------------------------------------------------------------------

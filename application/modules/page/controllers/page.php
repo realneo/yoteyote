@@ -68,15 +68,17 @@ class Page extends Public_Controller
         // Load the page model.
         $this->load->model('page/mdl_pages', 'page');
 
+		// Get the page data from the database.
         $page_data = $this->page->get_where(array('page_slug' => $page_slug));
 
+		// Display a 404 Error if no page data.
 		if ($page_data === FALSE OR $page_data === NULL)
 		{
 			// Show a 404 if no page exists.
 			show_404();
 		}
 
-		// Get the Theme & Menu data from the ui_helper.
+		// Get the Theme & Menu data.
 		$data = $this->set_page_data($page_slug);
 
 		// Loop through and get the page data.
@@ -108,7 +110,7 @@ class Page extends Public_Controller
     {
     	/**
     	 * -------------------------------------------------------------------
-		 * The FreshUI Main Configuration data array.
+		 * The YoteyoteUI Main Configuration data array.
 		 * -------------------------------------------------------------------
 		 */
 
