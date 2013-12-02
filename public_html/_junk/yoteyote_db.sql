@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `user_data`     text                  NOT NULL,                         -- The session user data serialized array
   PRIMARY KEY (`session_id`),
   KEY `last_activity_idx` (`last_activity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_status`      enum('active','inactive','banned','deleted') NOT NULL DEFAULT 'active',  -- The user status
   PRIMARY KEY  (`id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `user_profiles` (
   `profile_updated_at`      datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The profile updated at date time
   PRIMARY KEY (`id`),
   UNIQUE KEY `profile_nickname` (`profile_nickname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user_profiles`
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `group_name`        varchar(20)           NOT NULL,
   `group_description` varchar(100)          NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 
 --
@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `users_groups`;
 CREATE TABLE IF NOT EXISTS `users_groups` (
   `user_id`  int(11) unsigned NOT NULL,
   `group_id` int(11) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- RELATIONS FOR TABLE `users_groups`:
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `page_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The page updated at date time
   `page_status`      enum('published','draft') NOT NULL  DEFAULT 'published',        -- The page status
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -197,7 +197,7 @@ CREATE TABLE `comments` (
   `comment_updated_at` datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The comment updated at date time
   `comment_status`     enum('active','inactive') NOT NULL DEFAULT 'active',            -- The comment status
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `comments`
@@ -221,7 +221,7 @@ CREATE TABLE `categories` (
   `category_updated_at` datetime                  NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- the category updated at date time
   `category_status`     enum('active','inactive') NOT NULL  DEFAULT 'active',               -- The category status
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 --
 -- Dumping data for table `categories`
@@ -241,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `setting_type`   enum('string','int','float','double','bool') NOT NULL DEFAULT 'string',  -- The setting type
   `setting_status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',           -- The setting status
   PRIMARY KEY (`id`, `setting_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `menu_title`  varchar(50)          NOT NULL,                       -- The menu title - 'Topmenu'
   `menu_slug`   varchar(20)          NOT NULL,                       -- The menu slug  - 'topmenu'
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Navigation main menus. Eg, header, sidebar, footer, etc' ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Navigation main menus. Eg, header, sidebar, footer, etc' ;
 
 --
 -- Dumping data for table `menu`
@@ -273,7 +273,30 @@ INSERT INTO `menu` (`id`, `menu_title`, `menu_slug`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `menu_categories`
+--
+
+DROP TABLE IF EXISTS `menu_categories`;
+CREATE TABLE IF NOT EXISTS `menu` (
+  `id`               int(11)     unsigned NOT NULL  AUTO_INCREMENT,       -- The menu category record id
+  `menu_category`    varchar(60)          NOT NULL,                       -- The menu category name
+  `menu_description` varchar(60)          NOT NULL,                       -- The menu category description
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Navigation main menus. Eg, header, sidebar, footer, etc' ;
+
+--
+-- Dumping data for table `menu_categories`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `menu_items`
+--
+-- Welcome - A menu header title
+-- menu
+-- -- menu sub iten
+-- ---- menu sub sub item
 --
 
 DROP TABLE IF EXISTS `menu_items`;
@@ -291,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
   `menu_show`        int(1)       unsigned NOT NULL  DEFAULT '1',         -- The menuitem menu show
   PRIMARY KEY (`id`),
   KEY `menu_id` (`menu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Links for site menu' ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Links for site menu' ;
 
 --
 -- Dumping data for table `menu_items`
@@ -302,6 +325,50 @@ INSERT INTO `menu_items` (`id`, `menu_title`, `menu_link_type`, `menu_page_id`, 
 (2, 'Home', 'page', 1, '', '', '', 2, 1, '_self', 1),
 (4, 'About us', 'page', 3, '', '', '', 1, 2, '_self', 1),
 (5, 'Forums', 'module', 0, 'forums', '', '', 1, 3, '_self', 1);
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table menus
+--
+
+DROP TABLE IF EXISTS `menus`;
+CREATE TABLE IF NOT EXISTS `menus` (
+  `id`        int(11)      unsigned NOT NULL  AUTO_INCREMENT,
+  `menu_name` varchar(255)          NOT NULL,
+  `menu_slug` varchar(255)          NOT NULL,
+  PRIMARY KEY (`id`),
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Links for site menu' ;
+
+--
+-- Dumping data for table `menus`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table menu_items
+--
+
+DROP TABLE IF EXISTS `menu_items`;
+CREATE TABLE IF NOT EXISTS `menu_items` (
+  `id`           int(11)      unsigned NOT NULL  AUTO_INCREMENT,
+  `menu_id`      int(3)       unsigned NOT NULL,
+  `menu_lft`     int(3)       unsigned NOT NULL,
+  `menu_rgt`     int(3)       unsigned NOT NULL,
+  `menu_title`   varchar(255)          NOT NULL,
+  `menu_slug`    varchar(255)          NOT NULL,
+  `menu_class`   varchar(255)          NOT NULL,
+  `menu_type`    varchar(12)           NOT NULL,
+  `menu_content` varchar(255)          NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `menu_id` (`menu_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Links for site menu' ;
+
+--
+-- Dumping data for table `menu_items`
+--
 
 
 -- --------------------------------------------------------
@@ -319,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `admin_bank` (
   `id`         int(11)  unsigned NOT NULL  AUTO_INCREMENT,                -- The admin bank record id
   `admin_bank` int(100)                    DEFAULT NULL,                  -- The admin bank
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `admin_bank`
@@ -337,7 +404,7 @@ CREATE TABLE IF NOT EXISTS `currency_setting` (
   `currency_title` varchar(100)                    DEFAULT NULL,          -- The currency title
   `currency_rate`  decimal(10,0)                   DEFAULT '0',           -- The currency rate value
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `currency_setting`
@@ -355,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `deduction` (
   `deduction_mobile` double                     DEFAULT '0',              -- The deduction mobile
   `deduction_transc` double                     DEFAULT '0',              -- The deduction transaction
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `deduction`
@@ -376,7 +443,7 @@ CREATE TABLE IF NOT EXISTS `listings` (
   `listing_created_at` datetime                    DEFAULT '0000-00-00 00:00:00',  -- The listing created at date time
   `listing_updated_at` datetime                    DEFAULT '0000-00-00 00:00:00',  -- The listing updated at date time
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `listings`
@@ -396,7 +463,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `log_admin_bank` double                      DEFAULT '0',               -- The log admin bank
   `log_trans_date` datetime                    DEFAULT '0000-00-00 00:00:00',  -- The log traansaction date
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `log`
@@ -416,7 +483,7 @@ CREATE TABLE IF NOT EXISTS `on_going` (
   `won_amount`      int(11) unsigned           DEFAULT NULL,              -- The on going won amount
   `post_id`         int(11) unsigned           DEFAULT NULL,              -- The on going post id
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `on_going`
@@ -443,7 +510,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `post_updated_at`  datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The post updated at date time
   `post_active`      enum('y','n')                   DEFAULT 'y',                    -- The post active status
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `posts`
@@ -461,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `trust` (
   `trust_user_id` int(11) unsigned           DEFAULT NULL,                -- The trust user id
   `trust_by_id`   int(11) unsigned           DEFAULT '0',                 -- The trust by id
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `trust`

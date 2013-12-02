@@ -30,3 +30,32 @@
 .discover-pad {
   padding-left: 95px;
 }
+
+/*
+.table thead > tr > th {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.thead-color .table thead {
+  background-color: #e9e9e9;
+  color: #ffffff;
+}
+
+.tfoot-color .table tfoot {
+  background-color: #e9e9e9;
+  color: #ffffff;
+}
+*/
+
+.table thead > tr > th,
+.table thead > tr > td,
+.table tfoot > tr > th,
+.table tfoot > tr > td {
+  background-color: #e9e9e9;
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

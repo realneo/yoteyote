@@ -124,13 +124,100 @@ class Users extends Admin_Controller
 	 */
 	public function add()
 	{
-		// Setup the data array and display the view.
-		$data = $this->set_admin_data('dashboard');
+		// Load the Form Validation library and form helper.
+		$this->load->library('form_validation');
+		$this->load->helper('form');
 
-		$data['page_title']  = 'Add User';
-		$data['view_file']   = 'user_add';
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		$this->load->view('users', $data);
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
+		{
+			$data = $this->set_admin_data('add');
+
+			$data['page_title'] = 'Add User';
+			$data['module']     = 'users';
+			$data['view_file']  = "user_add";
+
+			$this->load->view('users', $data);
+		}
+
+		// Form Validation passed so add the user to the database.
+		else
+		{
+			// See if the forms have been submitted!
+			$submit = $this->input->post(NULL, TRUE);
+
+			// Has the login form been submitted?
+			if (isset($submit['add']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				//$user_email    = set_value('user_email');
+				$user_email    = $this->input->post('user_email', TRUE);
+
+				// Setup the database record data.
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_ip_address' => $this->input->ip_address(),
+					'user_created_at' => set_now(),
+					'user_updated_at' => set_now(),
+			);
+
+				// Insert the new users record.
+				$insert_id = $this->users->_insert($data);
+
+				$data2['msg'] = "The user has now been created.";
+
+				/**
+				 * ---------------------------------------------------------------------
+				 * Add the new created user groups.
+				 * ---------------------------------------------------------------------
+				 */
+
+				// Web site admin group
+				if ($user_name == 'admin')
+				{
+					$data = array(
+						'user_id'  => $insert_id,
+						'group_id' => '1',
+					);
+				}
+
+				// Web site owner group
+				elseif ($user_name == 'owner')
+				{
+					$data = array(
+						'user_id'  => $insert_id,
+						'group_id' => '2',
+					);
+				}
+
+				// Web site user group default
+				else
+				{
+					$data = array(
+						'user_id'  => $insert_id,
+						'group_id' => '6',
+					);
+				}
+
+				// Insert the new users group
+				$result = modules::run('groups/insert_user_group', $data);
+
+
+				redirect('users/manage', 'refresh');
+			}
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -146,13 +233,65 @@ class Users extends Admin_Controller
 	 */
 	public function edit($id)
 	{
-		// Setup the data array and display the view.
-		$data = $this->set_admin_data('dashboard');
+		// Load the Form Validation library and form helper.
+		$this->load->library('form_validation');
+		$this->load->helper('form');
 
-		$data['page_title']  = 'Edit User';
-		$data['view_file']   = 'user_edit';
+		/**
+		 * ----------------------------------------------------------------------
+		 * Setup the Form Validation Rules.
+		 * You must supply at least one form validation rule to use CI forms and
+		 * jQuery validation!
+		 * ----------------------------------------------------------------------
+		 */
+		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
 
-		$this->load->view('users', $data);
+		// Run the form.
+		if ($this->form_validation->run($this) == FALSE)
+		{
+			$data = $this->set_admin_data('edit');
+
+			// Get the users information.
+			$query = $this->users->get_where(array('id' => $id));
+			$row   = $query->row();
+
+			$data['user_name']  = $row->user_name;
+			$data['user_email'] = $row->user_email;
+
+			$data['page_title'] = 'Edit User';
+			$data['module']     = 'users';
+			$data['view_file']  = "user_edit";
+
+			$this->load->view('users', $data);
+		}
+
+		// Form Validation passed so update the users database record.
+		else
+		{
+			// See if the forms have been submitted!
+			$submit = $this->input->post(NULL, TRUE);
+
+			// Has the login form been submitted?
+			if (isset($submit['update']))
+			{
+				$user_name     = set_value('user_name');
+				$user_password = $this->_secure_hash(set_value('user_password'));
+				$user_email    = set_value('user_email');
+
+				$data = array(
+					'user_name'       => $user_name,
+					'user_email'      => $user_email,
+					'user_password'   => $user_password,
+					'user_updated_at' => set_now(),
+				);
+
+				$result = $this->users->_update(array('id' => $id), $data);
+
+				$data2['msg'] = "The user has now been edited.";
+
+				redirect('users/manage', 'refresh');
+			}
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -170,13 +309,13 @@ class Users extends Admin_Controller
 	{
 		$this->users->_delete(array('id' => $id));
 
-		// Setup the data array and display the view.
-		$data = $this->set_admin_data('dashboard');
+		/**
+		 * ----------------------------------------------------------------------
+		 * You can add Success messages etc; Here if you want.
+		 * ----------------------------------------------------------------------
+		 */
 
-		$data['page_title']  = 'Delete User';
-		$data['view_file']   = 'users/delete_success';
-
-		$this->load->view('users', $data);
+		redirect('users/manage', 'refresh');
 	}
 
 	// -----------------------------------------------------------------------
@@ -192,6 +331,31 @@ class Users extends Admin_Controller
     {
 
     }
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * secure_hash()
+	 *
+	 * Hashes the password and CI 32-bit encryption key
+	 * using SHA-512. I place this key in my user_model.
+	 *
+	 * You can also pass in the password field to
+	 * this method to generate the encryption key then return the value.
+	 *
+	 * NOTE: The Database password field needs to be varchar(128)
+	 * Can also be used for generating hash for other values.
+	 * You can also pass a second parameter to this method if needed.
+	 *
+	 * @access	private
+	 * @param	string	- $default	- default value
+	 * @param	string	- $optional	- optional value
+	 * @retrun	string	- the 128 char encrypted string
+	 */
+	private function _secure_hash($default, $optional = '')
+	{
+		return hash_hmac('SHA512', $default . $optional, $this->config->item('encryption_key'));
+	}
 
 	// ------------------------------------------------------------------------
 
