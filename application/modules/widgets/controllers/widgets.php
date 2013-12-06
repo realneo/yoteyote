@@ -102,9 +102,9 @@ class Widget extends Public_Controller
 		$data['data_grid']   = $query->result();
 		$data['pager_links'] = $this->fx_pagination->create_links();
 		$data['module']      = 'widgets';
-		$data['view_file']   = 'widgets_manage';
+		$data['view_file']   = 'widget_manage';
 
-		$this->load->view('widgets', $data);
+		$this->load->view('widget', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -143,7 +143,7 @@ class Widget extends Public_Controller
 			$data['module']     = 'widgets';
 			$data['view_file']  = "widget_add";
 
-			$this->load->view('widgets', $data);
+			$this->load->view('widget', $data);
 		}
 
 		// Form Validation passed so add the user to the database.
@@ -223,7 +223,7 @@ class Widget extends Public_Controller
 			$data['module']     = 'widgets';
 			$data['view_file']  = "widget_edit";
 
-			$this->load->view('widgets', $data);
+			$this->load->view('widget', $data);
 		}
 
 		// Form Validation passed so update the database record.

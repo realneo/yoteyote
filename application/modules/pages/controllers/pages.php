@@ -40,10 +40,24 @@ class Pages extends Admin_Controller
 	{
 		parent::__construct();
 
-		modules::run('auth/restrict_user', 'admin');
+		//modules::run('auth/restrict_user', 'admin');
 
 		$this->load->model('mdl_pages', 'pages');
 	}
+
+	// -----------------------------------------------------------------------
+
+	/**
+	 * index()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function index()
+    {
+
+    }
 
 	// --------------------------------------------------------------------
 
@@ -94,11 +108,12 @@ class Pages extends Admin_Controller
 		// Setup the data array and display the view.
 		$data = $this->set_admin_data('dashboard');
 
+		$data['page_title']  = 'Manage Pages';
 		$data['data_grid']   = $query->result();
 		$data['pager_links'] = $this->fx_pagination->create_links();
-		$data['view_file']   = 'pages_manage';
+		$data['view_file']   = 'page_manage';
 
-		$this->load->view('pages', $data);
+		$this->load->view('page', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -125,7 +140,7 @@ class Pages extends Admin_Controller
 		 * jQuery validation!
 		 * ----------------------------------------------------------------------
 		 */
-		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
+		$this->form_validation->set_rules('page_title', 'Page Title', 'trim|required|min_length[4]');
 
 		// Run the form.
 		if ($this->form_validation->run($this) == FALSE)
@@ -134,9 +149,9 @@ class Pages extends Admin_Controller
 
 			$data['page_title'] = 'Add Page';
 			$data['module']     = 'pages';
-			$data['view_file']  = "pages_add";
+			$data['view_file']  = "page_add";
 
-			$this->load->view('pages', $data);
+			$this->load->view('page', $data);
 		}
 
 		// Form Validation passed so add the user to the database.
@@ -148,18 +163,22 @@ class Pages extends Admin_Controller
 			// Has the form been submitted ( name"add" )?
 			if (isset($submit['add']))
 			{
-				$user_name     = set_value('user_name');
-				$user_password = $this->_secure_hash(set_value('user_password'));
-				$user_email    = $this->input->post('user_email', TRUE);
+				$page_title     = set_value('page_title');
 
 				// Setup the database record data.
 				$data = array(
-					'user_name'       => $user_name,
-					'user_email'      => $user_email,
-					'user_password'   => $user_password,
-					'user_ip_address' => $this->input->ip_address(),
-					'user_created_at' => set_now(),
-					'user_updated_at' => set_now(),
+					'page_title'       => $page_title,
+					'page_slug'        => url_title($this->input->post('page_title', TRUE), 'underscore', TRUE),
+					'page_headline'    => $this->input->post('page_headline', TRUE),
+					'page_keywords'    => $this->input->post('page_keywords', TRUE),
+					'page_description' => $this->input->post('page_description', TRUE),
+					'page_content'     => $this->input->post('page_content', TRUE),
+					'page_author'      => $this->input->post('page_author', TRUE),
+					'page_location'    => $this->input->post('page_location', TRUE),
+					'page_type'        => $this->input->post('page_type', TRUE),
+					'page_created_at'  => set_now(),
+					'page_updated_at'  => set_now(),
+					'page_status'      => $this->input->post('page_status', TRUE),
 				);
 
 				// Insert the new page database record.
@@ -196,7 +215,7 @@ class Pages extends Admin_Controller
 		 * jQuery validation!
 		 * ----------------------------------------------------------------------
 		 */
-		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[5]|max_length[40]');
+		$this->form_validation->set_rules('page_title', 'Page Title', 'trim|required|min_length[4]');
 
 		// Run the form.
 		if ($this->form_validation->run($this) == FALSE)
@@ -207,14 +226,23 @@ class Pages extends Admin_Controller
 			$query = $this->pages->get_where(array('id' => $id));
 			$row   = $query->row();
 
-			$data['user_name']  = $row->user_name;
-			$data['user_email'] = $row->user_email;
+			// Setup the view with the database record data.
+			$data['page_title']       = $row->page_title;
+			$data['page_slug']        = $row->page_slug;
+			$data['page_headline']    = $row->page_headline;
+			$data['page_keywords']    = $row->page_keywords;
+			$data['page_description'] = $row->page_description;
+			$data['page_content']     = $row->page_content;
+			$data['page_author']      = $row->page_author;
+			$data['page_location']    = $row->page_location;
+			$data['page_type']        = $row->page_type;
+			$data['page_status']      = $row->page_status;
 
 			$data['page_title'] = 'Edit Page';
 			$data['module']     = 'pages';
-			$data['view_file']  = "pages_edit";
+			$data['view_file']  = "page_edit";
 
-			$this->load->view('pages', $data);
+			$this->load->view('page', $data);
 		}
 
 		// Form Validation passed so update the pages database record.
@@ -226,15 +254,21 @@ class Pages extends Admin_Controller
 			// Has the form been submitted?
 			if (isset($submit['update']))
 			{
-				$user_name     = set_value('user_name');
-				$user_password = $this->_secure_hash(set_value('user_password'));
-				$user_email    = set_value('user_email');
+				$page_title     = set_value('page_title');
 
+				// Setup the database record data.
 				$data = array(
-					'user_name'       => $user_name,
-					'user_email'      => $user_email,
-					'user_password'   => $user_password,
-					'user_updated_at' => set_now(),
+					'page_title'       => $this->input->post('page_title', TRUE),
+					'page_slug'        => url_title($this->input->post('page_title', TRUE), 'underscore', TRUE),
+					'page_headline'    => $this->input->post('page_headline', TRUE),
+					'page_keywords'    => $this->input->post('page_keywords', TRUE),
+					'page_description' => $this->input->post('page_description', TRUE),
+					'page_content'     => $this->input->post('page_content', TRUE),
+					'page_author'      => $this->input->post('page_author', TRUE),
+					'page_location'    => $this->input->post('page_location', TRUE),
+					'page_type'        => $this->input->post('page_type', TRUE),
+					'page_updated_at'  => set_now(),
+					'page_status'      => $this->input->post('page_status', TRUE),
 				);
 
 				$result = $this->pages->_update(array('id' => $id), $data);
@@ -415,7 +449,7 @@ class Pages extends Admin_Controller
 		    ),
 		    array(
         		'name'  => 'Users',
-		        'icon'  => 'fa fa-rocket',
+		        'icon'  => 'fa fa-th',
         		'sub'   => array(
 		            array(
     		            'name'  => 'Users',
@@ -430,6 +464,26 @@ class Pages extends Admin_Controller
         		    array(
                 		'name'  => 'Pages',
 		                'url'   => base_url('pages/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Posts',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Posts',
+		                'url'   => base_url('posts/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Comments',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Comments',
+		                'url'   => base_url('comments/manage'),
         		    ),
 		        )
 		    ),

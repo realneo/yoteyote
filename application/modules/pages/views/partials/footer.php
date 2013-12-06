@@ -11,6 +11,7 @@
 ?>
         <!-- Footer -->
         <footer class="clearfix">
+
         	<!-- Right Statusbar Text -->
             <div class="pull-right">
                 <span id="year-copy"></span> &copy; <a href="http://www.yoteyote.com" target="_blank"><?php echo $template['name'] . ' '; ?></a>

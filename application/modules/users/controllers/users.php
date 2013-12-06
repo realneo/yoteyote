@@ -106,9 +106,9 @@ class Users extends Admin_Controller
 		$data['data_grid']   = $query->result();
 		$data['pager_links'] = $this->fx_pagination->create_links();
 		$data['module']      = 'users';
-		$data['view_file']   = 'users_manage';
+		$data['view_file']   = 'user_manage';
 
-		$this->load->view('users', $data);
+		$this->load->view('user', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -147,7 +147,7 @@ class Users extends Admin_Controller
 			$data['module']     = 'users';
 			$data['view_file']  = "user_add";
 
-			$this->load->view('users', $data);
+			$this->load->view('user', $data);
 		}
 
 		// Form Validation passed so add the user to the database.
@@ -263,7 +263,7 @@ class Users extends Admin_Controller
 			$data['module']     = 'users';
 			$data['view_file']  = "user_edit";
 
-			$this->load->view('users', $data);
+			$this->load->view('user', $data);
 		}
 
 		// Form Validation passed so update the database record.

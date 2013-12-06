@@ -4,9 +4,9 @@
     <!-- Form Edit User with Blocks in the Grid -->
     <div class="row gutter30">
 
-        <div class="col-sm-4"></div>
+        <div class="col-xs-4"></div>
 
-        <div class="col-sm-4">
+        <div class="col-xs-4">
 
             <!-- Form Block -->
             <div class="block">
@@ -53,7 +53,7 @@
 
         </div>
 
-        <div class="col-sm-4"></div>
+        <div class="col-xs-4"></div>
 
     </div>
     <!-- END Form with Blocks in the Grid -->

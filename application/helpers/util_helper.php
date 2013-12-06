@@ -5,6 +5,8 @@
 /**
  * bread_crumbs()
  *
+ * Display's a list of bread crumbs in the current page.
+ *
  * @access	public
  * @param	string
  * @return	mixed
@@ -14,23 +16,27 @@ if ( ! function_exists('bread_crumbs'))
 	function bread_crumbs()
 	{
 		$html = '';
-		$i = 0;
+        $html = '<li><i class="fa fa-file-o"></i></li>'."\n";
+
+		$i = 1;
 
 		$_ci = get_instance();
 
+		// Get all the uri segments.
 		$segs = $_ci->uri->segment_array();
 
 		$num_segs = count($segs);
 
+		// Loop through the segements and create the html output.
 		foreach ($segs as $segment)
 		{
 			if ($num_segs == $i)
 			{
-				$html .= '<li ><a href="">' . $segment . '</a></li><br />';
+				$html .= '<li ><a href="">'.$segment.'</a></li>'."\n";
 			}
 			else
 			{
-				$html .= '<li>' . $segment . '</li><br />';
+				$html .= '<li>'.$segment.'</li>'."\n";
 			}
 
 			$i++;

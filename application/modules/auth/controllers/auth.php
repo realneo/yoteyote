@@ -402,12 +402,24 @@ class Auth extends Auth_Controller
 	 */
 	public function logout()
 	{
-		$this->session->set_userdata('user_id', '');
+		// The users session data array.
+		$data = array(
+			$login_type   => '',
+			'user_id'     => '',
+			'user_name'   => '',
+			'first_name'  => '',
+			'last_name'   => '',
+			'pic'         => '',
+			'user_groups' => '',
+			'logged_in'   => FALSE,
+		);
+
+		$this->session->set_userdata($data);
 		$this->session->sess_destroy();
 
-		setcookie("logged_in", '', 1, '/');
+		setcookie("logged_in", '', 1);
 
-		return;
+		redirect('/', 'refresh');
 	}
 
 	// --------------------------------------------------------------------

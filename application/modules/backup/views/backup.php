@@ -15,9 +15,7 @@
     </div>
 
     <ul class="breadcrumb breadcrumb-top">
-        <li><i class="fa fa-file-o"></i></li>
-        <li>Users</li>
-        <li><a href="">Manage</a></li>
+        <?php echo bread_crumbs(); ?>
     </ul>
     <!-- END Blank Header -->
 

@@ -76,8 +76,6 @@ class Admin extends Admin_Controller
 		{
 			$data = $this->set_admin_data('dashboard');
 
-			$data['page_title'] = 'Dashboard';
-
 			$this->load->view('dashboard', $data);
 		}
 
@@ -183,7 +181,7 @@ class Admin extends Admin_Controller
 		    ),
 		    array(
         		'name'  => 'Users',
-		        'icon'  => 'fa fa-rocket',
+		        'icon'  => 'fa fa-th',
         		'sub'   => array(
 		            array(
     		            'name'  => 'Users',
@@ -198,6 +196,26 @@ class Admin extends Admin_Controller
         		    array(
                 		'name'  => 'Pages',
 		                'url'   => base_url('pages/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Posts',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Posts',
+		                'url'   => base_url('posts/manage'),
+        		    ),
+		        )
+		    ),
+		    array(
+	        	'name'  => 'Comments',
+    		    'icon'  => 'fa fa-th',
+		        'sub'   => array(
+        		    array(
+                		'name'  => 'Comments',
+		                'url'   => base_url('comments/manage'),
         		    ),
 		        )
 		    ),

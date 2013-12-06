@@ -81,16 +81,21 @@
         'sidebar-right-pinned'                        for a right pinned sidebar (always visible > 1200px)
         'sidebar-left-pinned sidebar-right-pinned'    for both sidebars pinned (always visible > 1200px)
     -->
+
     <?php
     $body_classes = '';
 
-    if ($template['header'] == 'navbar-fixed-top') {
+    if ($template['header'] == 'navbar-fixed-top')
+	{
         $body_classes = 'header-fixed-top';
-    } else if ($template['header'] == 'navbar-fixed-bottom') {
+    }
+	elseif ($template['header'] == 'navbar-fixed-bottom')
+	{
         $body_classes = 'header-fixed-bottom';
     }
 
-    if ($template['navigation']) {
+    if ($template['navigation'])
+	{
         $body_classes .= ' ' . $template['navigation'];
     }
     ?>
@@ -115,29 +120,37 @@
 
                     <!-- Sidebar Navigation -->
                     <ul class="sidebar-nav">
-                        <?php foreach ($primary_nav as $key => $link) {
+                        <?php
+						foreach ($primary_nav as $key => $link)
+						{
                             $link_class = '';
 
                             // Get link's vital info
-                            $url = (isset($link['url']) && $link['url']) ? $link['url'] : '#';
+                            $url    = (isset($link['url']) && $link['url']) ? $link['url'] : '#';
                             $active = (isset($link['url']) && ($template['active_page'] == $link['url'])) ? ' active' : '';
-                            $icon = (isset($link['icon']) && $link['icon']) ? '<i class="' . $link['icon'] . '"></i>' : '';
+                            $icon   = (isset($link['icon']) && $link['icon']) ? '<i class="' . $link['icon'] . '"></i>' : '';
 
                             // Check if we need to add the class active to the li element (only if a sublink is active)
                             $li_active = '';
                             $menu_link = '';
 
-                            if (isset($link['sub']) && $link['sub']) {
-                                foreach ($link['sub'] as $sub_link) {
-                                    if (in_array($template['active_page'], $sub_link)) {
+                            if (isset($link['sub']) && $link['sub'])
+							{
+                                foreach ($link['sub'] as $sub_link)
+								{
+                                    if (in_array($template['active_page'], $sub_link))
+									{
                                         $li_active = ' class="active"';
                                         break;
                                     }
 
                                     // Check and sublinks for active class if they exist
-                                    if (isset($sub_link['sub']) && $sub_link['sub']) {
-                                        foreach ($sub_link['sub'] as $sub2_link) {
-                                            if (in_array($template['active_page'], $sub2_link)) {
+                                    if (isset($sub_link['sub']) && $sub_link['sub'])
+									{
+                                        foreach ($sub_link['sub'] as $sub2_link)
+										{
+                                            if (in_array($template['active_page'], $sub2_link))
+											{
                                                 $li_active = ' class="active"';
                                                 break;
                                             }
@@ -148,7 +161,8 @@
                                 $menu_link = 'menu-link';
                             }
 
-                            if ($menu_link || $active) {
+                            if ($menu_link || $active)
+							{
                                 $link_class = ' class="'. $menu_link . $active .'"';
                             }
                         ?>
@@ -161,20 +175,24 @@
                                 <a href="<?php echo $url; ?>"<?php echo $link_class; ?>><?php echo $icon . $link['name']; ?></a>
                                 <?php if (isset($link['sub']) && $link['sub']) { ?>
                                     <ul>
-                                        <?php foreach ($link['sub'] as $sub_link) {
+                                        <?php foreach ($link['sub'] as $sub_link)
+										{
                                             $link_class = '';
 
                                             // Get sublink's vital info
-                                            $url = (isset($sub_link['url']) && $sub_link['url']) ? $sub_link['url'] : '#';
+                                            $url    = (isset($sub_link['url']) && $sub_link['url']) ? $sub_link['url'] : '#';
                                             $active = (isset($sub_link['url']) && ($template['active_page'] == $sub_link['url'])) ? ' active' : '';
 
                                             // Check if we need add the class active to the li element (only if a sublink is active)
                                             $li2_active = '';
                                             $submenu_link = '';
 
-                                            if (isset($sub_link['sub']) && $sub_link['sub']) {
-                                                foreach ($sub_link['sub'] as $sub2_link) {
-                                                    if (in_array($template['active_page'], $sub2_link)) {
+                                            if (isset($sub_link['sub']) && $sub_link['sub'])
+											{
+                                                foreach ($sub_link['sub'] as $sub2_link)
+												{
+                                                    if (in_array($template['active_page'], $sub2_link))
+													{
                                                         $li2_active = ' class="active"';
                                                         break;
                                                     }
@@ -183,7 +201,8 @@
                                                 $submenu_link = 'submenu-link';
                                             }
 
-                                            if ($submenu_link || $active) {
+                                            if ($submenu_link || $active)
+											{
                                                 $link_class = ' class="'. $submenu_link . $active .'"';
                                             }
                                         ?>
@@ -191,9 +210,11 @@
                                             <a href="<?php echo $url; ?>"<?php echo $link_class; ?>><?php echo $sub_link['name']; ?></a>
                                             <?php if (isset($sub_link['sub']) && $sub_link['sub']) { ?>
                                                 <ul>
-                                                    <?php foreach ($sub_link['sub'] as $sub2_link) {
+                                                    <?php
+													foreach ($sub_link['sub'] as $sub2_link)
+													{
                                                         // Get vital info of sublinks
-                                                        $url = (isset($sub2_link['url']) && $sub2_link['url']) ? $sub2_link['url'] : '#';
+                                                        $url    = (isset($sub2_link['url']) && $sub2_link['url']) ? $sub2_link['url'] : '#';
                                                         $active = (isset($sub2_link['url']) && ($template['active_page'] == $sub2_link['url'])) ? ' class="active"' : '';
                                                     ?>
                                                     <li>
@@ -280,7 +301,7 @@
                             <a href="javascript:void(0)"><i class="fa fa-cog"></i> Settings</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('/'); ?>"><i class="fa fa-power-off"></i> Logout</a>
+                            <a href="<?php echo base_url('logout'); ?>"><i class="fa fa-power-off"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- END User Menu -->

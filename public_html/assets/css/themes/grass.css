@@ -5,6 +5,10 @@
  *
  */
 
+.header-bar-top {
+    border-top: 7px solid #a6db34;
+}
+
 a,
 a:hover,
 a:focus,

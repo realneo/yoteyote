@@ -7,14 +7,12 @@
         <!-- If you do not want a link in the header, instead of .header-title-link you can use a div with the class .header-section -->
         <a href="" class="header-title-link">
             <h1>
-                <i class="glyphicon-brush animation-expandUp"></i><?php echo $page_title; ?><br><small>A clean page to help you start!</small>
+                <i class="glyphicon-brush animation-expandUp"></i><?php echo $page_title; ?><br><small>Manage Users!</small>
             </h1>
         </a>
     </div>
     <ul class="breadcrumb breadcrumb-top">
-        <li><i class="fa fa-file-o"></i></li>
-        <li>Pages</li>
-        <li><a href="">Blank</a></li>
+        <?php echo bread_crumbs(); ?>
     </ul>
     <!-- END Blank Header -->
 

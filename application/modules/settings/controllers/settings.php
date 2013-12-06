@@ -78,7 +78,7 @@ class Settings extends Auth_Controller
 		 * ----------------------------------------------------------------------
 		 */
 		$config = array(
-			'base_url'      => base_url('settins/manage/'),
+			'base_url'      => base_url('settings/manage/'),
 			'uri_segment'   => 3,
 			'full_tag_open' => '<div id"content" class="text-center"><ul class="pagination pagination-sm page-manage">',
 			'display_pages' => TRUE,
@@ -98,13 +98,13 @@ class Settings extends Auth_Controller
 		// Setup the data array and display the view.
 		$data = $this->set_admin_data('dashboard');
 
-		$data['page_title']  = 'Manage Settings';
+		$data['page_title']  = 'Manage Web Site Settings';
 		$data['data_grid']   = $query->result();
 		$data['pager_links'] = $this->fx_pagination->create_links();
 		$data['module']      = 'settings';
-		$data['view_file']   = 'settings_manage';
+		$data['view_file']   = 'setting_manage';
 
-		$this->load->view('settings', $data);
+		$this->load->view('setting', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -143,7 +143,7 @@ class Settings extends Auth_Controller
 			$data['module']     = 'settings';
 			$data['view_file']  = "setting_add";
 
-			$this->load->view('settings', $data);
+			$this->load->view('setting', $data);
 		}
 
 		// Form Validation passed so add the user to the database.
@@ -175,7 +175,7 @@ class Settings extends Auth_Controller
 				$data2['msg'] = "The Setting has now been created.";
 
 				// Redirect back to the manage view.
-				redirect('settins/manage', 'refresh');
+				redirect('settings/manage', 'refresh');
 			}
 		}
 	}
@@ -223,7 +223,7 @@ class Settings extends Auth_Controller
 			$data['module']     = 'settings';
 			$data['view_file']  = "setting_edit";
 
-			$this->load->view('settings', $data);
+			$this->load->view('setting', $data);
 		}
 
 		// Form Validation passed so update the database record.

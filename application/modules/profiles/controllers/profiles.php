@@ -118,9 +118,9 @@ class Profiles extends Admin_Controller
 		$data['data_grid']   = $query->result();
 		$data['pager_links'] = $this->fx_pagination->create_links();
 		$data['module']      = 'profiles';
-		$data['view_file']   = 'profiles_manage';
+		$data['view_file']   = 'profile_manage';
 
-		$this->load->view('profiles', $data);
+		$this->load->view('profile', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -159,7 +159,7 @@ class Profiles extends Admin_Controller
 			$data['module']     = 'profiles';
 			$data['view_file']  = "profile_add";
 
-			$this->load->view('profiles', $data);
+			$this->load->view('profile', $data);
 		}
 
 		// Form Validation passed so add the user to the database.
@@ -239,7 +239,7 @@ class Profiles extends Admin_Controller
 			$data['module']     = 'profiles';
 			$data['view_file']  = "profile_edit";
 
-			$this->load->view('profiles', $data);
+			$this->load->view('profile', $data);
 		}
 
 		// Form Validation passed so update the database record.

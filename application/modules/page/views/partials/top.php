@@ -15,12 +15,11 @@
     <head>
         <meta charset="utf-8">
 
-        <title><?php echo $template['title'] ?></title>
+        <title><?php echo $template['title']; ?></title>
 
-        <meta name="description" content="<?php echo $template['description'] ?>">
-        <meta name="keywords" content="<?php echo $template['keywords'] ?>">
-
-        <meta name="author" content="<?php echo $template['author'] ?>">
+        <meta name="description" content="<?php echo $template['description']; ?>">
+        <meta name="keywords" content="<?php echo $template['keywords']; ?>">
+        <meta name="author" content="<?php echo $template['author']; ?>">
         <meta name="robots" content="noindex, nofollow">
 
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
@@ -62,7 +61,6 @@
         <link rel="stylesheet" href="<?php echo css_url('themes.css'); ?>">
         <!-- END Stylesheets -->
 
-		<!-- These are Global variables for jQuery. -->
 		<script type="text/javascript" charset="utf-8">
 			//<![CDATA[
 				var base_url  = "<?php echo base_url(); ?>";
@@ -86,21 +84,16 @@
     <?php
     $body_classes = '';
 
-    if ($template['header'] == 'navbar-fixed-top')
-	{
+    if ($template['header'] == 'navbar-fixed-top') {
         $body_classes = 'header-fixed-top';
-    }
-	elseif ($template['header'] == 'navbar-fixed-bottom')
-	{
+    } else if ($template['header'] == 'navbar-fixed-bottom') {
         $body_classes = 'header-fixed-bottom';
     }
 
-    if ($template['navigation'])
-	{
+    if ($template['navigation']) {
         $body_classes .= ' ' . $template['navigation'];
     }
     ?>
-
     <body<?php if ($body_classes) { echo ' class="' . $body_classes . '"'; } ?>>
         <!-- Left Sidebar -->
         <!-- In the PHP version you can set the following options from the config file -->
@@ -122,8 +115,7 @@
 
                     <!-- Sidebar Navigation -->
                     <ul class="sidebar-nav">
-                        <?php foreach ($primary_nav as $key => $link)
-						{
+                        <?php foreach ($primary_nav as $key => $link) {
                             $link_class = '';
 
                             // Get link's vital info
@@ -135,23 +127,17 @@
                             $li_active = '';
                             $menu_link = '';
 
-                            if (isset($link['sub']) && $link['sub'])
-							{
-                                foreach ($link['sub'] as $sub_link)
-								{
-                                    if (in_array($template['active_page'], $sub_link))
-									{
+                            if (isset($link['sub']) && $link['sub']) {
+                                foreach ($link['sub'] as $sub_link) {
+                                    if (in_array($template['active_page'], $sub_link)) {
                                         $li_active = ' class="active"';
                                         break;
                                     }
 
                                     // Check and sublinks for active class if they exist
-                                    if (isset($sub_link['sub']) && $sub_link['sub'])
-									{
-                                        foreach ($sub_link['sub'] as $sub2_link)
-										{
-                                            if (in_array($template['active_page'], $sub2_link))
-											{
+                                    if (isset($sub_link['sub']) && $sub_link['sub']) {
+                                        foreach ($sub_link['sub'] as $sub2_link) {
+                                            if (in_array($template['active_page'], $sub2_link)) {
                                                 $li_active = ' class="active"';
                                                 break;
                                             }
@@ -162,8 +148,7 @@
                                 $menu_link = 'menu-link';
                             }
 
-                            if ($menu_link || $active)
-							{
+                            if ($menu_link || $active) {
                                 $link_class = ' class="'. $menu_link . $active .'"';
                             }
                         ?>
@@ -176,8 +161,7 @@
                                 <a href="<?php echo $url; ?>"<?php echo $link_class; ?>><?php echo $icon . $link['name']; ?></a>
                                 <?php if (isset($link['sub']) && $link['sub']) { ?>
                                     <ul>
-                                        <?php foreach ($link['sub'] as $sub_link)
-										{
+                                        <?php foreach ($link['sub'] as $sub_link) {
                                             $link_class = '';
 
                                             // Get sublink's vital info
@@ -188,12 +172,9 @@
                                             $li2_active = '';
                                             $submenu_link = '';
 
-                                            if (isset($sub_link['sub']) && $sub_link['sub'])
-											{
-                                                foreach ($sub_link['sub'] as $sub2_link)
-												{
-                                                    if (in_array($template['active_page'], $sub2_link))
-													{
+                                            if (isset($sub_link['sub']) && $sub_link['sub']) {
+                                                foreach ($sub_link['sub'] as $sub2_link) {
+                                                    if (in_array($template['active_page'], $sub2_link)) {
                                                         $li2_active = ' class="active"';
                                                         break;
                                                     }
@@ -202,8 +183,7 @@
                                                 $submenu_link = 'submenu-link';
                                             }
 
-                                            if ($submenu_link || $active)
-											{
+                                            if ($submenu_link || $active) {
                                                 $link_class = ' class="'. $submenu_link . $active .'"';
                                             }
                                         ?>
@@ -211,8 +191,7 @@
                                             <a href="<?php echo $url; ?>"<?php echo $link_class; ?>><?php echo $sub_link['name']; ?></a>
                                             <?php if (isset($sub_link['sub']) && $sub_link['sub']) { ?>
                                                 <ul>
-                                                    <?php foreach ($sub_link['sub'] as $sub2_link)
-													{
+                                                    <?php foreach ($sub_link['sub'] as $sub2_link) {
                                                         // Get vital info of sublinks
                                                         $url = (isset($sub2_link['url']) && $sub2_link['url']) ? $sub2_link['url'] : '#';
                                                         $active = (isset($sub2_link['url']) && ($template['active_page'] == $sub2_link['url'])) ? ' class="active"' : '';
@@ -301,7 +280,7 @@
                             <a href="javascript:void(0)"><i class="fa fa-cog"></i> Settings</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('/'); ?>"><i class="fa fa-power-off"></i> Logout</a>
+                            <a href="<?php echo base_url('logout'); ?>"><i class="fa fa-power-off"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- END User Menu -->

@@ -102,9 +102,9 @@ class Yoteemail extends Auth_Controller
 		$data['data_grid']   = $query->result();
 		$data['pager_links'] = $this->fx_pagination->create_links();
 		$data['module']      = 'emails';
-		$data['view_file']   = 'emails_manage';
+		$data['view_file']   = 'email_manage';
 
-		$this->load->view('emails', $data);
+		$this->load->view('email', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -143,7 +143,7 @@ class Yoteemail extends Auth_Controller
 			$data['module']     = 'emails';
 			$data['view_file']  = "email_add";
 
-			$this->load->view('emails', $data);
+			$this->load->view('email', $data);
 		}
 
 		// Form Validation passed so add the email to the database.
@@ -223,7 +223,7 @@ class Yoteemail extends Auth_Controller
 			$data['module']     = 'emails';
 			$data['view_file']  = "email_edit";
 
-			$this->load->view('emails', $data);
+			$this->load->view('email', $data);
 		}
 
 		// Form Validation passed so update the database record.

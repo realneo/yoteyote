@@ -295,7 +295,7 @@ class Group extends Admin_Controller
 		 * ----------------------------------------------------------------------
 		 */
 
-		redirect('users/manage', 'refresh');
+		redirect('group/manage', 'refresh');
 	}
 
 	// -----------------------------------------------------------------------

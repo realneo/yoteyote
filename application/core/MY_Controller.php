@@ -114,7 +114,7 @@ class Base_Controller extends MX_Controller {
 	 */
 	public function login()
 	{
-		$this->login();
+		$this->auth->login();
 	}
 
 	// --------------------------------------------------------------------
@@ -130,7 +130,7 @@ class Base_Controller extends MX_Controller {
 	 */
 	public function logout()
 	{
-		$this->logout();
+		$this->auth->logout();
 	}
 
 	// --------------------------------------------------------------------
@@ -146,7 +146,7 @@ class Base_Controller extends MX_Controller {
 	 */
 	public function register()
 	{
-		$this->register();
+		//$this->auth->register();
 	}
 
 }	// End of Class.
