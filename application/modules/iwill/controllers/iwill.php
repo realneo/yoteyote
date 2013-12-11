@@ -194,6 +194,22 @@ class IWill extends Auth_Controller
 		}
 	}
 
+	// -----------------------------------------------------------------------
+
+	/**
+	 * create()
+	 *
+	 * Create a I Will.
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function create()
+    {
+
+    }
+
 	// --------------------------------------------------------------------
 
 	/**

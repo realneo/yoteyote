@@ -45,7 +45,7 @@ class Mdl_menu extends MY_Model
 	{
 		parent::__construct();
 
-		$this->set_table('menu');
+		$this->set_table('menus');
 	}
 
 }	// End of Class.

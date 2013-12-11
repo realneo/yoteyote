@@ -183,8 +183,6 @@ class Auth_Controller extends Base_Controller
 
 	}
 
-
-
 }	// End of Class.
 
 
@@ -218,7 +216,6 @@ class Admin_Controller extends Base_Controller
 
 	}
 
-
 }	// End of Class.
 
 
@@ -251,7 +248,6 @@ class Public_Controller extends Base_Controller
 		parent::__construct();
 
 	}
-
 
 }	// End of Class.
 

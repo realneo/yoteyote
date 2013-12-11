@@ -34,10 +34,11 @@
     </div>
 
     <ul class="breadcrumb breadcrumb-top">
-        <li><i class="fa fa-file-o"></i></li>
-        <li><a href=""><?php echo $page_title; ?></a></li>
+        <?php echo bread_crumbs(); ?>
     </ul>
     <!-- END Blank Header -->
+
+	<!--<?php //echo Modules::run('menus/build_menu', '1', '3'); ?>-->
 
     <!-- Block -->
     <div class="block">
@@ -50,7 +51,6 @@
 
         <!-- Block Content -->
         <p>
-			This is block's content..
 
 			<!-- For notification messages. -->
 			<div id="notifications">

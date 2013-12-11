@@ -44,13 +44,12 @@
 
         <!-- Block Title -->
         <div class="block-title">
-			<h2><?php echo $page_title; ?></h2>
+			<h2>Posts</h2>
 		</div>
         <!-- END Block Title -->
 
         <!-- Block Content -->
         <p>
-			This is block's content..
 
 			<!-- For notification messages. -->
 			<div id="notifications">

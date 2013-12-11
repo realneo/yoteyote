@@ -58,44 +58,82 @@ class Page extends Public_Controller
 		$data = array();
 
 		// Grab the URI segment.
-		$page_slug = $this->uri->segment(2);
+		$page = $this->uri->segment(2);
 
-		if ($page_slug === FALSE)
+		if ($page === FALSE)
 		{
-			$page_slug = 'home';
+			$page = 'home';
 		}
 
         // Load the page model.
-        $this->load->model('page/mdl_pages', 'page');
+        $this->load->model('page/mdl_pages', 'pages');
 
 		// Get the page data from the database.
-        $page_data = $this->page->get_where(array('page_slug' => $page_slug));
+        $query = $this->pages->get_where(array('page_slug' => $page));
+
+		$row = $query->row();
 
 		// Display a 404 Error if no page data.
-		if ($page_data === FALSE OR $page_data === NULL)
+		//if ($row === FALSE OR $row === NULL)
+/*		if (empty($row))
 		{
 			// Show a 404 if no page exists.
 			show_404();
 		}
+*/
+		// Get and set the Theme & Menu data.
+		$data = $this->set_page_data($page);
 
-		// Get the Theme & Menu data.
-		$data = $this->set_page_data($page_slug);
-
-		// Loop through and get the page data.
-        foreach ($page_data->result() as $row)
+		// Check to see if this is a database page or a normal page.
+		if ( ! empty($row))
 		{
-            // page_title - page_headline - page_url - page_keywords - page_description - page_content
-           	$data['page_title']       = $row->page_title;
-           	$data['page_slug']        = $row->page_slug;
-       	    $data['page_headline']    = $row->page_headline;
-            $data['page_keywords']    = $row->page_keywords;
-   	        $data['page_description'] = $row->page_description;
-           	$data['page_content']     = $row->page_content;
-        }
+			/**
+			 * ----------------------------------------------------------------------
+			 * Setup the view data for the database page and display it.
+			 *
+			 * page_title - page_headline - page_url - page_keywords
+			 * page_description - page_content
+			 * ----------------------------------------------------------------------
+			 */
+			$data['page_title']       = $row->page_title;
+			$data['page_slug']        = $row->page_slug;
+			$data['page_headline']    = $row->page_headline;
+			$data['page_keywords']    = $row->page_keywords;
+			$data['page_description'] = $row->page_description;
+			$data['page_content']     = $row->page_content;
+		}
 
-		// Load and display the view.
-		$this->load->view($page_slug, $data);
+		// Else it is not a database page, so handle it!
+		elseif ($page == 'Posts')
+		{
+			$data = $this->get_posts($data);
+		}
+
+		$this->load->view($page, $data);
 	}
+
+	// -----------------------------------------------------------------------
+
+	/**
+	 * get_posts()
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function get_posts($data)
+    {
+
+		$this->load->model('posts/mdl_post', 'posts');
+
+		$order_by = 'id asc';
+
+        $query = $this->posts->get($order_by);
+
+		$data['page_content'] = $query->result();
+
+		//var_debug($data); exit;
+    }
 
 	// ------------------------------------------------------------------------
 
@@ -108,12 +146,33 @@ class Page extends Public_Controller
 	 */
     public function set_page_data($page)
     {
+    	$data = array();
+
     	/**
     	 * -------------------------------------------------------------------
 		 * The YoteyoteUI Main Configuration data array.
 		 * -------------------------------------------------------------------
 		 */
 
+		$params = array(
+   			'name'          => 'Yoteyote',
+		    'version'       => '1.0',
+		    'author'        => 'Yoteyote',
+		    'title'         => 'YoteyoteUI - Premium Web App and Admin Template',
+		    'description'   => 'YoteyoteUI is a Premium Web App and Admin Template',
+			'keywords'      => 'Yoteyote',
+		    'page'          => 'full-width',
+		    'header_navbar' => 'navbar-default',
+		    'header'        => 'navbar-fixed-top',
+		    'sidebar_left'  => 'enable-hover',
+		    'sidebar_right' => '',
+		    'navigation'    => '',
+		    'content_fx'    => 'fx-opacity',
+		    'theme'         => 'dragon',
+		    'active_page'   => current_url($page),
+		);
+
+/*
 		$data = array(
 			'template' => array(
     			'name'          => 'Yoteyote',
@@ -167,6 +226,10 @@ class Page extends Public_Controller
 			    'active_page'   => current_url($page),  // To get the CI current page.
 			),
 		);
+*/
+
+
+
 
 		// ----------------------------------------------------------------------
 
@@ -196,7 +259,7 @@ class Page extends Public_Controller
 			$base = base_url('/');
 		}
 
-		$data['primary_nav'] = array(
+		$nav['primary_nav'] = array(
 		    array(
         		'name'  => 'Welcome',
 		        'url'   => 'header'
@@ -435,6 +498,12 @@ class Page extends Public_Controller
 		        'icon'  => 'fa fa-envelope-o'
 		    ),
 		    array(
+        		'name'  => 'Posts',
+		        //'url'   => base_url('home/page_special_login'),
+		        'url'   => base_url('home/posts'),
+        		'icon'  => 'fa fa-envelope-o'
+		    ),
+		    array(
         		'name'  => 'Login &amp; Register',
 		        //'url'   => base_url('home/page_special_login'),
 		        'url'   => base_url('login'),
@@ -442,7 +511,11 @@ class Page extends Public_Controller
 		    )
 		);
 
-		return $data;
+		$data = set_theme($params);
+
+		$result = array_merge($data, $nav);
+
+		return $result;
     }
 
 }	// End of Class.

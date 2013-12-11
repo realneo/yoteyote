@@ -12,23 +12,9 @@
 			<!-- Block 1 -->
 			<div class="block">
 
-				<div class="block-title"> <h4>Page Data</h4> </div>
+				<div class="block-title"> <h4>Post Data</h4> </div>
 
 				<p>
-<!--
-  `id`              int(11)      unsigned NOT NULL  AUTO_INCREMENT,      -- The post record id
-  `post_user_id`    int(11)      unsigned NOT NULL,                      -- The post user id
-  `post_title`      varchar(255)          NOT NULL,                      -- The post title - 'Home'
-  `post_slug`       varchar(255)          NOT NULL,                      -- The post slug  - 'home'
-  `post_content`    text                  NOT NULL,                      -- The post content
-  `post_type`       varchar(4)            NOT NULL,                      -- The post type
-  `post_amount`     int(11)      unsigned NOT NULL,                      -- The post amount
-  `post_currency`   varchar(20)           NOT NULL,                      -- The post currency
-  `post_pic`        varchar(255)                    DEFAULT NULL,        -- The post picture
-  `post_created_at` datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The post created at date time
-  `post_updated_at` datetime              NOT NULL  DEFAULT '0000-00-00 00:00:00',  -- The post updated at date time
-  `post_active`     enum('yes','no')                DEFAULT 'yes',                  -- The post active status
--->
 
 	                <!-- Form Content -->
        		        <form id="form-validation" class="form-horizontal" method="post">
@@ -101,7 +87,7 @@
 			<!-- Block 2 -->
 			<div class="block">
 
-				<div class="block-title"><h4>Page Options</h4></div>
+				<div class="block-title"><h4>Post Options</h4></div>
 
 				<p>
 

@@ -248,28 +248,34 @@ CREATE TABLE IF NOT EXISTS `settings` (
 -- Menu System - Table Structures
 -- --------------------------------------------------------
 
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu_headers`
+-- Table structure for table `menus`
 --
 
-DROP TABLE IF EXISTS `menu_headers`;
-CREATE TABLE IF NOT EXISTS `menu_headers` (
-  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,                          -- The menuitem record id
-  `menu_name`        varchar(100)          NOT NULL  DEFAULT '',                              -- The menuitem name
-  `menu_icon``       varchar(20)           NOT NULL  DEFAULT '',                              -- The menuitem icon
-  `menu_url`         varchar(255)          NOT NULL  DEFAULT '',                              -- The menuitem url - 'http://www.your.com/controller/method'
+CREATE TABLE IF NOT EXISTS `menus` (
+  `id`        int(11)     unsigned NOT NULL AUTO_INCREMENT,                                  -- The menu record id
+  `menu_name` varchar(50)          NOT NULL,                                                 -- The menu name
+  `menu_slug` varchar(55)          NOT NULL,                                                 -- The menu slug
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;                                 -- 'Links for site menu'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `menu_headers`
+-- Dumping data for table `menus`
 --
 
-INSERT INTO `menu_headers` (`id`, `menu_name`, `menu_icon`, `menu_url`) VALUES
-(1, 'Welcome',   '', ''),
-(2, 'Dashboard', '', '');
+INSERT INTO `menus` (`id`, `menu_name`, `menu_slug`) VALUES
+(1, 'Top Menu', 'top_menu'),
+(2, 'Header Menu', 'header_menu'),
+(3, 'Home Menu', 'home_menu'),
+(4, 'Admin Menu', 'admin_menu'),
+(5, 'Sidebar Left Menu', 'sidebar_left_menu'),
+(6, 'Sidebar Right Menu', 'sidebar_right_menu'),
+(7, 'Slideout Left Menu', 'slideout_left_menu'),
+(8, 'Slideout Right Menu', 'slideout_right_menu'),
+(9, 'Footer Menu', 'footer_menu');
 
 -- --------------------------------------------------------
 
@@ -284,26 +290,82 @@ INSERT INTO `menu_headers` (`id`, `menu_name`, `menu_icon`, `menu_url`) VALUES
 
 DROP TABLE IF EXISTS `menu_items`;
 CREATE TABLE IF NOT EXISTS `menu_items` (
-  `id`               int(11)      unsigned NOT NULL  AUTO_INCREMENT,                          -- The menuitem record id
-  `menu_header_id`   int(11)      unsigned NOT NULL,                                          -- The menuitem header id
-  `menu_parent_id`   int(11)      unsigned NOT NULL, DEFAULT '0',                             -- The menuitem parent id - 0 = parent menu
-  `menu_name`        varchar(100)          NOT NULL  DEFAULT '',                              -- The menuitem name
-  `menu_icon``       varchar(20)           NOT NULL  DEFAULT '',                              -- The menuitem icon
-  `menu_url`         varchar(255)          NOT NULL  DEFAULT '',                              -- The menuitem url - 'http://www.your.com/controller/method'
-  `menu_link_type`   int(1)       unsigned NOT NULL  DEFAULT '1',                             -- The menuitem link type ( 1 = 'url' or 2 = 'uri' )
-  `menu_is_parent`,  int(1)       unsigned NOT NULL  DEFAULT '1',                             -- The menuitem is a parent menu - sub menu 1 = parent sub menu
-  `menu_is_sub`,     int(1)       unsigned NOT NULL  DEFAULT '0',                             -- The menuitem is a sub menu - 1 = sub menu
+  `id`             int(11)      unsigned NOT NULL  AUTO_INCREMENT,                            -- The menuitem record id
+  `menu_id`        int(11)      unsigned NOT NULL  DEFAULT 1,                                 -- The menuitem id - ( see above )
+  `menu_parent_id` int(11)      unsigned NOT NULL  DEFAULT 0,                                 -- The menuitem parent id - 0 = parent menu
+  `menu_name`      varchar(100)          NOT NULL  DEFAULT '',                                -- The menuitem name
+  `menu_icon`      varchar(20)           NOT NULL  DEFAULT '',                                -- The menuitem icon
+  `menu_url`       varchar(255)          NOT NULL  DEFAULT '',                                -- The menuitem url - 'http://www.your.com/controller/method' or 'header'
+  `menu_link_type` int(1)       unsigned NOT NULL  DEFAULT 1,                                 -- The menuitem link type ( 1 = 'url' or 2 = 'uri' )
+  `menu_is_parent` int(1)       unsigned NOT NULL  DEFAULT 0,                                 -- The menuitem is a parent menu - sub menu 1 = parent sub menu
+  `menu_is_sub`    int(1)       unsigned NOT NULL  DEFAULT 0,                                 -- The menuitem is a sub menu - 1 = sub menu
   PRIMARY KEY (`id`),                                                                         -- The menuitem primary key
-  KEY `menu_header_id` (`menu_header_id`)                                                     -- The menuitem key
+  KEY `menu_id` (`menu_id`)                                                                   -- The menu id key
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;                                 -- 'Links for web site menu'
 
 --
 -- Dumping data for table `menu_items`
 --
 
-INSERT INTO `menu_items` (`id`, `menu_header_id`, `menu_parent_id`, `menu_name`, `menu_icon`, `menu_url`, `menu_link_type`, `menu_is_parent`, `menu_is_sub`) VALUES
-(1, '1', '0', 'menu name', 'menu icon', 'menu url', 1, 1, 0, NULL, 1),
-(2, 'Home', 'page', 1, '', '', '', 2, 1, '_self', 1);
+INSERT INTO `menu_items` (`id`, `menu_id`, `menu_parent_id`, `menu_name`, `menu_icon`, `menu_url`, `menu_link_type`, `menu_is_parent`, `menu_is_sub`) VALUES
+(1,  3, 0,  'Welcome', '', 'header', 2, 0, 0),
+(2,  3, 0,  'Home', 'fa fa-coffee', '/', 2, 0, 0),
+(3,  3, 0,  'User Interface', '', 'header', 2, 0, 0),
+(4,  3, 0,  'Elements', 'fa fa-rocket', '', 2, 0, 0),
+(5,  3, 4,  'Typography', '', 'home/page_elements_typography', 2, 0, 1),
+(6,  3, 4,  'Blocks - Grid', '', 'home/page_elements_blocks_grid', 2, 0, 1),
+(7,  3, 4,  'Navigation - Extras', '', 'home/page_elements_navigation_extras', 2, 0, 1),
+(8,  3, 4,  'Buttons - Dropdowns', '', 'home/page_elements_buttons_dropdowns', 2, 0, 1),
+(9,  3, 4,  'Progress - loading', '', 'home/page_elements_progress_loading', 2, 0, 1),
+(10, 3, 0,  'Tables', 'fa fa-th', '', 2, 0, 0),
+(11, 3, 10, 'Styles', '', 'home/page_tables_styles', 2, 0, 1),
+(12, 3, 10, 'Datatables', '', 'home/page_tables_datatables', 2, 0, 1),
+(13, 3, 10, 'Editable', '', 'home/page_tables_editable', 2, 0, 1),
+(14, 3, 0,  'Forms', 'fa fa-pencil-square-o', '', 2, 0, 0),
+(15, 3, 14, 'General', '', 'home/page_forms_general', 2, 0, 1),
+(16, 3, 14, 'Components', '', 'home/page_forms_components', 2, 0, 1),
+(17, 3, 14, 'Validation', '', 'home/page_forms_validation', 2, 0, 1),
+(18, 3, 14, 'Wizard', '', 'home/page_forms_wizard', 2, 0, 1),
+(19, 3, 0,  'Icon Packs', 'fa fa-gift', '', 2, 0, 0),
+(20, 3, 19, 'Font Awesome', '', 'home/page_icons_fontawesome', 2, 0, 1),
+(21, 3, 19, 'Glyphicons Pro', '', 'home/page_icons_glyphicons_pro', 2, 0, 1),
+(22, 3, 0,  'Extras', '', 'header', 2, 0, 0),
+(23, 3, 0,  'Components', 'fa fa-gear', '', 2, 0, 0),
+(24, 3, 23, 'Animations', '', 'home/page_comp_animations', 2, 0, 1),
+(25, 3, 23, 'Carousel', '', 'home/page_comp_carousel', 2, 0, 1),
+(26, 3, 23, 'Gallery', '', 'home/page_comp_gallery', 2, 0, 1),
+(27, 3, 23, 'Calendar', '', 'home/page_comp_calendar', 2, 0, 1),
+(28, 3, 23, 'Charts', '', 'home/page_comp_charts', 2, 0, 1),
+(29, 3, 23, 'Syntax Highlighting', '', 'home/page_comp_syntax_highlighting', 2, 0, 1),
+(30, 3, 23, 'Maps', '', 'home/page_comp_maps', 2, 0, 1),
+(31, 3, 0,  'Pages', 'fa fa-file', '', 2, 0, 0),
+(32, 3, 31, 'Blank', '', 'home/page_ready_blank', 2, 0, 1),
+(33, 3, 31, '404 Error', '', 'home/page_ready_404', 2, 0, 1),
+(34, 3, 31, 'Search Results', '', 'home/page_ready_search_results', 2, 0, 1),
+(35, 3, 31, 'Pricing Tables', '', 'home/page_ready_pricing_tables', 2, 0, 1),
+(36, 3, 31, 'FAQ', '', 'home/page_ready_faq', 2, 0, 1),
+(37, 3, 31, 'Invoice', '', 'home/page_ready_invoice', 2, 0, 1),
+(38, 3, 31, 'Article', '', 'home/page_ready_article', 2, 0, 1),
+(39, 3, 31, 'Forum', '', 'home/page_ready_forum', 2, 0, 1),
+(40, 3, 0,  '3 Level Menu', 'glyphicon-tint', '', 2, 0, 0),
+(41, 3, 40, 'Link 1', '', '#', 2, 0, 1),
+(42, 3, 40, 'Submenu 1', '', '#', 2, 0, 1),
+(43, 3, 40, 'Link', '', '#', 2, 1, 1),
+(44, 3, 40, 'Link', '', '#', 2, 1, 1),
+(45, 3, 40, 'Link', '', '#', 2, 1, 1),
+(46, 3, 40, 'Link 2', '', '#', 2, 0, 1),
+(47, 3, 40, 'Submenu 2', '', '#', 2, 0, 1),
+(48, 3, 40, 'Link', '', '#', 2, 1, 1),
+(49, 3, 40, 'Link', '', '#', 2, 1, 1),
+(50, 3, 0,  'Special', '', 'header', 2, 0, 0),
+(51, 3, 50, 'Timeline', 'fa fa-clock-o', 'home/page_special_timeline', 2, 0, 1),
+(52, 3, 50, 'User Profile', 'fa fa-pencil-square', 'home/page_special_user_profile', 2, 0, 1),
+(53, 3, 50, 'Message Center', 'fa fa-envelope-o', 'home/page_special_message_center', 2, 0, 1),
+(54, 3, 50, 'Yoteyote Page', 'fa fa-envelope-o', 'fa fa-envelope-o', 2, 0, 1),
+(55, 3, 50, 'Login &amp; Register', 'fa fa-envelope-o', 'login', 2, 0, 1);
+
+
+
 
 
 -- --------------------------------------------------------

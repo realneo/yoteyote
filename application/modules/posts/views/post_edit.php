@@ -12,7 +12,7 @@
 			<!-- Block 1 -->
 			<div class="block">
 
-				<div class="block-title"> <h4>Page Data</h4> </div>
+				<div class="block-title"> <h4>Post Data</h4> </div>
 
 				<p>
 
@@ -102,7 +102,7 @@
 			<!-- Block 2 -->
 			<div class="block">
 
-				<div class="block-title"><h4>Page Options</h4></div>
+				<div class="block-title"><h4>Post Options</h4></div>
 
 				<p>
 

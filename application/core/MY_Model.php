@@ -112,33 +112,6 @@ class MY_Model extends CI_Model
 	 */
 	public function get($order_by)
 	{
-		$data = array();
-
-		$this->db->order_by($order_by);
-		return $this->db->get($this->table);
-
-	}
-
-	// -----------------------------------------------------------------------
-
-	/**
-	 * get_with_limit()
-	 *
-	 * Gets the database records with limit, offset and order_by clause.
-	 *
-	 * USAGE:
-	 *
-	 * $limit = 10 - $offset = 0 - $order_by = 'id asc';
-	 * or
-	 * get_with_limit(10, 0, 'id asc');
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	void
-	 */
-	public function get_with_limit($limit, $offset, $order_by)
-	{
-		$this->db->limit($limit, $offset);
 		$this->db->order_by($order_by);
 
 		return $this->db->get($this->table);
@@ -157,11 +130,51 @@ class MY_Model extends CI_Model
 	 *
 	 * @access	public
 	 * @param	string
+	 * @param	string	-	( optional $order_by )
 	 * @return	void
 	 */
 	public function get_where($where)
 	{
 		$this->db->where($where);
+
+		return $this->db->get($this->table);
+	}
+
+	// -----------------------------------------------------------------------
+
+	/**
+	 * get_with_limit()
+	 *
+	 * Gets the database records with limit, offset and order_by clause.
+	 *
+	 * USAGE:
+	 *
+	 * $limit = 10 - $offset = 0 - $order_by = 'id asc';
+	 * or
+	 * get_with_limit(10, 0, 'id asc');
+	 *
+	 * $where = array('id' => $id);
+	 *
+	 * $order_by = 'id asc';
+	 *
+	 * @access	public
+	 * @param	string	-	$limit
+	 * @param	string	-	$offset
+	 * @param	string	-	$order_by
+	 * @param	string	-	( optional $where )
+	 * @return	void
+	 */
+	public function get_with_limit($limit, $offset, $order_by, $where = '')
+	{
+		$this->db->limit($limit, $offset);
+
+		if ( ! empty($where))
+		{
+			$this->db->where($where);
+		}
+
+		$this->db->order_by($order_by);
+
 		return $this->db->get($this->table);
 	}
 
@@ -177,13 +190,18 @@ class MY_Model extends CI_Model
 	 * get_where(array('id' => $id));
 	 *
 	 * @access	public
-	 * @param	string
+	 * @param	string	-	$cat_id
+	 * @param	string	-	( optional $where )
 	 * @return	void
 	 */
-	public function get_by_category($cat_id)
+	public function get_by_category($cat_id, $where = '')
 	{
 		$this->db->where('category_id', $cat_id);
-		$this->db->where('status', 'published');
+
+		if ( ! empty($where))
+		{
+			$this->db->where($where);
+		}
 
 		return $this->db->get($this->table);
 	}
@@ -208,6 +226,7 @@ class MY_Model extends CI_Model
 	public function _insert($data)
 	{
 		$this->db->insert($this->table, $data);
+
 		return $this->db->insert_id();
 	}
 
@@ -254,6 +273,7 @@ class MY_Model extends CI_Model
 	public function _update($where, $data)
 	{
 		$this->db->where($where);
+
 		$this->db->update($this->table, $data);
 	}
 
@@ -300,6 +320,7 @@ class MY_Model extends CI_Model
 	public function _delete($where)
 	{
 		$this->db->where($where);
+
 		$this->db->delete($this->table);
 	}
 
@@ -339,6 +360,7 @@ class MY_Model extends CI_Model
 	public function count_all_where($where)
 	{
 		$this->db->where($where);
+
 		$query = $this->db->get($this->table);
 
 		return $query->num_rows();

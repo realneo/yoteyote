@@ -194,6 +194,22 @@ class IWant extends Auth_Controller
 		}
 	}
 
+	// -----------------------------------------------------------------------
+
+	/**
+	 * create()
+	 *
+	 * Create a I Want.
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	void
+	 */
+    public function create()
+    {
+
+    }
+
 	// --------------------------------------------------------------------
 
 	/**

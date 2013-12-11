@@ -68,9 +68,9 @@ $autoload['helper'] = array(
 	'url',
 	'file',
 	'html',
+	'functions',
 	'assets',
 	'auth',
-	'util',
 );
 
 /*
