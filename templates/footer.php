@@ -46,3 +46,9 @@
 
 		</body>
 </html>
+
+<?php
+
+    unset($_SESSION['alert_type']);
+    unset($_SESSION['alert_msg']);
+?>

@@ -2,7 +2,6 @@
 
     <div class='row'>
         <div class='col-md-12'>
-            
             <div class='row' id='login_container'>
                <div class='row' id='login_logo'>
                     <div class='col-md-2 col-md-offset-5'>
@@ -21,26 +20,38 @@
                                   
                 </div>
                 <div class='col-md-4 boxed'>
-                    <h4>Sign Up</h4>
+		    
+		    
+		    <?php if(isset($_SESSION['alert_type'])){ ?>
+			<div class="alert alert-<?php echo $_SESSION['alert_type']; ?> alert-dismissible" role="alert">
+			    <button type="button" class="close" data-dismiss="alert">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			    </button>
+			    <?php echo $_SESSION['alert_msg']; ?>
+			</div>
+		    <?php } ?>
+		    
                     
-                    <p>Personal</p>
-                    <div class="field_text">
-                        <input type="text" name="first_name" id="first_name" placeholder="First Name">
-                    </div>
-                    <div class="field_text">
-                        <input type="text" name="last_name" id="last_name" placeholder="Last Name">
-                    </div>
-                    
-                    <p>Contact</p>
-                    <div class="field_text">
-                        <input type="text" name="email" id="email" placeholder="Enter Email">
-                    </div>
-                    <div class="field_text">
-                        <input type="text" name="email2" id="email2" placeholder="Re-Enter Email">
-                    </div>
-                    
-                    <a href="#" class="btn btn-green"><span>Sign Up</span></a> <span class='text-11'>By Signing Up, You Agree with Our Terms &amp; Conditions</span>
- 
+		    <h4>Sign Up</h4>
+		    <form name='signup' action='processes/add_user_process.php' method='post'>
+			<p>Personal</p>
+			<div class="field_text">
+			    <input type="text" name="first_name" id="first_name" placeholder="First Name">
+			</div>
+			<div class="field_text">
+			    <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+			</div>
+			
+			<p>Contact</p>
+			<div class="field_text">
+			    <input type="text" name="email" id="email" placeholder="Enter Email">
+			</div>
+			<div class="field_text">
+			    <input type="text" name="email2" id="email2" placeholder="Re-Enter Email">
+			</div>
+			
+			<span class="btn btn-green"><input type="submit" value="Sign Up" /></span><span class='text-11'>By Signing Up, You Agree with Our Terms &amp; Conditions</span>
+		    </form>
                 </div>
             </div>
 			   
