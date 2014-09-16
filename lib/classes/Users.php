@@ -1,8 +1,5 @@
 <?php
-    include('../config/config.php');
-    include('Main.php');
-    include('Database.php');
-    
+
     class Users extends Main{
         
         protected $db;
@@ -31,34 +28,68 @@
             }
         }
         
-        public function add_user($email, $first_name, $last_name){
-            
-            if($this->check_email_match() == false && $this->check_user_exists() == false){
-                
+        public function add_user($email, $re_email, $first_name, $last_name){
+
+            if($this->check_email_match($email, $re_email) == false){
+                $this->alert('warning', 'Email Adresses do not match');
+                return "Mismatch Email";
+            }elseif($this->check_user_exists($email) == true){
+                $this->alert('warning', 'Email Address Exists');
+                return "Email Exists";
+            }else{
                 $user_ip = $this->get_user_ip();
                 $created_at = $this->set_now();
+                $token = $this->get_new_token();
                 
-            }else{
-             
-                return false;
+                $query = $this->db->query("INSERT INTO
+                                            `users`
+                                                (
+                                                    `user_email`,
+                                                    `first_name`,
+                                                    `last_name`,
+                                                    `user_ip_address`,
+                                                    `user_token`,
+                                                    `user_created_at`
+                                                )
+                                            VALUES
+                                                (
+                                                    :email,
+                                                    :first_name,
+                                                    :last_name,
+                                                    :user_ip,
+                                                    :token,
+                                                    :created_at
+                                                )
+                                            ");
                 
-            }
+                $this->db->bind(':email', $email);
+                $this->db->bind(':first_name', $first_name);
+                $this->db->bind(':last_name', $last_name);
+                $this->db->bind(':user_ip', $user_ip);
+                $this->db->bind(':token', $token);
+                $this->db->bind(':created_at', $created_at);
             
+                $this->db->execute();
+                
+                if($this->db->lastInsertId() == true){
+                    $this->alert('success', 'Successfully Logged In');
+                    return true;
+                }else{
+                    $this->alert('danger', 'There was a system Error, Please Try Again');
+                    return false;
+                }
+            }
         }
         
-        
-        
+        public function add_password($id, $password){
+            
+        }
+
+
+ 
     }
     
-    $users = new Users($db);
-    
-    $user = $users->check_user_exists('neo@yoteyote.com');
-
-    echo $users->get_user_ip();
-    
-    echo "<pre>";
-    var_dump('Neo');
-    echo "</pre>";
+   
 
 
 ?>

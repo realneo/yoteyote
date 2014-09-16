@@ -89,6 +89,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<?php } ?>
 
 			</div><!-- col-md-12 -->	

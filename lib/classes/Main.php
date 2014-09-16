@@ -52,5 +52,19 @@
             return date("Y-m-d H:i:s");
         }
         
+        // Generate Token
+        
+        public function get_new_token(){
+            $token = sha1(uniqid(mt_rand(), true));
+            return $token;
+        }
+        
+        // Alert Messages
+        
+        public function alert($type, $message){
+            $_SESSION['alert_type'] = $type;
+            $_SESSION['alert_msg'] = $message;
+        }
+        
     }// End of Common Class
 ?>

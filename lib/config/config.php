@@ -27,5 +27,9 @@
         define("DB_NAME", $db_name);
         
     }
-
+    
+    // Facebook app settings
+    $app_id = '1547531755460936';
+    $app_secret = '8d66d6e17ace837104273f82566af02f';
+    $redirect_uri = 'http://localhost:8888/test2.php';
 ?>
