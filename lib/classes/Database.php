@@ -91,6 +91,4 @@
         }
         
     }
-    
-    $db = new Database();
 ?>

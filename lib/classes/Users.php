@@ -28,16 +28,27 @@
             }
         }
         
-        public function add_user($email, $first_name, $last_name){
+        public function check_password_match($password, $password2){
+            if($password === $password2){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
+        public function add_user($email, $password, $first_name, $last_name){
 
             $user_ip = $this->get_user_ip();
             $created_at = $this->set_now();
             $token = $this->get_new_token();
+            
+            $hashed_password = $this->new_hash($password);
                 
             $query = $this->db->query("INSERT INTO
                                         `users`
                                             (
                                                 `user_email`,
+                                                `user_password`,
                                                 `first_name`,
                                                 `last_name`,
                                                 `user_ip_address`,
@@ -47,6 +58,7 @@
                                         VALUES
                                             (
                                                 :email,
+                                                :password,
                                                 :first_name,
                                                 :last_name,
                                                 :user_ip,
@@ -56,6 +68,7 @@
                                         ");
                 
             $this->db->bind(':email', $email);
+            $this->db->bind(':password', $hashed_password);
             $this->db->bind(':first_name', $first_name);
             $this->db->bind(':last_name', $last_name);
             $this->db->bind(':user_ip', $user_ip);
@@ -77,11 +90,33 @@
             
         }
 
-
- 
+        public function login($email, $password){
+            
+            // Secure the Input Fields
+            $hashed_password = $this->new_hash($password);
+             
+            // Check if user with the same password exists
+            $this->db->query("SELECT * FROM `users` WHERE `user_email` = :email AND `user_password` = :password");
+            $this->db->bind(':email', $email);
+            $this->db->bind(':password', $hashed_password);
+                
+            $row = $this->db->rowCount();
+                
+            // If there is no rowCount
+            if($row > 0){
+                $this->alert('danger', 'Email or Password is incorrect');
+                return false;
+            }else{
+                $this->alert('success', 'Successfully Logged In');
+                return true;
+            }  
+        }
+        
+        public function get_user_info($email){
+            $this->db->query("SELECT * FROM `users` WHERE `user_email` = :email");
+            $this->db->bind(':email', $email);
+            return $this->db->resultset();
+        }
+        
     }
-    
-   
-
-
 ?>

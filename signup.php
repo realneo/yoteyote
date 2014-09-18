@@ -42,6 +42,14 @@
 			    <input type="text" name="last_name" id="last_name" placeholder="Last Name">
 			</div>
 			
+			<p>Password</p>
+			<div class="field_text">
+			    <input type="text" name="password" id="password" placeholder="Enter Password">
+			</div>
+			<div class="field_text">
+			    <input type="text" name="password2" id="password2" placeholder="Re-Enter Password">
+			</div>
+			
 			<p>Contact</p>
 			<div class="field_text">
 			    <input type="text" name="email" id="email" placeholder="Enter Email">

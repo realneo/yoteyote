@@ -11,5 +11,10 @@
     include_once($file_path."lib/config/config.php");
     include_once($file_path."lib/classes/Main.php");
     include_once($file_path."lib/classes/Database.php");
+    include_once($file_path."lib/classes/Session.php");
+    
+    // New Objects 
+    $session = new Session();
+    $db = new Database();
 
 ?>

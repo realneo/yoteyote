@@ -14,8 +14,8 @@ jQuery(document).ready(function() {
     }, 0);
 	
 // First Child, Last Child
-$(".widget-container li:first-child, .pricing_box li:first-child, .dropdown li:first-child, ol li:first-child").addClass("first");
-$(".widget-container li:last-child, .pricing_box li:last-child, .dropdown li:last-child, ol li:last-child").addClass("last");
+//$(".widget-container li:first-child, .pricing_box li:first-child, .dropdown li:first-child, ol li:first-child").addClass("first");
+//$(".widget-container li:last-child, .pricing_box li:last-child, .dropdown li:last-child, ol li:last-child").addClass("last");
 
 // buttons
     $(".btn").not(".btn-round").hover(function(){

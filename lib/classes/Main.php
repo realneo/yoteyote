@@ -66,5 +66,16 @@
             $_SESSION['alert_msg'] = $message;
         }
         
+        public function new_hash($plainText, $salt = 'M42d9h&!.') {
+            
+            if ($salt === null){
+                $salt = substr(md5(uniqid(rand(), true)), 0, 9);
+            }else{
+                $salt = substr($salt, 0, 9);
+            }
+
+            return $salt . sha1($salt . $plainText);
+        }
+        
     }// End of Common Class
 ?>
