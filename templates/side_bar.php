@@ -17,7 +17,7 @@
 					<h6 class='text-center'>Login</h6>
 					<hr />
 					<p><a href='signup.php'>Sign Up</a> if you don't have an account</p>
-					<form name='signin' action='processes/login_process.php' method='post'>
+					<form name='signin' action='process/login_process.php' method='post'>
 						<label for='email'>Email</label>
 						<p><input type="text" name="email" id="email" placeholder="Enter Email"></p>
 						<label for='password'>Password</label>

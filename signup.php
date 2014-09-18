@@ -33,7 +33,7 @@
 		    
                     
 		    <h4>Sign Up</h4>
-		    <form name='signup' action='processes/add_user_process.php' method='post'>
+		    <form name='signup' action='process/add_user_process.php' method='post'>
 			<p>Personal</p>
 			<div class="field_text">
 			    <input type="text" name="first_name" id="first_name" placeholder="First Name">
