@@ -44,10 +44,10 @@
 			
 			<p>Password</p>
 			<div class="field_text">
-			    <input type="text" name="password" id="password" placeholder="Enter Password">
+			    <input type="password" name="password" id="password" placeholder="Enter Password">
 			</div>
 			<div class="field_text">
-			    <input type="text" name="password2" id="password2" placeholder="Re-Enter Password">
+			    <input type="password" name="password2" id="password2" placeholder="Re-Enter Password">
 			</div>
 			
 			<p>Contact</p>
