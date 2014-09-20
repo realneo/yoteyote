@@ -1,8 +1,8 @@
-<?php include('templates/header.php'); ?>
-<?php include('includes/want_modal_form.php'); ?>
-<?php include('includes/will_modal_form.php'); ?>
-<?php include('templates/side_bar.php'); ?>	
-<?php include('templates/top_bar.php'); ?>
+<?php require_once('templates/header.php'); ?>
+<?php include_once('includes/want_modal_form.php'); ?>
+<?php include_once('includes/will_modal_form.php'); ?>
+<?php require_once('templates/side_bar.php'); ?>	
+<?php require_once('templates/top_bar.php'); ?>
 	
 		<div class='row'>
 			<div class='col-md-12'>
@@ -58,8 +58,8 @@
 				
 				foreach($posts as $post){
 					
-					$post_title = $post['post'];
-					$pic = $post['pic'];
+					$post_title = $post['post_title'];
+					$pic = $post['post_pic'];
 					$post_type = $post['post_type'];
 					
 					// Changing Text Color
@@ -78,19 +78,28 @@
 						$pic = "<img alt='$post_title' src='images/posts/$pic' />";
 					}
 					
+					// Getting User
+					$post_user_id = $post['post_user_id'];
+					$db->query("SELECT * FROM `users` WHERE `id` = '$post_user_id'");
+					$users = $db->resultset();
+					
+					foreach($users as $user){
+						$user_first_name = $user['first_name'];
+						$user_last_name = $user['last_name'];
+					}
 					
 			?>
 			<div class='boxed post'>
 				<!--<div class='badge post_badge'></div> -->
                 <div class='col-md-12 text-center post_title'><h5><span class='bolder-text <?php echo $text_color; ?>'>I <?php echo $post['post_type']; ?></span> <?php echo $post_title; ?></h5></div>
-                <div class='col-md-12 post_amount'><h4><span class="label label-default currency"><?php echo $post['currency']; ?></span> <?php echo number_format($post['amount']); ?></h4></div>
+                <div class='col-md-12 post_amount'><h4><span class="label label-default currency"><?php echo $post['post_currency']; ?></span> <?php echo number_format($post['post_amount']); ?></h4></div>
                 <?php echo $pic ; ?>
-                <div class='col-md-12'><p><?php echo $post['description']; ?></p></div>
+                <div class='col-md-12'><p><?php echo $post['post_content']; ?></p></div>
                 <div class="col-md-12">
 					<img alt="" src="images/users/default.png" class='post_profile_pic'>
 					<div class='user_info'>
 						<p>
-							<strong>Nadhir Bahayan</strong><br />
+							<strong><?php echo $user_first_name. " " . $user_last_name; ?></strong><br />
 							Trusted By <span class='round-badge orange_bg'>12</span><br />
 							Satisfied Users <span class='round-badge green_bg'>12</span><br />
 							<?php if($session->is_user_logged_in() == true){ ?>

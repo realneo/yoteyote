@@ -44,8 +44,24 @@
 						<span><i class="plus"></i>Follow</span>
 					</a>
 				</div>
+				<a href='process/logout.php' alt='Logout'>Logout</a>
 			</div><!-- inner -->
 			<?php } ?>
+	</div>
+	
+	<div class='widget-container boxed'>
+		<div class='inner'>
+			<?php
+				echo $_SESSION['user_id'];
+				echo "<br />";
+				echo $_SESSION['user_first_name'];
+				echo "<br />";
+				echo $_SESSION['user_last_name'];
+				echo "<br />";
+				echo $_SESSION['user_confirmed'];
+				echo "<br />";
+			?>
+		</div>
 	</div>
 	
 </div><!-- col-lg-2  Sidebar-->

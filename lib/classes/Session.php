@@ -17,7 +17,6 @@
             $_SESSION['user_ip'] = $user_ip;
             $_SESSION['user_confirmed'] = $user_confirmed;
         }
-        
     }
 
 ?>

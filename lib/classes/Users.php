@@ -13,7 +13,7 @@
             $this->db->bind(':entered_email', $email);
             $this->db->execute();
     
-            if($this->db->rowCount() == 0){
+            if(!$this->db->rowCount()){
                 return false;
             }else{
                 return true;
@@ -92,24 +92,22 @@
 
         public function login($email, $password){
             
-            // Secure the Input Fields
+            // Change into Hash Password
             $hashed_password = $this->new_hash($password);
              
             // Check if user with the same password exists
             $this->db->query("SELECT * FROM `users` WHERE `user_email` = :email AND `user_password` = :password");
             $this->db->bind(':email', $email);
             $this->db->bind(':password', $hashed_password);
-                
-            $row = $this->db->rowCount();
-                
-            // If there is no rowCount
-            if($row > 0){
-                $this->alert('danger', 'Email or Password is incorrect');
-                return false;
-            }else{
-                $this->alert('success', 'Successfully Logged In');
+            
+            $this->db->execute();    
+            
+            if($this->db->rowCount() == 1){
                 return true;
-            }  
+            }else{
+                return false;
+            }
+            
         }
         
         public function get_user_info($email){

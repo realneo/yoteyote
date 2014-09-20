@@ -15,7 +15,8 @@
             header("Location:../index.php");
             return false;
         }
-    
+        
+        $q = $users->login($email, $password);
     
     if($users->login($email, $password) == true){
         // Get User Data from Database
@@ -32,8 +33,10 @@
         $session->set_user_init($user_id, $user_first_name, $user_last_name, $user_ip, $user_confirmed);
         
         // Redirect
+        $users->alert('success', 'Successfully Logged In');
         header('Location:../index.php');
     }else{
+        $users->alert('danger', 'Email or Password is incorrect');
         header('Location:../index.php');
     }
     
