@@ -4,6 +4,7 @@
         
         public function __construct(){
         }
+        
         // Secure PHP Form Input function
         public function secure_input($data) {
             $data = trim($data);
@@ -13,13 +14,13 @@
         }
 
         // Secure GET id 
-        protected function secure_id($id){
+        public function secure_id($id){
             $s_id = ($id * 8371)+1;
             return $s_id;
         }
 
         // Unsecure GET id
-        protected function un_secure_id($id){
+        public function un_secure_id($id){
             $u_id = $id - 1;
             $u_id = $u_id / 8371;
             return $u_id;

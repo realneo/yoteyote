@@ -3,7 +3,7 @@
 <?php include_once('includes/will_modal_form.php'); ?>
 <?php require_once('templates/side_bar.php'); ?>	
 <?php require_once('templates/top_bar.php'); ?>
-	
+
 		<div class='row'>
 			<div class='col-md-12'>
 					<div class="field_select">
@@ -61,6 +61,7 @@
 					$post_title = $post['post_title'];
 					$pic = $post['post_pic'];
 					$post_type = $post['post_type'];
+					$post_id = $post['id'];
 					
 					// Changing Text Color
 					if($post_type == 'will'){
@@ -103,7 +104,7 @@
 							Trusted By <span class='round-badge orange_bg'>12</span><br />
 							Satisfied Users <span class='round-badge green_bg'>12</span><br />
 							<?php if($session->is_user_logged_in() == true){ ?>
-								<a href="#" class="btn <?php echo $btn_color; ?>"><span><?php echo $btn_text; ?></span></a>
+								<a href="post_content.php?id=<?php echo $db->secure_id($post_id); ?>" class="btn <?php echo $btn_color; ?>"><span><?php echo $btn_text; ?></span></a>
 							<?php }else{ ?>
 								<p>Login to Buy or Bid</p>
 							<?php } ?>

@@ -1,5 +1,5 @@
 <?php
-    class Database{
+    class Database extends Main{
         private $host      = DB_HOST;
         private $user      = DB_USER;
         private $pass      = DB_PASS;

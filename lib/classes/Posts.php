@@ -51,6 +51,72 @@
             }
         }
         
+        // Get all from a selected POST
+        public function get_post($id){
+            $this->db->query("SELECT * FROM `posts` WHERE `id` = :id");
+	    $this->db->bind(':id', $id);
+				
+	    $this->db->execute();
+				
+	    return $this->db->resultset();
+        }
+        
+        // Get Total Post Views of a selected POST
+        public function get_post_views($post_id){
+            $this->db->query("SELECT `post_views` FROM `posts` WHERE `id` = :id");
+            $this->db->bind(':id', $post_id);
+            $this->db->execute();
+            
+            return $this->db->single();
+        }
+         
+        // Get all Post Views Log of a selected POST
+        public function get_post_views_log($post_id){
+            $this->db->query("SELECT * FROM `post_views` WHERE `post_id` = :id");
+            $this->db->bind(':id', $post_id);
+            $this->db->execute();
+            
+            return $this->db->single();
+        }
+        
+        // Check if user already viewed the POST
+        public function user_post_viewed($user_id){
+            $this->db->query("SELECT * FROM `post_views` WHERE `user_id` = :id");
+            $this->db->bind(':id', $user_id);
+            $this->db->execute();
+            
+            if($this->db->rowCount() > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
+        public function new_post_view($user_id, $post_id){
+            
+            if($this->user_post_viewed($user_id) == true){
+                return false;
+            }else{
+                
+                $this->db->query("INSERT INTO `post_views` (`date`, `user_id`, `post_id`) VALUES (:date, :user_id, :post_id)");
+                $this->db->bind(':date', $this->db->set_now());
+                $this->db->bind(':user_id', $user_id);
+                $this->db->bind(':post_id', $post_id);
+                
+                $this->db->execute();
+                
+                $post_views = $this->get_post_views($id)['post_views'];
+                $new_post_view = $post_views + 1;
+                $this->db->query("UPDATE `posts` SET `post_views` = '$new_post_view' WHERE `id` = :id");
+                $this->db->bind(':id', $post_id);
+                
+                $this->db->execute();
+            
+                return true;
+            }
+            
+        }
+        
     }
     
 ?>
