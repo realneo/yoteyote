@@ -10,8 +10,8 @@
 			<?php
 				
 				// Checking if the ID is set for the page to load
-				if(!$_GET['id']){
-					header("Location:index.php");
+				if(!isset($_GET['id'])){
+					header("Location: index.php");
 					return false;
 				}
 			

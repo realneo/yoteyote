@@ -80,12 +80,13 @@
         }
         
         // Check if user already viewed the POST
-        public function user_post_viewed($user_id){
-            $this->db->query("SELECT * FROM `post_views` WHERE `user_id` = :id");
-            $this->db->bind(':id', $user_id);
+        public function user_post_viewed($user_id, $post_id){
+            $this->db->query("SELECT * FROM `post_views` WHERE `post_id` = :post_id AND `user_id` = :user_id");
+            $this->db->bind(':user_id', $user_id);
+            $this->db->bind(':post_id', $post_id);
             $this->db->execute();
             
-            if($this->db->rowCount() > 0){
+            if($this->db->rowCount() == 1){
                 return true;
             }else{
                 return false;
@@ -94,7 +95,7 @@
         
         public function new_post_view($user_id, $post_id){
             
-            if($this->user_post_viewed($user_id) == true){
+            if($this->user_post_viewed($user_id, $post_id) == true){
                 return false;
             }else{
                 
@@ -105,7 +106,7 @@
                 
                 $this->db->execute();
                 
-                $post_views = $this->get_post_views($id)['post_views'];
+                $post_views = $this->get_post_views($post_id)['post_views'];
                 $new_post_view = $post_views + 1;
                 $this->db->query("UPDATE `posts` SET `post_views` = '$new_post_view' WHERE `id` = :id");
                 $this->db->bind(':id', $post_id);

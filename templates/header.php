@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php include('lib/config/autoload.php'); ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html lang="en" class="no-js ie6"> <![endif]-->
