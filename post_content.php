@@ -3,6 +3,7 @@
 <?php require_once('templates/top_bar.php'); ?>
 
 <?php require_once('lib/classes/Posts.php'); ?>
+<?php require_once('lib/classes/Users.php'); ?>
 	
 		<div class='row'>
 			<div class='col-md-12'>
@@ -16,15 +17,18 @@
 				}
 			
 				// Creating a new Post Object
-				$posts = new Posts($db);
+				$Posts = new Posts($db);
+				
+				// Creating a new Users Object
+				$Users = new Users($db);
 				
 				// Un Securing the post ID
- 				$post_id = $posts->un_secure_id($_GET['id']);
+ 				$post_id = $Posts->un_secure_id($_GET['id']);
 				
 				// Adding a New View to the Post
-				$posts->new_post_view($_SESSION['user_id'], $post_id);
+				$Posts->new_post_view($_SESSION['user_id'], $post_id);
 				
-				$rows = $posts->get_post($post_id);
+				$rows = $Posts->get_post($post_id);
 				
 				foreach($rows as $post){
 					
@@ -52,8 +56,7 @@
 					
 					// Getting User
 					$post_user_id = $post['post_user_id'];
-					$db->query("SELECT * FROM `users` WHERE `id` = '$post_user_id'");
-					$users = $db->resultset();
+					$users = $Users->get_user_by_id($post_user_id);
 					
 					foreach($users as $user){
 						$user_first_name = $user['first_name'];
@@ -89,12 +92,8 @@
 							<div class="inner">
 								<ul class="tabs clearfix active_bookmark1">
 									<li class="active"><a href="#actions" data-toggle="tab">Action</a></li>
-									<li><a href="#comments" data-toggle="tab">Comments</a></li>
-									<li>
-										<a href="#reminders" data-toggle="tab">
-											<sup class="note">3</sup>Reviews
-										</a>
-									</li>
+									<li><a href="#comments" data-toggle="tab"><sup class="note"><?php echo $Posts->get_total_comments($post_id) ; ?></sup>Comments</a></li>
+									<li><a href="#reminders" data-toggle="tab"><sup class="note">3</sup>Reviews</a></li>
 									<li><a href="#starred" data-toggle="tab">Recent Jobs</a></li>
 								</ul>
 						
@@ -125,62 +124,52 @@
 										
 										<div class="comment-list clearfix" id="comments">
 											<ol>
-												
+												<?php
+													$comments = $Posts->get_post_comment($post_id);
+													
+													foreach($comments as $comment){
+														$post_comment = $comment['comment'];
+														$post_comment_date = $comment['date'];
+														$post_comment_user_id = $comment['user_id'];
+														
+														$rows = $Users->get_user_by_id($post_comment_user_id);
+														foreach($rows as $user){
+															$first_name = $user['first_name'];
+															$last_name = $user['last_name'];
+														}
+												?>
 												<li class="comment">
 													<div class="comment-body">
 														<div class="inner">
 															<div class="comment-arrow"></div>
 															<div class="comment-avatar">
 																<div class="avatar">
-																	<img src="images/temp/avatar1.png" alt="" />
+																	<img src="images/users/default.png" alt="<?php echo $first_name. " " .$last_name; ?>" />
 																</div>
 															</div>
 															<div class="comment-text">
 																<div class="comment-author clearfix">
-																	<a href="#" class="link-author">Brad Pit</a>
-																	<span class="comment-date">June 26, 2013</span> | 
+																	<a href="#" class="link-author"><?php echo $first_name. " " .$last_name; ?></a>
+																	<span class="comment-date"><?php echo $post_comment_date; ?></span> | 
 																	<a href="#addcomments" class="link-reply anchor">Reply</a>
 																</div>
-																<div class="comment-entry">
-																	William Bradley "Brad" Pitt is an American actor and film producer. Pitt has received four Academy nominations and five Award nominations.
-																</div>
+																<div class="comment-entry"> <?php echo $post_comment; ?> </div>
 															</div>
 															<div class="clear"></div>
 														</div>
 													</div>
 												</li>
-												
-												<li class="comment">
-													<div class="comment-body">
-														<div class="inner">
-															<div class="comment-arrow"></div>
-															<div class="comment-avatar">
-																<div class="avatar">
-																	<img src="images/temp/avatar1.png" alt="" />
-																</div>
-															</div>
-															<div class="comment-text">
-																<div class="comment-author clearfix">
-																	<a href="#" class="link-author">Brad Pit</a>
-																	<span class="comment-date">June 26, 2013</span> | 
-																	<a href="#addcomments" class="link-reply anchor">Reply</a>
-																</div>
-																<div class="comment-entry">
-																	William Bradley "Brad" Pitt is an American actor and film producer. Pitt has received four Academy nominations and five Award nominations.
-																</div>
-															</div>
-															<div class="clear"></div>
-														</div>
-													</div>
-												</li>
-												
+												<?php } ?>
 											</ol>
 										</div>
 										
 										<div class='divider'></div>
 										
-										<textarea class='col-lg-12' placeholder="Enter your Comment Here"></textarea>
-										<span class="btn"><input type="submit" value="Send Comment" /></span>
+										<form name='post_comment' action='process/add_comment_process.php' method='post'>
+											<textarea class='col-lg-12' name='comment' placeholder="Enter your Comment Here"></textarea>
+											<input type='hidden' name='post_id' value='<?php echo $post_id; ?>' />
+											<span class="btn pull-right"><input type="submit" value="Send Comment" /></span>
+										</form>
 										
 									</div>
 									<div class="tab-pane clearfix fade" id="starred">

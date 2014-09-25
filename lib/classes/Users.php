@@ -116,5 +116,12 @@
             return $this->db->resultset();
         }
         
+        public function get_user_by_id($user_id){
+            $this->db->query("SELECT * FROM `users` WHERE `id` = :user_id");
+            $this->db->bind(':user_id', $user_id);
+            $this->db->execute();
+            return $this->db->resultset();
+        }
+        
     }
 ?>

@@ -93,6 +93,7 @@
             }
         }
         
+        // Check if user viewed, if not then insert into post_views
         public function new_post_view($user_id, $post_id){
             
             if($this->user_post_viewed($user_id, $post_id) == true){
@@ -117,6 +118,46 @@
             }
             
         }
+        
+        // New Post Comment
+        public function new_post_comment($post_id, $post_comment, $user_id){
+            
+            $this->db->query("INSERT INTO `post_comments` (`date`, `user_id`, `post_id`, `comment`) VALUES (:date, :user_id, :post_id, :comment)");
+            $this->db->bind(':date', $this->db->set_now());
+            $this->db->bind(':user_id', $user_id);
+            $this->db->bind(':post_id', $post_id);
+            $this->db->bind(':comment', $post_comment);
+            
+            $this->db->execute();
+            
+            if($this->db->lastInsertId() == 0){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        
+        // Get all Comments of a specific POST
+        public function get_post_comment($post_id){
+            
+            $this->db->query("SELECT * FROM `post_comments` WHERE `post_id` = :post_id ORDER BY `id` DESC");
+            $this->db->bind(':post_id', $post_id);
+            $this->db->execute();
+            
+            return $this->db->resultset();
+        }
+        
+        // Total Comments for the Post
+        public function get_total_comments($post_id){
+            
+            $this->db->query("SELECT * FROM `post_comments` WHERE `post_id` = :post_id");
+            $this->db->bind(':post_id', $post_id);
+            $this->db->execute();
+            $this->db->resultset();
+            
+            return $this->db->rowCount();
+        }
+        
         
     }
     
