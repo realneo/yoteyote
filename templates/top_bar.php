@@ -18,3 +18,12 @@
 		    </div><!-- col-md-3 -->
 		   
 		</div><!-- row -->
+		
+		<?php if(isset($_SESSION['alert_type'])){ ?>
+					<div class="alert alert-<?php echo $_SESSION['alert_type']; ?> alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<?php echo $_SESSION['alert_msg']; ?>
+					</div>
+				<?php } ?>
