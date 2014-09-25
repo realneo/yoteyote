@@ -89,7 +89,7 @@
 							<div class="inner">
 								<ul class="tabs clearfix active_bookmark1">
 									<li class="active"><a href="#actions" data-toggle="tab">Action</a></li>
-									<li><a href="#archive" data-toggle="tab">Comments</a></li>
+									<li><a href="#comments" data-toggle="tab">Comments</a></li>
 									<li>
 										<a href="#reminders" data-toggle="tab">
 											<sup class="note">3</sup>Reviews
@@ -121,8 +121,67 @@
 										</table>
 										
 									</div>
-									<div class="tab-pane clearfix fade" id="reminders">
-										<!--place your content here-->
+									<div class="tab-pane clearfix fade" id="comments">
+										
+										<div class="comment-list clearfix" id="comments">
+											<ol>
+												
+												<li class="comment">
+													<div class="comment-body">
+														<div class="inner">
+															<div class="comment-arrow"></div>
+															<div class="comment-avatar">
+																<div class="avatar">
+																	<img src="images/temp/avatar1.png" alt="" />
+																</div>
+															</div>
+															<div class="comment-text">
+																<div class="comment-author clearfix">
+																	<a href="#" class="link-author">Brad Pit</a>
+																	<span class="comment-date">June 26, 2013</span> | 
+																	<a href="#addcomments" class="link-reply anchor">Reply</a>
+																</div>
+																<div class="comment-entry">
+																	William Bradley "Brad" Pitt is an American actor and film producer. Pitt has received four Academy nominations and five Award nominations.
+																</div>
+															</div>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												
+												<li class="comment">
+													<div class="comment-body">
+														<div class="inner">
+															<div class="comment-arrow"></div>
+															<div class="comment-avatar">
+																<div class="avatar">
+																	<img src="images/temp/avatar1.png" alt="" />
+																</div>
+															</div>
+															<div class="comment-text">
+																<div class="comment-author clearfix">
+																	<a href="#" class="link-author">Brad Pit</a>
+																	<span class="comment-date">June 26, 2013</span> | 
+																	<a href="#addcomments" class="link-reply anchor">Reply</a>
+																</div>
+																<div class="comment-entry">
+																	William Bradley "Brad" Pitt is an American actor and film producer. Pitt has received four Academy nominations and five Award nominations.
+																</div>
+															</div>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												
+											</ol>
+										</div>
+										
+										<div class='divider'></div>
+										
+										<textarea class='col-lg-12' placeholder="Enter your Comment Here"></textarea>
+										<span class="btn"><input type="submit" value="Send Comment" /></span>
+										
 									</div>
 									<div class="tab-pane clearfix fade" id="starred">
 										<!--place your content here-->
