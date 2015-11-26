@@ -30,8 +30,8 @@
 			<?php	}else{ ?>
 			
 			<div class="inner">
-				<h5><?php echo $_SESSION['user_first_name'] . "  ". $_SESSION['user_last_name']; ?></h5>
-				<span class="subtitle">Comedy actors</span>
+				<h5><?php echo $_SESSION['user_first_name'] ."<br /> ". $_SESSION['user_last_name']; ?></h5>
+				<!--<span class="subtitle">Comedy actors</span>
 				<div class="avatar">
 					<img src="images/temp/avatar.png" alt="" />
 				</div>
@@ -44,11 +44,13 @@
 						<span><i class="plus"></i>Follow</span>
 					</a>
 				</div>
-				<a href='process/logout.php' alt='Logout'>Logout</a>
+				-->
+				<hr>
+				<a href='process/logout.php' alt='Logout' class='logout_btn'>Logout</a>
 			</div><!-- inner -->
 			<?php } ?>
 	</div>
-	
+	<!--
 	<div class='widget-container boxed'>
 		<div class='inner'>
 			<?php
@@ -63,5 +65,5 @@
 			?>
 		</div>
 	</div>
-	
+	-->
 </div><!-- col-lg-2  Sidebar-->

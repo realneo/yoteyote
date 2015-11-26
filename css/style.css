@@ -170,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight:700;
 	line-height:1.2em;
 	margin-bottom:.7em;
-	text-shadow: 0 1px 1px #FFF;
+	/*text-shadow: 0 1px 1px #FFF;*/
 }
 h1{font-size:29px}
 h2{font-size:25px}
@@ -199,7 +199,7 @@ i{
 	margin-right: 15px;
 }
 p{
-	line-height: 21px;
+	line-height: 15px;
 	margin-bottom: 16px;
     font-family: Arial;
     font-weight: 400;
@@ -2268,6 +2268,17 @@ img.post_profile_pic{
 .login_social_btn img:hover{
     box-shadow:1px 1px 1px 1px #ccc;
 }
+
+/*-------------------------------------------*/
+/* Side Bar */
+/*-------------------------------------------*/
+
+.logout_btn{
+	text-decoration: none;
+	color: #E73F1D;
+	margin: 0px;
+}
+
 
 /*-------------------------------------------*/
 /* Footer Section */
