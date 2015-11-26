@@ -14,6 +14,11 @@
     $terms = $_POST['post_terms'];
     $user_id = $_SESSION['user_id'];
     
+    // Remove Commas from the Amount Field
+    if($amount){
+    	$amount = str_replace(",", "", $amount);
+    }
+    
     // Check if Data is filled in
     if(!$terms){
         $posts->alert('warning', 'Please Read and Accept our Terms & Conditions');
