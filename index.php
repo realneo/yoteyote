@@ -87,6 +87,7 @@
                 <div class='col-md-12 post_amount'><h4><span class="label label-default currency"><?php echo $post['post_currency']; ?></span> <?php echo number_format($post['post_amount']); ?></h4></div>
                 <?php echo $pic ; ?>
                 <div class='col-md-12'><p><?php echo $post['post_content']; ?></p></div>
+                <!--
                 <div class="col-md-12">
 					<img alt="" src="images/users/default.png" class='post_profile_pic'>
 					<div class='user_info'>
@@ -102,6 +103,7 @@
 						</p>
 					</div>
 				</div>
+				-->
 			</div>
 			
 			<?php } ?>
