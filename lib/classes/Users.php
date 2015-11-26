@@ -36,7 +36,15 @@
             }
         }
         
-        public function add_user($email, $password, $first_name, $last_name){
+        public function check_mobile_match($mobile, $mobile2){
+            if($mobile === $mobile2){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
+        public function add_user($email, $mobile, $password, $first_name, $last_name){
 
             $user_ip = $this->get_user_ip();
             $created_at = $this->set_now();
@@ -48,6 +56,7 @@
                                         `users`
                                             (
                                                 `user_email`,
+                                                `user_mobile`,
                                                 `user_password`,
                                                 `first_name`,
                                                 `last_name`,
@@ -58,6 +67,7 @@
                                         VALUES
                                             (
                                                 :email,
+                                                :mobile,
                                                 :password,
                                                 :first_name,
                                                 :last_name,
@@ -68,6 +78,7 @@
                                         ");
                 
             $this->db->bind(':email', $email);
+            $this->db->bind(':mobile', $mobile);
             $this->db->bind(':password', $hashed_password);
             $this->db->bind(':first_name', $first_name);
             $this->db->bind(':last_name', $last_name);

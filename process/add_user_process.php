@@ -11,6 +11,8 @@
     $password2 = $users->secure_input($_POST['password2']);
     $first_name = $users->secure_input($_POST['first_name']);
     $last_name = $users->secure_input($_POST['last_name']);
+    $mobile = $users->secure_input($_POST['mobile']);
+    $re_mobile = $users->secure_input($_POST['mobile2']);
     
     // Check if Both Emails are Set
     if(!$email && !$re_email){
@@ -44,14 +46,26 @@
             break;
         
         // Check if Passwords Match
-        }elseif($users->check_password_match($password, $password2) == false){
-            $users->alert('warning', 'Passwords do not match');
+        }elseif($users->check_mobile_match($mobile, $re_mobile) == false){
+            $users->alert('warning', 'Mobile Numbers do not match');
             header('Location:../signup.php');
             break;
+            
+        }elseif($users->check_mobile_match($mobile, $re_mobile) == false){
+            $users->alert('warning', 'Email Entrered Do NOT Match');
+            header("Location: ../signup.php");
+            break;
+        
+        // Check if User Email Exists
+        }elseif($users->check_user_exists($email) == true){
+            $users->alert('warning', 'This Email already has an account');
+            header('Location:../signup.php');
+            break;
+        
         }else{
             
             // Add User if All the Criterias are passed
-            if($users->add_user($email, $password, $first_name, $last_name) == true){
+            if($users->add_user($email, $mobile, $password, $first_name, $last_name) == true){
                 $users->alert('success', 'Successfully Signed Up. Please Check Your Email');
                 header('Location:../index.php');
                 break;

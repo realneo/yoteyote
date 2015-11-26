@@ -50,12 +50,20 @@
 			    <input type="password" name="password2" id="password2" placeholder="Re-Enter Password">
 			</div>
 			
-			<p>Contact</p>
+			<p>Email</p>
 			<div class="field_text">
 			    <input type="text" name="email" id="email" placeholder="Enter Email">
 			</div>
 			<div class="field_text">
 			    <input type="text" name="email2" id="email2" placeholder="Re-Enter Email">
+			</div>
+			
+			<p>Mobile</p>
+			<div class="field_text">
+			    <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile Number">
+			</div>
+			<div class="field_text">
+			    <input type="text" name="mobile2" id="mobile2" placeholder="Re-Enter Mobile Number">
 			</div>
 			
 			<span class="btn btn-green"><input type="submit" value="Sign Up" /></span><span class='text-11'>By Signing Up, You Agree with Our Terms &amp; Conditions</span>

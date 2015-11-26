@@ -2117,8 +2117,8 @@ input[type="password"]:focus{
 	font-size:23px;
 	float:right;
 	padding-top:17px;
-	padding-right:25px;
-	color:#ccc;
+	padding-right:10px;
+	color:#E73F1D;
 }
 .logo img{
 	padding:2px;

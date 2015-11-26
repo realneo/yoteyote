@@ -79,6 +79,7 @@
 					foreach($users as $user){
 						$user_first_name = $user['first_name'];
 						$user_last_name = $user['last_name'];
+						$user_mobile = $user['user_mobile'];
 					}
 					
 			?>
@@ -98,7 +99,7 @@
 							Satisfied Users <span class='round-badge green_bg'>12</span><br />-->
 							<?php if($session->is_user_logged_in() == true){ ?>
 								<!--<a href="post_content.php?id=<?php echo $db->secure_id($post_id); ?>" class="btn <?php echo $btn_color; ?>"><span><?php echo $btn_text; ?></span></a>-->
-								<p><strong>Contacts:</strong> 0787487333</p>
+								<p><strong>Contacts:</strong> <?php echo $user_mobile; ?> </p>
 							<?php }else{ ?>
 								<p>Login to Buy or Bid</p>
 							<?php } ?>
