@@ -88,23 +88,23 @@
                 <div class='col-md-12 post_amount'><h4><span class="label label-default currency"><?php echo $post['post_currency']; ?></span> <?php echo number_format($post['post_amount']); ?></h4></div>
                 <?php echo $pic ; ?>
                 <div class='col-md-12'><p><?php echo $post['post_content']; ?></p></div>
-                <!--
+               
                 <div class="col-md-12">
 					<img alt="" src="images/users/default.png" class='post_profile_pic'>
 					<div class='user_info'>
 						<p>
 							<strong><?php echo $user_first_name. " " . $user_last_name; ?></strong><br />
-							Trusted By <span class='round-badge orange_bg'>12</span><br />
-							Satisfied Users <span class='round-badge green_bg'>12</span><br />
+							<!--Trusted By <span class='round-badge orange_bg'>12</span><br />
+							Satisfied Users <span class='round-badge green_bg'>12</span><br />-->
 							<?php if($session->is_user_logged_in() == true){ ?>
-								<a href="post_content.php?id=<?php echo $db->secure_id($post_id); ?>" class="btn <?php echo $btn_color; ?>"><span><?php echo $btn_text; ?></span></a>
+								<!--<a href="post_content.php?id=<?php echo $db->secure_id($post_id); ?>" class="btn <?php echo $btn_color; ?>"><span><?php echo $btn_text; ?></span></a>-->
+								<p><strong>Contacts:</strong> 0787487333</p>
 							<?php }else{ ?>
 								<p>Login to Buy or Bid</p>
 							<?php } ?>
 						</p>
 					</div>
 				</div>
-				-->
 			</div>
 			
 			<?php } ?>
