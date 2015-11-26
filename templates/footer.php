@@ -19,7 +19,7 @@
                                 
                                 <a href='#'>Contact</a>
                                 
-                                <p class='pull-right'>All Rights Reserved. Yoteyote 2014</p>
+                                <p class='pull-right'>All Rights Reserved. Yoteyote 2015</p>
                             </div>
                         </div>
                         
