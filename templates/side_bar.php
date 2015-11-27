@@ -50,6 +50,18 @@
 			</div><!-- inner -->
 			<?php } ?>
 	</div>
+	
+	<!-- UPDATES -->
+	<div class='widget_avatar boxed'>
+		<div class='inner'>
+			<h6 class='text-center'>Updates v1.0</h6>
+			<ul>
+				<li>> Normal Registration </li>
+				<li>> Posting on the Grid </li>
+			</ul>
+		</div>
+	</div>
+	
 	<!--
 	<div class='widget-container boxed'>
 		<div class='inner'>
