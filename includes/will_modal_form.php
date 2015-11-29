@@ -6,7 +6,7 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title white_text lighter-text">Create "I Will" Post</h4>
                     </div><!-- modal-header -->
-                    <form name='will_form' action='process/add_post_process.php' method='post'>
+                    <form name='will_form' action='process/add_post_process.php' method='post' enctype='multipart/form-data'>
                     <div class="modal-body">
                        <div class='row'>
                            <div class='col-md-12'>
@@ -58,8 +58,12 @@
                                </div>
 
                                <div class='col-md-6'>
-				
-                                   <a href="#" class="btn btn-round "><span>Upload Picture</span></a>
+                                   
+				                   <img id="image_preview" src="#" alt="Upload your Image" />
+                                   <a href='' class='close_btn'>X</a>
+                                   
+                                   <input type="file" id="image_upload" name="image_upload" style="visibility: hidden; width: 1px; height: 1px" multiple />
+                                   <a href="#" class="btn btn-round" onclick="document.getElementById('image_upload').click(); return false"><span>Upload Picture</span></a>
 
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">60%</div>

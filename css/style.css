@@ -2279,7 +2279,26 @@ img.post_profile_pic{
 	margin: 0px;
 }
 
+/*-------------------------------------------*/
+/* Image Upload */
+/*-------------------------------------------*/
+#image_preview{
+    width:250px;
+    border:10px solid #eee;
+    display:none;
+}
 
+.close_btn{
+    position:absolute;
+    top:0px;
+    background-color:#eee;
+    color:darkslategray;
+    padding:5px;
+    display: none;
+}
+.close_btn:hover{
+    font-weight: bold;
+}
 /*-------------------------------------------*/
 /* Footer Section */
 /*-------------------------------------------*/

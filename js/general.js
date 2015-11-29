@@ -297,6 +297,51 @@ $container.masonry({
   itemSelector: '.post'
 });
     
-    /* Facebook Login ***********************************/
+/* Image Upload Preview ***********************************/
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#image_upload").change(function(){
+        readURL(this);
+        $('#image_preview').fadeIn();
+        $('.close_btn').fadeIn();
+        
+        // Upload automatically
+        $.ajax({
+            method:'POST',
+            url: 'process/post_img_upload_process.php',
+            //Creating data from form 
+             data: new FormData(this),
+
+             //Setting these to false because we are sending a multipart request
+             contentType: false,
+             cache: false,
+             processData: false,
+            success:function(){
+                console.log(FormData);
+            }
+        });
+    });
+    
+     // Remove selected image from input
+    $('.close_btn').click(function(){
+        $('#image_upload').val = '';
+        $('#image_preview').fadeOut();
+        $('.close_btn').fadeOut();
+        
+        return false;
+    });
 	
 });
+
+
+
