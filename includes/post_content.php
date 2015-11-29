@@ -190,4 +190,4 @@
 
 	</div><!-- col-md-9 -->
 
-<?php include('templates/footer.php'); ?>
+<?php include('templates/footer.php'); ?> 
