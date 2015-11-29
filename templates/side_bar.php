@@ -31,10 +31,11 @@
 			
 			<div class="inner">
 				<h5><?php echo $_SESSION['user_first_name'] ."<br /> ". $_SESSION['user_last_name']; ?></h5>
-				<!--<span class="subtitle">Comedy actors</span>
+				<!--<span class="subtitle">Comedy actors</span>-->
 				<div class="avatar">
-					<img src="images/temp/avatar.png" alt="" />
+					<img src="images/users/default.png" alt="" />
 				</div>
+				<!--
 				<div class="followers">
 					<span class="counter">1489</span>
 					<span>followers</span>
