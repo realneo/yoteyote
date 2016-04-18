@@ -829,7 +829,7 @@ h6.foo{
 	-moz-box-shadow:inset 0 0 10px rgba(0,0,0,0.45);
 }
 .carousel-inner > .item {
-	z-index: -1; 
+	z-index: -1;
 	height: 300px;
 	overflow:hidden;
 }
@@ -2187,7 +2187,7 @@ input[type="password"]:focus{
     padding:0px;
 }
 
-.post { 
+.post {
     width: 23%;
     margin-left:17px;
 }
@@ -2199,7 +2199,7 @@ input[type="password"]:focus{
 }
 
 .post img{
-     width:100%   
+     width:100%
 }
 
 .post_amount{
@@ -2211,7 +2211,7 @@ input[type="password"]:focus{
 }
 
 .post_title{
-    padding-top:10px; 
+    padding-top:10px;
     float:inherit;
     padding-bottom:10px;
 }
@@ -2242,7 +2242,7 @@ input[type="password"]:focus{
   border-radius: 10px;
 }
 .user_info{
-    font-size:12px; 
+    font-size:12px;
     text-align: right;
 }
 img.post_profile_pic{
@@ -2256,7 +2256,7 @@ img.post_profile_pic{
 /*-------------------------------------------*/
 
 #login_container{
-    margin-top:10%; 
+    margin-top:10%;
 }
 
 
@@ -2269,6 +2269,25 @@ img.post_profile_pic{
     box-shadow:1px 1px 1px 1px #ccc;
 }
 
+#login_info{
+	display: none;
+}
+
+.loading_icon{
+	position: absolute;
+	left:45%;
+	top:35%;
+}
+.loading_icon_bg{
+	position: absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	background-color:#fff;
+	opacity: 0.9;
+	z-index: 10;
+}
 /*-------------------------------------------*/
 /* Side Bar */
 /*-------------------------------------------*/
@@ -2310,43 +2329,3 @@ img.post_profile_pic{
 /*-------------------------------------------*/
 /* Statistics Section */
 /*-------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
