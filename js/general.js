@@ -12,10 +12,66 @@ jQuery(document).ready(function() {
     setTimeout(function () {
         $(".carousel-title, .note, .vjs-controls, .price_col_head").addClass("gradient");
     }, 0);
-	
+
 // First Child, Last Child
 //$(".widget-container li:first-child, .pricing_box li:first-child, .dropdown li:first-child, ol li:first-child").addClass("first");
 //$(".widget-container li:last-child, .pricing_box li:last-child, .dropdown li:last-child, ol li:last-child").addClass("last");
+
+// FUNCTIONS
+var user_logged_in;
+
+$.ajax({
+  type:'post',
+  url:'process/is_user_logged_in.php',
+  async:false,
+  success: function(data){
+    if(data == 'success'){
+      user_logged_in = true;
+      $('.logged_out').slideUp();
+      $('.logged_in').slideDown();
+    }else{
+      user_logged_in = false;
+      $('.logged_out').slideDown();
+      $('.logged_in').slideUp();
+    }
+  }
+});
+
+// Notify
+function notify(selector, message, type){
+  var alert = "<div class='alert alert-"+type+" alert-dismissible' role='alert'> <button type='button' class='close' data-dismiss='alert'> <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span> </button> "+ message +" </div>";
+  $(selector).append(alert);
+}
+
+// Preloader
+var preloader = "<div class='loading_icon_bg'><img src='images/loading.gif' alt='Yoteyote Loading' class='loading_icon'/></div>";
+
+function preloader(selector){
+  $(selector).append(preloader);
+}
+
+function get_user_info(email){
+  $.ajax({
+    type:'post',
+    url:'process/get_user_info.php',
+    data:{email:email},
+    async:false,
+    success: function(text){
+      if(text == 'success'){
+        $('.loading_icon_bg').remove();
+        $('.logged_out').slideUp();
+        $('.logged_in').slideDown();
+      }else{
+        $('.loading_icon_bg').remove();
+        $('.logged_in').slideUp();
+        $('.logged_out').slideDown();
+        $('.loading_icon_bg').remove();
+        notify($(this).parent(), "Email or Password is incorrect <br /> If you don't have an Account, <h4>Sign Up</h4>", 'danger');
+      }
+    }
+  });
+}
+
 
 // buttons
     $(".btn").not(".btn-round").hover(function(){
@@ -296,7 +352,7 @@ var $container = $('#posts');
 $container.masonry({
   itemSelector: '.post'
 });
-    
+
 /* Image Upload Preview ***********************************/
     function readURL(input) {
     if (input.files && input.files[0]) {
@@ -314,34 +370,109 @@ $container.masonry({
         readURL(this);
         $('#image_preview').fadeIn();
         $('.close_btn').fadeIn();
-        
+
         // Upload automatically
         $.ajax({
             method:'POST',
             url: 'process/post_img_upload_process.php',
-            //Creating data from form 
+            //Creating data from form
              data: new FormData(this),
 
              //Setting these to false because we are sending a multipart request
              contentType: false,
              cache: false,
              processData: false,
-            success:function(){
+             success:function(){
                 console.log(FormData);
             }
         });
     });
-    
+
      // Remove selected image from input
     $('.close_btn').click(function(){
         $('#image_upload').val = '';
         $('#image_preview').fadeOut();
         $('.close_btn').fadeOut();
-        
+
         return false;
     });
-	
+
+    // General Check if user is Logged In
+
+    var logged_in_user_email;
+/*
+    if(is_user_logged_in() === true){
+      $('.logged_out').slideUp();
+      $('.logged_in').slideDown();
+    }else{
+      $('.logged_in').slideUp();
+      $('.logged_out').slideDown();
+    }
+*/
+
+    // Login process
+    $('#login_btn').click(function(){
+      $('.logged_out').append(preloader);
+      // Check if User is Logged In
+      if(user_logged_in == true){
+        $('.loading_icon_bg').remove();
+      }else{
+        var email = $('#email').val();
+        var password = $('#password').val();
+        logged_in_user_email = email;
+        // Check if both field are filled In
+        if(!email || !password){
+          $('.loading_icon_bg').remove();
+          notify($(this).parent(), "Fill both Email and Password! <br /> If you don't have an Account, <h4>Sign Up</h4>", 'warning');
+        }else{
+          $.ajax({
+            type:'post',
+            url:'process/login_process.php',
+            async:false,
+            data:{email:email, password:password},
+            success: function(text){
+              if(text == 'success'){
+                $('.loading_icon_bg').remove();
+                $('.logged_out').slideUp();
+                $('.logged_in').slideDown();
+                $('.full_name_display').load("<?php echo $_SESSION['user_first_name'] ."+"<br />"+". $_SESSION['user_last_name']; ?>");
+              }else{
+                $('.loading_icon_bg').remove();
+                $('.logged_in').slideUp();
+                $('.logged_out').slideDown();
+                $('.loading_icon_bg').remove();
+                notify($(this).parent(), "Email or Password is incorrect <br /> If you don't have an Account, <h4>Sign Up</h4>", 'danger');
+              }
+            }
+          });
+        }
+      }
+
+      return false;
+    }); // Login Process
+
+    //Logout process
+    $('.logout_btn').click(function(){
+      $('.logged_in').append(preloader);
+      var confirmation = confirm('Are you sure you want to Logout?');
+      if(confirmation == true){
+        $.ajax({
+          type:'post',
+          url:'process/logout.php',
+          success: function(text){
+            if(text == 'success'){
+              $('.logged_in').slideUp();
+              $('.logged_out').slideDown();
+              $('.loading_icon_bg').remove();
+            }else{
+              $('.loading_icon_bg').remove();
+            }
+          }
+        });
+      }else{
+        $('.loading_icon_bg').remove();
+      }
+      return false;
+    });
+
 });
-
-
-
