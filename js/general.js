@@ -17,60 +17,137 @@ jQuery(document).ready(function() {
 //$(".widget-container li:first-child, .pricing_box li:first-child, .dropdown li:first-child, ol li:first-child").addClass("first");
 //$(".widget-container li:last-child, .pricing_box li:last-child, .dropdown li:last-child, ol li:last-child").addClass("last");
 
-// FUNCTIONS
-var user_logged_in;
+  /**********************************************************
+  GLOBAL VARIABLES
+  ***********************************************************/
+  // This stores a boolean value or true or false
+  // It is set when user is logged in, true value is set or else false for not logged in
+  var user_logged_in;
 
-$.ajax({
-  type:'post',
-  url:'process/is_user_logged_in.php',
-  async:false,
-  success: function(data){
-    if(data == 'success'){
-      user_logged_in = true;
-      $('.logged_out').slideUp();
-      $('.logged_in').slideDown();
-    }else{
-      user_logged_in = false;
-      $('.logged_out').slideDown();
-      $('.logged_in').slideUp();
-    }
-  }
-});
+  // This stores email for the logged In user.
+  var logged_in_user_email;
 
-// Notify
-function notify(selector, message, type){
-  var alert = "<div class='alert alert-"+type+" alert-dismissible' role='alert'> <button type='button' class='close' data-dismiss='alert'> <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span> </button> "+ message +" </div>";
-  $(selector).append(alert);
-}
+  /**********************************************************
+  OVERALL CHECK IF USER IS LOGGED IN WHEN PAGE LOADS
+  ***********************************************************/
+  //Initiating Full Screen Blur
+  preloader('body');
 
-// Preloader
-var preloader = "<div class='loading_icon_bg'><img src='images/loading.gif' alt='Yoteyote Loading' class='loading_icon'/></div>";
-
-function preloader(selector){
-  $(selector).append(preloader);
-}
-
-function get_user_info(email){
+  //Checking If User is Logged In
   $.ajax({
     type:'post',
-    url:'process/get_user_info.php',
-    data:{email:email},
+    url:'process/is_user_logged_in.php',
     async:false,
-    success: function(text){
-      if(text == 'success'){
-        $('.loading_icon_bg').remove();
+    success: function(data){
+      if(data == 'success'){
+        user_logged_in = true;
         $('.logged_out').slideUp();
         $('.logged_in').slideDown();
+        postloader();
       }else{
-        $('.loading_icon_bg').remove();
-        $('.logged_in').slideUp();
+        user_logged_in = false;
         $('.logged_out').slideDown();
-        $('.loading_icon_bg').remove();
-        notify($(this).parent(), "Email or Password is incorrect <br /> If you don't have an Account, <h4>Sign Up</h4>", 'danger');
+        $('.logged_in').slideUp();
+        postloader();
       }
     }
   });
-}
+
+  /**********************************************************
+  FUNCTIONS
+  ***********************************************************/
+  // NOTIFY
+  // It has 3 Parameters:
+  // Selector: Where you want the notification to appear
+  // Message: What message of the notification
+  // Type: warning, success, danger, normal (Bootrstrap colors)
+  function notify(selector, message, type){
+    var alert = "<div class='alert alert-"+type+" alert-dismissible' role='alert'> <button type='button' class='close' data-dismiss='alert'> <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span> </button> "+ message +" </div>";
+    $(selector).append(alert);
+    $('.alert').delay(10000).fadeOut();
+  }
+
+  // PRELOADER
+  function preloader(selector){
+    $(selector).append("<div class='loading_icon_bg preloader'><img src='images/loading.gif' alt='Yoteyote Loading' class='loading_icon'/></div>");
+  }
+  // POSTLOADER
+  function postloader(){
+    $('.preloader').fadeOut();
+  }
+
+
+  /**********************************************************
+  LOGIN PROCESS
+  ***********************************************************/
+  $('#login_btn').click(function(){
+    preloader('.logged_out');
+    // Check if User is Logged In
+    if(user_logged_in == true){
+      $('.logged_out').slideUp();
+      $('.logged_in').slideDown();
+      postloader();
+    }else{
+      var email = $('#email').val();
+      var password = $('#password').val();
+      logged_in_user_email = email;
+      // Check if both field are filled In
+      if(!email || !password){
+        postloader();
+        notify($(this).parent(), "Fill both Email and Password! <br /> If you don't have an Account, <h4>Sign Up</h4>", 'warning');
+      }else{
+        $.ajax({
+          type:'post',
+          url:'process/login_process.php',
+          async:false,
+          data:{email:email, password:password},
+          success: function(text){
+            if(text == 'success'){
+              $('.logged_out').slideUp();
+              $('.logged_in').slideDown();
+              postloader();
+            }else{
+              $('.logged_in').slideUp();
+              $('.logged_out').slideDown();
+              notify($(this).parent(), "Email or Password is incorrect <br /> If you don't have an Account, <h4>Sign Up</h4>", 'danger');
+              postloader();
+            }
+          }
+        });
+      }
+    }
+    return false;
+  });
+
+  /**********************************************************
+  LOGOUT PROCESS
+  ***********************************************************/
+  $('.logout_btn').click(function(){
+    preloader($(this).parent());
+    var confirmation = confirm('Are you sure you want to Logout?');
+    if(confirmation == true){
+      $.ajax({
+        type:'post',
+        url:'process/logout.php',
+        success: function(text){
+          if(text){
+            $('.logged_in').slideUp();
+            $('.logged_out').slideDown();
+            postloader();
+          }else{
+            notify($(this).parent(), "There was an error Logging Out", 'danger');
+            postloader();
+          }
+        }
+      });
+    }else{
+      postloader();
+    }
+    return false;
+  });
+
+
+
 
 
 // buttons
@@ -397,82 +474,5 @@ $container.masonry({
         return false;
     });
 
-    // General Check if user is Logged In
-
-    var logged_in_user_email;
-/*
-    if(is_user_logged_in() === true){
-      $('.logged_out').slideUp();
-      $('.logged_in').slideDown();
-    }else{
-      $('.logged_in').slideUp();
-      $('.logged_out').slideDown();
-    }
-*/
-
-    // Login process
-    $('#login_btn').click(function(){
-      $('.logged_out').append(preloader);
-      // Check if User is Logged In
-      if(user_logged_in == true){
-        $('.loading_icon_bg').remove();
-      }else{
-        var email = $('#email').val();
-        var password = $('#password').val();
-        logged_in_user_email = email;
-        // Check if both field are filled In
-        if(!email || !password){
-          $('.loading_icon_bg').remove();
-          notify($(this).parent(), "Fill both Email and Password! <br /> If you don't have an Account, <h4>Sign Up</h4>", 'warning');
-        }else{
-          $.ajax({
-            type:'post',
-            url:'process/login_process.php',
-            async:false,
-            data:{email:email, password:password},
-            success: function(text){
-              if(text == 'success'){
-                $('.loading_icon_bg').remove();
-                $('.logged_out').slideUp();
-                $('.logged_in').slideDown();
-                $('.full_name_display').load("<?php echo $_SESSION['user_first_name'] ."+"<br />"+". $_SESSION['user_last_name']; ?>");
-              }else{
-                $('.loading_icon_bg').remove();
-                $('.logged_in').slideUp();
-                $('.logged_out').slideDown();
-                $('.loading_icon_bg').remove();
-                notify($(this).parent(), "Email or Password is incorrect <br /> If you don't have an Account, <h4>Sign Up</h4>", 'danger');
-              }
-            }
-          });
-        }
-      }
-
-      return false;
-    }); // Login Process
-
-    //Logout process
-    $('.logout_btn').click(function(){
-      $('.logged_in').append(preloader);
-      var confirmation = confirm('Are you sure you want to Logout?');
-      if(confirmation == true){
-        $.ajax({
-          type:'post',
-          url:'process/logout.php',
-          success: function(text){
-            if(text == 'success'){
-              $('.logged_in').slideUp();
-              $('.logged_out').slideDown();
-              $('.loading_icon_bg').remove();
-            }else{
-              $('.loading_icon_bg').remove();
-            }
-          }
-        });
-      }else{
-        $('.loading_icon_bg').remove();
-      }
-      return false;
-    });
 
 });

@@ -7,23 +7,11 @@
 
 		    <div class="col-md-3 col-md-offset-1 widget-container boxed">
 		    	<div class='top_btns'>
-				<?php if($session->is_user_logged_in() == false){ ?>
-					<p class='padding-top-10'>Login First to Create a Post</p>
-				<?php }else{ ?>
-	    			<span> Create </span>
-	    			<a href="#" class="btn btn-green" data-toggle="modal" data-target="#i_will_modal"><span>I Will</span></a>
-	    			<a href="#" class="btn btn-red" data-toggle="modal" data-target="#i_want_modal"><span>I Want</span></a>
-	    		<?php } ?>
+					<p class='padding-top-10 logged_out'>Login First to Create a Post</p>
+	    			<span class='logged_in'> Create </span>
+	    			<a href="#" class="btn btn-green logged_in" data-toggle="modal" data-target="#i_will_modal"><span>I Will</span></a>
+	    			<a href="#" class="btn btn-red logged_in" data-toggle="modal" data-target="#i_want_modal"><span>I Want</span></a>
 				</div>
 		    </div><!-- col-md-3 -->
-		   
+
 		</div><!-- row -->
-		
-		<?php if(isset($_SESSION['alert_type'])){ ?>
-					<div class="alert alert-<?php echo $_SESSION['alert_type']; ?> alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>
-						<?php echo $_SESSION['alert_msg']; ?>
-					</div>
-				<?php } ?>

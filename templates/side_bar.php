@@ -5,31 +5,24 @@
 		</a>
 	</div>
 
-    
+
 	<div class="widget_avatar boxed">
-			
-			<?php
-				// Check if user is Logged In
-				if($session->is_user_logged_in() == false){
-			?>
-				<div class='inner'>
-					
+
+				<div class='inner logged_out'>
+
 					<h6 class='text-center'>Login</h6>
 					<hr />
 					<p><a href='signup.php'>Sign Up</a> if you don't have an account</p>
 					<form name='signin' action='process/login_process.php' method='post'>
 						<label for='email'>Email</label>
-						<p><input type="text" name="email" id="email" placeholder="Enter Email"></p>
+						<p><input type="text" name="email" id="email" placeholder="Enter Email" value='neo@yoteyote.com'></p>
 						<label for='password'>Password</label>
 						<p><input type="password" name="password" id="password" placeholder="Enter Password"></p>
-						<span class="btn btn-red"><input type="submit" value="Login" /></span>
+						<span class="btn btn-red" id='login_btn'><input type="submit" value="Login" /></span>
 					</form>
 				</div><!-- inner -->
-			
-			
-			<?php	}else{ ?>
-			
-			<div class="inner">
+
+			<div class="inner logged_in">
 				<h5><?php echo $_SESSION['user_first_name'] ."<br /> ". $_SESSION['user_last_name']; ?></h5>
 				<!--<span class="subtitle">Comedy actors</span>-->
 				<div class="avatar">
@@ -49,9 +42,8 @@
 				<hr>
 				<a href='process/logout.php' alt='Logout' class='logout_btn'>Logout</a>
 			</div><!-- inner -->
-			<?php } ?>
 	</div>
-	
+
 	<!-- UPDATES -->
 	<div class='widget_avatar boxed'>
 		<div class='inner'>
@@ -62,7 +54,7 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<!--
 	<div class='widget-container boxed'>
 		<div class='inner'>
