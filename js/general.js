@@ -27,31 +27,8 @@ jQuery(document).ready(function() {
   // This stores email for the logged In user.
   var logged_in_user_email;
 
-  /**********************************************************
-  OVERALL CHECK IF USER IS LOGGED IN WHEN PAGE LOADS
-  ***********************************************************/
-  //Initiating Full Screen Blur
-  preloader('body');
-
-  //Checking If User is Logged In
-  $.ajax({
-    type:'post',
-    url:'process/is_user_logged_in.php',
-    async:false,
-    success: function(data){
-      if(data == 'success'){
-        user_logged_in = true;
-        $('.logged_out').slideUp();
-        $('.logged_in').slideDown();
-        postloader();
-      }else{
-        user_logged_in = false;
-        $('.logged_out').slideDown();
-        $('.logged_in').slideUp();
-        postloader();
-      }
-    }
-  });
+  // This object carries all the user Information
+  var user_info;
 
   /**********************************************************
   FUNCTIONS
@@ -90,7 +67,6 @@ jQuery(document).ready(function() {
     }else{
       var email = $('#email').val();
       var password = $('#password').val();
-      logged_in_user_email = email;
       // Check if both field are filled In
       if(!email || !password){
         postloader();
@@ -105,6 +81,17 @@ jQuery(document).ready(function() {
             if(text == 'success'){
               $('.logged_out').slideUp();
               $('.logged_in').slideDown();
+              $.ajax({
+                type:'post',
+                url:'process/get_user_info.php',
+                async:false,
+                success: function(user_information){
+                    user_info = JSON.parse(user_information);
+                    //console.log(user_info[0]['id']);
+                }
+              });
+              $('.fullname_display').html(user_info[0]['first_name']+' '+user_info[0]['last_name']);
+              console.log(user_info);
               postloader();
             }else{
               $('.logged_in').slideUp();
@@ -119,6 +106,41 @@ jQuery(document).ready(function() {
     return false;
   });
 
+
+  /**********************************************************
+  OVERALL CHECK IF USER IS LOGGED IN WHEN PAGE LOADS
+  ***********************************************************/
+  //Initiating Full Screen Blur
+  preloader('body');
+
+  //Checking If User is Logged In
+  $.ajax({
+    type:'post',
+    url:'process/is_user_logged_in.php',
+    async:false,
+    success: function(data){
+      if(data == 'success'){
+        user_logged_in = true;
+        $('.logged_out').slideUp();
+        $('.logged_in').slideDown();
+        $.ajax({
+          type:'post',
+          url:'process/get_user_info.php',
+          async:false,
+          success: function(user_information){
+              user_info = JSON.parse(user_information);
+              //console.log(user_info[0]['id']);
+          }
+        });
+        postloader();
+      }else{
+        user_logged_in = false;
+        $('.logged_out').slideDown();
+        $('.logged_in').slideUp();
+        postloader();
+      }
+    }
+  });
   /**********************************************************
   LOGOUT PROCESS
   ***********************************************************/
@@ -145,7 +167,6 @@ jQuery(document).ready(function() {
     }
     return false;
   });
-
 
 
 

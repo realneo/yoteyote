@@ -2,7 +2,7 @@
 
 		<div class="row">
 			<div class="col-md-8 widget-container boxed">
-		        <h5 class='slogan'>Buy & Sell small jobs from one another <!--<a href="#" class="btn btn-red"><span>Discover how</span></a>--></h5>
+		        <h5 class='slogan'>Buy &amp; Sell small jobs from one another <a href="#" class="btn btn-red" id='discover_btn'><span>Discover how</span></a></h5>
 		    </div><!-- col-md-9 -->
 
 		    <div class="col-md-3 col-md-offset-1 widget-container boxed">

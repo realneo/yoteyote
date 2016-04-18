@@ -23,7 +23,7 @@
 				</div><!-- inner -->
 
 			<div class="inner logged_in">
-				<h5><?php echo $_SESSION['user_first_name'] ."<br /> ". $_SESSION['user_last_name']; ?></h5>
+				<h5 class='fullname_display'><?php echo $_SESSION['user_first_name'] ."<br /> ". $_SESSION['user_last_name']; ?></h5>
 				<!--<span class="subtitle">Comedy actors</span>-->
 				<div class="avatar">
 					<img src="images/users/default.png" alt="" />
