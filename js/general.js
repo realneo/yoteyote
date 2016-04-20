@@ -31,6 +31,15 @@ jQuery(document).ready(function() {
   var user_info;
 
   /**********************************************************
+  GRID LAYOUT - MASONRY
+  ***********************************************************/
+  var $container = $('#posts');
+  // initialize
+  $container.masonry({
+    itemSelector: '.post'
+  });
+
+  /**********************************************************
   FUNCTIONS
   ***********************************************************/
   // NOTIFY
@@ -141,6 +150,7 @@ jQuery(document).ready(function() {
       }
     }
   });
+
   /**********************************************************
   LOGOUT PROCESS
   ***********************************************************/
@@ -166,6 +176,27 @@ jQuery(document).ready(function() {
       postloader();
     }
     return false;
+  });
+
+  /**********************************************************
+  LOADING POSTS
+  ***********************************************************/
+  var load = 0;
+  $(window).scroll(function(){
+    if($(window).scrollTop() == $(document).height() - $(window).height()){
+      preloader('.posts_preloader');
+      load++;
+      $.ajax({
+        type:'post',
+        url:'process/posts.php',
+        data:{load:load},
+        success:function(response){
+          var $content = $(response);
+          $container.append($content).masonry('appended', $content).masonry();
+          postloader();
+        }
+      });
+    }
   });
 
 
@@ -441,14 +472,6 @@ imageSize();
 $(window).resize(function() {
     $('.carousel-indicators .first').click();
     imageSize();
-});
-
-/* Masonry Grid Init *************************************/
-
-var $container = $('#posts');
-// initialize
-$container.masonry({
-  itemSelector: '.post'
 });
 
 /* Image Upload Preview ***********************************/

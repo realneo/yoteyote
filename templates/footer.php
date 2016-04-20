@@ -1,7 +1,10 @@
                         </div><!-- col-md-9 -->
 
                         <div class='row' id='footer'>
+
                             <div class='col-md-10 col-md-offset-1 text-11'>
+
+                                <div class='posts_preloader'></div>
 
                                 <div class='divider'></div>
 

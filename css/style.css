@@ -2326,6 +2326,11 @@ img.post_profile_pic{
     padding-left:10px;
 }
 
+.posts_preloader{
+	position:fixed;
+	left:45%;
+}
+
 /*-------------------------------------------*/
 /* Statistics Section */
 /*-------------------------------------------*/
