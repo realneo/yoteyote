@@ -217,7 +217,13 @@ jQuery(document).ready(function() {
     }
   });
 
-
+  /**********************************************************
+  SORT POSTS
+  ***********************************************************/
+  $('.sort_btn').click(function(){
+    $('.sort_btn').removeClass('btn-red');
+    $(this).addClass('btn-red');
+  });
 
 
 // buttons
