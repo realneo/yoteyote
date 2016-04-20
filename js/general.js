@@ -30,6 +30,9 @@ jQuery(document).ready(function() {
   // This object carries all the user Information
   var user_info;
 
+  // This variable stores the number of posts loaded in the page
+  var load = 0;
+
   /**********************************************************
   GRID LAYOUT - MASONRY
   ***********************************************************/
@@ -179,9 +182,24 @@ jQuery(document).ready(function() {
   });
 
   /**********************************************************
-  LOADING POSTS
+  LOADING POSTS WHEN PAGE LOADS
   ***********************************************************/
-  var load = 0;
+  $.ajax({
+    type:'post',
+    url:'process/posts.php',
+    data:{load:load},
+    async:false,
+    success:function(response){
+      var $content = $(response);
+      $container.append($content).masonry('appended', $content).masonry();
+      postloader();
+      load++;
+    }
+  });
+  /**********************************************************
+  LOADING POSTS WHEN USER SCROLLS DOWN
+  ***********************************************************/
+
   $(window).scroll(function(){
     if($(window).scrollTop() == $(document).height() - $(window).height()){
       preloader('.posts_preloader');
